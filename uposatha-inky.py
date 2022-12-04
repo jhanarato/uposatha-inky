@@ -26,6 +26,6 @@ w, h = font.getsize(uposatha_date)
 x = (what.WIDTH / 2) - (w / 2)
 y = (what.HEIGHT / 2) - (h / 2)
 
-draw.text((x, y), message, what.BLACK, font)
+draw.text((x, y), uposatha_date, what.BLACK, font)
 what.set_image(img)
 what.show()
