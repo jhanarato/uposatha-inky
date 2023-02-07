@@ -45,7 +45,7 @@ def display_on_inky() -> None:
     drawing = NextUposathaDrawing(image)
     drawing.draw(view)
 
-    what.set_image(img)
+    what.set_image(image)
     what.show()
 
 if __name__ == "__main__":
