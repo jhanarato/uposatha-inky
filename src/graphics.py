@@ -49,10 +49,4 @@ def display_on_inky() -> None:
     what.show()
 
 if __name__ == "__main__":
-    # image = screen_image()
-    #
-    # calendar = Calendar()
-    # view = next_uposatha_view(calendar)
-    # drawing = NextUposathaDrawing(image)
-    # drawing.draw(view)
-    # image.show()
+    display_on_inky()
