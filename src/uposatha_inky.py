@@ -29,8 +29,8 @@ def main():
     uposatha_date = view.falls_on.strftime("%d/%m/%y")
 
     image = make_image(uposatha_date)
-    # display_on_inky(image)
-    display_on_screen(image)
+    display_on_inky(image)
+    # display_on_screen(image)
 
 
 if __name__ == "__main__":
