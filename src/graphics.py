@@ -1,51 +1,32 @@
-from inky import InkyWHAT
+from inky.auto import auto
+
 from PIL import Image, ImageDraw, ImageFont
 from font_fredoka_one import FredokaOne
 
-from uposatha.calendar import Calendar
+def make_image() -> Image:
+    image = Image.new(mode="P", size=(400, 300))
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype(FredokaOne, 36)
+    draw.text((0, 0), "*** TESTING***", 1, font)
+    return image
 
-from data import NextUposathaView, next_uposatha_view
+def display_on_screen(image: Image) -> None:
+    palette = [
+        255, 255, 255, # 1 = WHITE
+        0, 0, 0,       # 2 = BLACK
+        255, 255, 0    # 3 = YELLOW
+    ]
+    image.putpalette(palette)
+    converted = image.convert(mode="RGB")
+    converted.show()
 
-class NextUposathaDrawing:
-    def __init__(self, image: Image) -> None:
-        self.image = image
-
-    def draw(self, view_data: NextUposathaView) -> None:
-        draw = ImageDraw.Draw(self.image)
-        font = ImageFont.truetype(FredokaOne, 36)
-        draw.text((0,0), "Here we go", 1, font)
-
-
-def screen_image() -> Image:
-    return Image.new(mode="RGB",
-                     size=(InkyWHAT.WIDTH, InkyWHAT.HEIGHT),
-                     color=(255, 255, 255))
-
-def inky_image() -> Image:
-    return Image.new(mode="P",
-                     size=(InkyWHAT.WIDTH, InkyWHAT.HEIGHT))
-
-def display_on_screen() -> None:
-    image = screen_image()
-    calendar = Calendar()
-    view = next_uposatha_view(calendar)
-    drawing = NextUposathaDrawing(image)
-    drawing.draw(view)
-    image.show()
-
-def display_on_inky() -> None:
-    what = InkyWHAT('yellow')
-    what.set_border(what.WHITE)
-
-    image = inky_image()
-    calendar = Calendar()
-    view = next_uposatha_view(calendar)
-    drawing = NextUposathaDrawing(image)
-    drawing.draw(view)
-
-    what.set_image(image)
-    what.show()
+def display_on_inky(image: Image) -> None:
+    display = auto()
+    display.set_border(display.WHITE)
+    display.set_image(image)
+    display.show()
 
 if __name__ == "__main__":
-    display_on_inky()
-    # display_on_screen()
+    image = make_image()
+    display_on_inky(image)
+    # display_on_screen(image)
