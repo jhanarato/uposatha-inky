@@ -1,4 +1,5 @@
-# Script to display the uposatha on a Pimoroni Inky WHAT e-ink screen.
+import argparse
+
 from PIL import Image
 from inky import auto
 
@@ -24,14 +25,23 @@ def display_on_inky(image: Image) -> None:
     display.show()
 
 def main():
+    parser = argparse.ArgumentParser(
+        prog="uposatha_inky.py",
+        description="Displays lunar calendar details on Pimoroni Inky",
+    )
+    parser.add_argument("-t", "--test", action="store_true", default=False)
+    args = parser.parse_args()
+
     calendar = Calendar()
     view = next_uposatha_view(calendar)
     uposatha_date = view.falls_on.strftime("%d/%m/%y")
 
     image = make_image(uposatha_date)
-    display_on_inky(image)
-    # display_on_screen(image)
 
+    if args.test:
+        display_on_screen(image)
+    else:
+        display_on_inky(image)
 
 if __name__ == "__main__":
     main()
