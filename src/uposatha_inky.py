@@ -34,7 +34,7 @@ def main():
 
     calendar = Calendar()
     view = next_uposatha_view(calendar)
-    uposatha_date = view.falls_on.strftime("%d/%m/%y")
+    uposatha_date = view.falls_on.strftime("%a %d/%m/%y")
 
     image = make_image(uposatha_date)
 
