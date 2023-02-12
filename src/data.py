@@ -21,9 +21,9 @@ class NextUposathaView:
     def days_until(self) -> int:
         return (self.falls_on - self.today).days
 
-def next_uposatha_view(calendar: Calendar) -> NextUposathaView:
-    season = calendar.current_season()
-    uposatha = calendar.next_uposatha()
+def next_uposatha_view(calendar: Calendar, today: date) -> NextUposathaView:
+    season = calendar.current_season(today)
+    uposatha = calendar.next_uposatha(today)
 
     if uposatha.days_since_previous == 15:
         uposatha_day = "fifteen"
