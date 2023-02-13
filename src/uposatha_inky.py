@@ -5,8 +5,8 @@ from PIL import Image
 from inky import auto
 
 from uposatha.calendar import Calendar
-from data import next_uposatha_view
-from graphics import make_image
+from content import next_uposatha_content
+from images import make_image
 
 def display_on_screen(image: Image) -> None:
     palette = [
@@ -23,7 +23,7 @@ def display_on_inky(image: Image) -> None:
     try:
         display = auto()
     except RuntimeError:
-        print("Not running with InkyWHAT e-ink display. Use --testing for screen display.")
+        print("Not running with InkyWHAT e-ink display. Use --screen for screen display.")
         exit(1)
 
     display.set_border(display.WHITE)
@@ -50,11 +50,9 @@ def parse_args():
 def main():
     args = parse_args()
 
-    calendar = Calendar()
-    view = next_uposatha_view(calendar, args.date)
-    uposatha_date = view.falls_on.strftime("%a %d/%m/%y")
+    content = next_uposatha_content(args.date)
 
-    image = make_image(uposatha_date)
+    image = make_image(content)
 
     if args.screen:
         display_on_screen(image)
