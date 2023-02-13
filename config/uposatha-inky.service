@@ -1,0 +1,12 @@
+[Unit]
+Description=Updates InkyWHAT Lunar Calendar
+After=time-sync.target
+
+[Service]
+User=pi
+ExecStart=~/uposatha/venv/bin/python ~/uposatha/uposatha-inky/src/uposatha_inky.py
+WorkingDirectory=~/uposatha
+Environment=PYTHONPATH=~/uposatha/uposatha/src
+
+[Install]
+WantedBy=default.target

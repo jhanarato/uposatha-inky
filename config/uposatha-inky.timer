@@ -1,0 +1,9 @@
+[Unit]
+Description=Updates InkyWHAT display at midnight each day
+
+[Timer]
+OnCalendar=daily
+Unit=uposatha-inky.service
+
+[Install]
+WantedBy=basic.target
