@@ -12,18 +12,19 @@ YELLOW = 2
 
 def make_image(content: NextUposathaContent) -> Image:
     image = Image.new(mode="P", size=(WIDTH, HEIGHT), color=WHITE)
-
-    draw = ImageDraw.Draw(image)
-
-    font = ImageFont.truetype(FredokaOne, 36)
-
-    w, h = font.getsize(content.date)
-    x = (WIDTH / 2) - (w / 2)
-    y = (HEIGHT / 2) - (h / 2)
-
-    draw.text((x, y), content.date, BLACK, font)
-
+    draw_centered_text(image, 0, "Next Uposatha:")
+    draw_centered_text(image, 50, content.day)
+    draw_centered_text(image, 100, content.date)
+    draw_centered_text(image, 150, content.days_until)
     return image
 
-def text_x_value(text: str) -> int:
-    pass
+def draw_centered_text(image: Image, y_coord: int, text: str):
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype(FredokaOne, 36)
+    text_coord = (centered_x_coord(font, text), y_coord)
+    draw.text(text_coord, text, BLACK, font)
+
+
+def centered_x_coord(font: ImageFont, text: str) -> int:
+    w, _ = font.getsize(text)
+    return (WIDTH / 2) - (w / 2)
