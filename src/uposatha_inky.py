@@ -10,9 +10,9 @@ from images import make_image
 
 def display_on_screen(image: Image) -> None:
     palette = [
-        255, 255, 255, # 1 = WHITE
-        0, 0, 0,       # 2 = BLACK
-        255, 255, 0    # 3 = YELLOW
+        255, 255, 255, # 0 = WHITE
+        0, 0, 0,       # 1 = BLACK
+        255, 255, 0    # 2 = YELLOW
     ]
     image.putpalette(palette)
     converted = image.convert(mode="RGB")
