@@ -32,14 +32,20 @@ def make_image(content: List[str]) -> Image:
 def draw_heading(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(CaladeaBoldItalic, 40)
     x_coord = centered_x_coord(font, text)
-    draw.text((x_coord, 10), text, BLACK, font)
+    y_coord = 10
+    draw.text((x_coord, y_coord), text, BLACK, font)
 
 def draw_underline(draw: ImageDraw):
     y_coord = 70
     draw.line([50, y_coord, WIDTH - 50, y_coord], BLACK, 2)
 
 def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
-    pass
+    draw.multiline_text(
+        xy=(0, 90),
+        text="\n".join(text_lines),
+        font=ImageFont.truetype(ManropeBold, 30),
+        fill=BLACK
+    )
 
 def draw_centered_text(draw: ImageDraw, y_coord: int, text: str):
     font = ImageFont.truetype(FredokaOne, 36)

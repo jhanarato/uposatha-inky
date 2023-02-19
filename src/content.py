@@ -15,11 +15,7 @@ def next_uposatha_content(today: date) -> List[str]:
     next_uposatha = calendar.next_uposatha(today)
 
     days_until = (next_uposatha.falls_on - today).days
+    falls_on = next_uposatha.falls_on.strftime("%a %d/%m")
 
-    # return NextUposathaContent(
-    #     day = next_uposatha.falls_on.strftime("%A"),
-    #     date = next_uposatha.falls_on.strftime("%d/%m/%y"),
-    #     days_until = f"In {days_until} days"
-    # )
-
-    return ["Line 1", "Line 2"]
+    line_one = f"{falls_on} ({days_until} days)"
+    return [line_one]

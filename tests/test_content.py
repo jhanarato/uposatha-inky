@@ -4,13 +4,7 @@ from content import (
     next_uposatha_content, NextUposathaContent
 )
 
-def test_next_uposatha_day():
+def test_next_uposatha_content_line_one():
     today = date(2023, 2, 13)
-    actual = next_uposatha_content(today)
-    expected = NextUposathaContent(
-        day="Sunday",
-        date="19/02/23",
-        days_until="In 6 days"
-    )
-
-    assert actual == expected
+    lines = next_uposatha_content(today)
+    assert lines[0] == "Sun 19/02 (6 days)"
