@@ -45,7 +45,7 @@ def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
         xy=(x_coord, y_coord),
         text=text,
         font=font,
-        fill=WHITERe,
+        fill=WHITE,
         align="center"
     )
 
