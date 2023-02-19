@@ -8,8 +8,6 @@ from font_font_awesome import FontAwesome5Free
 from font_hanken_grotesk import HankenGroteskBold
 from font_manrope import ManropeBold
 
-from content import NextUposathaContent
-
 WIDTH = 400
 HEIGHT = 300
 
