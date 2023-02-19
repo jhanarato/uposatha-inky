@@ -17,7 +17,7 @@ BLACK = 1
 YELLOW = 2
 
 def make_image(content: List[str]) -> Image:
-    image = Image.new(mode="P", size=(WIDTH, HEIGHT), color=BLACK)
+    image = Image.new(mode="P", size=(WIDTH, HEIGHT), color=WHITE)
     draw = ImageDraw.Draw(image)
     draw_heading(draw, "Next Uposatha")
     draw_underline(draw)
@@ -28,11 +28,11 @@ def draw_heading(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(CaladeaBoldItalic, 40)
     x_coord = centered_x_coord(font, text)
     y_coord = 10
-    draw.text((x_coord, y_coord), text, WHITE, font)
+    draw.text((x_coord, y_coord), text, BLACK, font)
 
 def draw_underline(draw: ImageDraw):
     y_coord = 70
-    draw.line([50, y_coord, WIDTH - 50, y_coord], WHITE, 2)
+    draw.line([50, y_coord, WIDTH - 50, y_coord], BLACK, 2)
 
 def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
     font = ImageFont.truetype(RobotoBold, 32)
@@ -45,7 +45,7 @@ def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
         xy=(x_coord, y_coord),
         text=text,
         font=font,
-        fill=WHITE,
+        fill=BLACK,
         align="center"
     )
 
