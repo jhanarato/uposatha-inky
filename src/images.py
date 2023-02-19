@@ -21,10 +21,6 @@ def make_image(content: List[str]) -> Image:
     draw_heading(draw, "Next Uposatha")
     draw_underline(draw)
     draw_content(draw, content)
-
-    # draw_centered_text(image, 50, content.day)
-    # draw_centered_text(image, 100, content.date)
-    # draw_centered_text(image, 150, content.days_until)
     return image
 
 def draw_heading(draw: ImageDraw, text: str) -> None:
@@ -38,19 +34,20 @@ def draw_underline(draw: ImageDraw):
     draw.line([50, y_coord, WIDTH - 50, y_coord], BLACK, 2)
 
 def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
+    font = ImageFont.truetype(ManropeBold, 30)
+    text = "\n".join(text_lines)
+    y_coord = 120
+    _, _, width, _ = draw.textbbox((0,0), text, font)
+    x_coord = (WIDTH / 2) - (width / 2)
+
     draw.multiline_text(
-        xy=(0, 90),
-        text="\n".join(text_lines),
-        font=ImageFont.truetype(ManropeBold, 30),
-        fill=BLACK
+        xy=(x_coord, y_coord),
+        text=text,
+        font=font,
+        fill=BLACK,
+        align="center"
     )
 
-def draw_centered_text(draw: ImageDraw, y_coord: int, text: str):
-    font = ImageFont.truetype(FredokaOne, 36)
-    text_coord = (centered_x_coord(font, text), y_coord)
-    draw.text(text_coord, text, BLACK, font)
-
-
 def centered_x_coord(font: ImageFont, text: str) -> int:
-    w, _ = font.getsize(text)
-    return (WIDTH / 2) - (w / 2)
+    text_width = font.getlength(text)
+    return (WIDTH / 2) - (text_width / 2)
