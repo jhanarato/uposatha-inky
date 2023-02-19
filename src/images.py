@@ -27,7 +27,7 @@ def make_image(content: NextUposathaContent) -> Image:
 
 def draw_heading(image: Image, text: str) -> None:
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype(ManropeBold, 36)
+    font = ImageFont.truetype(CaladeaBoldItalic, 36)
     x_coord = centered_x_coord(font, text)
     draw.text((x_coord, 0), text, BLACK, font)
 
