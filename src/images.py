@@ -2,11 +2,12 @@ from typing import List
 
 from PIL import Image, ImageDraw, ImageFont
 from font_fredoka_one import FredokaOne
-from font_source_serif_pro import SourceSerifProBoldIt
-from font_caladea import CaladeaBoldItalic
+from font_source_serif_pro import SourceSerifProBold
+from font_caladea import CaladeaBoldItalic, CaladeaBold
 from font_font_awesome import FontAwesome5Free
 from font_hanken_grotesk import HankenGroteskBold
 from font_manrope import ManropeBold
+from font_roboto import RobotoBold
 
 WIDTH = 400
 HEIGHT = 300
@@ -16,7 +17,7 @@ BLACK = 1
 YELLOW = 2
 
 def make_image(content: List[str]) -> Image:
-    image = Image.new(mode="P", size=(WIDTH, HEIGHT), color=WHITE)
+    image = Image.new(mode="P", size=(WIDTH, HEIGHT), color=BLACK)
     draw = ImageDraw.Draw(image)
     draw_heading(draw, "Next Uposatha")
     draw_underline(draw)
@@ -27,14 +28,14 @@ def draw_heading(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(CaladeaBoldItalic, 40)
     x_coord = centered_x_coord(font, text)
     y_coord = 10
-    draw.text((x_coord, y_coord), text, BLACK, font)
+    draw.text((x_coord, y_coord), text, WHITE, font)
 
 def draw_underline(draw: ImageDraw):
     y_coord = 70
-    draw.line([50, y_coord, WIDTH - 50, y_coord], BLACK, 2)
+    draw.line([50, y_coord, WIDTH - 50, y_coord], WHITE, 2)
 
 def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
-    font = ImageFont.truetype(ManropeBold, 30)
+    font = ImageFont.truetype(RobotoBold, 32)
     text = "\n".join(text_lines)
     y_coord = 120
     _, _, width, _ = draw.textbbox((0,0), text, font)
@@ -44,7 +45,7 @@ def draw_content(draw: ImageDraw, text_lines: List[str]) -> None:
         xy=(x_coord, y_coord),
         text=text,
         font=font,
-        fill=BLACK,
+        fill=WHITERe,
         align="center"
     )
 
