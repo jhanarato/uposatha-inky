@@ -11,18 +11,18 @@ def next_uposatha_content(today: date) -> List[str]:
     season = calendar.current_season(today)
 
     return [
-        date_line(uposatha, today),
-        season_line(season, uposatha)
+        line_one(uposatha, today),
+        line_two(season, uposatha)
     ]
 
-def date_line(next_uposatha, today):
-    days_until = (next_uposatha.falls_on - today).days
-    falls_on = next_uposatha.falls_on.strftime("%a %d/%m")
-    line_one = f"{falls_on} ({days_until} days)"
-    return line_one
+def line_one(uposatha, today):
+    formatted_date = uposatha.falls_on.strftime("%a %d/%m")
+    text = f"{formatted_date} ({uposatha.days_since_previous} Day)"
+    return text
 
-def season_line(season: Season, uposatha: Uposatha):
-    text = f"{uposatha.days_since_previous} day, "
-    text += f"{uposatha.number_in_season}/{len(season.uposathas)} "
-    text += f"{season.name.name.capitalize()} Season"
+def line_two(season: Season, uposatha: Uposatha):
+    text = (
+        f"{uposatha.number_in_season}/{len(season.uposathas)} "
+        f"{season.name.name.capitalize()} Season"
+    )
     return text
