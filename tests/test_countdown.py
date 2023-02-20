@@ -20,7 +20,7 @@ def test_letters_on_day():
     assert countdown_letters(a_friday, uposatha) == ["F"]
 
 @pytest.mark.parametrize(
-    "days_left,split",
+    "days_left,countdown",
     [
         (14, (["T", "F", "S", "S", "M", "T", "W"],
               ["T", "F", "S", "S", "M", "T", "W", "T"])),
@@ -32,8 +32,10 @@ def test_letters_on_day():
         (0, ([], ["T"])) # The uposatha
     ]
 )
-def test_split(days_left, split):
+def test_split(days_left, countdown):
     end = date(2011, 2, 3) # 15 day new moon.
     start = end - timedelta(days_left)
     letters = countdown_letters(start, end)
-    assert split_countdown(letters) == split
+    actual = split_countdown(letters)
+    assert actual.top_row == countdown[0]
+    assert actual.bottom_row == countdown[1]

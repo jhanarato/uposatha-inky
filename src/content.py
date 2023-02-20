@@ -5,9 +5,14 @@ from datetime import date, timedelta
 from uposatha.calendar import Calendar
 
 @dataclass
+class Countdown:
+    top_row: List[str]
+    bottom_row: List[str]
+
+@dataclass
 class NextUposatha:
     info: str
-    countdown: List[str]
+    countdown: Countdown
 
 def next_uposatha_content(today: date) -> NextUposatha:
     calendar = Calendar()
@@ -30,9 +35,9 @@ def next_uposatha_content(today: date) -> NextUposatha:
         phase=uposatha.moon_phase.name.capitalize()
     )
 
-    countdown_list = countdown_letters(today, uposatha.falls_on)
+    countdown = split_countdown(countdown_letters(today, uposatha.falls_on))
 
-    return NextUposatha(info, countdown_list)
+    return NextUposatha(info, countdown)
 
 def countdown_letters(today: date, uposatha_date: date) -> List[str]:
     day_letters = []
@@ -43,13 +48,11 @@ def countdown_letters(today: date, uposatha_date: date) -> List[str]:
         next_date += timedelta(1)
     return day_letters
 
-def split_countdown(letters: List[str]) -> Tuple[List[str], List[str]]:
+def split_countdown(letters: List[str]) -> Countdown:
     if len(letters) <= 8:
         top_row = []
         bottom_row = letters
     else:
         top_row = letters[:-8]
         bottom_row = letters[-8:]
-
-
-    return top_row, bottom_row
+    return Countdown(top_row, bottom_row)
