@@ -4,7 +4,7 @@ import datetime
 from PIL import Image
 from inky import auto
 
-from content import next_uposatha_content
+from content import next_uposatha_content, countdown_letters
 from images import make_image
 
 def inky_available() -> bool:
