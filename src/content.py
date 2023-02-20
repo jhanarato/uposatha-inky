@@ -1,5 +1,7 @@
+from typing import List
+
 from string import Template
-from datetime import date
+from datetime import date, timedelta
 from uposatha.calendar import Calendar
 
 def next_uposatha_content(today: date) -> str:
@@ -22,3 +24,12 @@ def next_uposatha_content(today: date) -> str:
         season_name=season.name.name.capitalize(),
         phase=uposatha.moon_phase.name.capitalize()
     )
+
+def countdown(today: date, uposatha_date: date) -> List[str]:
+    day_letters = []
+    next_date = today
+    while next_date <= uposatha_date:
+        day_letter = next_date.strftime("%a")[0]
+        day_letters.append(day_letter)
+        next_date += timedelta(1)
+    return day_letters
