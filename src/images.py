@@ -29,7 +29,7 @@ def draw_underline(draw: ImageDraw):
 def draw_content(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(font=RobotoBold,
                               size=32)
-    y_coord = 120
+    y_coord = 100
     width = draw.textbbox((0,0), text, font)[2]
     x_coord = centered_x_coord(width)
 
