@@ -23,7 +23,13 @@ def test_letters_on_day():
     "days_left,split",
     [
         (14, (["T", "F", "S", "S", "M", "T", "W"],
-              ["T", "F", "S", "S", "M", "T", "W", "T"]))
+              ["T", "F", "S", "S", "M", "T", "W", "T"])),
+
+        (8, (["W"], ["T", "F", "S", "S", "M", "T", "W", "T"])),
+        (7, ([], ["T", "F", "S", "S", "M", "T", "W", "T"])),
+        (6, ([], ["F", "S", "S", "M", "T", "W", "T"])),
+        (1, ([], ["W", "T"])),
+        (0, ([], ["T"])) # The uposatha
     ]
 )
 def test_split(days_left, split):
