@@ -1,5 +1,3 @@
-from typing import List
-
 from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
@@ -20,7 +18,7 @@ def make_image(content: str) -> Image:
 
 def draw_heading(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(font=RobotoBold, size=36)
-    x_coord = centered_x_coord(font, text)
+    x_coord = centered_x_coord(font.getlength(text))
     y_coord = 10
     draw.text((x_coord, y_coord), text, BLACK, font)
 
@@ -32,8 +30,8 @@ def draw_content(draw: ImageDraw, text: str) -> None:
     font = ImageFont.truetype(font=RobotoBold,
                               size=32)
     y_coord = 120
-    _, _, width, _ = draw.textbbox((0,0), text, font)
-    x_coord = (WIDTH / 2) - (width / 2)
+    width = draw.textbbox((0,0), text, font)[2]
+    x_coord = centered_x_coord(width)
 
     draw.multiline_text(
         xy=(x_coord, y_coord),
@@ -44,6 +42,5 @@ def draw_content(draw: ImageDraw, text: str) -> None:
         spacing=20
     )
 
-def centered_x_coord(font: ImageFont, text: str) -> int:
-    text_width = font.getlength(text)
-    return (WIDTH / 2) - (text_width / 2)
+def centered_x_coord(object_width: int) -> int:
+    return round((WIDTH / 2) - (object_width / 2))
