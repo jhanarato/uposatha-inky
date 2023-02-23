@@ -62,9 +62,9 @@ class CountdownArea:
 def draw_countdown(draw, countdown: Countdown):
     area = CountdownArea(
         x=30,
-        y=50,
-        width=240,
-        height=100,
+        y=220,
+        width=340,
+        height=70,
         border=10,
         letter_spacing=20,
         row_spacing=20
