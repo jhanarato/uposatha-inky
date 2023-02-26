@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Generator
 from dataclasses import dataclass
 from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
@@ -101,3 +101,8 @@ def countdown_centre_points(area: CountdownArea,
                             number_of_points: int) -> List[Tuple[int, int]]:
     return [letter_coords(area, letter_num, 0)
             for letter_num in range(number_of_points)]
+
+def generate_centres(area: CountdownArea) -> Generator[Tuple[int, int], None, None]:
+    centres = [(260, 50), (240, 50), (220, 50)]
+    for centre in centres:
+        yield centre
