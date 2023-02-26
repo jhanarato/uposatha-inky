@@ -72,14 +72,13 @@ def draw_countdown(draw, days: List[str]):
 
     draw.rectangle(area.rectangle, fill=BLACK)
     draw_countdown_row(draw, days, 0, area)
-    draw_countdown_row(draw, days, 1, area)
 
 def draw_countdown_row(draw: Image,
                        row: List[str],
                        row_num: int,
                        area: CountdownArea) -> None:
     for index, day_letter in enumerate(reversed(row)):
-        x_coord, y_coord = countdown_letter_xy(area, index, row_num)
+        x_coord, y_coord = letter_coords(area, index, row_num)
         font = ImageFont.truetype(font=RobotoBold, size=20)
         draw.text(
             xy=(x_coord, y_coord),
@@ -88,12 +87,17 @@ def draw_countdown_row(draw: Image,
             fill=WHITE
         )
 
-def countdown_letter_xy(area: CountdownArea,
-                        letter_num: int,
-                        row_num: int) -> Tuple[int, int]:
+def letter_coords(area: CountdownArea,
+                  letter_num: int,
+                  row_num: int) -> Tuple[int, int]:
     x_coord = area.x + area.width - area.border - (area.letter_spacing * letter_num)
     y_coord = area.y + (area.row_spacing * row_num)
     return x_coord, y_coord
 
 def centered_x_coord(object_width: int) -> int:
     return round((WIDTH / 2) - (object_width / 2))
+
+def countdown_centre_points(area: CountdownArea,
+                            number_of_points: int) -> List[Tuple[int, int]]:
+    return [letter_coords(area, letter_num, 0)
+            for letter_num in range(number_of_points)]
