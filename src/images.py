@@ -59,7 +59,7 @@ class CountdownArea:
     def rectangle(self):
         return [self.x, self.y, self.x + self.width, self.y + self.height]
 
-def draw_countdown(draw, countdown: Countdown):
+def draw_countdown(draw, days: List[str]):
     area = CountdownArea(
         x=30,
         y=220,
@@ -71,8 +71,8 @@ def draw_countdown(draw, countdown: Countdown):
     )
 
     draw.rectangle(area.rectangle, fill=BLACK)
-    draw_countdown_row(draw, countdown.top_row, 0, area)
-    draw_countdown_row(draw, countdown.bottom_row, 1, area)
+    draw_countdown_row(draw, days, 0, area)
+    draw_countdown_row(draw, days, 1, area)
 
 def draw_countdown_row(draw: Image,
                        row: List[str],

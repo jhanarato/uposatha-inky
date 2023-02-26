@@ -12,7 +12,7 @@ class Countdown:
 @dataclass
 class NextUposatha:
     info: str
-    countdown: Countdown
+    countdown: List[str]
 
 def next_uposatha_content(today: date) -> NextUposatha:
     calendar = Calendar()
@@ -35,7 +35,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
         phase=uposatha.moon_phase.name.capitalize()
     )
 
-    countdown = split_countdown(countdown_letters(today, uposatha.falls_on))
+    countdown = countdown_letters(today, uposatha.falls_on)
 
     return NextUposatha(info, countdown)
 
@@ -49,10 +49,6 @@ def countdown_letters(today: date, uposatha_date: date) -> List[str]:
     return day_letters
 
 def split_countdown(letters: List[str]) -> Countdown:
-    if len(letters) <= 8:
-        top_row = []
-        bottom_row = letters
-    else:
-        top_row = letters[:-8]
-        bottom_row = letters[-8:]
+    top_row = letters[:-8]
+    bottom_row = letters[-8:]
     return Countdown(top_row, bottom_row)
