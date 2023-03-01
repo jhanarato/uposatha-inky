@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
-from content import NextUposatha, Countdown
+from content import NextUposatha
 
 WIDTH = 400
 HEIGHT = 300
@@ -46,53 +46,25 @@ def draw_info(draw: ImageDraw, text: str) -> None:
         spacing=10
     )
 
-@dataclass
-class CountdownArea:
-    x: int
-    y: int
-    width: int
-    height: int
-    border: int
-    letter_spacing: int
-    row_spacing: int
-
-    @property
-    def rectangle(self):
-        return [self.x, self.y, self.x + self.width, self.y + self.height]
-
-def draw_countdown(draw, days: List[str]):
-    area = CountdownArea(
-        x=30,
-        y=220,
-        width=340,
-        height=70,
-        border=10,
-        letter_spacing=20,
-        row_spacing=20
+def draw_countdown(draw: Image, letters: List[str]) -> None:
+    centres = centre_points(
+        y_coord=220,
+        screen_width=WIDTH,
+        spacing=20,
+        number_of_points=len(letters)
     )
-    draw.rectangle(area.rectangle, fill=BLACK)
-    draw_countdown_row(draw, days, 0, area)
 
-def draw_countdown_row(draw: Image,
-                       row: List[str],
-                       row_num: int,
-                       area: CountdownArea) -> None:
-    for index, day_letter in enumerate(reversed(row)):
-        x_coord, y_coord = letter_coords(area, index, row_num)
-        font = ImageFont.truetype(font=RobotoBold, size=20)
-        draw.text(
-            xy=(x_coord, y_coord),
-            text=day_letter,
-            font=font,
-            fill=WHITE
-        )
+    for letter, centre in zip(letters, centres):
+        draw_letter(draw, letter, centre)
 
-def letter_coords(area: CountdownArea,
-                  letter_num: int,
-                  row_num: int) -> Tuple[int, int]:
-    x_coord = area.x + area.width - area.border - (area.letter_spacing * letter_num)
-    y_coord = area.y + (area.row_spacing * row_num)
-    return x_coord, y_coord
+def draw_letter(draw: Image, letter: str, centre: Tuple[int, int]):
+    font = ImageFont.truetype(font=RobotoBold, size=20)
+    draw.text(
+        xy=centre,
+        text=letter,
+        font=font,
+        fill=BLACK
+    )
 
 def centered_x_coord(object_width: int) -> int:
     return round((WIDTH / 2) - (object_width / 2))

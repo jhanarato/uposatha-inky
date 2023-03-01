@@ -5,11 +5,6 @@ from datetime import date, timedelta
 from uposatha.calendar import Calendar
 
 @dataclass
-class Countdown:
-    top_row: List[str]
-    bottom_row: List[str]
-
-@dataclass
 class NextUposatha:
     info: str
     countdown: List[str]
@@ -47,8 +42,3 @@ def countdown_letters(today: date, uposatha_date: date) -> List[str]:
         day_letters.append(day_letter)
         next_date += timedelta(1)
     return day_letters
-
-def split_countdown(letters: List[str]) -> Countdown:
-    top_row = letters[:-8]
-    bottom_row = letters[-8:]
-    return Countdown(top_row, bottom_row)

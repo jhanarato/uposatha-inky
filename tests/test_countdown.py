@@ -89,4 +89,7 @@ def test_countdown_letter_y(countdown_area, letter_num, row_num, y):
     ]
 )
 def test_centre_points(y_coord, width, spacing, number, result):
-    assert centre_points(y_coord, width, spacing, number) == result
+    assert centre_points(y_coord=y_coord,
+                         screen_width=width,
+                         spacing=spacing,
+                         number_of_points=number) == result
