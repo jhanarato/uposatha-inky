@@ -2,7 +2,7 @@ import pytest
 from datetime import date, timedelta
 from itertools import islice
 from content import countdown_letters, split_countdown
-from images import letter_coords, CountdownArea, countdown_centre_points, generate_centres
+from images import letter_coords, CountdownArea, centre_points
 
 
 def test_letters_fifteen():
@@ -80,10 +80,13 @@ def test_countdown_letter_x(countdown_area, letter_num, row_num, x):
 def test_countdown_letter_y(countdown_area, letter_num, row_num, y):
     assert letter_coords(countdown_area, letter_num, row_num)[1] == y
 
-def test_countdown_centres(countdown_area):
-    points = countdown_centre_points(countdown_area, 3)
-    assert points == [(260, 50), (240,50), (220, 50)]
-
-def test_generate_centres(countdown_area):
-    centres = list(islice(generate_centres(countdown_area), 3))
-    assert centres == [(260, 50), (240, 50), (220, 50)]
+@pytest.mark.parametrize(
+    "y_coord,width,spacing,number,result",
+    [
+        (100, 400, 20, 1, [(200, 100)]),
+        (100, 400, 20, 2, [(190, 100), (210, 100)]),
+        (100, 400, 20, 3, [(180, 100), (200, 100), (220, 100)]),
+    ]
+)
+def test_centre_points(y_coord, width, spacing, number, result):
+    assert centre_points(y_coord, width, spacing, number) == result

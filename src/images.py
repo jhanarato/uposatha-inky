@@ -1,4 +1,5 @@
-from typing import List, Tuple, Generator
+from collections.abc import Iterator
+from typing import List, Tuple
 from dataclasses import dataclass
 from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
@@ -69,7 +70,6 @@ def draw_countdown(draw, days: List[str]):
         letter_spacing=20,
         row_spacing=20
     )
-
     draw.rectangle(area.rectangle, fill=BLACK)
     draw_countdown_row(draw, days, 0, area)
 
@@ -97,12 +97,16 @@ def letter_coords(area: CountdownArea,
 def centered_x_coord(object_width: int) -> int:
     return round((WIDTH / 2) - (object_width / 2))
 
-def countdown_centre_points(area: CountdownArea,
-                            number_of_points: int) -> List[Tuple[int, int]]:
-    return [letter_coords(area, letter_num, 0)
-            for letter_num in range(number_of_points)]
+def centre_points(y_coord: int,
+                  screen_width: int,
+                  spacing: int,
+                  number_of_points: int) -> List[Tuple[int, int]]:
 
-def generate_centres(area: CountdownArea) -> Generator[Tuple[int, int], None, None]:
-    centres = [(260, 50), (240, 50), (220, 50)]
-    for centre in centres:
-        yield centre
+    points_width = (number_of_points - 1) * spacing
+    left = (screen_width - points_width) / 2
+
+    points = []
+    for point_num in range(number_of_points):
+        x_coord = int(left + (point_num * spacing))
+        points.append((x_coord, y_coord))
+    return points
