@@ -31,7 +31,8 @@ class NextUposathaDrawing:
 
     def draw_heading(self, text: str) -> None:
         font = ImageFont.truetype(font=RobotoBold, size=36)
-        x_coord = centered_x_coord(self.config.width, font.getlength(text))
+        width = font.getlength(text)
+        x_coord = round((self.config.width / 2) - (width / 2))
         y_coord = 10
         self._draw.text((x_coord, y_coord), text, self.config.black, font)
 
@@ -45,7 +46,7 @@ class NextUposathaDrawing:
         font = ImageFont.truetype(font=RobotoBold, size=32)
         y_coord = 90
         text_width = self._draw.textbbox((0, 0), text, font)[2]
-        x_coord = centered_x_coord(self.config.width, text_width)
+        x_coord = round((self.config.width / 2) - (text_width / 2))
 
         self._draw.multiline_text(
             xy=(x_coord, y_coord),
@@ -76,8 +77,6 @@ class NextUposathaDrawing:
             fill=self.config.black
         )
 
-def centered_x_coord(screen_width: int, object_width: int) -> int:
-    return round((screen_width / 2) - (object_width / 2))
 
 def centre_points(y_coord: int,
                   screen_width: int,
@@ -87,5 +86,5 @@ def centre_points(y_coord: int,
     points_width = (number_of_points - 1) * spacing
     left = (screen_width - points_width) / 2
 
-    return [(int(left + (point_number * spacing)), y_coord)
+    return [(round(left + (point_number * spacing)), y_coord)
             for point_number in range(number_of_points)]
