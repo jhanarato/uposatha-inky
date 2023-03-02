@@ -13,6 +13,26 @@ class DrawingConfig:
     black:  int = 1
     yellow: int = 2
 
+class NextUposathaDrawing:
+    def __init__(self, content: NextUposatha):
+        self.config: DrawingConfig = DrawingConfig()
+        self._content: NextUposatha = content
+        self._image: Image = Image.new(mode="P",
+                                      size=(self.config.width, self.config.height),
+                                      color=self.config.white)
+        self._draw: ImageDraw = ImageDraw.Draw(self._image)
+        self.draw_heading("Uposatha")
+
+    @property
+    def image(self):
+        return self._image
+
+    def draw_heading(self, text: str) -> None:
+        font = ImageFont.truetype(font=RobotoBold, size=36)
+        x_coord = centered_x_coord(self.config.width, font.getlength(text))
+        y_coord = 10
+        self._draw.text((x_coord, y_coord), text, self.config.black, font)
+
 def make_image(content: NextUposatha) -> Image:
     config = DrawingConfig()
     image = Image.new(mode="P", size=(config.width, config.height), color=config.white)
