@@ -78,8 +78,5 @@ def centre_points(y_coord: int,
     points_width = (number_of_points - 1) * spacing
     left = (screen_width - points_width) / 2
 
-    points = []
-    for point_num in range(number_of_points):
-        x_coord = int(left + (point_num * spacing))
-        points.append((x_coord, y_coord))
-    return points
+    return [(int(left + (point_number * spacing)), y_coord)
+            for point_number in range(number_of_points)]
