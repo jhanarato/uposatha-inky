@@ -16,12 +16,14 @@ class DrawingConfig:
 class NextUposathaDrawing:
     def __init__(self, content: NextUposatha):
         self.config: DrawingConfig = DrawingConfig()
-        self._content: NextUposatha = content
         self._image: Image = Image.new(mode="P",
                                       size=(self.config.width, self.config.height),
                                       color=self.config.white)
         self._draw: ImageDraw = ImageDraw.Draw(self._image)
-        self.draw_heading("Uposatha")
+        self.draw_heading(text="Uposatha")
+        self.draw_underline(y_coord=70)
+        self.draw_info(content.info)
+        self.draw_countdown(content.countdown)
 
     @property
     def image(self):
@@ -32,6 +34,47 @@ class NextUposathaDrawing:
         x_coord = centered_x_coord(self.config.width, font.getlength(text))
         y_coord = 10
         self._draw.text((x_coord, y_coord), text, self.config.black, font)
+
+    def draw_underline(self, y_coord: int):
+        coords = [50, y_coord, self.config.width - 50, y_coord]
+        self._draw.line(xy=coords,
+                        fill=self.config.black,
+                        width=2)
+
+    def draw_info(self, text: str) -> None:
+        font = ImageFont.truetype(font=RobotoBold, size=32)
+        y_coord = 90
+        text_width = self._draw.textbbox((0, 0), text, font)[2]
+        x_coord = centered_x_coord(self.config.width, text_width)
+
+        self._draw.multiline_text(
+            xy=(x_coord, y_coord),
+            text=text,
+            font=font,
+            fill=self.config.black,
+            align="center",
+            spacing=10
+        )
+
+    def draw_countdown(self, letters: List[str]) -> None:
+        centres = centre_points(
+            y_coord=220,
+            screen_width=self.config.width,
+            spacing=20,
+            number_of_points=len(letters)
+        )
+
+        for letter, centre in zip(letters, centres):
+            draw_letter(self._draw, self.config.black, letter, centre)
+
+    def draw_letter(self, letter: str, centre: Tuple[int, int]):
+        font = ImageFont.truetype(font=RobotoBold, size=20)
+        self._draw.text(
+            xy=centre,
+            text=letter,
+            font=font,
+            fill=self.config.black
+        )
 
 def make_image(content: NextUposatha) -> Image:
     config = DrawingConfig()
