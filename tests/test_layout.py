@@ -1,11 +1,11 @@
 import pytest
 
 from layout import Layout
-from images import Text
+from images import Text, DrawingConfig
 
 
 def test_add_centred_text():
-    layout = Layout()
-    heading_text = Text("Heading")
-    layout.add_text(heading_text)
-    assert layout.items[0].x == 0
+    layout = Layout(DrawingConfig())
+    text = Text("Happy Birthday")
+    layout.add_text(text)
+    assert layout.items[0].x == 76

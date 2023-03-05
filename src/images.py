@@ -92,7 +92,13 @@ def centre_points(y_coord: int,
 
 class Text:
     def __init__(self, text: str):
+        self.text = text
+        self.font = ImageFont.truetype(font=RobotoBold, size=36)
         self.x: int = 0
         self.y: int = 0
+
+    @property
+    def width(self) -> int:
+        return self.font.getlength(self.text)
 
 
