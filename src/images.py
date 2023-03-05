@@ -88,3 +88,11 @@ def centre_points(y_coord: int,
 
     return [(round(left + (point_number * spacing)), y_coord)
             for point_number in range(number_of_points)]
+
+
+class Text:
+    def __init__(self, text: str):
+        self.x: int = 0
+        self.y: int = 0
+
+
