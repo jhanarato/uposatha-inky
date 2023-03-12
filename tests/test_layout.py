@@ -1,6 +1,7 @@
 import pytest
 
-from layout import Layout, ImageComponent
+from layout import Layout, ImageComponent, Align
+
 
 class FakeComponent(ImageComponent):
     def __init__(self, height: int, width: int):
@@ -20,17 +21,16 @@ class FakeComponent(ImageComponent):
         self.drawn_at_x = x
         self.drawn_at_y = y
 
-
-def test_should_center_one_component():
+@pytest.mark.parametrize(
+    "align,x_coord",
+    [
+        (Align.LEFT, 0),
+        (Align.CENTRE, 90)
+    ]
+)
+def test_should_align_component(align, x_coord):
     component = FakeComponent(height=10, width=20)
     layout = Layout(screen_height=100, screen_width=200)
-    layout.add(component)
+    layout.add(component, align)
     layout.draw()
-    assert component.drawn_at_x == 90
-
-# def test_add_centred_text():
-#     layout = Layout(DrawingConfig())
-#     text = Text("Happy Birthday")
-#     layout.add_text(text)
-#     assert layout.items[0].x == 76 # Given RobotoBold 32pt
-
+    assert component.drawn_at_x == x_coord

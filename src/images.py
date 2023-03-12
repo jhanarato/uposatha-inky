@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
 from content import NextUposatha
-from layout import ImageComponent
+from layout import Layout, ImageComponent
 
 @dataclass(frozen=True)
 class DrawingConfig:
@@ -13,6 +13,27 @@ class DrawingConfig:
     white:  int = 0
     black:  int = 1
     yellow: int = 2
+
+
+class TextComponent(ImageComponent):
+    def __init__(self, imgDraw: ImageDraw, config: DrawingConfig, text: str):
+        self._draw = imgDraw
+        self._text = text
+        self._font = ImageFont.truetype(font=RobotoBold, size=36)
+        self._colour = config.black
+
+    def height(self) -> int:
+        return 0
+
+    def width(self) -> int:
+        return self._font.getlength(self._text)
+
+    def draw(self, x: int, y: int) -> None:
+        self._draw.text(xy=(x, y),
+                        text=self._text,
+                        fill=self._colour,
+                        font=self._font)
+
 
 class NextUposathaDrawing:
     def __init__(self, content: NextUposatha):
@@ -31,11 +52,12 @@ class NextUposathaDrawing:
         return self._image
 
     def draw_heading(self, text: str) -> None:
-        font = ImageFont.truetype(font=RobotoBold, size=36)
-        width = font.getlength(text)
-        x_coord = round((self.config.width / 2) - (width / 2))
-        y_coord = 10
-        self._draw.text((x_coord, y_coord), text, self.config.black, font)
+        component = TextComponent(self._draw, self.config, text)
+
+        layout = Layout(screen_height=self.config.height,
+                        screen_width=self.config.width)
+        layout.add(component)
+        layout.draw()
 
     def draw_underline(self, y_coord: int):
         coords = [50, y_coord, self.config.width - 50, y_coord]
@@ -89,18 +111,3 @@ def centre_points(y_coord: int,
 
     return [(round(left + (point_number * spacing)), y_coord)
             for point_number in range(number_of_points)]
-
-
-class TextComponent(ImageComponent):
-    def __init__(self, text: str):
-        self.text = text
-        self.font = ImageFont.truetype(font=RobotoBold, size=36)
-
-    def height(self) -> int:
-        return 0
-
-    def width(self) -> int:
-        return self.font.getlength(self.text)
-
-    def draw(self, x: int, y: int) -> None:
-        pass
