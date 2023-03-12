@@ -4,7 +4,8 @@ from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
 from content import NextUposatha
-from layout import Layout, ImageComponent
+from layout import Layout, ImageComponent, Align
+
 
 @dataclass(frozen=True)
 class DrawingConfig:
@@ -56,7 +57,7 @@ class NextUposathaDrawing:
 
         layout = Layout(screen_height=self.config.height,
                         screen_width=self.config.width)
-        layout.add(component)
+        layout.add(component, Align.CENTRE)
         layout.draw()
 
     def draw_underline(self, y_coord: int):
