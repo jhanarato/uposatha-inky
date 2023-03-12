@@ -1,18 +1,24 @@
-from typing import List
+from typing import List, Protocol
 
-from images import DrawingConfig, Text
+class ImageComponent(Protocol):
+    def height(self) -> int: ...
+    def width(self) -> int: ...
+    def draw(self, x: int, y: int) -> None: ...
 
 class Layout:
-    def __init__(self, drawing: DrawingConfig):
-        self._drawing: DrawingConfig = drawing
-        self.items: List[Text] = []
+    def __init__(self, screen_height: int, screen_width: int):
+        self.screen_height = screen_height
+        self.screen_width = screen_width
+        self.components: List[ImageComponent] = []
 
-    def add_text(self, text: Text):
-        self.center(text)
-        self.items.append(text)
+    def add(self, component: ImageComponent) -> None:
+        self.center(component)
+        self.components.append(component)
 
-    def center(self, text: Text):
-        text.x = round((self._drawing.width - text.width) / 2)
+    def center(self, component: ImageComponent):
+        pass
+        # text.x = round((self._drawing.width - text.width) / 2)
 
     def draw(self):
-        pass
+        for component in self.components:
+            component.draw(x=90, y=0)

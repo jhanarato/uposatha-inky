@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
 from content import NextUposatha
+from layout import ImageComponent
 
 @dataclass(frozen=True)
 class DrawingConfig:
@@ -90,15 +91,16 @@ def centre_points(y_coord: int,
             for point_number in range(number_of_points)]
 
 
-class Text:
+class TextComponent(ImageComponent):
     def __init__(self, text: str):
         self.text = text
         self.font = ImageFont.truetype(font=RobotoBold, size=36)
-        self.x: int = 0
-        self.y: int = 0
 
-    @property
+    def height(self) -> int:
+        return 0
+
     def width(self) -> int:
         return self.font.getlength(self.text)
 
-
+    def draw(self, x: int, y: int) -> None:
+        pass
