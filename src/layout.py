@@ -12,13 +12,13 @@ class Layout:
         self.components: List[ImageComponent] = []
 
     def add(self, component: ImageComponent) -> None:
-        self.center(component)
         self.components.append(component)
 
-    def center(self, component: ImageComponent):
-        pass
-        # text.x = round((self._drawing.width - text.width) / 2)
+    def center_aligned_x(self, component: ImageComponent):
+        return round(
+            (self.screen_width - component.width()) / 2
+        )
 
     def draw(self):
         for component in self.components:
-            component.draw(x=90, y=0)
+            component.draw(x=self.center_aligned_x(component), y=0)
