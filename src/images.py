@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
 from content import NextUposatha
-from layout import Layout, ImageComponent, Align
+from layout import Layout, Align
 
 
 @dataclass(frozen=True)
@@ -16,7 +16,7 @@ class DrawingConfig:
     yellow: int = 2
 
 
-class TextComponent(ImageComponent):
+class TextComponent:
     def __init__(self, imgDraw: ImageDraw, config: DrawingConfig, text: str):
         self._draw = imgDraw
         self._text = text
