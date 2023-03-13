@@ -24,10 +24,10 @@ class TextComponent(ImageComponent):
         self._colour = config.black
 
     def height(self) -> int:
-        return 0
+        return self._font.getbbox(self._text)[3]
 
     def width(self) -> int:
-        return self._font.getlength(self._text)
+        return self._font.getbbox(self._text)[2]
 
     def draw(self, x: int, y: int) -> None:
         self._draw.text(xy=(x, y),
