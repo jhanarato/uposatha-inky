@@ -22,3 +22,12 @@ class Text:
                         text=self._text,
                         fill=self._colour,
                         font=self._font)
+
+class Underline:
+    pass
+
+class MultilineText:
+    pass
+
+class Countdown:
+    pass
