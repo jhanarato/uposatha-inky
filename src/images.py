@@ -1,44 +1,16 @@
 from typing import List, Tuple
-from dataclasses import dataclass
 from PIL import Image, ImageDraw, ImageFont
 from font_roboto import RobotoBold
 
+from components import Text
 from content import NextUposatha
 from layout import Layout, Align
-
-
-@dataclass(frozen=True)
-class DrawingConfig:
-    height: int = 300
-    width:  int = 400
-    white:  int = 0
-    black:  int = 1
-    yellow: int = 2
-
-
-class TextComponent:
-    def __init__(self, imgDraw: ImageDraw, config: DrawingConfig, text: str):
-        self._draw = imgDraw
-        self._text = text
-        self._font = ImageFont.truetype(font=RobotoBold, size=36)
-        self._colour = config.black
-
-    def height(self) -> int:
-        return self._font.getbbox(self._text)[3]
-
-    def width(self) -> int:
-        return self._font.getbbox(self._text)[2]
-
-    def draw(self, x: int, y: int) -> None:
-        self._draw.text(xy=(x, y),
-                        text=self._text,
-                        fill=self._colour,
-                        font=self._font)
+from screen import ScreenConfig
 
 
 class NextUposathaDrawing:
     def __init__(self, content: NextUposatha):
-        self.config: DrawingConfig = DrawingConfig()
+        self.config: ScreenConfig = ScreenConfig()
         self._image: Image = Image.new(mode="P",
                                       size=(self.config.width, self.config.height),
                                       color=self.config.white)
@@ -53,7 +25,7 @@ class NextUposathaDrawing:
         return self._image
 
     def draw_heading(self, text: str) -> None:
-        component = TextComponent(self._draw, self.config, text)
+        component = Text(self._draw, self.config, text)
 
         layout = Layout(screen_height=self.config.height,
                         screen_width=self.config.width)
