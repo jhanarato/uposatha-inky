@@ -34,3 +34,20 @@ def test_should_align_component(align, x_coord):
     layout.add(component, align)
     layout.draw()
     assert component.drawn_at_x == x_coord
+
+def test_should_space_component():
+    layout = Layout(screen_height=100, screen_width=200)
+    layout.add(
+        component=FakeComponent(height=10, width=20),
+        align=Align.CENTRE,
+        space_after=30
+    )
+
+    layout.add(
+        component=FakeComponent(height=10, width=20),
+        align=Align.CENTRE,
+        space_after=30
+    )
+
+    layout.draw()
+    assert layout.components[-1][0].drawn_at_y == 40
