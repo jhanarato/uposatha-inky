@@ -5,15 +5,15 @@ from font_roboto import RobotoBold
 from components import Text
 from content import NextUposatha
 from layout import Layout, Align
-from screen import ScreenConfig
+from screen import ImageConfig
 
 
 class NextUposathaDrawing:
     def __init__(self, content: NextUposatha):
-        self.config: ScreenConfig = ScreenConfig()
+        self.config: ImageConfig = ImageConfig()
         self._image: Image = Image.new(mode="P",
                                       size=(self.config.width, self.config.height),
-                                      color=self.config.white)
+                                      color=self.config.palette.WHITE)
         self._draw: ImageDraw = ImageDraw.Draw(self._image)
         self.draw_heading(text="Uposatha")
         self.draw_underline(y_coord=70)
@@ -35,7 +35,7 @@ class NextUposathaDrawing:
     def draw_underline(self, y_coord: int):
         coords = [50, y_coord, self.config.width - 50, y_coord]
         self._draw.line(xy=coords,
-                        fill=self.config.black,
+                        fill=self.config.palette.BLACK,
                         width=2)
 
     def draw_info(self, text: str) -> None:
@@ -48,7 +48,7 @@ class NextUposathaDrawing:
             xy=(x_coord, y_coord),
             text=text,
             font=font,
-            fill=self.config.black,
+            fill=self.config.palette.BLACK,
             align="center",
             spacing=10
         )
@@ -70,7 +70,7 @@ class NextUposathaDrawing:
             xy=centre,
             text=letter,
             font=font,
-            fill=self.config.black
+            fill=self.config.palette.BLACK
         )
 
 
