@@ -1,11 +1,9 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, auto
 from typing import Dict
 
-class Colour(Enum):
-    WHITE = 0
-    BLACK = 1
-    YELLOW = 2
+from PIL import ImageFont, ImageDraw
+from font_roboto import RobotoBold
 
 @dataclass
 class Palette:
@@ -14,12 +12,15 @@ class Palette:
     YELLOW: int = 2
 
 @dataclass
-class ImageConfig:
-    def __init__(self):
-        self.height = 300
-        self.width = 400
-        self.palette = Palette()
+class FontStyles:
+    HEADING: ImageFont = ImageFont.truetype(font=RobotoBold, size=36)
+    INFO: ImageFont = ImageFont.truetype(font=RobotoBold, size=32)
+    COUNTDOWN: ImageFont = ImageFont.truetype(font=RobotoBold, size=20)
 
-    height: int
-    width:  int
-    palette: Palette
+
+@dataclass
+class ImageConfig:
+    height: int = 300
+    width:  int = 400
+    palette: Palette = Palette()
+    font_styles: FontStyles = FontStyles()

@@ -1,14 +1,12 @@
-from PIL import ImageDraw, ImageFont
-from font_roboto import RobotoBold
+from PIL import ImageDraw
 
-from screen import ImageConfig, Colour
-
+from screen import ImageConfig
 
 class Text:
-    def __init__(self, imgDraw: ImageDraw, config: ImageConfig, text: str):
-        self._draw = imgDraw
+    def __init__(self, draw: ImageDraw, config: ImageConfig, text: str):
+        self._draw = draw
         self._text = text
-        self._font = ImageFont.truetype(font=RobotoBold, size=36)
+        self._font = config.font_styles.HEADING
         self._colour = config.palette.BLACK
 
     def height(self) -> int:

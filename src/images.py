@@ -1,6 +1,5 @@
 from typing import List, Tuple
-from PIL import Image, ImageDraw, ImageFont
-from font_roboto import RobotoBold
+from PIL import Image, ImageDraw
 
 from components import Text
 from content import NextUposatha
@@ -12,8 +11,8 @@ class NextUposathaDrawing:
     def __init__(self, content: NextUposatha):
         self.config: ImageConfig = ImageConfig()
         self._image: Image = Image.new(mode="P",
-                                      size=(self.config.width, self.config.height),
-                                      color=self.config.palette.WHITE)
+                                       size=(self.config.width, self.config.height),
+                                       color=self.config.palette.WHITE)
         self._draw: ImageDraw = ImageDraw.Draw(self._image)
         self.draw_heading(text="Uposatha")
         self.draw_underline(y_coord=70)
@@ -39,7 +38,7 @@ class NextUposathaDrawing:
                         width=2)
 
     def draw_info(self, text: str) -> None:
-        font = ImageFont.truetype(font=RobotoBold, size=32)
+        font = self.config.font_styles.INFO
         y_coord = 90
         text_width = self._draw.textbbox((0, 0), text, font)[2]
         x_coord = round((self.config.width / 2) - (text_width / 2))
@@ -65,7 +64,7 @@ class NextUposathaDrawing:
             self.draw_letter(letter, centre)
 
     def draw_letter(self, letter: str, centre: Tuple[int, int]):
-        font = ImageFont.truetype(font=RobotoBold, size=20)
+        font = self.config.font_styles.COUNTDOWN
         self._draw.text(
             xy=centre,
             text=letter,
