@@ -51,5 +51,8 @@ class Layout:
         for arranged in self.arrangement:
             x = self.align_x(arranged.component, arranged.align)
             y += arranged.space_before
+
             arranged.component.draw(x, y)
-            y += arranged.component.height() + arranged.space_after
+
+            y += arranged.component.height()
+            y += arranged.space_after
