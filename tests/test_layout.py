@@ -103,3 +103,31 @@ def test_should_combine_space_before_and_after():
     layout.draw()
 
     assert log.pixels[1].y == 60
+
+def test_three_components_spaced():
+    log = DrawLog()
+    layout = Layout(screen_height=100, screen_width=200)
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=20, width=20, log=log),
+            align=Align.CENTRE, space_before=0, space_after=25
+        )
+    )
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=30, width=20, log=log),
+            align=Align.CENTRE, space_before=25, space_after=20
+        )
+    )
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=40, width=20, log=log),
+            align=Align.CENTRE, space_before=10, space_after=10
+        )
+    )
+
+    layout.draw()
+
+    assert log.pixels[0].y == 0
+    assert log.pixels[1].y == 70
+    assert log.pixels[2].y == 130
