@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Tuple,Protocol
+from typing import List, Tuple, Protocol
 from enum import Enum, auto
 
 class Align(Enum):
@@ -18,15 +18,29 @@ class ImageComponent(Protocol):
     def draw(self, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
 
+@dataclass
+class ArrangedComponent:
+    """ A component with its layout"""
+    component: ImageComponent
+    align: Align
+    space_before: int
+    space_after: int
+
 class Layout:
     """ A layout of ImageComponents in an image """
     def __init__(self, screen_height: int, screen_width: int):
         self.screen_height = screen_height
         self.screen_width = screen_width
-        self.components: List[Tuple[ImageComponent, Align, int]] = []
+        self.arrangement: List[ArrangedComponent] = []
 
-    def add(self, component: ImageComponent, align: Align, space_after: int = 0) -> None:
-        self.components.append((component, align, space_after))
+    def add(self, component: ImageComponent, align: Align, space_before: int, space_after: int) -> None:
+        arranged = ArrangedComponent(
+            component=component,
+            align=align,
+            space_before=space_before,
+            space_after=space_after
+        )
+        self.arrangement.append(arranged)
 
     def align_x(self, component: ImageComponent, align: Align) -> int:
         x = 0
@@ -40,6 +54,7 @@ class Layout:
 
     def draw(self) -> None:
         y = 0
-        for component, align, space_after in self.components:
-            component.draw(x=self.align_x(component, align), y=y)
-            y += component.height() + space_after
+        for arranged in self.arrangement:
+            y += arranged.space_before
+            arranged.component.draw(x=self.align_x(arranged.component, arranged.align), y=y)
+            y += arranged.component.height() + arranged.space_after

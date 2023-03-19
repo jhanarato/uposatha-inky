@@ -39,20 +39,40 @@ def test_should_align_component(align, x_coord):
     log = DrawLog()
     component = LoggerComponent(height=10, width=20, log=log)
     layout = Layout(screen_height=100, screen_width=200)
-    layout.add(component, align)
+    layout.add(component, align, 0, 0)
     layout.draw()
     assert component.log.pixels[0].x == x_coord
 
-def test_should_space_component():
+@dataclass
+class Arrangement:
+    height: int
+    width: int
+    align: Align
+    space_before: int
+    space_after: int
+
+def test_should_draw_component_with_space_after():
     log = DrawLog()
     layout = Layout(screen_height=100, screen_width=200)
-    component_sizes = [
-        (10, 20),
-        (10, 20),
+    arrangements = [
+        Arrangement(height=10, width=20, align=Align.CENTRE, space_after=30, space_before=0),
+        Arrangement(height=10, width=20, align=Align.CENTRE, space_after=30, space_before=0),
     ]
 
-    for size in component_sizes:
-        layout.add(LoggerComponent(size[0], size[1], log), align=Align.CENTRE, space_after=30)
+    for arrange in arrangements:
+        layout.add(
+            component=LoggerComponent(arrange.height, arrange.width, log),
+            align=Align.CENTRE,
+            space_after=arrange.space_after,
+            space_before=arrange.space_before
+        )
 
     layout.draw()
     assert log.pixels[-1].y == 40
+
+def test_should_draw_component_with_space_before():
+    log = DrawLog()
+    layout = Layout(screen_height=100, screen_width=200)
+    layout.add(LoggerComponent(20, 50, log), Align.CENTRE, space_before=20, space_after=0)
+    layout.draw()
+    assert log.pixels[0].y == 20
