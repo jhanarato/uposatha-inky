@@ -33,14 +33,8 @@ class Layout:
         self.screen_width = screen_width
         self.arrangement: List[ArrangedComponent] = []
 
-    def add(self, component: ImageComponent, align: Align, space_before: int, space_after: int) -> None:
-        arranged = ArrangedComponent(
-            component=component,
-            align=align,
-            space_before=space_before,
-            space_after=space_after
-        )
-        self.arrangement.append(arranged)
+    def add(self, component: ArrangedComponent) -> None:
+        self.arrangement.append(component)
 
     def align_x(self, component: ImageComponent, align: Align) -> int:
         x = 0
