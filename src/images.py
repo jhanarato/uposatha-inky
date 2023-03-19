@@ -1,9 +1,9 @@
 from typing import List, Tuple
 from PIL import Image, ImageDraw
 
-from components import Text
+from components import Text, HorizontalLine
 from content import NextUposatha
-from layout import Layout, Align
+from layout import Layout, Align, ArrangedComponent
 from screen import ImageConfig
 
 
@@ -14,28 +14,53 @@ class NextUposathaDrawing:
                                        size=(self.config.width, self.config.height),
                                        color=self.config.palette.WHITE)
         self._draw: ImageDraw = ImageDraw.Draw(self._image)
-        self.draw_heading(text="Uposatha")
-        self.draw_underline(y_coord=70)
-        self.draw_info(content.info)
-        self.draw_countdown(content.countdown)
+
+        self.heading("Uposatha")
+
+        layout = Layout(screen_height=self.config.height,
+                        screen_width=self.config.width)
+        layout.add(self.heading("Uposatha"))
+        layout.add(self.underline())
+        layout.draw()
+
+        # self.draw_underline(y_coord=70)
+        # self.draw_info(content.info)
+        # self.draw_countdown(content.countdown)
 
     @property
     def image(self):
         return self._image
 
-    def draw_heading(self, text: str) -> None:
-        component = Text(self._draw, self.config, text)
+    def heading(self, text: str) -> ArrangedComponent:
+        return ArrangedComponent(
+            component=Text(
+                draw=self._draw,
+                text=text,
+                font=self.config.font_styles.HEADING,
+                colour=self.config.palette.BLACK
+            ),
+            align=Align.CENTRE,
+            space_before=20,
+            space_after=20
+        )
 
-        layout = Layout(screen_height=self.config.height,
-                        screen_width=self.config.width)
-        layout.add(component, Align.CENTRE)
-        layout.draw()
+    def underline(self) -> ArrangedComponent:
+        return ArrangedComponent(
+            component=HorizontalLine(
+                draw=self._draw,
+                length=300,
+                thickness=2,
+                colour=self.config.palette.BLACK
+            ),
+            align=Align.CENTRE,
+            space_before=0,
+            space_after=0
+        )
 
-    def draw_underline(self, y_coord: int):
-        coords = [50, y_coord, self.config.width - 50, y_coord]
-        self._draw.line(xy=coords,
-                        fill=self.config.palette.BLACK,
-                        width=2)
+        # coords = [50, y_coord, self.config.width - 50, y_coord]
+        # self._draw.line(xy=coords,
+        #                 fill=self.config.palette.BLACK,
+        #                 width=2)
 
     def draw_info(self, text: str) -> None:
         font = self.config.font_styles.INFO
