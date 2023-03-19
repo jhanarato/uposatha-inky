@@ -1,15 +1,23 @@
+from dataclasses import dataclass, field
+
 import pytest
 
 from layout import Layout, ImageComponent, Align
 
+@dataclass
+class Pixel:
+    x: int
+    y: int
 
-class FakeComponent(ImageComponent):
-    def __init__(self, height: int, width: int):
+@dataclass
+class DrawLog:
+    pixels: list[Pixel] = field(default_factory=list)
+
+class LoggerComponent:
+    def __init__(self, height: int, width: int, log: DrawLog):
         self._height = height
         self._width = width
-        self.drawn_at_x = None
-        self.drawn_at_y = None
-
+        self.log = log
 
     def height(self) -> int:
         return self._height
@@ -18,8 +26,7 @@ class FakeComponent(ImageComponent):
         return self._width
 
     def draw(self, x: int, y: int) -> None:
-        self.drawn_at_x = x
-        self.drawn_at_y = y
+        self.log.pixels.append(Pixel(x, y))
 
 @pytest.mark.parametrize(
     "align,x_coord",
@@ -29,25 +36,23 @@ class FakeComponent(ImageComponent):
     ]
 )
 def test_should_align_component(align, x_coord):
-    component = FakeComponent(height=10, width=20)
+    log = DrawLog()
+    component = LoggerComponent(height=10, width=20, log=log)
     layout = Layout(screen_height=100, screen_width=200)
     layout.add(component, align)
     layout.draw()
-    assert component.drawn_at_x == x_coord
+    assert component.log.pixels[0].x == x_coord
 
 def test_should_space_component():
+    log = DrawLog()
     layout = Layout(screen_height=100, screen_width=200)
-    layout.add(
-        component=FakeComponent(height=10, width=20),
-        align=Align.CENTRE,
-        space_after=30
-    )
+    component_sizes = [
+        (10, 20),
+        (10, 20),
+    ]
 
-    layout.add(
-        component=FakeComponent(height=10, width=20),
-        align=Align.CENTRE,
-        space_after=30
-    )
+    for size in component_sizes:
+        layout.add(LoggerComponent(size[0], size[1], log), align=Align.CENTRE, space_after=30)
 
     layout.draw()
-    assert layout.components[-1][0].drawn_at_y == 40
+    assert log.pixels[-1].y == 40
