@@ -82,3 +82,24 @@ def test_should_draw_component_with_space_before():
     )
     layout.draw()
     assert log.pixels[0].y == 20
+
+def test_should_combine_space_before_and_after():
+    log = DrawLog()
+    layout = Layout(screen_height=100, screen_width=200)
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=10, width=20, log=log),
+            align=Align.CENTRE, space_before=0, space_after=25
+        )
+    )
+
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=10, width=20, log=log),
+            align=Align.CENTRE, space_before=25, space_after=0
+        )
+    )
+
+    layout.draw()
+
+    assert log.pixels[1].y == 60
