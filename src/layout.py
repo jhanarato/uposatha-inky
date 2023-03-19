@@ -49,6 +49,7 @@ class Layout:
     def draw(self) -> None:
         y = 0
         for arranged in self.arrangement:
+            x = self.align_x(arranged.component, arranged.align)
             y += arranged.space_before
-            arranged.component.draw(x=self.align_x(arranged.component, arranged.align), y=y)
+            arranged.component.draw(x, y)
             y += arranged.component.height() + arranged.space_after
