@@ -29,30 +29,32 @@ class ArrangedComponent:
 class Layout:
     """ A layout of ImageComponents in an image """
     def __init__(self, screen_height: int, screen_width: int):
-        self.screen_height = screen_height
-        self.screen_width = screen_width
-        self.arrangement: List[ArrangedComponent] = []
+        self._screen_height = screen_height
+        self._screen_width = screen_width
+        self._arrangement: List[ArrangedComponent] = []
 
     def add(self, component: ArrangedComponent) -> None:
-        self.arrangement.append(component)
-
-    def align_x(self, component: ImageComponent, align: Align) -> int:
-        x = 0
-        if align == Align.LEFT:
-            x = 0
-        elif align == Align.CENTRE:
-            x = int((self.screen_width - component.width()) / 2)
-        elif align == Align.RIGHT:
-            x = int((self.screen_width - component.width()))
-        return x
+        """ Add a component to be arranged in the image """
+        self._arrangement.append(component)
 
     def draw(self) -> None:
+        """ Draw all components in the image """
         y = 0
-        for arranged in self.arrangement:
-            x = self.align_x(arranged.component, arranged.align)
+        for arranged in self._arrangement:
+            x = self._align_x(arranged.component, arranged.align)
             y += arranged.space_before
 
             arranged.component.draw(x, y)
 
             y += arranged.component.height()
             y += arranged.space_after
+
+    def _align_x(self, component: ImageComponent, align: Align) -> int:
+        x = 0
+        if align == Align.LEFT:
+            x = 0
+        elif align == Align.CENTRE:
+            x = int((self._screen_width - component.width()) / 2)
+        elif align == Align.RIGHT:
+            x = int((self._screen_width - component.width()))
+        return x
