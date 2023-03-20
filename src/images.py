@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from PIL import Image, ImageDraw
 
-from components import Text, HorizontalLine
+from components import Text, HorizontalLine, MultilineText
 from content import NextUposatha
 from layout import Layout, Align, ArrangedComponent
 from screen import ImageConfig
@@ -21,9 +21,9 @@ class NextUposathaDrawing:
                         screen_width=self.config.width)
         layout.add(self.heading("Uposatha"))
         layout.add(self.underline())
+        layout.add(self.info(content.info))
         layout.draw()
 
-        # self.draw_underline(y_coord=70)
         # self.draw_info(content.info)
         # self.draw_countdown(content.countdown)
 
@@ -54,27 +54,20 @@ class NextUposathaDrawing:
             ),
             align=Align.CENTRE,
             space_before=0,
-            space_after=0
+            space_after=20
         )
 
-        # coords = [50, y_coord, self.config.width - 50, y_coord]
-        # self._draw.line(xy=coords,
-        #                 fill=self.config.palette.BLACK,
-        #                 width=2)
-
-    def draw_info(self, text: str) -> None:
-        font = self.config.font_styles.INFO
-        y_coord = 90
-        text_width = self._draw.textbbox((0, 0), text, font)[2]
-        x_coord = round((self.config.width / 2) - (text_width / 2))
-
-        self._draw.multiline_text(
-            xy=(x_coord, y_coord),
-            text=text,
-            font=font,
-            fill=self.config.palette.BLACK,
-            align="center",
-            spacing=10
+    def info(self, text: str) -> ArrangedComponent:
+        return ArrangedComponent(
+            component=MultilineText(
+                draw=self._draw,
+                text=text,
+                font=self.config.font_styles.INFO,
+                colour=self.config.palette.BLACK
+            ),
+            align=Align.CENTRE,
+            space_before=0,
+            space_after=20
         )
 
     def draw_countdown(self, letters: List[str]) -> None:
