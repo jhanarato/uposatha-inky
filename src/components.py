@@ -78,8 +78,9 @@ class MultilineText:
 
 
 class LetterIcon:
-    def __init__(self, size: int) -> None:
+    def __init__(self, letter: str, size: int) -> None:
         self._size = size
+        self._letter = letter
 
     def height(self) -> int:
         return self._size
@@ -91,8 +92,8 @@ class LetterIcon:
         pass
 
 
-def letters_to_icons(self, letters: list[str]) -> list[LetterIcon]:
-    return [LetterIcon(10) for letter in letters]
+def letters_to_icons(letters: list[str]) -> list[LetterIcon]:
+    return [LetterIcon(letter, 10) for letter in letters]
 
 
 class Countdown:

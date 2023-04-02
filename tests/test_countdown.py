@@ -2,7 +2,7 @@ import pytest
 from datetime import date, timedelta
 from content import countdown_letters
 from images import centre_points
-from components import Countdown, LetterIcon
+from components import Countdown, LetterIcon, letters_to_icons
 from layout import ImageComponent, Layout, ArrangedComponent, Align
 
 
@@ -37,19 +37,6 @@ def test_centre_points(y_coord, width, spacing, number, result):
                          spacing=spacing,
                          number_of_points=number) == result
 
-class LetterDummy:
-    def __init__(self):
-        pass
-
-    def height(self) -> int:
-        return 0
-
-    def width(self) -> int:
-        return 0
-
-    def draw(self, x: int, y: int) -> None:
-        pass
-
 
 class LetterSpy:
     def __init__(self, size: int):
@@ -65,17 +52,10 @@ class LetterSpy:
     def draw(self, x: int, y: int) -> None:
         self.last_draw_at = (x, y)
 
+
 def letters_to_letter_spy(self, letters: list[str]) -> list[LetterSpy]:
     return [LetterSpy(size=10) for letter in letters]
 
-def test_should_create_component():
-    letters = [LetterDummy()]
-    component = Countdown(letters)
-
-def test_should_draw_letter():
-    letters = [LetterDummy()]
-    component = Countdown(letters)
-    component.draw(0, 0)
 
 def test_should_position_single_letter_at_centre():
     letters = [LetterSpy(size=10)]
@@ -93,10 +73,12 @@ def test_should_position_single_letter_at_centre():
 
     assert letters[0].last_draw_at == (45, 0)
 
+
 def test_should_set_width_of_countdown_for_one_letter():
     letters = [LetterSpy(size=10)]
     component = Countdown(letters)
     assert component.width() == 10
+
 
 def test_should_set_width_for_three_letters():
     letters = [
@@ -108,12 +90,22 @@ def test_should_set_width_for_three_letters():
     component = Countdown(letters)
     assert component.width() == 30
 
+
 def test_should_set_countdown_height_to_icon_height():
     letters = [LetterSpy(size=10)]
     component = Countdown(letters)
     assert component.height() == 10
 
+
 def test_should_set_icon_dimensions():
-    icon = LetterIcon(size=10)
+    icon = LetterIcon(letter="M", size=10)
     assert icon.height() == 10
     assert icon.width() == 10
+
+def test_should_assign_a_letter_to_an_icon():
+    letters = ["M", "T", "W"]
+    icons = letters_to_icons(letters)
+    assert icons[0]._letter == "M"
+    assert icons[1]._letter == "T"
+    assert icons[2]._letter == "W"
+
