@@ -77,13 +77,21 @@ class MultilineText:
         )
 
 
+class LetterIcon:
+    pass
+
+
+def letters_to_icons(self, letters: list[str]) -> list[LetterIcon]:
+    return [LetterIcon() for letter in letters]
+
+
 class Countdown:
     def __init__(self, icons: list[ImageComponent]):
         self._spacing = 10
         self.icons = icons
 
     def height(self) -> int:
-        return 0
+        return self.icons[0].height()
 
     def width(self) -> int:
         icon_width = self.icons[0].width()

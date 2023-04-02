@@ -105,3 +105,8 @@ def test_should_set_width_for_three_letters():
 
     component = Countdown(letters)
     assert component.width() == 30
+
+def test_should_set_countdown_height_to_icon_height():
+    letters = [LetterSpy(size=10)]
+    component = Countdown(letters)
+    assert component.height() == 10
