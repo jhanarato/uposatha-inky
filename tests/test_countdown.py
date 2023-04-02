@@ -57,16 +57,16 @@ def letters_to_letter_spy(letters: list[str], size: int) -> list[LetterSpy]:
     return [LetterSpy(size=size) for letter in letters]
 
 @pytest.fixture
-def single_letter_countdown():
+def one_day_countdown():
     component = Countdown([])
     component._icons = letters_to_letter_spy(letters=["M"], size=10)
     return component
 
-def test_should_position_single_letter_at_centre(single_letter_countdown):
+def test_should_position_single_letter_at_centre(one_day_countdown):
     layout = Layout(100, 100)
     layout.add(
         ArrangedComponent(
-            component=single_letter_countdown,
+            component=one_day_countdown,
             align=Align.CENTRE,
             space_before=0,
             space_after=0
@@ -74,30 +74,26 @@ def test_should_position_single_letter_at_centre(single_letter_countdown):
     )
     layout.draw()
 
-    assert single_letter_countdown._icons[0].last_draw_at == (45, 0)
+    assert one_day_countdown._icons[0].last_draw_at == (45, 0)
 
 
-def test_should_set_width_of_countdown_for_one_letter():
-    letters = [LetterSpy(size=10)]
-    component = Countdown(letters)
-    assert component.width() == 10
+def test_should_set_width_of_countdown_for_one_letter(one_day_countdown):
+    assert one_day_countdown.width() == 10
 
 
-def test_should_set_width_for_three_letters():
-    letters = [
-        LetterSpy(size=8),
-        LetterSpy(size=8),
-        LetterSpy(size=8),
-    ]
-
-    component = Countdown(letters)
-    assert component.width() == 30
+@pytest.fixture
+def three_day_countdown():
+    component = Countdown([])
+    component._icons = letters_to_letter_spy(letters=["M", "T", "W"], size=10)
+    return component
 
 
-def test_should_set_countdown_height_to_icon_height():
-    letters = [LetterSpy(size=10)]
-    component = Countdown(letters)
-    assert component.height() == 10
+def test_should_set_width_for_three_letters(three_day_countdown):
+    assert three_day_countdown.width() == 30
+
+
+def test_should_set_countdown_height_to_icon_height(one_day_countdown):
+    assert one_day_countdown.height() == 10
 
 
 def test_should_set_icon_dimensions():
