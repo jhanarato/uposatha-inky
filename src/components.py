@@ -1,6 +1,9 @@
 from typing import List
 from PIL import ImageDraw, ImageFont
 
+from layout import ImageComponent
+
+
 class Text:
     def __init__(self, draw: ImageDraw, text: str, font: ImageFont, colour: int):
         self._draw = draw
@@ -75,7 +78,7 @@ class MultilineText:
 
 
 class Countdown:
-    def __int__(self, draw: ImageDraw):
+    def __init__(self, day_icon: list[ImageComponent]):
         pass
 
     def height(self) -> int:

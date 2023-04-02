@@ -2,6 +2,8 @@ import pytest
 from datetime import date, timedelta
 from content import countdown_letters
 from images import centre_points
+from components import Countdown
+from layout import ImageComponent
 
 
 def test_letters_fifteen():
@@ -34,3 +36,30 @@ def test_centre_points(y_coord, width, spacing, number, result):
                          screen_width=width,
                          spacing=spacing,
                          number_of_points=number) == result
+
+class DummyLetter:
+    def __init__(self):
+        pass
+
+    def height(self) -> int:
+        return 0
+
+    def width(self) -> int:
+        return 0
+
+    def draw(self, x: int, y: int) -> None:
+        pass
+
+
+def test_should_create_component():
+    letters = [DummyLetter()]
+    component = Countdown(letters)
+
+def test_should_draw_letter():
+    letters = [DummyLetter()]
+    component = Countdown(letters)
+    component.draw(0, 0)
+
+def test_should_space_letters():
+    letters = [DummyLetter()]
+    component = Countdown(letters)

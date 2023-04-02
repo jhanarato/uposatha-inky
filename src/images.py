@@ -24,7 +24,6 @@ class NextUposathaDrawing:
         layout.add(self.info(content.info))
         layout.draw()
 
-        # self.draw_info(content.info)
         # self.draw_countdown(content.countdown)
 
     @property
