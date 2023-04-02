@@ -2,8 +2,8 @@ import pytest
 from datetime import date, timedelta
 from content import countdown_letters
 from images import centre_points
-from components import Countdown, LetterIcon, letters_to_icons
-from layout import ImageComponent, Layout, ArrangedComponent, Align
+from components import LetterIcon, letters_to_icons
+from layout import Layout, ArrangedComponent, Align
 
 
 def test_letters_fifteen():
@@ -53,15 +53,6 @@ class LetterSpy:
         self.last_draw_at = (x, y)
 
 
-def letters_to_letter_spy(letters: list[str], size: int) -> list[LetterSpy]:
-    return [LetterSpy(size=size) for letter in letters]
-
-@pytest.fixture
-def one_day_countdown():
-    component = Countdown([])
-    component._icons = letters_to_letter_spy(letters=["M"], size=10)
-    return component
-
 def test_should_position_single_letter_at_centre(one_day_countdown):
     layout = Layout(100, 100)
     layout.add(
@@ -79,13 +70,6 @@ def test_should_position_single_letter_at_centre(one_day_countdown):
 
 def test_should_set_width_of_countdown_for_one_letter(one_day_countdown):
     assert one_day_countdown.width() == 10
-
-
-@pytest.fixture
-def three_day_countdown():
-    component = Countdown([])
-    component._icons = letters_to_letter_spy(letters=["M", "T", "W"], size=10)
-    return component
 
 
 def test_should_set_width_for_three_letters(three_day_countdown):
