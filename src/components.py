@@ -85,7 +85,7 @@ class Countdown:
         return 0
 
     def width(self) -> int:
-        return 0
+        return 10
 
     def draw(self, x: int, y: int) -> None:
         self.icons[0].draw(x, y)

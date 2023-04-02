@@ -75,18 +75,23 @@ def test_should_draw_letter():
     component = Countdown(letters)
     component.draw(0, 0)
 
-def test_should_space_letters():
+def test_should_position_single_letter_at_centre():
     letters = [LetterSpy(size=10)]
     component = Countdown(letters)
     layout = Layout(100, 100)
     layout.add(
         ArrangedComponent(
             component=component,
-            align=Align.LEFT,
+            align=Align.CENTRE,
             space_before=0,
             space_after=0
         )
     )
     layout.draw()
 
-    assert letters[0].last_draw_at == (0, 0)
+    assert letters[0].last_draw_at == (45, 0)
+
+def test_should_set_width_of_countdown_for_one_letter():
+    letters = [LetterSpy(size=10)]
+    component = Countdown(letters)
+    assert component.width() == 10
