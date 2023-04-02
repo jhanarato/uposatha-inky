@@ -2,7 +2,7 @@ import pytest
 from datetime import date, timedelta
 from content import countdown_letters
 from images import centre_points
-from components import Countdown
+from components import Countdown, LetterIcon
 from layout import ImageComponent, Layout, ArrangedComponent, Align
 
 
@@ -65,6 +65,8 @@ class LetterSpy:
     def draw(self, x: int, y: int) -> None:
         self.last_draw_at = (x, y)
 
+def letters_to_letter_spy(self, letters: list[str]) -> list[LetterSpy]:
+    return [LetterSpy(size=10) for letter in letters]
 
 def test_should_create_component():
     letters = [LetterDummy()]
@@ -110,3 +112,8 @@ def test_should_set_countdown_height_to_icon_height():
     letters = [LetterSpy(size=10)]
     component = Countdown(letters)
     assert component.height() == 10
+
+def test_should_set_icon_dimensions():
+    icon = LetterIcon(size=10)
+    assert icon.height() == 10
+    assert icon.width() == 10

@@ -78,11 +78,21 @@ class MultilineText:
 
 
 class LetterIcon:
-    pass
+    def __init__(self, size: int) -> None:
+        self._size = size
+
+    def height(self) -> int:
+        return self._size
+
+    def width(self) -> int:
+        return self._size
+
+    def draw(self, x: int, y: int) -> None:
+        pass
 
 
 def letters_to_icons(self, letters: list[str]) -> list[LetterIcon]:
-    return [LetterIcon() for letter in letters]
+    return [LetterIcon(10) for letter in letters]
 
 
 class Countdown:
