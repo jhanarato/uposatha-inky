@@ -95,3 +95,13 @@ def test_should_set_width_of_countdown_for_one_letter():
     letters = [LetterSpy(size=10)]
     component = Countdown(letters)
     assert component.width() == 10
+
+def test_should_set_width_for_three_letters():
+    letters = [
+        LetterSpy(size=8),
+        LetterSpy(size=8),
+        LetterSpy(size=8),
+    ]
+
+    component = Countdown(letters)
+    assert component.width() == 30

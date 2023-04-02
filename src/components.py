@@ -79,13 +79,16 @@ class MultilineText:
 
 class Countdown:
     def __init__(self, icons: list[ImageComponent]):
+        self._spacing = 10
         self.icons = icons
 
     def height(self) -> int:
         return 0
 
     def width(self) -> int:
-        return 10
+        icon_width = self.icons[0].width()
+        spaces = len(self.icons) - 1
+        return spaces * self._spacing + icon_width
 
     def draw(self, x: int, y: int) -> None:
         self.icons[0].draw(x, y)
