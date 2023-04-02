@@ -53,13 +53,13 @@ class LetterSpy:
         self.last_draw_at = (x, y)
 
 
-def letters_to_letter_spy(self, letters: list[str]) -> list[LetterSpy]:
+def letters_to_letter_spy(letters: list[str]) -> list[LetterSpy]:
     return [LetterSpy(size=10) for letter in letters]
 
 
 def test_should_position_single_letter_at_centre():
-    letters = [LetterSpy(size=10)]
-    component = Countdown(letters)
+    component = Countdown(["M"])
+    component._icons = letters_to_letter_spy(["M"])
     layout = Layout(100, 100)
     layout.add(
         ArrangedComponent(
@@ -71,7 +71,7 @@ def test_should_position_single_letter_at_centre():
     )
     layout.draw()
 
-    assert letters[0].last_draw_at == (45, 0)
+    assert component._icons[0].last_draw_at == (45, 0)
 
 
 def test_should_set_width_of_countdown_for_one_letter():

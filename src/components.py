@@ -97,17 +97,17 @@ def letters_to_icons(letters: list[str]) -> list[LetterIcon]:
 
 
 class Countdown:
-    def __init__(self, icons: list[ImageComponent]):
+    def __init__(self, letters: list[str]):
+        self._icons = letters_to_icons(letters)
         self._spacing = 10
-        self.icons = icons
 
     def height(self) -> int:
-        return self.icons[0].height()
+        return self._icons[0].height()
 
     def width(self) -> int:
-        icon_width = self.icons[0].width()
-        spaces = len(self.icons) - 1
+        icon_width = self._icons[0].width()
+        spaces = len(self._icons) - 1
         return spaces * self._spacing + icon_width
 
     def draw(self, x: int, y: int) -> None:
-        self.icons[0].draw(x, y)
+        self._icons[0].draw(x, y)
