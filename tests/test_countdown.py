@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from content import countdown_letters
 from images import centre_points
 from components import Countdown
-from layout import ImageComponent
+from layout import ImageComponent, Layout, ArrangedComponent, Align
 
 
 def test_letters_fifteen():
@@ -52,7 +52,8 @@ class LetterDummy:
 
 
 class LetterSpy:
-    def __init__(self):
+    def __init__(self, size: int):
+        self.size = int
         self.last_draw_at = None
 
     def height(self) -> int:
@@ -75,7 +76,17 @@ def test_should_draw_letter():
     component.draw(0, 0)
 
 def test_should_space_letters():
-    letters = [LetterSpy()]
+    letters = [LetterSpy(size=10)]
     component = Countdown(letters)
-    component.draw(0, 0)
+    layout = Layout(100, 100)
+    layout.add(
+        ArrangedComponent(
+            component=component,
+            align=Align.LEFT,
+            space_before=0,
+            space_after=0
+        )
+    )
+    layout.draw()
+
     assert letters[0].last_draw_at == (0, 0)
