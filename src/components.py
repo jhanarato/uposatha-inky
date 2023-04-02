@@ -78,8 +78,8 @@ class MultilineText:
 
 
 class Countdown:
-    def __init__(self, day_icon: list[ImageComponent]):
-        pass
+    def __init__(self, icons: list[ImageComponent]):
+        self.icons = icons
 
     def height(self) -> int:
         return 0
@@ -88,4 +88,4 @@ class Countdown:
         return 0
 
     def draw(self, x: int, y: int) -> None:
-        pass
+        self.icons[0].draw(x, y)

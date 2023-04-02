@@ -37,7 +37,7 @@ def test_centre_points(y_coord, width, spacing, number, result):
                          spacing=spacing,
                          number_of_points=number) == result
 
-class DummyLetter:
+class LetterDummy:
     def __init__(self):
         pass
 
@@ -51,15 +51,31 @@ class DummyLetter:
         pass
 
 
+class LetterSpy:
+    def __init__(self):
+        self.last_draw_at = None
+
+    def height(self) -> int:
+        return 10
+
+    def width(self) -> int:
+        return 10
+
+    def draw(self, x: int, y: int) -> None:
+        self.last_draw_at = (x, y)
+
+
 def test_should_create_component():
-    letters = [DummyLetter()]
+    letters = [LetterDummy()]
     component = Countdown(letters)
 
 def test_should_draw_letter():
-    letters = [DummyLetter()]
+    letters = [LetterDummy()]
     component = Countdown(letters)
     component.draw(0, 0)
 
 def test_should_space_letters():
-    letters = [DummyLetter()]
+    letters = [LetterSpy()]
     component = Countdown(letters)
+    component.draw(0, 0)
+    assert letters[0].last_draw_at == (0, 0)
