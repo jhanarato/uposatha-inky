@@ -68,7 +68,7 @@ class Layout:
 
 class CountdownLayout:
     def __init__(self, box: BoundingBox, icons: list[ImageComponent]):
-        pass
+        icons[0].draw(0, 0)
 
     def draw(self):
         pass
