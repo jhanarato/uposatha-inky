@@ -110,4 +110,4 @@ def test_should_layout_single_icon():
     box = BoundingBox(top=0, left=0, height=100, width=100)
     layout = CountdownLayout(box=box, icons=icons)
     layout.draw()
-    assert icons[0].last_draw_at
+    assert icons[0].last_draw_at == (0, 0)
