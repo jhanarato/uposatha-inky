@@ -2,6 +2,13 @@ from dataclasses import dataclass
 from typing import List, Tuple, Protocol
 from enum import Enum, auto
 
+@dataclass
+class BoundingBox:
+    top: int
+    left: int
+    height: int
+    width: int
+
 class Align(Enum):
     LEFT = auto()
     CENTRE = auto()
@@ -58,3 +65,10 @@ class Layout:
         elif align == Align.RIGHT:
             x = int((self._screen_width - component.width()))
         return x
+
+class CountdownLayout:
+    def __init__(self, box: BoundingBox, icons: list[ImageComponent]):
+        pass
+
+    def draw(self):
+        pass

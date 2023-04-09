@@ -1,7 +1,4 @@
-from typing import List
 from PIL import ImageDraw, ImageFont
-
-from layout import ImageComponent
 
 
 class Text:
@@ -92,14 +89,11 @@ class LetterIcon:
         pass
 
 
-def letters_to_icons(letters: list[str]) -> list[LetterIcon]:
-    return [LetterIcon(letter, 10) for letter in letters]
-
-
 class Countdown:
     def __init__(self, letters: list[str]):
-        self._icons = letters_to_icons(letters)
+        self._size = 10
         self._spacing = 10
+        self._icons = [LetterIcon(letter, 10) for letter in letters]
 
     def height(self) -> int:
         return self._icons[0].height()
@@ -110,4 +104,5 @@ class Countdown:
         return spaces * self._spacing + icon_width
 
     def draw(self, x: int, y: int) -> None:
-        self._icons[0].draw(x, y)
+        for icon in self._icons:
+            icon.draw(x, y)
