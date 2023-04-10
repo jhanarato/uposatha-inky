@@ -25,8 +25,6 @@ class NextUposathaDrawing:
         layout.add(self.countdown(content.countdown))
         layout.draw()
 
-        # self.draw_countdown(content.countdown)
-
     @property
     def image(self):
         return self._image
@@ -80,27 +78,6 @@ class NextUposathaDrawing:
             space_before=0,
             space_after=20
         )
-
-    def draw_countdown(self, letters: List[str]) -> None:
-        centres = centre_points(
-            y_coord=220,
-            screen_width=self.config.width,
-            spacing=20,
-            number_of_points=len(letters)
-        )
-
-        for letter, centre in zip(letters, centres):
-            self.draw_letter(letter, centre)
-
-    def draw_letter(self, letter: str, centre: Tuple[int, int]):
-        font = self.config.font_styles.COUNTDOWN
-        self._draw.text(
-            xy=centre,
-            text=letter,
-            font=font,
-            fill=self.config.palette.BLACK
-        )
-
 
 def centre_points(y_coord: int,
                   screen_width: int,
