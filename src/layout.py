@@ -80,12 +80,9 @@ class CountdownLayout:
 
         for icon_number in range(number_of_icons):
             points.append((x_coord, y_coord))
-            x_coord += icon_number * self._spacing
+            x_coord += self._spacing
 
         return points
-
-    def _x_coord(self, icon_number: int) -> int:
-        return round(self._bbox.left + (icon_number * self._spacing))
 
     def draw(self):
         self._icons[0].draw(45, 0)

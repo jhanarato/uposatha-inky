@@ -113,8 +113,17 @@ def test_should_layout_single_icon():
 
     assert icons[0].last_draw_at == (45, 0)
 
-def test_should_produce_single_center():
+@pytest.mark.parametrize(
+    "number,points",
+    [
+        (0, []),
+        (1, [(5, 5)]),
+        (2, [(5, 5), (15, 5)]),
+        (3, [(5, 5), (15, 5), (25, 5)]),
+    ]
+)
+def test_should_calculate_center_points(number, points):
     icons = [LetterSpy(size=10)]
     box = BoundingBox(top=0, left=0, height=30, width=70)
     layout = CountdownLayout(bbox=box, icons=icons)
-    assert layout._centers(1) == [(5, 5)]
+    assert layout._centers(number) == points
