@@ -1,5 +1,7 @@
 from PIL import ImageDraw, ImageFont
 
+from screen import ImageConfig
+
 
 class Text:
     def __init__(self, draw: ImageDraw, text: str, font: ImageFont, colour: int):
@@ -75,7 +77,8 @@ class MultilineText:
 
 
 class LetterIcon:
-    def __init__(self, letter: str, size: int) -> None:
+    def __init__(self, draw: ImageDraw, letter: str, size: int) -> None:
+        self._draw = draw
         self._size = size
         self._letter = letter
 
@@ -86,7 +89,11 @@ class LetterIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        pass
+        config = ImageConfig()
+        self._draw.text(xy=(x, y),
+                        text=self._letter,
+                        font=config.font_styles.COUNTDOWN,
+                        fill=config.palette.BLACK)
 
 
 class Countdown:
