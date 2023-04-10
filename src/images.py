@@ -78,14 +78,3 @@ class NextUposathaDrawing:
             space_before=0,
             space_after=20
         )
-
-def centre_points(y_coord: int,
-                  screen_width: int,
-                  spacing: int,
-                  number_of_points: int) -> List[Tuple[int, int]]:
-
-    points_width = (number_of_points - 1) * spacing
-    left = (screen_width - points_width) / 2
-
-    return [(round(left + (point_number * spacing)), y_coord)
-            for point_number in range(number_of_points)]

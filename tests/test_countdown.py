@@ -4,9 +4,7 @@ from typing import Optional
 import pytest
 
 from content import countdown_letters
-from images import centre_points
-from components import LetterIcon
-from layout import ScreenLayout, ArrangedComponent, Align, BoundingBox, CountdownLayout
+from layout import BoundingBox, CountdownLayout
 
 
 def test_letters_fifteen():
@@ -25,20 +23,6 @@ def test_letters_on_day():
     a_friday = date(2010, 3, 26)
     uposatha = a_friday
     assert countdown_letters(a_friday, uposatha) == ["F"]
-
-@pytest.mark.parametrize(
-    "y_coord,width,spacing,number,result",
-    [
-        (100, 400, 20, 1, [(200, 100)]),
-        (100, 400, 20, 2, [(190, 100), (210, 100)]),
-        (100, 400, 20, 3, [(180, 100), (200, 100), (220, 100)]),
-    ]
-)
-def test_centre_points(y_coord, width, spacing, number, result):
-    assert centre_points(y_coord=y_coord,
-                         screen_width=width,
-                         spacing=spacing,
-                         number_of_points=number) == result
 
 
 class LetterSpy:
