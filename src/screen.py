@@ -20,7 +20,13 @@ class FontStyles:
 
 @dataclass
 class ImageConfig:
-    height: int = 300
-    width:  int = 400
-    palette: Palette = field(default=Palette())
-    font_styles: FontStyles = field(default=FontStyles())
+    def __init__(self):
+        self.height = 300
+        self.width = 400
+        self.palette = Palette()
+        self.font_styles = FontStyles()
+
+    height: int
+    width:  int
+    palette: Palette
+    font_styles: FontStyles
