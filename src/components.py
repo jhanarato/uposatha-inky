@@ -91,15 +91,21 @@ class LetterIcon:
 
     def draw(self, x: int, y: int) -> None:
         config = ImageConfig()
+
+        self._draw.rectangle(
+            xy=[x, y, x + self.width(), y + self.height()],
+            fill=config.palette.BLACK
+        )
+
         self._draw.text(xy=(x, y),
                         text=self._letter,
                         font=config.font_styles.COUNTDOWN,
-                        fill=config.palette.BLACK)
+                        fill=config.palette.WHITE)
 
 
 class Countdown:
     def __init__(self, draw: ImageDraw, letters: list[str]):
-        self._size = 20
+        self._size = 30
         self._spacing = self._size
         self._icons = [LetterIcon(draw, letter, self._size) for letter in letters]
 
