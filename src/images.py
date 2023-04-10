@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from PIL import Image, ImageDraw
 
-from components import Text, HorizontalLine, MultilineText
+from components import Text, HorizontalLine, MultilineText, Countdown
 from content import NextUposatha
 from layout import ScreenLayout, Align, ArrangedComponent
 from screen import ImageConfig
@@ -22,6 +22,7 @@ class NextUposathaDrawing:
         layout.add(self.heading("Uposatha"))
         layout.add(self.underline())
         layout.add(self.info(content.info))
+        layout.add(self.countdown(content.countdown))
         layout.draw()
 
         # self.draw_countdown(content.countdown)
@@ -63,6 +64,17 @@ class NextUposathaDrawing:
                 text=text,
                 font=self.config.font_styles.INFO,
                 colour=self.config.palette.BLACK
+            ),
+            align=Align.CENTRE,
+            space_before=0,
+            space_after=20
+        )
+
+    def countdown(self, letters: list[str]) -> ArrangedComponent:
+        return ArrangedComponent(
+            component=Countdown(
+                draw=self._draw,
+                letters=letters
             ),
             align=Align.CENTRE,
             space_before=0,
