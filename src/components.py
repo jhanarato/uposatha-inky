@@ -83,6 +83,22 @@ class LetterIcon:
         self._size = size
         self._letter = letter
 
+        config = ImageConfig()
+        self._font = config.font_styles.COUNTDOWN
+        self._text_width = self._font.getbbox(self._letter)[2]
+        self._text_height = self._font.getbbox(self._letter)[3]
+
+    def _text_x_offset(self) -> int:
+        return (self.width() - self._text_width) // 2
+
+    def _text_y_offset(self) -> int:
+        return (self.height() - self._text_height) // 2
+
+    def _to_text_xy(self, icon_x: int, icon_y: int) -> tuple[int, int]:
+        x = icon_x + self._text_x_offset()
+        y = icon_y + self._text_y_offset()
+        return x, y
+
     def height(self) -> int:
         return self._size
 
@@ -97,10 +113,10 @@ class LetterIcon:
             fill=config.palette.BLACK
         )
 
-        self._draw.text(xy=(x, y),
-                        text=self._letter,
-                        font=config.font_styles.COUNTDOWN,
-                        fill=config.palette.WHITE)
+        # self._draw.text(xy=self._to_text_xy(x, y),
+        #                 text=self._letter,
+        #                 font=self._font,
+        #                 fill=config.palette.WHITE)
 
 
 class Countdown:
