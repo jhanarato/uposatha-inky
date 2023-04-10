@@ -33,7 +33,7 @@ class ArrangedComponent:
     space_before: int
     space_after: int
 
-class Layout:
+class ScreenLayout:
     """ A layout of ImageComponents in an image """
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height

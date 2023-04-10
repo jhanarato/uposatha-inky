@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 
 from components import Text, HorizontalLine, MultilineText
 from content import NextUposatha
-from layout import Layout, Align, ArrangedComponent
+from layout import ScreenLayout, Align, ArrangedComponent
 from screen import ImageConfig
 
 
@@ -17,8 +17,8 @@ class NextUposathaDrawing:
 
         self.heading("Uposatha")
 
-        layout = Layout(screen_height=self.config.height,
-                        screen_width=self.config.width)
+        layout = ScreenLayout(screen_height=self.config.height,
+                              screen_width=self.config.width)
         layout.add(self.heading("Uposatha"))
         layout.add(self.underline())
         layout.add(self.info(content.info))

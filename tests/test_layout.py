@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 import pytest
 
-from layout import Layout, ArrangedComponent, Align
+from layout import ScreenLayout, ArrangedComponent, Align
 
 @dataclass
 class Pixel:
@@ -38,7 +38,7 @@ class LoggerComponent:
 def test_should_align_component(align, x_coord):
     log = DrawLog()
     component = LoggerComponent(height=10, width=20, log=log)
-    layout = Layout(screen_height=100, screen_width=200)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=10, width=20, log=log),
@@ -53,7 +53,7 @@ def test_should_align_component(align, x_coord):
 
 def test_should_draw_component_with_space_after():
     log = DrawLog()
-    layout = Layout(screen_height=100, screen_width=200)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
     arrangements = [
         ArrangedComponent(
             component=LoggerComponent(10, 20, log),
@@ -73,7 +73,7 @@ def test_should_draw_component_with_space_after():
 
 def test_should_draw_component_with_space_before():
     log = DrawLog()
-    layout = Layout(screen_height=100, screen_width=200)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(20, 50, log),
@@ -85,7 +85,7 @@ def test_should_draw_component_with_space_before():
 
 def test_should_combine_space_before_and_after():
     log = DrawLog()
-    layout = Layout(screen_height=100, screen_width=200)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=10, width=20, log=log),
@@ -106,7 +106,7 @@ def test_should_combine_space_before_and_after():
 
 def test_three_components_spaced():
     log = DrawLog()
-    layout = Layout(screen_height=100, screen_width=200)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=20, width=20, log=log),

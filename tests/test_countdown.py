@@ -6,7 +6,7 @@ import pytest
 from content import countdown_letters
 from images import centre_points
 from components import LetterIcon
-from layout import Layout, ArrangedComponent, Align, BoundingBox, CountdownLayout
+from layout import ScreenLayout, ArrangedComponent, Align, BoundingBox, CountdownLayout
 
 
 def test_letters_fifteen():
@@ -91,7 +91,7 @@ def test_should_assign_a_letter_to_an_icon():
 
 
 def test_should_position_single_letter_at_centre(one_day_countdown):
-    layout = Layout(100, 100)
+    layout = ScreenLayout(100, 100)
     layout.add(
         ArrangedComponent(
             component=one_day_countdown,
