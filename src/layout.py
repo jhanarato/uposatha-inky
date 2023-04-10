@@ -73,12 +73,11 @@ class CountdownLayout:
         self._icons = icons
         self._spacing = icons[0].width()
         self._offset = round(self._spacing / 2)
+        self._x_start = round(self._bbox.left + self._offset)
+        self.y_start = round(self._bbox.top + self._offset)
 
     def _centers(self, number_of_icons: int) -> list[tuple[int, int]]:
-        y_coord = round(self._bbox.top + self._offset)
-        x_coord = round(self._bbox.left + self._offset)
-
-        return [(x_coord + self._spacing * icon_number, y_coord)
+        return [(self._x_start + self._spacing * icon_number, self.y_start)
                 for icon_number in range(number_of_icons)]
 
     def _to_xy(self, centers: list[tuple[int, int]]) -> list[tuple[int, int]]:
