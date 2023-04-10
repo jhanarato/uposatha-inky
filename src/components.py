@@ -99,8 +99,8 @@ class LetterIcon:
 
 class Countdown:
     def __init__(self, draw: ImageDraw, letters: list[str]):
-        self._size = 10
-        self._spacing = 10
+        self._size = 20
+        self._spacing = self._size
         self._icons = [LetterIcon(draw, letter, self._size) for letter in letters]
 
     def height(self) -> int:
