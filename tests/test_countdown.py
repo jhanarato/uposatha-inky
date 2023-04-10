@@ -78,13 +78,13 @@ def test_should_set_countdown_height_to_icon_height(one_day_countdown):
 
 
 def test_should_set_icon_dimensions():
-    icon = LetterIcon(letter="M", size=10)
+    icon = LetterIcon(draw=None, letter="M", size=10)
     assert icon.height() == 10
     assert icon.width() == 10
 
 def test_should_assign_a_letter_to_an_icon():
     letters = ["M", "T", "W"]
-    icons = [LetterIcon(letter, 10) for letter in letters]
+    icons = [LetterIcon(None, letter, 10) for letter in letters]
     assert icons[0]._letter == "M"
     assert icons[1]._letter == "T"
     assert icons[2]._letter == "W"
@@ -108,6 +108,13 @@ def test_should_position_single_letter_at_centre(one_day_countdown):
 def test_should_layout_single_icon():
     icons = [LetterSpy(size=10)]
     box = BoundingBox(top=0, left=0, height=100, width=100)
-    layout = CountdownLayout(box=box, icons=icons)
+    layout = CountdownLayout(bbox=box, icons=icons)
     layout.draw()
-    assert icons[0].last_draw_at == (0, 0)
+
+    assert icons[0].last_draw_at == (45, 0)
+
+def test_should_produce_single_center():
+    icons = [LetterSpy(size=10)]
+    box = BoundingBox(top=0, left=0, height=30, width=70)
+    layout = CountdownLayout(bbox=box, icons=icons)
+    assert layout._centers(1) == [(5, 5)]

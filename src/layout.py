@@ -67,8 +67,25 @@ class Layout:
         return x
 
 class CountdownLayout:
-    def __init__(self, box: BoundingBox, icons: list[ImageComponent]):
-        icons[0].draw(0, 0)
+    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent]):
+        self._bbox = bbox
+        self._icons = icons
+        self._spacing = icons[0].width()
+
+    def _centers(self, number_of_icons: int) -> list[tuple[int, int]]:
+        y_coord = round(self._bbox.top + (self._spacing / 2))
+        x_coord = round(self._bbox.left + (self._spacing / 2))
+
+        points = []
+
+        for icon_number in range(number_of_icons):
+            points.append((x_coord, y_coord))
+            x_coord += icon_number * self._spacing
+
+        return points
+
+    def _x_coord(self, icon_number: int) -> int:
+        return round(self._bbox.left + (icon_number * self._spacing))
 
     def draw(self):
-        pass
+        self._icons[0].draw(45, 0)
