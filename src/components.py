@@ -1,5 +1,6 @@
 from PIL import ImageDraw, ImageFont
 
+from layout import CountdownLayout, BoundingBox
 from screen import ImageConfig
 
 
@@ -97,10 +98,10 @@ class LetterIcon:
 
 
 class Countdown:
-    def __init__(self, letters: list[str]):
+    def __init__(self, draw: ImageDraw, letters: list[str]):
         self._size = 10
         self._spacing = 10
-        self._icons = [LetterIcon(letter, 10) for letter in letters]
+        self._icons = [LetterIcon(draw, letter, self._size) for letter in letters]
 
     def height(self) -> int:
         return self._icons[0].height()
@@ -111,5 +112,6 @@ class Countdown:
         return spaces * self._spacing + icon_width
 
     def draw(self, x: int, y: int) -> None:
-        for icon in self._icons:
-            icon.draw(x, y)
+        bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
+        layout = CountdownLayout(bbox=bbox, icons=self._icons)
+        layout.draw()
