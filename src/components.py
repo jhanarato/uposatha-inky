@@ -113,10 +113,10 @@ class LetterIcon:
             fill=config.palette.BLACK
         )
 
-        # self._draw.text(xy=self._to_text_xy(x, y),
-        #                 text=self._letter,
-        #                 font=self._font,
-        #                 fill=config.palette.WHITE)
+        self._draw.text(xy=self._to_text_xy(x, y),
+                        text=self._letter,
+                        font=self._font,
+                        fill=config.palette.WHITE)
 
 
 class Countdown:
