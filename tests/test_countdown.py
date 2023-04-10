@@ -127,3 +127,9 @@ def test_should_calculate_center_points(number, points):
     box = BoundingBox(top=0, left=0, height=30, width=70)
     layout = CountdownLayout(bbox=box, icons=icons)
     assert layout._centers(number) == points
+
+def test_should_center_relative_to_bbox():
+    icons = [LetterSpy(size=10)]
+    box = BoundingBox(top=10, left=20, height=30, width=70)
+    layout = CountdownLayout(bbox=box, icons=icons)
+    assert layout._centers(1) == [(25, 15)]
