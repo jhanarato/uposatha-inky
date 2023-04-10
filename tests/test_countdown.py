@@ -55,15 +55,6 @@ class LetterSpy:
     def draw(self, x: int, y: int) -> None:
         self.last_draw_at = (x, y)
 
-    def center(self) -> Optional[tuple[int, int]]:
-        if self.last_draw_at is None:
-            return None
-
-        x, y = self.last_draw_at
-        center_x = x + int(self.width() / 2)
-        center_y = y + int(self.height() / 2)
-        return center_x, center_y
-
 
 def test_should_set_width_of_countdown_for_one_letter(one_day_countdown):
     assert one_day_countdown.width() == 10
@@ -111,7 +102,7 @@ def test_should_layout_single_icon():
     layout = CountdownLayout(bbox=box, icons=icons)
     layout.draw()
 
-    assert icons[0].last_draw_at == (45, 0)
+    assert icons[0].last_draw_at == (0, 0)
 
 @pytest.mark.parametrize(
     "number,points",
@@ -134,8 +125,23 @@ def test_should_center_relative_to_bbox():
     layout = CountdownLayout(bbox=box, icons=icons)
     assert layout._centers(1) == [(25, 15)]
 
-def test_should_convert_centers_to_top_xy():
+def test_should_convert_centers_to_xy():
     icons = [LetterSpy(size=10)]
     box = BoundingBox(top=0, left=0, height=30, width=70)
     layout = CountdownLayout(bbox=box, icons=icons)
     assert layout._to_xy([(5, 5), (15, 5), (25, 5)]) == [(0, 0), (10, 0), (20, 0)]
+
+def test_should_draw_icons_at_top_left():
+    icons = [
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+    ]
+
+    box = BoundingBox(top=0, left=0, height=100, width=100)
+
+    layout = CountdownLayout(bbox=box, icons=icons)
+    layout.draw()
+
+    drawn_at = [icon.last_draw_at for icon in icons]
+    assert drawn_at == [(0, 0), (10, 0), (20, 0)]

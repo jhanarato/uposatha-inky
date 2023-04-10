@@ -85,4 +85,7 @@ class CountdownLayout:
                 for center in centers]
 
     def draw(self):
-        self._icons[0].draw(45, 0)
+        icons_centers = self._centers(len(self._icons))
+        icons_xy = self._to_xy(icons_centers)
+        for icon, xy in zip(self._icons, icons_xy):
+            icon.draw(*xy)
