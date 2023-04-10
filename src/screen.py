@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import Dict
 
@@ -22,5 +22,5 @@ class FontStyles:
 class ImageConfig:
     height: int = 300
     width:  int = 400
-    palette: Palette = Palette()
-    font_styles: FontStyles = FontStyles()
+    palette: Palette = field(default=Palette())
+    font_styles: FontStyles = field(default=FontStyles())
