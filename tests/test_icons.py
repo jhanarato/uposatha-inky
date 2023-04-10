@@ -1,13 +1,15 @@
 import pytest
 
 from components import LetterIcon
+from screen import ImageConfig
 
 
 def test_should_centre_letter_text():
+    config = ImageConfig()
     icon = LetterIcon(draw=None,
-                      font=None,
-                      background=0,
-                      foreground=1,
+                      font=config.font_styles.COUNTDOWN,
+                      background=config.palette.BLACK,
+                      foreground=config.palette.WHITE,
                       letter="W", size=40)
     icon._text_height = 10
     icon._text_width = 20
