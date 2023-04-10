@@ -1,6 +1,8 @@
 from dataclasses import dataclass
-from typing import List, Tuple, Protocol
+from typing import Protocol
 from enum import Enum, auto
+
+XY = tuple[int, int]
 
 @dataclass
 class BoundingBox:
@@ -38,7 +40,7 @@ class ScreenLayout:
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height
         self._screen_width = screen_width
-        self._arrangement: List[ArrangedComponent] = []
+        self._arrangement: list[ArrangedComponent] = []
 
     def add(self, component: ArrangedComponent) -> None:
         """ Add a component to be arranged in the image """
@@ -71,21 +73,26 @@ class CountdownLayout:
     def __init__(self, bbox: BoundingBox, icons: list[ImageComponent]):
         self._bbox = bbox
         self._icons = icons
-        self._spacing = icons[0].width()
-        self._offset = round(self._spacing / 2)
-        self._x_start = round(self._bbox.left + self._offset)
-        self.y_start = round(self._bbox.top + self._offset)
+        self._offset = self._spacing() // 2
+        self._x_start = self._bbox.left + self._offset
+        self._y_start = self._bbox.top + self._offset
 
-    def _centers(self, number_of_icons: int) -> list[tuple[int, int]]:
-        return [(self._x_start + self._spacing * icon_number, self.y_start)
-                for icon_number in range(number_of_icons)]
+    def _spacing(self):
+        spacing = 0
+        if len(self._icons) > 0:
+            spacing = self._icons[0].width()
+        return spacing
 
-    def _to_xy(self, centers: list[tuple[int, int]]) -> list[tuple[int, int]]:
-        return [(center[0] - self._offset, center[1] - self._offset)
-                for center in centers]
+    def _centers(self) -> list[XY]:
+        return [(self._x_start + self._spacing() * icon_number, self._y_start)
+                for icon_number in range(len(self._icons))]
+
+    def _to_xy(self, centers: list[XY]) -> list[XY]:
+        return [(cx - self._offset, cy - self._offset)
+                for cx, cy in centers]
 
     def draw(self):
-        icons_centers = self._centers(len(self._icons))
+        icons_centers = self._centers()
         icons_xy = self._to_xy(icons_centers)
         for icon, xy in zip(self._icons, icons_xy):
             icon.draw(*xy)
