@@ -2,8 +2,6 @@ from dataclasses import dataclass
 from typing import Protocol
 from enum import Enum, auto
 
-XY = tuple[int, int]
-
 @dataclass
 class BoundingBox:
     top: int
@@ -68,6 +66,8 @@ class ScreenLayout:
             x = int((self._screen_width - component.width()))
         return x
 
+XY = tuple[int, int]
+
 class CountdownLayout:
     """ A sub-layout for countdown icons"""
     def __init__(self, bbox: BoundingBox, icons: list[ImageComponent]):
@@ -77,11 +77,11 @@ class CountdownLayout:
         self._x_start = self._bbox.left + self._offset
         self._y_start = self._bbox.top + self._offset
 
-    def _spacing(self):
-        spacing = 0
-        if len(self._icons) > 0:
-            spacing = self._icons[0].width()
-        return spacing
+    def _spacing(self) -> int:
+        if self._icons:
+            return max(self._icons, key=lambda icon: icon.width()).width()
+        else:
+            return 0
 
     def _centers(self) -> list[XY]:
         return [(self._x_start + self._spacing() * icon_number, self._y_start)
