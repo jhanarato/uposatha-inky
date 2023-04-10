@@ -133,3 +133,9 @@ def test_should_center_relative_to_bbox():
     box = BoundingBox(top=10, left=20, height=30, width=70)
     layout = CountdownLayout(bbox=box, icons=icons)
     assert layout._centers(1) == [(25, 15)]
+
+def test_should_convert_centers_to_top_xy():
+    icons = [LetterSpy(size=10)]
+    box = BoundingBox(top=0, left=0, height=30, width=70)
+    layout = CountdownLayout(bbox=box, icons=icons)
+    assert layout._to_xy([(5, 5), (15, 5), (25, 5)]) == [(0, 0), (10, 0), (20, 0)]
