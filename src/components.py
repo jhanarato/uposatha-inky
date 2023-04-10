@@ -1,7 +1,6 @@
 from PIL import ImageDraw, ImageFont
 
 from layout import CountdownLayout, BoundingBox
-from screen import ImageConfig
 
 
 class Text:
@@ -78,13 +77,20 @@ class MultilineText:
 
 
 class LetterIcon:
-    def __init__(self, draw: ImageDraw, letter: str, size: int) -> None:
+    def __init__(self,
+                 draw: ImageDraw,
+                 font: ImageFont,
+                 background: int,
+                 foreground: int,
+                 letter: str, size: int) -> None:
         self._draw = draw
         self._size = size
         self._letter = letter
 
-        config = ImageConfig()
-        self._font = config.font_styles.COUNTDOWN
+        self._font = font
+        self._background = background
+        self._foreground = foreground
+
         self._text_width = self._font.getbbox(self._letter)[2]
         self._text_height = self._font.getbbox(self._letter)[3]
 
@@ -106,24 +112,34 @@ class LetterIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        config = ImageConfig()
-
         self._draw.rectangle(
             xy=[x, y, x + self.width(), y + self.height()],
-            fill=config.palette.BLACK
+            fill=self._background
         )
 
         self._draw.text(xy=self._to_text_xy(x, y),
                         text=self._letter,
                         font=self._font,
-                        fill=config.palette.WHITE)
+                        fill=self._foreground)
 
 
 class Countdown:
-    def __init__(self, draw: ImageDraw, letters: list[str]):
+    def __init__(self,
+                 draw: ImageDraw,
+                 font: ImageFont,
+                 background: int,
+                 foreground: int,
+                 letters: list[str]):
         self._size = 30
         self._spacing = self._size
-        self._icons = [LetterIcon(draw, letter, self._size) for letter in letters]
+        self._icons = [
+            LetterIcon(draw=draw,
+                       font=font,
+                       background=background,
+                       foreground=foreground,
+                       letter=letter,
+                       size=self._size) for letter in letters
+        ]
 
     def height(self) -> int:
         return self._icons[0].height()

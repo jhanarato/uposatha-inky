@@ -72,6 +72,9 @@ class NextUposathaDrawing:
         return ArrangedComponent(
             component=Countdown(
                 draw=self._draw,
+                font=self.config.font_styles.COUNTDOWN,
+                background=self.config.palette.BLACK,
+                foreground=self.config.palette.WHITE,
                 letters=letters
             ),
             align=Align.CENTRE,
