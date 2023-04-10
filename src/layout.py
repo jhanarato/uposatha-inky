@@ -34,7 +34,7 @@ class ArrangedComponent:
     space_after: int
 
 class ScreenLayout:
-    """ A layout of ImageComponents in an image """
+    """ A layout of ImageComponents on the full image """
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height
         self._screen_width = screen_width
@@ -67,6 +67,7 @@ class ScreenLayout:
         return x
 
 class CountdownLayout:
+    """ A sub-layout for countdown icons"""
     def __init__(self, bbox: BoundingBox, icons: list[ImageComponent]):
         self._bbox = bbox
         self._icons = icons
@@ -76,13 +77,8 @@ class CountdownLayout:
         y_coord = round(self._bbox.top + (self._spacing / 2))
         x_coord = round(self._bbox.left + (self._spacing / 2))
 
-        points = []
-
-        for icon_number in range(number_of_icons):
-            points.append((x_coord, y_coord))
-            x_coord += self._spacing
-
-        return points
+        return [(x_coord + self._spacing * icon_number, y_coord)
+                for icon_number in range(number_of_icons)]
 
     def draw(self):
         self._icons[0].draw(45, 0)
