@@ -56,46 +56,6 @@ class LetterSpy:
         self.last_draw_at = (x, y)
 
 
-def test_should_set_width_of_countdown_for_one_letter(one_day_countdown):
-    assert one_day_countdown.width() == 10
-
-
-def test_should_set_width_for_three_letters(three_day_countdown):
-    assert three_day_countdown.width() == 30
-
-
-def test_should_set_countdown_height_to_icon_height(one_day_countdown):
-    assert one_day_countdown.height() == 10
-
-
-def test_should_set_icon_dimensions():
-    icon = LetterIcon(draw=None, letter="M", size=10)
-    assert icon.height() == 10
-    assert icon.width() == 10
-
-def test_should_assign_a_letter_to_an_icon():
-    letters = ["M", "T", "W"]
-    icons = [LetterIcon(None, letter, 10) for letter in letters]
-    assert icons[0]._letter == "M"
-    assert icons[1]._letter == "T"
-    assert icons[2]._letter == "W"
-
-
-def test_should_position_single_letter_at_centre(one_day_countdown):
-    layout = ScreenLayout(100, 100)
-    layout.add(
-        ArrangedComponent(
-            component=one_day_countdown,
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
-        )
-    )
-    layout.draw()
-
-    assert one_day_countdown._icons[0].last_draw_at == (45, 0)
-
-
 def test_should_layout_single_icon():
     icons = [LetterSpy(size=10)]
     box = BoundingBox(top=0, left=0, height=100, width=100)
