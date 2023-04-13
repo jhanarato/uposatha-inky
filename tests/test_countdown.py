@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from components import create_icons
+from components import create_icons, Countdown
 from content import countdown_letters
 from layout import BoundingBox, CountdownLayout
 from screen import ImageConfig
@@ -110,3 +110,13 @@ def test_should_draw_icons_with_gap():
     assert icons[0].last_draw_at == (0, 0)
     assert icons[1].last_draw_at == (12, 0)
     assert icons[2].last_draw_at == (24, 0)
+
+def test_should_space_icons():
+    icons = [
+        LetterSpy(size=10),
+        LetterSpy(size=20),
+        LetterSpy(size=30),
+    ]
+
+    countdown = Countdown(icons)
+    assert countdown._spacing() == 32

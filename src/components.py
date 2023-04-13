@@ -124,23 +124,28 @@ class LetterIcon:
                         fill=self._foreground)
 
 
-def create_icons(draw: ImageDraw,config: ImageConfig, letters: list[str]) -> list[LetterIcon]:
+def create_icons(draw: ImageDraw,
+                 config: ImageConfig,
+                 size: int,
+                 letters: list[str]) -> list[LetterIcon]:
     return [
         LetterIcon(draw=draw,
                    font=config.font_styles.COUNTDOWN,
                    background=config.palette.BLACK,
                    foreground=config.palette.WHITE,
                    letter=letter,
-                   size=30)
+                   size=size)
         for letter in letters
     ]
 
 
 class Countdown:
     def __init__(self, icons: list[ImageComponent]):
-        self._size = 30
-        self._spacing = self._size
         self._icons = icons
+        self._gap = 2
+
+    def _spacing(self) -> int:
+        return max(self._icons, key=lambda icon: icon.width()).width() + self._gap
 
     def height(self) -> int:
         return self._icons[0].height()
@@ -148,9 +153,9 @@ class Countdown:
     def width(self) -> int:
         icon_width = self._icons[0].width()
         spaces = len(self._icons) - 1
-        return spaces * self._spacing + icon_width
+        return spaces * self._spacing() + icon_width
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
-        layout = CountdownLayout(bbox=bbox, icons=self._icons)
+        layout = CountdownLayout(bbox=bbox, icons=self._icons, gap=self._gap)
         layout.draw()
