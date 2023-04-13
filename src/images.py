@@ -69,7 +69,12 @@ class NextUposathaDrawing:
         )
 
     def countdown(self, letters: list[str]) -> ArrangedComponent:
-        icons = create_icons(self._draw, self.config, letters)
+        icons = create_icons(
+            draw=self._draw,
+            config=self.config,
+            size=30,
+            letters=letters
+        )
 
         return ArrangedComponent(
             component=Countdown(icons),
