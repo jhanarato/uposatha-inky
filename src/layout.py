@@ -78,10 +78,10 @@ class CountdownLayout:
         self._y_start = self._bbox.top + self._offset
 
     def _spacing(self) -> int:
-        if self._icons:
-            return max(self._icons, key=lambda icon: icon.width()).width()
-        else:
+        if not self._icons:
             return 0
+        icon_width = max(self._icons, key=lambda icon: icon.width()).width()
+        return icon_width
 
     def _centers(self) -> list[XY]:
         return [(self._x_start + self._spacing() * icon_number, self._y_start)
