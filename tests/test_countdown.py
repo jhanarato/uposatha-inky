@@ -1,10 +1,11 @@
 from datetime import date, timedelta
-from typing import Optional
 
 import pytest
 
+from components import create_icons
 from content import countdown_letters
 from layout import BoundingBox, CountdownLayout
+from screen import ImageConfig
 
 
 def test_letters_fifteen():
@@ -89,3 +90,9 @@ def test_should_draw_icons_at_top_left():
 
     drawn_at = [icon.last_draw_at for icon in icons]
     assert drawn_at == [(0, 0), (10, 0), (20, 0)]
+
+def test_should_create_icon_list():
+    config = ImageConfig()
+    letters = ["M", "T", "W"]
+    icons = create_icons(draw=None, config=config, letters=letters)
+    assert len(icons) == 3

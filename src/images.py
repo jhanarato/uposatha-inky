@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from PIL import Image, ImageDraw
 
-from components import Text, HorizontalLine, MultilineText, Countdown
+from components import Text, HorizontalLine, MultilineText, Countdown, create_icons
 from content import NextUposatha
 from layout import ScreenLayout, Align, ArrangedComponent
 from screen import ImageConfig
@@ -69,14 +69,10 @@ class NextUposathaDrawing:
         )
 
     def countdown(self, letters: list[str]) -> ArrangedComponent:
+        icons = create_icons(self._draw, self.config, letters)
+
         return ArrangedComponent(
-            component=Countdown(
-                draw=self._draw,
-                font=self.config.font_styles.COUNTDOWN,
-                background=self.config.palette.BLACK,
-                foreground=self.config.palette.WHITE,
-                letters=letters
-            ),
+            component=Countdown(icons),
             align=Align.CENTRE,
             space_before=0,
             space_after=20
