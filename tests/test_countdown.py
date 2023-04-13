@@ -94,5 +94,19 @@ def test_should_draw_icons_at_top_left():
 def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
-    icons = create_icons(draw=None, config=config, letters=letters)
+    icons = create_icons(draw=None, config=config, size=10, letters=letters)
     assert len(icons) == 3
+
+def test_should_draw_icons_with_gap():
+    icons = [
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+    ]
+    bbox = BoundingBox(0, 0, 100, 100)
+    layout = CountdownLayout(bbox=bbox, icons=icons, gap=2)
+    layout.draw()
+
+    assert icons[0].last_draw_at == (0, 0)
+    assert icons[1].last_draw_at == (12, 0)
+    assert icons[2].last_draw_at == (24, 0)

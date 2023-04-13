@@ -70,9 +70,10 @@ XY = tuple[int, int]
 
 class CountdownLayout:
     """ A sub-layout for countdown icons"""
-    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent]):
+    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], gap: int = 0):
         self._bbox = bbox
         self._icons = icons
+        self._gap = gap
         self._offset = self._spacing() // 2
         self._x_start = self._bbox.left + self._offset
         self._y_start = self._bbox.top + self._offset
@@ -81,7 +82,7 @@ class CountdownLayout:
         if not self._icons:
             return 0
         icon_width = max(self._icons, key=lambda icon: icon.width()).width()
-        return icon_width
+        return icon_width + self._gap
 
     def _centers(self) -> list[XY]:
         return [(self._x_start + self._spacing() * icon_number, self._y_start)
