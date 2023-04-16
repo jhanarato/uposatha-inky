@@ -54,10 +54,6 @@ class ScreenLayout:
         self._screen_width = screen_width
         self._arrangement: list[ArrangedComponent] = []
 
-    def add(self, component: ArrangedComponent) -> None:
-        """ Add a component to be arranged in the image """
-        self._arrangement.append(component)
-
     def add_space(self, height: int) -> None:
         component = ArrangedComponent(
             component=Space(height=height),
