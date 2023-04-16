@@ -108,17 +108,17 @@ class LetterIcon:
         self._rect = Rectangle(draw, self.height(), self.width(), background)
         self._text = Text(draw, letter, font, foreground)
 
-    def _text_x(self, component_x: int) -> int:
-        return component_x + (self.width() - self._text.width()) // 2
-
-    def _text_y(self, component_y: int) -> int:
-        return component_y + (self.height() - self._text.height()) // 2
-
     def height(self) -> int:
         return self._size
 
     def width(self) -> int:
         return self._size
+
+    def _text_x(self, component_x: int) -> int:
+        return component_x + (self.width() - self._text.width()) // 2
+
+    def _text_y(self, component_y: int) -> int:
+        return component_y + (self.height() - self._text.height()) // 2
 
     def draw(self, x: int, y: int) -> None:
         self._rect.draw(x, y)
