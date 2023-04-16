@@ -118,11 +118,8 @@ class LetterIcon:
             fill=self._background
         )
 
-        self._draw.text(xy=self._to_text_xy(x, y),
-                        text=self._letter,
-                        font=self._font,
-                        fill=self._foreground)
-
+        text = Text(draw=self._draw, text=self._letter, font=self._font, colour=self._foreground)
+        text.draw(*self._to_text_xy(x, y))
 
 def create_icons(draw: ImageDraw,
                  config: ImageConfig,
