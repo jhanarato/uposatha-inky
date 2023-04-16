@@ -44,9 +44,7 @@ class NextUposathaDrawing:
                 font=self.config.font_styles.HEADING,
                 colour=self.config.palette.BLACK
             ),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )
 
     def underline(self) -> ArrangedComponent:
@@ -57,9 +55,7 @@ class NextUposathaDrawing:
                 thickness=2,
                 colour=self.config.palette.BLACK
             ),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )
 
     def date(self, text: str) -> ArrangedComponent:
@@ -70,9 +66,7 @@ class NextUposathaDrawing:
                 font=self.config.font_styles.INFO,
                 colour=self.config.palette.BLACK
             ),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )
 
     def info(self, text: str) -> ArrangedComponent:
@@ -83,9 +77,7 @@ class NextUposathaDrawing:
                 font=self.config.font_styles.INFO,
                 colour=self.config.palette.BLACK
             ),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )
 
     def countdown(self, letters: list[str]) -> ArrangedComponent:
@@ -98,7 +90,5 @@ class NextUposathaDrawing:
 
         return ArrangedComponent(
             component=Countdown(icons=icons, gap=4),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )

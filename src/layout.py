@@ -46,8 +46,6 @@ class ArrangedComponent:
     """ A component with its layout"""
     component: ImageComponent
     align: Align
-    space_before: int
-    space_after: int
 
 class ScreenLayout:
     """ A layout of ImageComponents on the full image """
@@ -63,9 +61,7 @@ class ScreenLayout:
     def add_space(self, height: int) -> None:
         component = ArrangedComponent(
             component=Space(height=height),
-            align=Align.CENTRE,
-            space_before=0,
-            space_after=0
+            align=Align.CENTRE
         )
         self._arrangement.append(component)
 
@@ -74,12 +70,8 @@ class ScreenLayout:
         y = 0
         for arranged in self._arrangement:
             x = self._align_x(arranged.component, arranged.align)
-            y += arranged.space_before
-
             arranged.component.draw(x, y)
-
             y += arranged.component.height()
-            y += arranged.space_after
 
     def _align_x(self, component: ImageComponent, align: Align) -> int:
         x = 0
