@@ -19,11 +19,17 @@ class NextUposathaDrawing:
 
         layout = ScreenLayout(screen_height=self.config.height,
                               screen_width=self.config.width)
+        layout.add_space(20)
         layout.add(self.heading("Uposatha"))
+        layout.add_space(20)
         layout.add(self.underline())
+        layout.add_space(20)
         layout.add(self.date(content.date))
+        layout.add_space(20)
         layout.add(self.countdown(content.countdown))
+        layout.add_space(20)
         layout.add(self.info(content.info))
+
         layout.draw()
 
     @property
@@ -39,8 +45,8 @@ class NextUposathaDrawing:
                 colour=self.config.palette.BLACK
             ),
             align=Align.CENTRE,
-            space_before=20,
-            space_after=20
+            space_before=0,
+            space_after=0
         )
 
     def underline(self) -> ArrangedComponent:
@@ -53,7 +59,7 @@ class NextUposathaDrawing:
             ),
             align=Align.CENTRE,
             space_before=0,
-            space_after=20
+            space_after=0
         )
 
     def date(self, text: str) -> ArrangedComponent:
@@ -66,7 +72,7 @@ class NextUposathaDrawing:
             ),
             align=Align.CENTRE,
             space_before=0,
-            space_after=20
+            space_after=0
         )
 
     def info(self, text: str) -> ArrangedComponent:
@@ -79,7 +85,7 @@ class NextUposathaDrawing:
             ),
             align=Align.CENTRE,
             space_before=0,
-            space_after=20
+            space_after=0
         )
 
     def countdown(self, letters: list[str]) -> ArrangedComponent:
@@ -94,5 +100,5 @@ class NextUposathaDrawing:
             component=Countdown(icons=icons, gap=4),
             align=Align.CENTRE,
             space_before=0,
-            space_after=20
+            space_after=0
         )
