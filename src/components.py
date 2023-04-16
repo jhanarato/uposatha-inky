@@ -77,6 +77,25 @@ class MultilineText:
         )
 
 
+class Rectangle:
+    def __init__(self, draw: ImageDraw, height: int, width: int, colour: int):
+        self._draw = draw
+        self._height = height
+        self._width = width
+        self._colour = colour
+
+    def height(self) -> int:
+        return self._height
+
+    def width(self) -> int:
+        return self._width
+
+    def draw(self, x: int, y: int) -> None:
+        self._draw.rectangle(
+            xy=[x, y, x + self.width(), y + self.height()],
+            fill=self._colour
+        )
+
 class LetterIcon:
     def __init__(self,
                  draw: ImageDraw,
@@ -113,12 +132,18 @@ class LetterIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        self._draw.rectangle(
-            xy=[x, y, x + self.width(), y + self.height()],
-            fill=self._background
-        )
+        rect = Rectangle(draw=self._draw,
+                         height=self.height(),
+                         width=self.width(),
+                         colour=self._background)
 
-        text = Text(draw=self._draw, text=self._letter, font=self._font, colour=self._foreground)
+        rect.draw(x, y)
+
+        text = Text(draw=self._draw,
+                    text=self._letter,
+                    font=self._font,
+                    colour=self._foreground)
+
         text.draw(*self._to_text_xy(x, y))
 
 def create_icons(draw: ImageDraw,
