@@ -61,9 +61,9 @@ class ScreenLayout:
         if align == Align.LEFT:
             x = 0
         elif align == Align.CENTRE:
-            x = int((self._screen_width - component.width()) / 2)
+            x = (self._screen_width - component.width()) // 2
         elif align == Align.RIGHT:
-            x = int((self._screen_width - component.width()))
+            x = self._screen_width - component.width()
         return x
 
 XY = tuple[int, int]
