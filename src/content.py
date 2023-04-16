@@ -22,7 +22,6 @@ def next_uposatha_content(today: date) -> NextUposatha:
     )
 
     info = template.substitute(
-        formatted_date=uposatha.falls_on.strftime("%A, %d %B"),
         days_since_previous=uposatha.days_since_previous,
         uposatha_number=uposatha.number_in_season,
         number_of_uposathas=len(season.uposathas),
@@ -31,7 +30,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
     )
 
     return NextUposatha(
-        date=uposatha.falls_on.strftime("%A, %d %B"),
+        date=uposatha.falls_on.strftime("%a %d/%m/%y"),
         info=info,
         countdown=countdown_letters(today, uposatha.falls_on)
     )
