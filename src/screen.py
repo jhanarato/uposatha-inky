@@ -1,8 +1,6 @@
 from dataclasses import dataclass, field
-from enum import Enum, auto
-from typing import Dict
 
-from PIL import ImageFont, ImageDraw
+from PIL import ImageFont
 from font_roboto import RobotoBold
 
 @dataclass
