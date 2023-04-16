@@ -102,28 +102,26 @@ class LetterIcon:
                  font: ImageFont,
                  background: int,
                  foreground: int,
-                 letter: str, size: int) -> None:
-        self._draw = draw
+                 letter: str,
+                 size: int) -> None:
         self._size = size
-        self._letter = letter
-
-        self._font = font
-        self._background = background
-        self._foreground = foreground
-
-        self._text_width = self._font.getbbox(self._letter)[2]
-        self._text_height = self._font.getbbox(self._letter)[3]
+        self._rect = Rectangle(draw, self.height(), self.width(), background)
+        self._text = Text(draw, letter, font, foreground)
 
     def _text_x_offset(self) -> int:
-        return (self.width() - self._text_width) // 2
+        return (self.width() - self._text.width()) // 2
 
     def _text_y_offset(self) -> int:
-        return (self.height() - self._text_height) // 2
+        return (self.height() - self._text.height()) // 2
 
     def _to_text_xy(self, icon_x: int, icon_y: int) -> tuple[int, int]:
-        x = icon_x + self._text_x_offset()
-        y = icon_y + self._text_y_offset()
-        return x, y
+        return self._text_x(icon_x), self._text_y(icon_y)
+
+    def _text_x(self, icon_x) -> int:
+        return icon_x + self._text_x_offset()
+
+    def _text_y(self, icon_y) -> int:
+        return icon_y + self._text_y_offset()
 
     def height(self) -> int:
         return self._size
@@ -132,19 +130,9 @@ class LetterIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        rect = Rectangle(draw=self._draw,
-                         height=self.height(),
-                         width=self.width(),
-                         colour=self._background)
+        self._rect.draw(x, y)
+        self._text.draw(*self._to_text_xy(x, y))
 
-        rect.draw(x, y)
-
-        text = Text(draw=self._draw,
-                    text=self._letter,
-                    font=self._font,
-                    colour=self._foreground)
-
-        text.draw(*self._to_text_xy(x, y))
 
 def create_icons(draw: ImageDraw,
                  config: ImageConfig,
