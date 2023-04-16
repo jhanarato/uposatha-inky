@@ -77,7 +77,7 @@ class NextUposathaDrawing:
         )
 
         return ArrangedComponent(
-            component=Countdown(icons),
+            component=Countdown(icons=icons, gap=4),
             align=Align.CENTRE,
             space_before=0,
             space_after=20

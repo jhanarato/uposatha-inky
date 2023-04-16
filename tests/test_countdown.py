@@ -118,5 +118,5 @@ def test_should_space_icons():
         LetterSpy(size=30),
     ]
 
-    countdown = Countdown(icons)
+    countdown = Countdown(icons=icons, gap=2)
     assert countdown._spacing() == 32
