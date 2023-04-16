@@ -57,7 +57,7 @@ def test_should_draw_component_with_space_after():
     arrangements = [
         ArrangedComponent(
             component=LoggerComponent(10, 20, log),
-            align=Align.CENTRE, space_before=0, space_after=30
+            align=Align.CENTRE, space_before=0, space_after=0
         ),
         ArrangedComponent(
             component=LoggerComponent(10, 20, log),
@@ -65,8 +65,9 @@ def test_should_draw_component_with_space_after():
         ),
     ]
 
-    for component in arrangements:
-        layout.add(component)
+    layout.add(arrangements[0])
+    layout.add_space(30)
+    layout.add(arrangements[1])
 
     layout.draw()
     assert log.pixels[-1].y == 40
@@ -74,35 +75,17 @@ def test_should_draw_component_with_space_after():
 def test_should_draw_component_with_space_before():
     log = DrawLog()
     layout = ScreenLayout(screen_height=100, screen_width=200)
-    layout.add(
-        ArrangedComponent(
-            component=LoggerComponent(20, 50, log),
-            align=Align.CENTRE, space_before=20, space_after=0
-        )
+    component = ArrangedComponent(
+        component=LoggerComponent(20, 50, log),
+        align=Align.CENTRE, space_before=0, space_after=0
     )
+
+    layout.add_space(20)
+    layout.add(component)
     layout.draw()
+
     assert log.pixels[0].y == 20
 
-def test_should_combine_space_before_and_after():
-    log = DrawLog()
-    layout = ScreenLayout(screen_height=100, screen_width=200)
-    layout.add(
-        ArrangedComponent(
-            component=LoggerComponent(height=10, width=20, log=log),
-            align=Align.CENTRE, space_before=0, space_after=25
-        )
-    )
-
-    layout.add(
-        ArrangedComponent(
-            component=LoggerComponent(height=10, width=20, log=log),
-            align=Align.CENTRE, space_before=25, space_after=0
-        )
-    )
-
-    layout.draw()
-
-    assert log.pixels[1].y == 60
 
 def test_three_components_spaced():
     log = DrawLog()
@@ -110,19 +93,25 @@ def test_three_components_spaced():
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=20, width=20, log=log),
-            align=Align.CENTRE, space_before=0, space_after=25
+            align=Align.CENTRE, space_before=0, space_after=0
         )
     )
+
+    layout.add_space(50)
+
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=30, width=20, log=log),
-            align=Align.CENTRE, space_before=25, space_after=20
+            align=Align.CENTRE, space_before=0, space_after=0
         )
     )
+
+    layout.add_space(30)
+
     layout.add(
         ArrangedComponent(
             component=LoggerComponent(height=40, width=20, log=log),
-            align=Align.CENTRE, space_before=10, space_after=10
+            align=Align.CENTRE, space_before=0, space_after=0
         )
     )
 
