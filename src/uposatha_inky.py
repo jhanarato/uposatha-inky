@@ -5,7 +5,7 @@ from PIL import Image
 from inky import auto
 
 from content import next_uposatha_content, countdown_letters
-from images import NextUposathaDrawing
+from images import draw_next_uposatha
 
 
 def inky_available() -> bool:
@@ -49,12 +49,12 @@ def parse_args():
 def main():
     args = parse_args()
     content = next_uposatha_content(args.date)
-    drawing = NextUposathaDrawing(content)
+    image = draw_next_uposatha(content)
 
     if inky_available():
-        display_on_inky(drawing.image)
+        display_on_inky(image)
     else:
-        display_on_screen(drawing.image)
+        display_on_screen(image)
 
 if __name__ == "__main__":
     main()
