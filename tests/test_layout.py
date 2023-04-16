@@ -131,3 +131,20 @@ def test_three_components_spaced():
     assert log.pixels[0].y == 0
     assert log.pixels[1].y == 70
     assert log.pixels[2].y == 130
+
+def test_should_space_using_component():
+    log = DrawLog()
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+
+    layout.add_space(height=10)
+
+    layout.add(
+        ArrangedComponent(
+            component=LoggerComponent(height=20, width=20, log=log),
+            align=Align.CENTRE, space_before=0, space_after=0
+        )
+    )
+
+    layout.draw()
+
+    assert log.pixels[0].y == 10

@@ -25,6 +25,22 @@ class ImageComponent(Protocol):
     def draw(self, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
 
+
+class Space:
+    """ A blank area between components. """
+    def __init__(self, height: 0):
+        self._height = height
+
+    def height(self) -> int:
+        return self._height
+
+    def width(self) -> int:
+        return 0
+
+    def draw(self, x: int, y: int) -> None:
+        pass
+
+
 @dataclass
 class ArrangedComponent:
     """ A component with its layout"""
@@ -42,6 +58,15 @@ class ScreenLayout:
 
     def add(self, component: ArrangedComponent) -> None:
         """ Add a component to be arranged in the image """
+        self._arrangement.append(component)
+
+    def add_space(self, height: int) -> None:
+        component = ArrangedComponent(
+            component=Space(height=height),
+            align=Align.CENTRE,
+            space_before=0,
+            space_after=0
+        )
         self._arrangement.append(component)
 
     def draw(self) -> None:
