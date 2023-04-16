@@ -41,7 +41,7 @@ def test_should_align_component(align, x_coord):
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add(
         ArrangedComponent(
-            component=LoggerComponent(height=10, width=20, log=log),
+            component=component,
             align=align
         )
     )
@@ -135,3 +135,21 @@ def test_should_space_using_component():
     layout.draw()
 
     assert log.pixels[0].y == 10
+
+def test_should_centre_align_component():
+    log = DrawLog()
+    component = LoggerComponent(height=10, width=20, log=log)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+    layout.add_centred(component)
+    layout.draw()
+
+    assert component.log.pixels[0].x == 90
+
+def test_should_left_align_component():
+    log = DrawLog()
+    component = LoggerComponent(height=10, width=20, log=log)
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+    layout.add_left(component)
+    layout.draw()
+
+    assert component.log.pixels[0].x == 0

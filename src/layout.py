@@ -65,6 +65,18 @@ class ScreenLayout:
         )
         self._arrangement.append(component)
 
+    def add_left(self, component: ImageComponent) -> None:
+        arranged = ArrangedComponent(component, Align.LEFT)
+        self._arrangement.append(arranged)
+
+    def add_right(self, component: ImageComponent) -> None:
+        arranged = ArrangedComponent(component, Align.RIGHT)
+        self._arrangement.append(arranged)
+
+    def add_centred(self, component: ImageComponent) -> None:
+        arranged = ArrangedComponent(component, Align.CENTRE)
+        self._arrangement.append(arranged)
+
     def draw(self) -> None:
         """ Draw all components in the image """
         y = 0
