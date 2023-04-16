@@ -6,6 +6,7 @@ from uposatha.calendar import Calendar
 
 @dataclass
 class NextUposatha:
+    date: str
     info: str
     countdown: List[str]
 
@@ -30,9 +31,11 @@ def next_uposatha_content(today: date) -> NextUposatha:
         phase=uposatha.moon_phase.name.capitalize()
     )
 
-    countdown = countdown_letters(today, uposatha.falls_on)
-
-    return NextUposatha(info, countdown)
+    return NextUposatha(
+        date=uposatha.falls_on.strftime("%A, %d %B"),
+        info=info,
+        countdown=countdown_letters(today, uposatha.falls_on)
+    )
 
 def countdown_letters(today: date, uposatha_date: date) -> List[str]:
     day_letters = []
