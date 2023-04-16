@@ -143,7 +143,7 @@ def create_icons(draw: ImageDraw,
 class Countdown:
     def __init__(self, icons: list[ImageComponent]):
         self._icons = icons
-        self._gap = 2
+        self._gap = 4
 
     def _spacing(self) -> int:
         return max(self._icons, key=lambda icon: icon.width()).width() + self._gap

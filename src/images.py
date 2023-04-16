@@ -72,7 +72,7 @@ class NextUposathaDrawing:
         icons = create_icons(
             draw=self._draw,
             config=self.config,
-            size=30,
+            size=20,
             letters=letters
         )
 
