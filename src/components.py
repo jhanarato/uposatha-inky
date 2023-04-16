@@ -108,20 +108,11 @@ class LetterIcon:
         self._rect = Rectangle(draw, self.height(), self.width(), background)
         self._text = Text(draw, letter, font, foreground)
 
-    def _text_x_offset(self) -> int:
-        return (self.width() - self._text.width()) // 2
+    def _text_x(self, component_x: int) -> int:
+        return component_x + (self.width() - self._text.width()) // 2
 
-    def _text_y_offset(self) -> int:
-        return (self.height() - self._text.height()) // 2
-
-    def _to_text_xy(self, icon_x: int, icon_y: int) -> tuple[int, int]:
-        return self._text_x(icon_x), self._text_y(icon_y)
-
-    def _text_x(self, icon_x) -> int:
-        return icon_x + self._text_x_offset()
-
-    def _text_y(self, icon_y) -> int:
-        return icon_y + self._text_y_offset()
+    def _text_y(self, component_y: int) -> int:
+        return component_y + (self.height() - self._text.height()) // 2
 
     def height(self) -> int:
         return self._size
@@ -131,7 +122,7 @@ class LetterIcon:
 
     def draw(self, x: int, y: int) -> None:
         self._rect.draw(x, y)
-        self._text.draw(*self._to_text_xy(x, y))
+        self._text.draw(self._text_x(x), self._text_y(y))
 
 
 def create_icons(draw: ImageDraw,
