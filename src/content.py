@@ -16,8 +16,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
     season = calendar.current_season(today)
 
     template = Template(
-        "${formatted_date}"
-        "\n${uposatha_number}/${number_of_uposathas} "
+        "${uposatha_number}/${number_of_uposathas} "
         "${season_name} Season"
         "\n${days_since_previous} Day ${phase} Moon"
     )

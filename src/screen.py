@@ -13,8 +13,8 @@ class Palette:
 
 @dataclass
 class FontStyles:
-    HEADING: ImageFont = ImageFont.truetype(font=RobotoBold, size=36)
-    INFO: ImageFont = ImageFont.truetype(font=RobotoBold, size=32)
+    HEADING: ImageFont = ImageFont.truetype(font=RobotoBold, size=30)
+    INFO: ImageFont = ImageFont.truetype(font=RobotoBold, size=24)
     COUNTDOWN: ImageFont = ImageFont.truetype(font=RobotoBold, size=16)
 
 

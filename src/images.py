@@ -21,8 +21,9 @@ class NextUposathaDrawing:
                               screen_width=self.config.width)
         layout.add(self.heading("Uposatha"))
         layout.add(self.underline())
-        layout.add(self.info(content.info))
+        layout.add(self.date(content.date))
         layout.add(self.countdown(content.countdown))
+        layout.add(self.info(content.info))
         layout.draw()
 
     @property
@@ -48,6 +49,19 @@ class NextUposathaDrawing:
                 draw=self._draw,
                 length=300,
                 thickness=2,
+                colour=self.config.palette.BLACK
+            ),
+            align=Align.CENTRE,
+            space_before=0,
+            space_after=20
+        )
+
+    def date(self, text: str) -> ArrangedComponent:
+        return ArrangedComponent(
+            component=Text(
+                draw=self._draw,
+                text=text,
+                font=self.config.font_styles.INFO,
                 colour=self.config.palette.BLACK
             ),
             align=Align.CENTRE,
