@@ -49,14 +49,12 @@ def create_icons(draw: ImageDraw,
     ]
 
 
-def all_icons_are_square(icons: list[ImageComponent]) -> bool:
+def icons_are_square(icons: list[ImageComponent]) -> bool:
     return all([icon.height() == icon.width() for icon in icons])
 
 
-def check_icons_are_same_size(icons):
-    icon_sizes = {icon.width() for icon in icons}
-    if len(icon_sizes) > 1:
-        raise ValueError("All icons must be the same size")
+def icons_are_same_size(icons: list[ImageComponent]) -> bool:
+    return len({icon.width() for icon in icons}) == 1
 
 
 class Countdown:
@@ -64,27 +62,23 @@ class Countdown:
         if len(icons) < 1:
             raise ValueError("At least one icon is required")
 
-        if not all_icons_are_square(icons):
+        if not icons_are_square(icons):
             raise ValueError("Icons must be square")
 
-        check_icons_are_same_size(icons)
+        if not icons_are_same_size(icons):
+            raise ValueError("All icons must be the same size")
 
         self._icons = icons
         self._icon_size = icons[0].width()
         self._gap = gap
-
-    def _horizontal_spacing(self) -> int:
-        return self._icon_size + self._gap
-
-    def _vertical_spacing(self) -> int:
-        return self._icon_size + self._gap
+        self._spacing = self._icon_size + self._gap
 
     def height(self) -> int:
         return self._icon_size
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
-        return spaces * self._horizontal_spacing() + self._icon_size
+        return spaces * self._spacing + self._icon_size
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())

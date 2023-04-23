@@ -110,16 +110,6 @@ def test_should_draw_icons_with_gap():
     assert icons[1].last_draw_at == (12, 0)
     assert icons[2].last_draw_at == (24, 0)
 
-def test_should_space_icons():
-    icons = [
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-    ]
-
-    countdown = Countdown(icons=icons, gap=2)
-    assert countdown._horizontal_spacing() == 12
-
 def test_should_raise_exception_when_icon_list_is_empty():
     with pytest.raises(ValueError, match="At least one icon is required"):
         countdown = Countdown(icons=[], gap=0)
