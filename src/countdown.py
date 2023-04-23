@@ -51,21 +51,25 @@ def create_icons(draw: ImageDraw,
 
 class Countdown:
     def __init__(self, icons: list[ImageComponent], gap: int):
-        self._check_icons(icons)
+        self._check_for_empty_icon_list(icons)
+        self._check_icons_are_square(icons)
+        self._check_icons_are_same_size(icons)
+
         self._icons = icons
         self._icon_size = icons[0].width()
         self._gap = gap
 
-    def _check_icons(self, icons: list[ImageComponent]) -> None:
+    def _check_for_empty_icon_list(self, icons):
         if len(icons) < 1:
             raise ValueError("At least one icon is required")
 
+    def _check_icons_are_square(self, icons):
         for icon in icons:
             if icon.height() != icon.width():
                 raise ValueError("Icons must be square")
 
+    def _check_icons_are_same_size(self, icons):
         icon_sizes = {icon.width() for icon in icons}
-
         if len(icon_sizes) > 1:
             raise ValueError("All icons must be the same size")
 
