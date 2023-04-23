@@ -53,9 +53,8 @@ class Countdown:
     def __init__(self, icons: list[ImageComponent], gap: int):
         self._check_icons(icons)
         self._icons = icons
+        self._icon_size = icons[0].width()
         self._gap = gap
-        self._icon_width = max_width(self._icons)
-        self._icon_height = max_height(self._icons)
 
     def _check_icons(self, icons: list[ImageComponent]) -> None:
         if len(icons) < 1:
@@ -71,17 +70,17 @@ class Countdown:
             raise ValueError("All icons must be the same size")
 
     def _horizontal_spacing(self) -> int:
-        return self._icon_width + self._gap
+        return self._icon_size + self._gap
 
     def _vertical_spacing(self) -> int:
-        return self._icon_height + self._gap
+        return self._icon_size + self._gap
 
     def height(self) -> int:
-        return self._icon_height
+        return self._icon_size
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
-        return spaces * self._horizontal_spacing() + self._icon_width
+        return spaces * self._horizontal_spacing() + self._icon_size
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
