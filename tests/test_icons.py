@@ -1,5 +1,5 @@
 import pytest
 
-from components import LetterIcon
+from countdown import LetterIcon
 from screen import ImageConfig
 

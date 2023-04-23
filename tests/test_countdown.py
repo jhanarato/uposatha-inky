@@ -2,9 +2,9 @@ from datetime import date, timedelta
 
 import pytest
 
-from components import create_icons, Countdown
+from countdown import create_icons, Countdown, CountdownLayout
 from content import countdown_letters
-from layout import BoundingBox, CountdownLayout
+from layout import BoundingBox
 from screen import ImageConfig
 
 
