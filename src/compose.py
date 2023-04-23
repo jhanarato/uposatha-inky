@@ -47,18 +47,21 @@ def draw_next_uposatha(content: NextUposatha) -> Image:
         font=config.font_styles.INFO,
         colour=config.palette.BLACK)
 
+    components = [
+        heading,
+        divider,
+        falls_on,
+        countdown,
+        details
+    ]
+
     layout = ScreenLayout(screen_height=config.height,
                           screen_width=config.width)
-    layout.add_space(20)
-    layout.add_centred(heading)
-    layout.add_space(20)
-    layout.add_centred(divider)
-    layout.add_space(20)
-    layout.add_centred(falls_on)
-    layout.add_space(20)
-    layout.add_centred(countdown)
-    layout.add_space(20)
-    layout.add_centred(details)
+
+    for component in components:
+        layout.add_space(20)
+        layout.add_centred(component)
+
     layout.draw()
 
     return image
