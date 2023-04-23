@@ -120,3 +120,26 @@ def test_should_space_icons():
 
     countdown = Countdown(icons=icons, gap=2)
     assert countdown._horizontal_spacing() == 32
+
+def test_should_raise_exception_when_icon_list_is_empty():
+    with pytest.raises(ValueError, match="At least one icon is required"):
+        countdown = Countdown(icons=[], gap=0)
+
+class NotSquare:
+    def height(self) -> int:
+        return 1
+
+    def width(self) -> int:
+        return 2
+
+    def draw(self, x: int, y: int) -> None:
+        pass
+
+def test_should_raise_exception_if_icons_are_not_square():
+    icons = [
+        LetterSpy(size=10),
+        NotSquare(),
+        LetterSpy(size=10),
+    ]
+    with pytest.raises(ValueError, match="Icons must be square"):
+        countdown = Countdown(icons=icons, gap=0)
