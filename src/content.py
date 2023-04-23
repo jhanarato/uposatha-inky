@@ -1,6 +1,5 @@
-from typing import List, Tuple
+from typing import List
 from dataclasses import dataclass
-from string import Template
 from datetime import date, timedelta
 from uposatha.calendar import Calendar
 
