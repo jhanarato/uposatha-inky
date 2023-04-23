@@ -15,18 +15,18 @@ def next_uposatha_content(today: date) -> NextUposatha:
     uposatha = calendar.next_uposatha(today)
     season = calendar.current_season(today)
 
+    return NextUposatha(
+        date=uposatha.falls_on.strftime("%a %d/%m/%y"),
+        details=uposatha_details(season, uposatha),
+        countdown=countdown_letters(today, uposatha.falls_on)
+    )
+
+def uposatha_details(season, uposatha):
     days_since_previous = uposatha.days_since_previous
     uposatha_number = uposatha.number_in_season
     number_of_uposathas = len(season.uposathas)
     season_name = season.name.name.capitalize()
-
-    details = f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
-
-    return NextUposatha(
-        date=uposatha.falls_on.strftime("%a %d/%m/%y"),
-        details=details,
-        countdown=countdown_letters(today, uposatha.falls_on)
-    )
+    return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
 
 def countdown_letters(today: date, uposatha_date: date) -> List[str]:
     day_letters = []
