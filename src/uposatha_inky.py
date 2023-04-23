@@ -5,7 +5,7 @@ from PIL import Image
 from inky import auto
 
 from content import next_uposatha_content, countdown_letters
-from images import draw_next_uposatha
+from compose import draw_next_uposatha
 
 
 def inky_available() -> bool:
