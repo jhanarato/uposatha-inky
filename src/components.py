@@ -1,6 +1,6 @@
 from PIL import ImageDraw, ImageFont
 
-from layout import CountdownLayout, BoundingBox, ImageComponent, max_width
+from layout import CountdownLayout, BoundingBox, ImageComponent, max_width, max_height
 from screen import ImageConfig
 
 
@@ -145,8 +145,11 @@ class Countdown:
         self._icons = icons
         self._gap = gap
 
-    def _spacing(self) -> int:
+    def _horizontal_spacing(self) -> int:
         return max_width(self._icons) + self._gap
+
+    def _vertical_spacing(self) -> int:
+        return max_height(self._icons) + self._gap
 
     def height(self) -> int:
         return self._icons[0].height()
@@ -154,7 +157,7 @@ class Countdown:
     def width(self) -> int:
         icon_width = self._icons[0].width()
         spaces = len(self._icons) - 1
-        return spaces * self._spacing() + icon_width
+        return spaces * self._horizontal_spacing() + icon_width
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())

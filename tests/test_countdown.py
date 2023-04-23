@@ -119,4 +119,4 @@ def test_should_space_icons():
     ]
 
     countdown = Countdown(icons=icons, gap=2)
-    assert countdown._spacing() == 32
+    assert countdown._horizontal_spacing() == 32
