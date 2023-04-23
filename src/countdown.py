@@ -53,20 +53,21 @@ class Countdown:
     def __init__(self, icons: list[ImageComponent], gap: int):
         self._icons = icons
         self._gap = gap
+        self._icon_width = max_width(self._icons)
+        self._icon_height = max_height(self._icons)
 
     def _horizontal_spacing(self) -> int:
-        return max_width(self._icons) + self._gap
+        return self._icon_width + self._gap
 
     def _vertical_spacing(self) -> int:
-        return max_height(self._icons) + self._gap
+        return self._icon_height + self._gap
 
     def height(self) -> int:
-        return self._icons[0].height()
+        return self._icon_height
 
     def width(self) -> int:
-        icon_width = self._icons[0].width()
         spaces = len(self._icons) - 1
-        return spaces * self._horizontal_spacing() + icon_width
+        return spaces * self._horizontal_spacing() + self._icon_width
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
