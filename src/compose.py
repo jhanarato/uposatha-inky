@@ -6,7 +6,7 @@ from layout import ScreenLayout
 from screen import ImageConfig
 
 
-def draw_next_uposatha(content: NextUposatha) -> Image:
+def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
     image = Image.new(mode="P", size=(config.width, config.height), color=config.palette.WHITE)
     draw = ImageDraw.Draw(image)
