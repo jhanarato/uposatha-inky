@@ -41,7 +41,7 @@ def draw_next_uposatha(content: NextUposatha) -> Image:
 
     countdown = Countdown(icons=icons, gap=4)
 
-    details = MultilineText(
+    details = Text(
         draw=draw,
         text=content.details,
         font=config.font_styles.INFO,
