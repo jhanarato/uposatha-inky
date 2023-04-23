@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 
-from components import Text, HorizontalLine, MultilineText, Countdown, create_icons
+from components import Text, HorizontalLine, Countdown, create_icons
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
