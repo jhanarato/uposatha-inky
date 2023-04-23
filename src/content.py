@@ -7,7 +7,7 @@ from uposatha.calendar import Calendar
 @dataclass
 class NextUposatha:
     date: str
-    info: str
+    details: str
     countdown: List[str]
 
 def next_uposatha_content(today: date) -> NextUposatha:
@@ -15,23 +15,16 @@ def next_uposatha_content(today: date) -> NextUposatha:
     uposatha = calendar.next_uposatha(today)
     season = calendar.current_season(today)
 
-    template = Template(
-        "${uposatha_number}/${number_of_uposathas} "
-        "${season_name} Season"
-        "\n${days_since_previous} Day ${phase} Moon"
-    )
+    days_since_previous = uposatha.days_since_previous
+    uposatha_number = uposatha.number_in_season
+    number_of_uposathas = len(season.uposathas)
+    season_name = season.name.name.capitalize()
 
-    info = template.substitute(
-        days_since_previous=uposatha.days_since_previous,
-        uposatha_number=uposatha.number_in_season,
-        number_of_uposathas=len(season.uposathas),
-        season_name=season.name.name.capitalize(),
-        phase=uposatha.moon_phase.name.capitalize()
-    )
+    details = f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
 
     return NextUposatha(
         date=uposatha.falls_on.strftime("%a %d/%m/%y"),
-        info=info,
+        details=details,
         countdown=countdown_letters(today, uposatha.falls_on)
     )
 
