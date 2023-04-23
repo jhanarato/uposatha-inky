@@ -116,14 +116,8 @@ class CountdownLayout:
 
 
 def max_width(components: list[ImageComponent]) -> int:
-    if not components:
-        return 0
-
     return max(components, key=lambda component: component.width()).width()
 
 
 def max_height(components: list[ImageComponent]) -> int:
-    if not components:
-        return 0
-
     return max(components, key=lambda component: component.height()).height()
