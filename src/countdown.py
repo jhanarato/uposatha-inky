@@ -65,6 +65,11 @@ class Countdown:
             if icon.height() != icon.width():
                 raise ValueError("Icons must be square")
 
+        icon_sizes = {icon.width() for icon in icons}
+
+        if len(icon_sizes) > 1:
+            raise ValueError("All icons must be the same size")
+
     def _horizontal_spacing(self) -> int:
         return self._icon_width + self._gap
 

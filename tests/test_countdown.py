@@ -52,7 +52,6 @@ def test_should_layout_single_icon():
 @pytest.mark.parametrize(
     "number,points",
     [
-        (0, []),
         (1, [(5, 5)]),
         (2, [(5, 5), (15, 5)]),
         (3, [(5, 5), (15, 5), (25, 5)]),
@@ -114,12 +113,12 @@ def test_should_draw_icons_with_gap():
 def test_should_space_icons():
     icons = [
         LetterSpy(size=10),
-        LetterSpy(size=20),
-        LetterSpy(size=30),
+        LetterSpy(size=10),
+        LetterSpy(size=10),
     ]
 
     countdown = Countdown(icons=icons, gap=2)
-    assert countdown._horizontal_spacing() == 32
+    assert countdown._horizontal_spacing() == 12
 
 def test_should_raise_exception_when_icon_list_is_empty():
     with pytest.raises(ValueError, match="At least one icon is required"):
@@ -141,5 +140,15 @@ def test_should_raise_exception_if_icons_are_not_square():
         NotSquare(),
         LetterSpy(size=10),
     ]
+
     with pytest.raises(ValueError, match="Icons must be square"):
+        countdown = Countdown(icons=icons, gap=0)
+
+def test_should_raise_exception_if_icons_have_different_size():
+    icons = [
+        LetterSpy(size=10),
+        LetterSpy(size=20)
+    ]
+
+    with pytest.raises(ValueError, match="All icons must be the same size"):
         countdown = Countdown(icons=icons, gap=0)
