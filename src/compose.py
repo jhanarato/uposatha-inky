@@ -11,42 +11,26 @@ def draw_next_uposatha(content: NextUposatha) -> Image:
     image = Image.new(mode="P", size=(config.width, config.height), color=config.palette.WHITE)
     draw = ImageDraw.Draw(image)
 
-    layout = ScreenLayout(screen_height=config.height,
-                          screen_width=config.width)
-    layout.add_space(20)
-
-    layout.add_centred(
-        Text(
+    heading = Text(
             draw=draw,
             text="Uposatha",
             font=config.font_styles.HEADING,
             colour=config.palette.BLACK
-        )
     )
 
-    layout.add_space(20)
-
-    layout.add_centred(
-        HorizontalLine(
+    divider = HorizontalLine(
             draw=draw,
             length=300,
             thickness=2,
             colour=config.palette.BLACK
-        )
     )
 
-    layout.add_space(20)
-
-    layout.add_centred(
-        Text(
+    falls_on = Text(
             draw=draw,
             text=content.date,
             font=config.font_styles.INFO,
             colour=config.palette.BLACK
         )
-    )
-
-    layout.add_space(20)
 
     icons = create_icons(
         draw=draw,
@@ -55,21 +39,26 @@ def draw_next_uposatha(content: NextUposatha) -> Image:
         letters=content.countdown
     )
 
-    layout.add_centred(
-        Countdown(icons=icons, gap=4)
-    )
+    countdown = Countdown(icons=icons, gap=4)
 
+    details = MultilineText(
+        draw=draw,
+        text=content.details,
+        font=config.font_styles.INFO,
+        colour=config.palette.BLACK)
+
+    layout = ScreenLayout(screen_height=config.height,
+                          screen_width=config.width)
     layout.add_space(20)
-
-    layout.add_centred(
-        MultilineText(
-            draw=draw,
-            text=content.info,
-            font=config.font_styles.INFO,
-            colour=config.palette.BLACK
-        )
-    )
-
+    layout.add_centred(heading)
+    layout.add_space(20)
+    layout.add_centred(divider)
+    layout.add_space(20)
+    layout.add_centred(falls_on)
+    layout.add_space(20)
+    layout.add_centred(countdown)
+    layout.add_space(20)
+    layout.add_centred(details)
     layout.draw()
 
     return image
