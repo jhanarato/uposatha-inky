@@ -1,6 +1,6 @@
 from PIL import ImageDraw, ImageFont
 
-from layout import CountdownLayout, BoundingBox, ImageComponent
+from layout import CountdownLayout, BoundingBox, ImageComponent, max_width
 from screen import ImageConfig
 
 
@@ -146,7 +146,7 @@ class Countdown:
         self._gap = gap
 
     def _spacing(self) -> int:
-        return max(self._icons, key=lambda icon: icon.width()).width() + self._gap
+        return max_width(self._icons) + self._gap
 
     def height(self) -> int:
         return self._icons[0].height()
