@@ -5,6 +5,35 @@ from components import Rectangle, Text
 from layout import ImageComponent, BoundingBox
 
 
+class Countdown:
+    def __init__(self, icons: list[ImageComponent], gap: int):
+        if len(icons) < 1:
+            raise ValueError("At least one icon is required")
+
+        if not icons_are_square(icons):
+            raise ValueError("Icons must be square")
+
+        if not icons_are_same_size(icons):
+            raise ValueError("All icons must be the same size")
+
+        self._icons = icons
+        self._icon_size = icons[0].width()
+        self._gap = gap
+        self._spacing = self._icon_size + self._gap
+
+    def height(self) -> int:
+        return self._icon_size
+
+    def width(self) -> int:
+        spaces = len(self._icons) - 1
+        return spaces * self._spacing + self._icon_size
+
+    def draw(self, x: int, y: int) -> None:
+        bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
+        layout = CountdownLayout(bbox=bbox, icons=self._icons, gap=self._gap)
+        layout.draw()
+
+
 class LetterIcon:
     def __init__(self,
                  draw: ImageDraw,
@@ -55,35 +84,6 @@ def icons_are_square(icons: list[ImageComponent]) -> bool:
 
 def icons_are_same_size(icons: list[ImageComponent]) -> bool:
     return len({icon.width() for icon in icons}) == 1
-
-
-class Countdown:
-    def __init__(self, icons: list[ImageComponent], gap: int):
-        if len(icons) < 1:
-            raise ValueError("At least one icon is required")
-
-        if not icons_are_square(icons):
-            raise ValueError("Icons must be square")
-
-        if not icons_are_same_size(icons):
-            raise ValueError("All icons must be the same size")
-
-        self._icons = icons
-        self._icon_size = icons[0].width()
-        self._gap = gap
-        self._spacing = self._icon_size + self._gap
-
-    def height(self) -> int:
-        return self._icon_size
-
-    def width(self) -> int:
-        spaces = len(self._icons) - 1
-        return spaces * self._spacing + self._icon_size
-
-    def draw(self, x: int, y: int) -> None:
-        bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
-        layout = CountdownLayout(bbox=bbox, icons=self._icons, gap=self._gap)
-        layout.draw()
 
 
 XY = tuple[int, int]
