@@ -6,35 +6,54 @@ from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
 
+class PillowImage:
+    def __init__(self):
+        self._config = ImageConfig()
+
+        self._foreground = self._config.palette.WHITE
+        self._background = self._config.palette.BLACK
+
+        self._image = Image.new(
+            mode="P",
+            size=(self._config.width, self._config.height),
+            color=self._config.palette.WHITE
+        )
+
+        self._draw = ImageDraw.Draw(self._image)
+
+    def add_heading(self, text: str) -> Text:
+        return Text(
+            draw=self._draw,
+            text=text,
+            font=self._config.font_styles.HEADING,
+            colour=self._foreground
+        )
 
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
     image = Image.new(mode="P", size=(config.width, config.height), color=config.palette.WHITE)
     draw = ImageDraw.Draw(image)
 
-    heading = Text(
-            draw=draw,
-            text="Uposatha",
-            font=config.font_styles.HEADING,
-            colour=config.palette.BLACK
-    )
+    image = PillowImage()
+
+    heading = image.add_heading("Uposatha")
 
     divider = HorizontalLine(
-            draw=draw,
+            draw=image._draw,
             length=300,
             thickness=2,
             colour=config.palette.BLACK
     )
 
     falls_on = Text(
-            draw=draw,
+            draw=image._draw,
             text=content.date,
             font=config.font_styles.INFO,
             colour=config.palette.BLACK
         )
 
     icons = create_icons(
-        draw=draw,
+        draw=image._draw,
         config=config,
         size=20,
         letters=content.countdown
@@ -43,7 +62,7 @@ def next_uposatha(content: NextUposatha) -> Image:
     countdown = Countdown(icons=icons, gap=4)
 
     details = Text(
-        draw=draw,
+        draw=image._draw,
         text=content.details,
         font=config.font_styles.INFO,
         colour=config.palette.BLACK)
@@ -65,4 +84,4 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     layout.draw()
 
-    return image
+    return image._image
