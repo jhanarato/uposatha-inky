@@ -10,8 +10,8 @@ class PillowImage:
     def __init__(self):
         self._config = ImageConfig()
 
-        self._foreground = self._config.palette.WHITE
-        self._background = self._config.palette.BLACK
+        self._foreground = self._config.palette.BLACK
+        self._background = self._config.palette.WHITE
 
         self._image = Image.new(
             mode="P",
@@ -21,13 +21,22 @@ class PillowImage:
 
         self._draw = ImageDraw.Draw(self._image)
 
-    def add_heading(self, text: str) -> Text:
+    def new_heading_text(self, text: str) -> Text:
         return Text(
             draw=self._draw,
             text=text,
             font=self._config.font_styles.HEADING,
             colour=self._foreground
         )
+
+    def new_info_text(self, text: str) -> Text:
+        return Text(
+            draw=self._draw,
+            text=text,
+            font=self._config.font_styles.INFO,
+            colour=self._foreground
+        )
+
 
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
@@ -36,7 +45,7 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     image = PillowImage()
 
-    heading = image.add_heading("Uposatha")
+    heading = image.new_heading_text("Uposatha")
 
     divider = HorizontalLine(
             draw=image._draw,
@@ -45,12 +54,7 @@ def next_uposatha(content: NextUposatha) -> Image:
             colour=config.palette.BLACK
     )
 
-    falls_on = Text(
-            draw=image._draw,
-            text=content.date,
-            font=config.font_styles.INFO,
-            colour=config.palette.BLACK
-        )
+    falls_on = image.new_info_text(content.date)
 
     icons = create_icons(
         draw=image._draw,
