@@ -114,13 +114,3 @@ def icons_are_square(icons: list[ImageComponent]) -> bool:
 
 def icons_are_same_size(icons: list[ImageComponent]) -> bool:
     return len({icon.width() for icon in icons}) == 1
-
-
-
-
-def max_width(components: list[ImageComponent]) -> int:
-    return max(components, key=lambda component: component.width()).width()
-
-
-def max_height(components: list[ImageComponent]) -> int:
-    return max(components, key=lambda component: component.height()).height()
