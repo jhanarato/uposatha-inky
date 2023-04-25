@@ -18,8 +18,7 @@ class Countdown:
 
         self._icons = icons
         self._icon_size = icons[0].width()
-        self._gap = gap
-        self._icon_distance = self._icon_size + self._gap
+        self._icon_distance = self._icon_size + gap
 
     def height(self) -> int:
         return self._icon_size
