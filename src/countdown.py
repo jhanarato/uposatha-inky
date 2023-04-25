@@ -19,18 +19,18 @@ class Countdown:
         self._icons = icons
         self._icon_size = icons[0].width()
         self._gap = gap
-        self._spacing = self._icon_size + self._gap
+        self._icon_distance = self._icon_size + self._gap
 
     def height(self) -> int:
         return self._icon_size
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
-        return spaces * self._spacing + self._icon_size
+        return spaces * self._icon_distance + self._icon_size
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
-        layout = CountdownLayout(bbox=bbox, icons=self._icons, gap=self._gap)
+        layout = CountdownLayout(bbox=bbox, icons=self._icons, gap=self._gap, icon_distance=self._icon_distance)
         layout.draw()
 
 
@@ -39,16 +39,17 @@ XY = tuple[int, int]
 
 class CountdownLayout:
     """ A sub-layout for countdown icons"""
-    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], gap: int = 0):
+    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], gap: int = 0, icon_distance: int = 0):
         self._bbox = bbox
         self._icons = icons
         self._gap = gap
+        self._icon_distance = icon_distance
         self._offset = self._spacing() // 2
         self._x_start = self._bbox.left + self._offset
         self._y_start = self._bbox.top + self._offset
 
     def _spacing(self) -> int:
-        return max_width(self._icons) + self._gap
+        return self._icon_distance
 
     def _centers(self) -> list[XY]:
         return [(self._x_start + self._spacing() * icon_number, self._y_start)
