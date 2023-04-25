@@ -34,6 +34,37 @@ class Countdown:
         layout.draw()
 
 
+XY = tuple[int, int]
+
+
+class CountdownLayout:
+    """ A sub-layout for countdown icons"""
+    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], gap: int = 0):
+        self._bbox = bbox
+        self._icons = icons
+        self._gap = gap
+        self._offset = self._spacing() // 2
+        self._x_start = self._bbox.left + self._offset
+        self._y_start = self._bbox.top + self._offset
+
+    def _spacing(self) -> int:
+        return max_width(self._icons) + self._gap
+
+    def _centers(self) -> list[XY]:
+        return [(self._x_start + self._spacing() * icon_number, self._y_start)
+                for icon_number in range(len(self._icons))]
+
+    def _to_xy(self, centers: list[XY]) -> list[XY]:
+        return [(cx - self._offset, cy - self._offset)
+                for cx, cy in centers]
+
+    def draw(self):
+        icons_centers = self._centers()
+        icons_xy = self._to_xy(icons_centers)
+        for icon, xy in zip(self._icons, icons_xy):
+            icon.draw(*xy)
+
+
 class LetterIcon:
     def __init__(self,
                  draw: ImageDraw,
@@ -86,35 +117,6 @@ def icons_are_same_size(icons: list[ImageComponent]) -> bool:
     return len({icon.width() for icon in icons}) == 1
 
 
-XY = tuple[int, int]
-
-
-class CountdownLayout:
-    """ A sub-layout for countdown icons"""
-    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], gap: int = 0):
-        self._bbox = bbox
-        self._icons = icons
-        self._gap = gap
-        self._offset = self._spacing() // 2
-        self._x_start = self._bbox.left + self._offset
-        self._y_start = self._bbox.top + self._offset
-
-    def _spacing(self) -> int:
-        return max_width(self._icons) + self._gap
-
-    def _centers(self) -> list[XY]:
-        return [(self._x_start + self._spacing() * icon_number, self._y_start)
-                for icon_number in range(len(self._icons))]
-
-    def _to_xy(self, centers: list[XY]) -> list[XY]:
-        return [(cx - self._offset, cy - self._offset)
-                for cx, cy in centers]
-
-    def draw(self):
-        icons_centers = self._centers()
-        icons_xy = self._to_xy(icons_centers)
-        for icon, xy in zip(self._icons, icons_xy):
-            icon.draw(*xy)
 
 
 def max_width(components: list[ImageComponent]) -> int:
