@@ -47,6 +47,14 @@ class PillowImage:
 
         return Countdown(icons=icons, gap=4)
 
+    def new_horizontal_line(self, length: int) -> HorizontalLine:
+        return HorizontalLine(
+            draw=self._draw,
+            length=length,
+            thickness=2,
+            colour=self._foreground
+    )
+
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
     image = Image.new(mode="P", size=(config.width, config.height), color=config.palette.WHITE)
@@ -55,14 +63,7 @@ def next_uposatha(content: NextUposatha) -> Image:
     image = PillowImage()
 
     heading = image.new_heading_text("Uposatha")
-
-    divider = HorizontalLine(
-            draw=image._draw,
-            length=300,
-            thickness=2,
-            colour=config.palette.BLACK
-    )
-
+    divider = image.new_horizontal_line(300)
     falls_on = image.new_info_text(content.date)
     countdown = image.new_countdown(content.countdown)
     details = image.new_info_text(content.details)
