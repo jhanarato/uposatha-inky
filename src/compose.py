@@ -53,7 +53,15 @@ class PillowImage:
             length=length,
             thickness=2,
             colour=self._foreground
-    )
+        )
+
+    @property
+    def height(self) -> int:
+        return self._config.height
+
+    @property
+    def width(self) -> int:
+        return self._config.width
 
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
@@ -76,8 +84,8 @@ def next_uposatha(content: NextUposatha) -> Image:
         details
     ]
 
-    layout = ScreenLayout(screen_height=config.height,
-                          screen_width=config.width)
+    layout = ScreenLayout(screen_height=image.height,
+                          screen_width=image.width)
 
     for component in components:
         layout.add_space(20)
