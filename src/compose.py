@@ -37,6 +37,15 @@ class PillowImage:
             colour=self._foreground
         )
 
+    def new_countdown(self, letters: list[str]) -> Countdown:
+        icons = create_icons(
+            draw=self._draw,
+            config=self._config,
+            size=20,
+            letters=letters
+        )
+
+        return Countdown(icons=icons, gap=4)
 
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
@@ -55,16 +64,7 @@ def next_uposatha(content: NextUposatha) -> Image:
     )
 
     falls_on = image.new_info_text(content.date)
-
-    icons = create_icons(
-        draw=image._draw,
-        config=config,
-        size=20,
-        letters=content.countdown
-    )
-
-    countdown = Countdown(icons=icons, gap=4)
-
+    countdown = image.new_countdown(content.countdown)
     details = image.new_info_text(content.details)
 
     components = [
