@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import create_icons, Countdown, CountdownLayout
+from countdown import create_icons, Countdown, CountdownLayout, distribute_centers
 from content import countdown_letters
 from layout import BoundingBox
 from screen import ImageConfig
@@ -133,3 +133,17 @@ def test_should_raise_exception_if_icons_have_different_size():
 
     with pytest.raises(ValueError, match="All icons must be the same size"):
         countdown = Countdown(icons=icons, gap=0)
+
+@pytest.mark.parametrize(
+    "number,points",
+    [
+        (1, [(5, 5)]),
+        (2, [(5, 5), (15, 5)]),
+        (3, [(5, 5), (15, 5), (25, 5)]),
+    ]
+)
+def test_should_distribute_center_points(number, points):
+    centers = distribute_centers(
+        x_start=5, y_start=5, distance=10, number_of_icons=number
+    )
+    assert centers == points

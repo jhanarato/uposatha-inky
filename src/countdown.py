@@ -62,6 +62,10 @@ class CountdownLayout:
             icon.draw(*xy)
 
 
+def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icons: int) -> list[XY]:
+    return [(x_start + distance * number, y_start) for number in range(number_of_icons)]
+
+
 class LetterIcon:
     def __init__(self,
                  draw: ImageDraw,
