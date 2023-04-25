@@ -41,39 +41,6 @@ class HorizontalLine:
         )
 
 
-class MultilineText:
-    def __init__(self, draw: ImageDraw, text: str, font: ImageFont, colour: int):
-        self._draw = draw
-        self._text = text
-        self._font = font
-        self._colour = colour
-        self._spacing = 10
-
-    @property
-    def _bbox(self) -> [int, int, int, int]:
-        return self._draw.multiline_textbbox(
-            xy=(0, 0),
-            text=self._text,
-            font=self._font
-        )
-
-    def height(self) -> int:
-        return self._bbox[3]
-
-    def width(self) -> int:
-        return self._bbox[2]
-
-    def draw(self, x: int, y: int) -> None:
-        self._draw.multiline_text(
-            xy=(x, y),
-            text=self._text,
-            fill=self._colour,
-            font=self._font,
-            spacing=self._spacing,
-            align="center"
-        )
-
-
 class Rectangle:
     def __init__(self, draw: ImageDraw, height: int, width: int, colour: int):
         self._draw = draw
