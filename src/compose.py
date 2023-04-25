@@ -55,37 +55,27 @@ class PillowImage:
             colour=self._foreground
         )
 
-    @property
     def height(self) -> int:
         return self._config.height
 
-    @property
     def width(self) -> int:
         return self._config.width
 
-def next_uposatha(content: NextUposatha) -> Image:
-    config = ImageConfig()
-    image = Image.new(mode="P", size=(config.width, config.height), color=config.palette.WHITE)
-    draw = ImageDraw.Draw(image)
+    def pillow_image(self) -> Image:
+        return self._image
 
+def next_uposatha(content: NextUposatha) -> Image:
     image = PillowImage()
 
-    heading = image.new_heading_text("Uposatha")
-    divider = image.new_horizontal_line(300)
-    falls_on = image.new_info_text(content.date)
-    countdown = image.new_countdown(content.countdown)
-    details = image.new_info_text(content.details)
-
     components = [
-        heading,
-        divider,
-        falls_on,
-        countdown,
-        details
+        image.new_heading_text("Uposatha"),
+        image.new_horizontal_line(300),
+        image.new_info_text(content.date),
+        image.new_countdown(content.countdown),
+        image.new_info_text(content.details)
     ]
 
-    layout = ScreenLayout(screen_height=image.height,
-                          screen_width=image.width)
+    layout = ScreenLayout(image.height(), image.width())
 
     for component in components:
         layout.add_space(20)
@@ -93,4 +83,4 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     layout.draw()
 
-    return image._image
+    return image.pillow_image()
