@@ -48,8 +48,12 @@ class CountdownLayout:
         self._y_start = self._bbox.top + self._offset
 
     def _centers(self) -> list[XY]:
-        return [(self._x_start + self._icon_distance * icon_number, self._y_start)
-                for icon_number in range(len(self._icons))]
+        return distribute_centers(
+            x_start=self._x_start,
+            y_start=self._y_start,
+            distance=self._icon_distance,
+            number_of_icons=len(self._icons)
+        )
 
     def _to_xy(self, centers: list[XY]) -> list[XY]:
         return [(cx - self._offset, cy - self._offset)
@@ -63,7 +67,10 @@ class CountdownLayout:
 
 
 def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icons: int) -> list[XY]:
-    return [(x_start + distance * number, y_start) for number in range(number_of_icons)]
+    return [
+        (x_start + distance * number, y_start)
+        for number in range(number_of_icons)
+    ]
 
 
 class LetterIcon:
