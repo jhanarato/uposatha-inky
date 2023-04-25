@@ -42,15 +42,13 @@ class CountdownLayout:
         self._bbox = bbox
         self._icons = icons
         self._icon_distance = icon_distance
-        self._offset = self._spacing() // 2
+        self._offset = icons[0].width() // 2
+
         self._x_start = self._bbox.left + self._offset
         self._y_start = self._bbox.top + self._offset
 
-    def _spacing(self) -> int:
-        return self._icon_distance
-
     def _centers(self) -> list[XY]:
-        return [(self._x_start + self._spacing() * icon_number, self._y_start)
+        return [(self._x_start + self._icon_distance * icon_number, self._y_start)
                 for icon_number in range(len(self._icons))]
 
     def _to_xy(self, centers: list[XY]) -> list[XY]:
