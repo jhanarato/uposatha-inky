@@ -19,14 +19,14 @@ class Countdown:
         self._icons = icons
         self._icon_size = icons[0].width()
         self._gap = gap
-        self._icon_distance = self._icon_size + gap
 
     def height(self) -> int:
         return self._icon_size
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
-        return spaces * self._icon_distance + self._icon_size
+        distance = self._icon_size + self._gap
+        return spaces * distance + self._icon_size
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
