@@ -65,11 +65,7 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     countdown = Countdown(icons=icons, gap=4)
 
-    details = Text(
-        draw=image._draw,
-        text=content.details,
-        font=config.font_styles.INFO,
-        colour=config.palette.BLACK)
+    details = image.new_info_text(content.details)
 
     components = [
         heading,
