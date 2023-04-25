@@ -103,7 +103,7 @@ def test_should_draw_icons_with_gap():
         LetterSpy(size=10),
     ]
     bbox = BoundingBox(0, 0, 100, 100)
-    layout = CountdownLayout(bbox=bbox, icons=icons, gap=2, icon_distance=12)
+    layout = CountdownLayout(bbox=bbox, icons=icons, icon_distance=12)
     layout.draw()
 
     assert icons[0].last_draw_at == (0, 0)
