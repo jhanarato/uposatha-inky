@@ -39,7 +39,7 @@ XY = tuple[int, int]
 
 class CountdownLayout:
     """ A sub-layout for countdown icons"""
-    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], icon_distance: int = 0):
+    def __init__(self, bbox: BoundingBox, icons: list[ImageComponent], icon_distance: int):
         self._bbox = bbox
         self._icons = icons
         self._icon_distance = icon_distance

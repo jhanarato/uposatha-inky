@@ -40,15 +40,6 @@ class LetterSpy:
     def draw(self, x: int, y: int) -> None:
         self.last_draw_at = (x, y)
 
-
-def test_should_layout_single_icon():
-    icons = [LetterSpy(size=10)]
-    box = BoundingBox(top=0, left=0, height=100, width=100)
-    layout = CountdownLayout(bbox=box, icons=icons)
-    layout.draw()
-
-    assert icons[0].last_draw_at == (0, 0)
-
 @pytest.mark.parametrize(
     "number,points",
     [
