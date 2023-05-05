@@ -1,27 +1,27 @@
+from icons import Icons
 from layout import ImageComponent, BoundingBox
 
 
 class Countdown:
-    def __init__(self, icons: list[ImageComponent], gap: int):
+    def __init__(self, icons: Icons, gap: int):
         self._icons = icons
-        self._icon_size = icons[0].width()
         self._gap = gap
 
     def height(self) -> int:
-        return self._icon_size
+        return self._icons.icon_size
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
-        distance = self._icon_size + self._gap
-        return spaces * distance + self._icon_size
+        distance = self._icons.icon_size + self._gap
+        return spaces * distance + self._icons.icon_size
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
 
         layout = CountdownLayout(
             bbox=bbox,
-            icons=self._icons,
-            icon_size=self._icon_size,
+            icons=self._icons.icons,
+            icon_size=self._icons.icon_size,
             gap=self._gap)
 
         layout.draw()

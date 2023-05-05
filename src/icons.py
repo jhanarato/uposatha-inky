@@ -20,6 +20,9 @@ class Icons:
         self._icon_size = icon_size
         self._letters = letters
 
+    def __len__(self):
+        return len(self._letters)
+    
     @property
     def icon_size(self) -> int:
         return self._icon_size
