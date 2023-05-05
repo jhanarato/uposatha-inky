@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import create_icons, Countdown, CountdownLayout, distribute_centers
+from countdown import Countdown, CountdownLayout, distribute_centers, Icons
 from content import countdown_letters
 from layout import BoundingBox
 from screen import ImageConfig
@@ -84,8 +84,8 @@ def test_should_draw_icons_at_top_left():
 def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
-    icons = create_icons(draw=None, config=config, size=10, letters=letters)
-    assert len(icons) == 3
+    icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
+    assert len(icons.icons) == 3
 
 def test_should_draw_icons_with_gap():
     icons = [

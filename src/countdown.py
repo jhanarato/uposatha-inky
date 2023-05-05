@@ -109,6 +109,19 @@ class LetterIcon:
         self._text.draw(self._text_x(x), self._text_y(y))
 
 
+class Icons:
+    def __init__(self,
+                 draw: ImageDraw,
+                 config: ImageConfig,
+                 icon_size: int,
+                 letters: list[str]):
+        self._icons = create_icons(draw, config, icon_size, letters)
+
+    @property
+    def icons(self):
+        return self._icons
+
+
 def create_icons(draw: ImageDraw,
                  config: ImageConfig,
                  size: int,

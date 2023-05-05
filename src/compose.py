@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 
 from components import Text, HorizontalLine
-from countdown import create_icons, Countdown
+from countdown import Countdown, Icons
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
@@ -38,14 +38,14 @@ class PillowImage:
         )
 
     def new_countdown(self, letters: list[str]) -> Countdown:
-        icons = create_icons(
+        icons = Icons(
             draw=self._draw,
             config=self._config,
-            size=20,
+            icon_size=20,
             letters=letters
         )
 
-        return Countdown(icons=icons, gap=4)
+        return Countdown(icons=icons.icons, gap=4)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
