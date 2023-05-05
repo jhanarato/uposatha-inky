@@ -115,26 +115,26 @@ class Icons:
                  config: ImageConfig,
                  icon_size: int,
                  letters: list[str]):
-        self._icons = create_icons(draw, config, icon_size, letters)
+        self._draw = draw
+        self._config = config
+        self._icon_size = icon_size
+        self._letters = letters
 
     @property
-    def icons(self):
-        return self._icons
+    def icon_size(self) -> int:
+        return self._icon_size
 
-
-def create_icons(draw: ImageDraw,
-                 config: ImageConfig,
-                 size: int,
-                 letters: list[str]) -> list[LetterIcon]:
-    return [
-        LetterIcon(draw=draw,
-                   font=config.font_styles.COUNTDOWN,
-                   background=config.palette.BLACK,
-                   foreground=config.palette.WHITE,
-                   letter=letter,
-                   size=size)
-        for letter in letters
-    ]
+    @property
+    def icons(self) -> list[LetterIcon]:
+        return [
+            LetterIcon(draw=self._draw,
+                       font=self._config.font_styles.COUNTDOWN,
+                       background=self._config.palette.BLACK,
+                       foreground=self._config.palette.WHITE,
+                       letter=letter,
+                       size=self._icon_size)
+            for letter in self._letters
+        ]
 
 
 def icons_are_square(icons: list[ImageComponent]) -> bool:
