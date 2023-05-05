@@ -101,39 +101,6 @@ def test_should_draw_icons_with_gap():
     assert icons[1].last_draw_at == (12, 0)
     assert icons[2].last_draw_at == (24, 0)
 
-def test_should_raise_exception_when_icon_list_is_empty():
-    with pytest.raises(ValueError, match="At least one icon is required"):
-        countdown = Countdown(icons=[], gap=0)
-
-class NotSquare:
-    def height(self) -> int:
-        return 1
-
-    def width(self) -> int:
-        return 2
-
-    def draw(self, x: int, y: int) -> None:
-        pass
-
-def test_should_raise_exception_if_icons_are_not_square():
-    icons = [
-        LetterSpy(size=10),
-        NotSquare(),
-        LetterSpy(size=10),
-    ]
-
-    with pytest.raises(ValueError, match="Icons must be square"):
-        countdown = Countdown(icons=icons, gap=0)
-
-def test_should_raise_exception_if_icons_have_different_size():
-    icons = [
-        LetterSpy(size=10),
-        LetterSpy(size=20)
-    ]
-
-    with pytest.raises(ValueError, match="All icons must be the same size"):
-        countdown = Countdown(icons=icons, gap=0)
-
 @pytest.mark.parametrize(
     "number,points",
     [

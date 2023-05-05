@@ -7,15 +7,6 @@ from layout import ImageComponent, BoundingBox
 
 class Countdown:
     def __init__(self, icons: list[ImageComponent], gap: int):
-        if len(icons) < 1:
-            raise ValueError("At least one icon is required")
-
-        if not icons_are_square(icons):
-            raise ValueError("Icons must be square")
-
-        if not icons_are_same_size(icons):
-            raise ValueError("All icons must be the same size")
-
         self._icons = icons
         self._icon_size = icons[0].width()
         self._gap = gap
@@ -80,6 +71,38 @@ def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icon
     ]
 
 
+class Icons:
+    def __init__(self,
+                 draw: ImageDraw,
+                 config: ImageConfig,
+                 icon_size: int,
+                 letters: list[str]):
+
+        if len(letters) < 1:
+            raise ValueError("At least one letter is required")
+
+        self._draw = draw
+        self._config = config
+        self._icon_size = icon_size
+        self._letters = letters
+
+    @property
+    def icon_size(self) -> int:
+        return self._icon_size
+
+    @property
+    def icons(self) -> list[ImageComponent]:
+        return [
+            LetterIcon(draw=self._draw,
+                       font=self._config.font_styles.COUNTDOWN,
+                       background=self._config.palette.BLACK,
+                       foreground=self._config.palette.WHITE,
+                       letter=letter,
+                       size=self._icon_size)
+            for letter in self._letters
+        ]
+
+
 class LetterIcon:
     def __init__(self,
                  draw: ImageDraw,
@@ -107,34 +130,6 @@ class LetterIcon:
     def draw(self, x: int, y: int) -> None:
         self._rect.draw(x, y)
         self._text.draw(self._text_x(x), self._text_y(y))
-
-
-class Icons:
-    def __init__(self,
-                 draw: ImageDraw,
-                 config: ImageConfig,
-                 icon_size: int,
-                 letters: list[str]):
-        self._draw = draw
-        self._config = config
-        self._icon_size = icon_size
-        self._letters = letters
-
-    @property
-    def icon_size(self) -> int:
-        return self._icon_size
-
-    @property
-    def icons(self) -> list[LetterIcon]:
-        return [
-            LetterIcon(draw=self._draw,
-                       font=self._config.font_styles.COUNTDOWN,
-                       background=self._config.palette.BLACK,
-                       foreground=self._config.palette.WHITE,
-                       letter=letter,
-                       size=self._icon_size)
-            for letter in self._letters
-        ]
 
 
 def icons_are_square(icons: list[ImageComponent]) -> bool:
