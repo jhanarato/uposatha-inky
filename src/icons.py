@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+
 from PIL import ImageDraw, ImageFont
 
 from components import Rectangle, Text
@@ -5,7 +7,7 @@ from layout import ImageComponent
 from screen import ImageConfig
 
 
-class Icons:
+class Icons(Sequence):
     def __init__(self,
                  draw: ImageDraw,
                  config: ImageConfig,
@@ -55,12 +57,17 @@ class LetterIcon:
         self._size = size
         self._rect = Rectangle(draw, self.height(), self.width(), background)
         self._text = Text(draw, letter, font, foreground)
+        self._letter = letter
 
     def height(self) -> int:
         return self._size
 
     def width(self) -> int:
         return self._size
+
+    @property
+    def letter(self):
+        return self._letter
 
     def _text_x(self, component_x: int) -> int:
         return component_x + (self.width() - self._text.width()) // 2
