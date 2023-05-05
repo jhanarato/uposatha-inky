@@ -31,9 +31,6 @@ class Icons(Sequence):
     def __len__(self):
         return len(self._icons)
 
-    def __iter__(self):
-        return iter(self._icons)
-
     def __getitem__(self, item):
         return self._icons[item]
 
