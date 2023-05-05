@@ -28,7 +28,10 @@ class Icons:
 
     def __len__(self):
         return len(self._icons)
-    
+
+    def __iter__(self):
+        return iter(self._icons)
+
     @property
     def icon_size(self) -> int:
         return self._icon_size
