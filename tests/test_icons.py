@@ -1,5 +1,5 @@
 import pytest
 
-from countdown import LetterIcon
+from icons import LetterIcon
 from screen import ImageConfig
 

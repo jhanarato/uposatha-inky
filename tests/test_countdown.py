@@ -2,7 +2,8 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, CountdownLayout, distribute_centers, Icons
+from countdown import Countdown, CountdownLayout, distribute_centers
+from icons import Icons
 from content import countdown_letters
 from layout import BoundingBox
 from screen import ImageConfig
