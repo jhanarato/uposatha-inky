@@ -15,13 +15,19 @@ class Icons:
         if len(letters) < 1:
             raise ValueError("At least one letter is required")
 
-        self._draw = draw
-        self._config = config
         self._icon_size = icon_size
-        self._letters = letters
+        self._icons = [
+            LetterIcon(draw=draw,
+                       font=config.font_styles.COUNTDOWN,
+                       background=config.palette.BLACK,
+                       foreground=config.palette.WHITE,
+                       letter=letter,
+                       size=icon_size)
+            for letter in letters
+        ]
 
     def __len__(self):
-        return len(self._letters)
+        return len(self._icons)
     
     @property
     def icon_size(self) -> int:
@@ -29,15 +35,7 @@ class Icons:
 
     @property
     def icons(self) -> list[ImageComponent]:
-        return [
-            LetterIcon(draw=self._draw,
-                       font=self._config.font_styles.COUNTDOWN,
-                       background=self._config.palette.BLACK,
-                       foreground=self._config.palette.WHITE,
-                       letter=letter,
-                       size=self._icon_size)
-            for letter in self._letters
-        ]
+        return self._icons
 
 
 class LetterIcon:
