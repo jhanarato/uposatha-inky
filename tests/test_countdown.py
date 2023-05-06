@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, CountdownLayout, distribute_centers
+from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows
 from icons import CountdownIcons
 from content import countdown_letters
 from layout import BoundingBox
@@ -130,3 +130,7 @@ def test_should_distribute_center_points(number, points):
         x_start=5, y_start=5, distance=10, number_of_icons=number
     )
     assert centers == points
+
+def test_should_split_sequence_into_two_rows():
+    result = seq_to_rows(seq=[1, 2, 3, 4], row_length=2)
+    assert result == [[1, 2], [3, 4]]

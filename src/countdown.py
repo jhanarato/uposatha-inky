@@ -1,3 +1,6 @@
+from collections.abc import Sequence
+from typing import Any
+
 from icons import CountdownIcons
 from layout import ImageComponent, BoundingBox
 
@@ -26,6 +29,10 @@ class Countdown:
 
         layout.draw()
 
+def seq_to_rows(seq: Sequence, row_length: int) -> list[list[Any]]:
+    first_row = seq[0:2]
+    second_row = seq[2:4]
+    return [first_row, second_row]
 
 XY = tuple[int, int]
 
