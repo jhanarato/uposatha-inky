@@ -146,3 +146,10 @@ def test_should_handle_sequence_equal_to_row_length():
 def test_should_handle_sequence_smaller_than_row_length():
     result = seq_to_rows(seq=[1, 2, 3], row_length=4)
     assert result == [[1, 2, 3]]
+
+def test_should_split_rows_if_sequence_is_icons():
+    config = ImageConfig()
+    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    rows = seq_to_rows(seq=icons, row_length=3)
+    assert len(rows[0]) == 1
+    assert len(rows[1]) == 3
