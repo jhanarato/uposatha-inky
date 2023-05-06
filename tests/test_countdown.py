@@ -134,3 +134,7 @@ def test_should_distribute_center_points(number, points):
 def test_should_split_sequence_into_two_rows():
     result = seq_to_rows(seq=[1, 2, 3, 4], row_length=2)
     assert result == [[1, 2], [3, 4]]
+
+def test_should_split_sequence_with_smaller_first_row():
+    result = seq_to_rows(seq=[1, 2, 3], row_length=2)
+    assert result == [[1], [2, 3]]

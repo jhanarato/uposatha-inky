@@ -30,9 +30,19 @@ class Countdown:
         layout.draw()
 
 def seq_to_rows(seq: Sequence, row_length: int) -> list[list[Any]]:
-    first_row = seq[0:2]
-    second_row = seq[2:4]
-    return [first_row, second_row]
+    full_rows, items_left_over = divmod(len(seq), row_length)
+
+    rows = []
+
+    if items_left_over > 0:
+        rows.append(seq[:items_left_over])
+
+    for row_num in range(full_rows):
+        start = items_left_over + row_num * row_length
+        stop = start + row_length
+        rows.append(seq[start:stop])
+
+    return rows
 
 XY = tuple[int, int]
 
