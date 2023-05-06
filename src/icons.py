@@ -14,9 +14,6 @@ class Icons(Sequence):
                  icon_size: int,
                  letters: list[str]):
 
-        if len(letters) < 1:
-            raise ValueError("At least one letter is required")
-
         self._icon_size = icon_size
         self._icons = [
             LetterIcon(draw=draw,

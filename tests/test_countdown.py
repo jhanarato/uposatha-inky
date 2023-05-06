@@ -41,6 +41,29 @@ class LetterSpy:
     def draw(self, x: int, y: int) -> None:
         self.last_draw_at = (x, y)
 
+
+@pytest.fixture
+def one_icon_sequence():
+    config = ImageConfig()
+    icon_size = 10
+    icon_spies = [LetterSpy(size=10)]
+    icons = Icons(None, config, icon_size, [])
+    icons._icons = icon_spies
+    return icons
+
+@pytest.fixture
+def three_icon_sequence():
+    config = ImageConfig()
+    icon_size = 10
+    icon_spies = [
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+        LetterSpy(size=10),
+    ]
+    icons = Icons(None, config, icon_size, [])
+    icons._icons = icon_spies
+    return icons
+
 @pytest.mark.parametrize(
     "number,points",
     [
@@ -50,36 +73,33 @@ class LetterSpy:
     ]
 )
 def test_should_calculate_center_points(number, points):
-    icons = [LetterSpy(size=10) for _ in range(number)]
+    config = ImageConfig()
+    icon_size = 10
+    icon_spies = [LetterSpy(size=icon_size) for _ in range(number)]
+    icons = Icons(None, config, icon_size, [])
+    icons._icons = icon_spies
+
     box = BoundingBox(top=0, left=0, height=30, width=70)
-    layout = CountdownLayout(bbox=box, icons=icons, icon_size=10, gap=0)
+    layout = CountdownLayout(bbox=box, icons=icons, gap=0)
     assert layout._centers() == points
 
-def test_should_center_relative_to_bbox():
-    icons = [LetterSpy(size=10)]
+def test_should_center_relative_to_bbox(one_icon_sequence):
     box = BoundingBox(top=10, left=20, height=30, width=70)
-    layout = CountdownLayout(bbox=box, icons=icons, icon_size=10, gap=0)
+    layout = CountdownLayout(bbox=box, icons=one_icon_sequence, gap=0)
     assert layout._centers() == [(25, 15)]
 
-def test_should_convert_centers_to_xy():
-    icons = [LetterSpy(size=10)]
+def test_should_convert_centers_to_xy(one_icon_sequence):
     box = BoundingBox(top=0, left=0, height=30, width=70)
-    layout = CountdownLayout(bbox=box, icons=icons, icon_size=10, gap=0)
+    layout = CountdownLayout(bbox=box, icons=one_icon_sequence, gap=0)
     assert layout._to_xy([(5, 5), (15, 5), (25, 5)]) == [(0, 0), (10, 0), (20, 0)]
 
-def test_should_draw_icons_at_top_left():
-    icons = [
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-    ]
-
+def test_should_draw_icons_at_top_left(three_icon_sequence):
     box = BoundingBox(top=0, left=0, height=100, width=100)
 
-    layout = CountdownLayout(bbox=box, icons=icons, icon_size=10, gap=0)
+    layout = CountdownLayout(bbox=box, icons=three_icon_sequence, gap=0)
     layout.draw()
 
-    drawn_at = [icon.last_draw_at for icon in icons]
+    drawn_at = [icon.last_draw_at for icon in three_icon_sequence]
     assert drawn_at == [(0, 0), (10, 0), (20, 0)]
 
 def test_should_create_icon_list():
@@ -88,19 +108,14 @@ def test_should_create_icon_list():
     icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
     assert len(icons.icons) == 3
 
-def test_should_draw_icons_with_gap():
-    icons = [
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-    ]
+def test_should_draw_icons_with_gap(three_icon_sequence):
     bbox = BoundingBox(0, 0, 100, 100)
-    layout = CountdownLayout(bbox=bbox, icons=icons, icon_size=10, gap=2)
+    layout = CountdownLayout(bbox=bbox, icons=three_icon_sequence, gap=2)
     layout.draw()
 
-    assert icons[0].last_draw_at == (0, 0)
-    assert icons[1].last_draw_at == (12, 0)
-    assert icons[2].last_draw_at == (24, 0)
+    assert three_icon_sequence[0].last_draw_at == (0, 0)
+    assert three_icon_sequence[1].last_draw_at == (12, 0)
+    assert three_icon_sequence[2].last_draw_at == (24, 0)
 
 @pytest.mark.parametrize(
     "number,points",
