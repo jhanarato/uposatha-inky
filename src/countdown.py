@@ -13,17 +13,22 @@ class Countdown:
         self._row_length = row_length
         self._rows = seq_to_rows(seq=icons, row_length=self._row_length)
 
+    @property
+    def rows(self):
+        return len(self._rows)
+
+    @property
+    def columns(self):
+        longest_row = max(self._rows, key=lambda x: len(x))
+        return len(longest_row)
+
     def height(self) -> int:
-        columns = len(self._rows)
-        icons_height = self._icons.icon_size * columns
-        gap_height = self._gap * (len(self._rows) - 1)
-        return icons_height + gap_height
+        gaps = self.rows - 1
+        return (self.rows * self._icons.icon_size) + (gaps * self._gap)
 
     def width(self) -> int:
-        longest_row = max(self._rows, key=lambda x: len(x))
-        icons_width = len(longest_row) * self._icons.icon_size
-        gap_width = self._gap * (len(longest_row) - 1)
-        return icons_width + gap_width
+        gaps = self.columns - 1
+        return (self.columns * self._icons.icon_size) + (gaps * self._gap)
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
