@@ -10,8 +10,7 @@ class Countdown:
     def __init__(self, icons: CountdownIcons, row_length: int, gap: int):
         self._icons = icons
         self._gap = gap
-        self._row_length = row_length
-        self._rows = seq_to_rows(seq=icons, row_length=self._row_length)
+        self._rows = seq_to_rows(icons, row_length)
 
     @property
     def rows(self):
