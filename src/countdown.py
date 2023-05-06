@@ -7,20 +7,23 @@ from layout import ImageComponent, BoundingBox
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, icons: CountdownIcons, gap: int):
+    def __init__(self, icons: CountdownIcons, row_length: int, gap: int):
         self._icons = icons
         self._gap = gap
-        self._rows = seq_to_rows(seq=icons, row_length=2)
+        self._row_length = row_length
+        self._rows = seq_to_rows(seq=icons, row_length=self._row_length)
 
     def height(self) -> int:
-        icons_height = self._icons.icon_size * len(self._rows)
+        columns = len(self._rows)
+        icons_height = self._icons.icon_size * columns
         gap_height = self._gap * (len(self._rows) - 1)
         return icons_height + gap_height
 
     def width(self) -> int:
-        spaces = len(self._icons) - 1
-        distance = self._icons.icon_size + self._gap
-        return spaces * distance + self._icons.icon_size
+        longest_row = max(self._rows, key=lambda x: len(x))
+        icons_width = len(longest_row) * self._icons.icon_size
+        gap_width = self._gap * (len(longest_row) - 1)
+        return icons_width + gap_width
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())

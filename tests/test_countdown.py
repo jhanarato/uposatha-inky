@@ -157,5 +157,11 @@ def test_should_split_rows_if_sequence_is_icons():
 def test_should_report_height_for_two_rows():
     config = ImageConfig()
     icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    countdown = Countdown(icons=icons, gap=2)
+    countdown = Countdown(icons=icons, gap=2, row_length=2)
     assert countdown.height() == 22
+
+def test_should_report_width_for_two_rows():
+    config = ImageConfig()
+    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    countdown = Countdown(icons=icons, gap=2, row_length=2)
+    assert countdown.width() == 22
