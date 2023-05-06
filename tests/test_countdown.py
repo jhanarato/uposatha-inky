@@ -165,3 +165,15 @@ def test_should_report_width_for_two_rows():
     icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
     countdown = Countdown(icons=icons, gap=2, row_length=2)
     assert countdown.width() == 22
+
+def test_should_report_width_for_shorter_first_row():
+    config = ImageConfig()
+    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    countdown = Countdown(icons=icons, gap=2, row_length=3)
+    assert countdown.width() == 34
+
+def test_should_report_width_for_single_row():
+    config = ImageConfig()
+    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    countdown = Countdown(icons=icons, gap=2, row_length=5)
+    assert countdown.width() == 46
