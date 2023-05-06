@@ -35,10 +35,6 @@ class Icons(Sequence):
     def icon_size(self) -> int:
         return self._icon_size
 
-    @property
-    def icons(self) -> list[ImageComponent]:
-        return self._icons
-
 
 class LetterIcon:
     def __init__(self,

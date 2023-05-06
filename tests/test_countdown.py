@@ -106,7 +106,7 @@ def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
     icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
-    assert len(icons.icons) == 3
+    assert len(icons) == 3
 
 def test_should_draw_icons_with_gap(three_icon_sequence):
     bbox = BoundingBox(0, 0, 100, 100)
