@@ -153,3 +153,9 @@ def test_should_split_rows_if_sequence_is_icons():
     rows = seq_to_rows(seq=icons, row_length=3)
     assert len(rows[0]) == 1
     assert len(rows[1]) == 3
+
+def test_should_report_height_for_two_rows():
+    config = ImageConfig()
+    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    countdown = Countdown(icons=icons, gap=2)
+    assert countdown.height() == 22

@@ -10,9 +10,12 @@ class Countdown:
     def __init__(self, icons: CountdownIcons, gap: int):
         self._icons = icons
         self._gap = gap
+        self._rows = seq_to_rows(seq=icons, row_length=2)
 
     def height(self) -> int:
-        return self._icons.icon_size
+        icons_height = self._icons.icon_size * len(self._rows)
+        gap_height = self._gap * (len(self._rows) - 1)
+        return icons_height + gap_height
 
     def width(self) -> int:
         spaces = len(self._icons) - 1
