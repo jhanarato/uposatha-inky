@@ -138,3 +138,11 @@ def test_should_split_sequence_into_two_rows():
 def test_should_split_sequence_with_smaller_first_row():
     result = seq_to_rows(seq=[1, 2, 3], row_length=2)
     assert result == [[1], [2, 3]]
+
+def test_should_handle_sequence_equal_to_row_length():
+    result = seq_to_rows(seq=[1, 2, 3], row_length=3)
+    assert result == [[1, 2, 3]]
+
+def test_should_handle_sequence_smaller_than_row_length():
+    result = seq_to_rows(seq=[1, 2, 3], row_length=4)
+    assert result == [[1, 2, 3]]
