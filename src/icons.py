@@ -8,6 +8,7 @@ from screen import ImageConfig
 
 
 class Icons(Sequence):
+    """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
                  draw: ImageDraw,
                  config: ImageConfig,
@@ -37,6 +38,7 @@ class Icons(Sequence):
 
 
 class LetterIcon:
+    """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
     def __init__(self,
                  draw: ImageDraw,
                  font: ImageFont,

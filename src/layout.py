@@ -44,7 +44,7 @@ class Space:
 
 @dataclass
 class ArrangedComponent:
-    """ A component with its layout"""
+    """ A component paired with its alignment """
     component: ImageComponent
     align: Align
 

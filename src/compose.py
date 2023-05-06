@@ -8,6 +8,7 @@ from layout import ScreenLayout
 from screen import ImageConfig
 
 class PillowImage:
+    """ Wraps a Pillow Image and allows components to be created with less boilerplate. """
     def __init__(self):
         self._config = ImageConfig()
 
