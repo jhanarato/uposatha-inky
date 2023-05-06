@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import pytest
 
 from countdown import Countdown, CountdownLayout, distribute_centers
-from icons import Icons
+from icons import CountdownIcons
 from content import countdown_letters
 from layout import BoundingBox
 from screen import ImageConfig
@@ -47,7 +47,7 @@ def one_icon_sequence():
     config = ImageConfig()
     icon_size = 10
     icon_spies = [LetterSpy(size=10)]
-    icons = Icons(None, config, icon_size, [])
+    icons = CountdownIcons(None, config, icon_size, [])
     icons._icons = icon_spies
     return icons
 
@@ -60,7 +60,7 @@ def three_icon_sequence():
         LetterSpy(size=10),
         LetterSpy(size=10),
     ]
-    icons = Icons(None, config, icon_size, [])
+    icons = CountdownIcons(None, config, icon_size, [])
     icons._icons = icon_spies
     return icons
 
@@ -76,7 +76,7 @@ def test_should_calculate_center_points(number, points):
     config = ImageConfig()
     icon_size = 10
     icon_spies = [LetterSpy(size=icon_size) for _ in range(number)]
-    icons = Icons(None, config, icon_size, [])
+    icons = CountdownIcons(None, config, icon_size, [])
     icons._icons = icon_spies
 
     box = BoundingBox(top=0, left=0, height=30, width=70)
@@ -105,7 +105,7 @@ def test_should_draw_icons_at_top_left(three_icon_sequence):
 def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
-    icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
+    icons = CountdownIcons(draw=None, config=config, icon_size=10, letters=letters)
     assert len(icons) == 3
 
 def test_should_draw_icons_with_gap(three_icon_sequence):

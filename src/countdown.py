@@ -1,10 +1,10 @@
-from icons import Icons
+from icons import CountdownIcons
 from layout import ImageComponent, BoundingBox
 
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, icons: Icons, gap: int):
+    def __init__(self, icons: CountdownIcons, gap: int):
         self._icons = icons
         self._gap = gap
 
@@ -32,7 +32,7 @@ XY = tuple[int, int]
 
 class CountdownLayout:
     """ A sub-layout for countdown icons. Likely to be removed soon. """
-    def __init__(self, bbox: BoundingBox, icons: Icons, gap: int):
+    def __init__(self, bbox: BoundingBox, icons: CountdownIcons, gap: int):
         self._bbox = bbox
         self._icons = icons
         self._icon_distance = icons.icon_size + gap
