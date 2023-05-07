@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Any
+from typing import TypeVar
 
 from icons import CountdownIcons
 from layout import ImageComponent, BoundingBox
@@ -39,18 +39,20 @@ class Countdown:
 
         layout.draw()
 
-def seq_to_rows(seq: Sequence, row_length: int) -> list[list[Any]]:
+T = TypeVar('T')
+
+def seq_to_rows(seq: Sequence[T], row_length: int) -> list[list[T]]:
     full_rows, items_left_over = divmod(len(seq), row_length)
 
     rows = []
 
     if items_left_over > 0:
-        rows.append(seq[:items_left_over])
+        rows.append(list(seq[:items_left_over]))
 
     for row_num in range(full_rows):
         start = items_left_over + row_num * row_length
         stop = start + row_length
-        rows.append(seq[start:stop])
+        rows.append(list(seq[start:stop]))
 
     return rows
 
