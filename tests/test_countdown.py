@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from typing import cast
 
 import pytest
 
@@ -113,9 +114,9 @@ def test_should_draw_icons_with_gap(three_icon_sequence):
     layout = CountdownLayout(bbox=bbox, icons=three_icon_sequence, gap=2)
     layout.draw()
 
-    assert three_icon_sequence[0].last_draw_at == (0, 0)
-    assert three_icon_sequence[1].last_draw_at == (12, 0)
-    assert three_icon_sequence[2].last_draw_at == (24, 0)
+    assert cast(LetterSpy, three_icon_sequence[0]).last_draw_at == (0, 0)
+    assert cast(LetterSpy, three_icon_sequence[1]).last_draw_at == (12, 0)
+    assert cast(LetterSpy, three_icon_sequence[2]).last_draw_at == (24, 0)
 
 @pytest.mark.parametrize(
     "number,points",

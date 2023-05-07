@@ -7,7 +7,7 @@ from layout import ImageComponent
 from screen import ImageConfig
 
 
-class CountdownIcons(Sequence):
+class CountdownIcons(Sequence[ImageComponent]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
                  draw: ImageDraw,
@@ -29,7 +29,7 @@ class CountdownIcons(Sequence):
     def __len__(self):
         return len(self._icons)
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> ImageComponent:
         return self._icons[item]
 
     @property
