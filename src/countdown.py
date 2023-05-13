@@ -112,9 +112,12 @@ class IconGrid:
         self._icons = icons
         self._max_columns = max_columns
 
+    def has_single_row(self) -> bool:
+        return len(self._icons) <= self._max_columns
+
     @property
     def columns(self) -> int:
-        if len(self._icons) < self._max_columns:
+        if self.has_single_row():
             return len(self._icons)
 
         return self._max_columns
