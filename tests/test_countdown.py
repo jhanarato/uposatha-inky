@@ -202,3 +202,8 @@ def test_grid_row_count(icon_count, max_columns, rows):
     spies = make_letter_spies(icon_count)
     grid = IconGrid(spies, max_columns)
     assert grid.rows == rows
+
+def test_pad_sequence_to_fill_rows():
+    grid = IconGrid(make_letter_spies(5), 3)
+    assert grid._left_pad()[:2] == [None, None]
+    assert all(grid._left_pad()[2:])

@@ -103,6 +103,9 @@ class IconGrid:
         self._icons = icons
         self._max_columns = max_columns
 
+    def _left_pad(self) -> Sequence[ImageComponent|None]:
+        return [None, None, 1, 1, 1]
+
     @property
     def columns(self) -> int:
         if len(self._icons) < self._max_columns:
