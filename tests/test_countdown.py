@@ -3,7 +3,7 @@ from typing import cast
 
 import pytest
 
-from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows
+from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows, IconGrid
 from icons import CountdownIcons
 from content import countdown_letters
 from layout import BoundingBox
@@ -148,33 +148,42 @@ def test_should_handle_sequence_smaller_than_row_length():
     result = seq_to_rows(seq=[1, 2, 3], row_length=4)
     assert result == [[1, 2, 3]]
 
-def test_should_split_rows_if_sequence_is_icons():
+@pytest.fixture
+def four_icons():
     config = ImageConfig()
-    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    rows = seq_to_rows(seq=icons, row_length=3)
+    return CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+
+def test_should_split_rows_if_sequence_is_icons(four_icons):
+    rows = seq_to_rows(seq=four_icons, row_length=3)
     assert len(rows[0]) == 1
     assert len(rows[1]) == 3
 
-def test_should_report_height_for_two_rows():
-    config = ImageConfig()
-    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    countdown = Countdown(icons=icons, gap=2, row_length=2)
+def test_should_report_height_for_two_rows(four_icons):
+    countdown = Countdown(icons=four_icons, gap=2, row_length=2)
     assert countdown.height() == 22
 
-def test_should_report_width_for_two_rows():
-    config = ImageConfig()
-    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    countdown = Countdown(icons=icons, gap=2, row_length=2)
+def test_should_report_width_for_two_rows(four_icons):
+    countdown = Countdown(icons=four_icons, gap=2, row_length=2)
     assert countdown.width() == 22
 
-def test_should_report_width_for_shorter_first_row():
-    config = ImageConfig()
-    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    countdown = Countdown(icons=icons, gap=2, row_length=3)
+def test_should_report_width_for_shorter_first_row(four_icons):
+    countdown = Countdown(icons=four_icons, gap=2, row_length=3)
     assert countdown.width() == 34
 
-def test_should_report_width_for_single_row():
-    config = ImageConfig()
-    icons = CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
-    countdown = Countdown(icons=icons, gap=2, row_length=5)
+def test_should_report_width_for_single_row(four_icons):
+    countdown = Countdown(icons=four_icons, gap=2, row_length=5)
     assert countdown.width() == 46
+
+def make_letter_spies(count: int) -> list[LetterSpy]:
+    return [LetterSpy(10) for _ in range(count)]
+
+@pytest.mark.parametrize(
+    "icon_count,max_columns,columns",
+    [
+        (2, 2, 2)
+    ]
+)
+def test_should_provide_number_of_grid_columns(icon_count, max_columns, columns):
+    spies = make_letter_spies(icon_count)
+    grid = IconGrid(spies, max_columns)
+    assert grid.columns == columns

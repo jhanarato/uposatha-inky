@@ -94,3 +94,11 @@ def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icon
         (x_start + distance * number, y_start)
         for number in range(number_of_icons)
     ]
+
+class IconGrid:
+    def __init__(self, icons: Sequence[ImageComponent], columns: int):
+        pass
+
+    @property
+    def columns(self) -> int:
+        return 2
