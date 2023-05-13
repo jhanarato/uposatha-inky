@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-import pytest
 
 from icons import CountdownIcons
 from screen import ImageConfig
@@ -19,7 +18,7 @@ def test_icon_sequence_can_be_iterated_over():
 def test_icon_sequence_can_be_accessed_by_index():
     config = ImageConfig()
     icons = CountdownIcons(None, config, 1, ["M", "T", "W"])
-    assert icons[0].letter == "M"
+    assert str(icons[0]) == "M"
 
 def test_icon_instance_is_sequence():
     config = ImageConfig()
@@ -29,8 +28,8 @@ def test_icon_instance_is_sequence():
 def test_icon_sequence_can_be_reversed():
     config = ImageConfig()
     icons = CountdownIcons(None, config, 1, ["M", "T", "W"])
-    assert [icon.letter for icon in reversed(icons)] == ["W", "T", "M"]
+    assert [str(icon) for icon in reversed(icons)] == ["W", "T", "M"]
 
-def test_icons_strings():
+def test_should_convert_icon_collection_to_string():
     icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     assert str(icons) == "SMTW"
