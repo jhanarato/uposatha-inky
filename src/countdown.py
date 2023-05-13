@@ -1,3 +1,5 @@
+from itertools import islice
+
 from collections.abc import Sequence
 from typing import TypeVar
 
@@ -95,10 +97,23 @@ def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icon
         for number in range(number_of_icons)
     ]
 
+
 class IconGrid:
     def __init__(self, icons: Sequence[ImageComponent], columns: int):
-        pass
+        self._columns = columns
+        if len(icons) < columns:
+            self._columns = len(icons)
 
     @property
     def columns(self) -> int:
-        return 2
+        return self._columns
+
+
+def batched(iterable, n):
+    """ Copied from https://docs.python.org/3.12/library/itertools.html#itertools.batched """
+    # batched('ABCDEFG', 3) --> ABC DEF G
+    if n < 1:
+        raise ValueError('n must be at least one')
+    it = iter(iterable)
+    while batch := tuple(islice(it, n)):
+        yield batch
