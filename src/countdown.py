@@ -1,7 +1,9 @@
+from dataclasses import dataclass
+
 import math
 
 from itertools import repeat, chain
-from collections.abc import Sequence
+from collections.abc import Sequence, Iterator
 from typing import TypeVar
 
 from icons import CountdownIcons
@@ -98,6 +100,12 @@ def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icon
         for number in range(number_of_icons)
     ]
 
+@dataclass
+class GridPosition:
+    icon: ImageComponent
+    row: int
+    column: int
+
 
 class IconGrid:
     def __init__(self, icons: Sequence[ImageComponent], max_columns: int):
@@ -123,3 +131,10 @@ class IconGrid:
     @property
     def positions(self):
         return self.columns * self.rows
+
+    def __iter__(self) -> Iterator[GridPosition]:
+        yield GridPosition(
+            icon=self._icons[0],
+            row=0,
+            column=2
+        )

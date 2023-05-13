@@ -215,3 +215,11 @@ def test_should_have_complete_sequence_after_padding():
     grid = IconGrid(icons, 3)
     icons_in_grid = [icon for icon in grid._left_pad() if icon]
     assert len(icons_in_grid) == 4
+
+def test_should_iterate():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    first = next(iter(IconGrid(icons, 3)))
+    assert isinstance(first.icon, LetterIcon)
+    assert cast(LetterIcon, first.icon).letter == "S"
+    assert first.row == 0
+    assert first.column == 2
