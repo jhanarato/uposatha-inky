@@ -191,3 +191,14 @@ def test_grid_column_count(icon_count, max_columns, columns):
 def test_fewer_icons_than_columns():
     grid = IconGrid(make_letter_spies(3), 4)
     assert grid.columns == 3
+
+@pytest.mark.parametrize(
+    "icon_count,max_columns,rows",
+    [
+        (2, 2, 2),
+    ]
+)
+def test_grid_row_count(icon_count, max_columns, rows):
+    spies = make_letter_spies(icon_count)
+    grid = IconGrid(spies, max_columns)
+    assert grid.rows == rows

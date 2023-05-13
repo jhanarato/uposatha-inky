@@ -108,6 +108,10 @@ class IconGrid:
     def columns(self) -> int:
         return self._columns
 
+    @property
+    def rows(self) -> int:
+        return 2
+
 
 def batched(iterable, n):
     """ Copied from https://docs.python.org/3.12/library/itertools.html#itertools.batched """
