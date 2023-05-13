@@ -107,8 +107,8 @@ class IconGrid:
     def columns(self) -> int:
         if len(self._icons) < self._max_columns:
             return len(self._icons)
-        else:
-            return self._max_columns
+
+        return self._max_columns
 
     @property
     def rows(self) -> int:
