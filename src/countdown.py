@@ -104,8 +104,10 @@ class IconGrid:
         self._icons = icons
         self._max_columns = max_columns
 
-    def _left_pad(self) -> Sequence[ImageComponent|None]:
-        return [None, None, 1, 1, 1]
+    def _left_pad(self) -> Sequence[ImageComponent | None]:
+        pad_num = self.positions - len(self._icons)
+        padding = repeat(None, pad_num)
+        return list(chain(padding, self._icons))
 
     @property
     def columns(self) -> int:
@@ -117,3 +119,7 @@ class IconGrid:
     @property
     def rows(self) -> int:
         return math.ceil(len(self._icons) / self._max_columns)
+
+    @property
+    def positions(self):
+        return self.columns * self.rows

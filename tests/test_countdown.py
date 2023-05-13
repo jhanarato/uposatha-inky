@@ -4,7 +4,7 @@ from typing import cast
 import pytest
 
 from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows, IconGrid
-from icons import CountdownIcons
+from icons import CountdownIcons, LetterIcon
 from content import countdown_letters
 from layout import BoundingBox
 from screen import ImageConfig
@@ -205,7 +205,13 @@ def test_grid_row_count(icon_count, max_columns, rows):
     grid = IconGrid(spies, max_columns)
     assert grid.rows == rows
 
-def test_pad_sequence_to_fill_rows():
-    grid = IconGrid(make_letter_spies(5), 3)
+def test_should_pad_sequence_with_none():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    grid = IconGrid(icons, 3)
     assert grid._left_pad()[:2] == [None, None]
-    assert all(grid._left_pad()[2:])
+
+def test_should_have_complete_sequence_after_padding():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    grid = IconGrid(icons, 3)
+    icons_in_grid = [icon for icon in grid._left_pad() if icon]
+    assert len(icons_in_grid) == 4
