@@ -223,15 +223,3 @@ def test_should_iterate():
     assert cast(LetterIcon, first.icon).letter == "S"
     assert first.row == 0
     assert first.column == 2
-
-def icons_to_letters(icons: CountdownIcons) -> str:
-    return "".join(
-        [
-            cast(LetterIcon, icon).letter
-            for icon in icons
-        ]
-    )
-
-def test_icons_to_letters():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
-    assert icons_to_letters(icons) == "SMTW"

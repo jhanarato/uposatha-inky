@@ -30,3 +30,7 @@ def test_icon_sequence_can_be_reversed():
     config = ImageConfig()
     icons = CountdownIcons(None, config, 1, ["M", "T", "W"])
     assert [icon.letter for icon in reversed(icons)] == ["W", "T", "M"]
+
+def test_icons_strings():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    assert str(icons) == "SMTW"

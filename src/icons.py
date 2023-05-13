@@ -36,6 +36,11 @@ class CountdownIcons(Sequence[ImageComponent]):
     def icon_size(self) -> int:
         return self._icon_size
 
+    def __str__(self):
+        return "".join(
+            [str(icon) for icon in self._icons]
+        )
+
 
 class LetterIcon:
     """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
@@ -70,3 +75,6 @@ class LetterIcon:
     def draw(self, x: int, y: int) -> None:
         self._rect.draw(x, y)
         self._text.draw(self._text_x(x), self._text_y(y))
+
+    def __str__(self):
+        return self.letter
