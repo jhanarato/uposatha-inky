@@ -1,5 +1,6 @@
-from itertools import islice
+import math
 
+from itertools import repeat, chain
 from collections.abc import Sequence
 from typing import TypeVar
 
@@ -115,4 +116,4 @@ class IconGrid:
 
     @property
     def rows(self) -> int:
-        return 2
+        return math.ceil(len(self._icons) / self._max_columns)

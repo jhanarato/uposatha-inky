@@ -195,7 +195,9 @@ def test_fewer_icons_than_columns():
 @pytest.mark.parametrize(
     "icon_count,max_columns,rows",
     [
-        (2, 2, 2),
+        (2, 3, 1),
+        (4, 2, 2),
+        (6, 2, 3),
     ]
 )
 def test_grid_row_count(icon_count, max_columns, rows):
