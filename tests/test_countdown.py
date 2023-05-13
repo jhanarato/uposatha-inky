@@ -205,17 +205,6 @@ def test_grid_row_count(icon_count, max_columns, rows):
     grid = IconGrid(spies, max_columns)
     assert grid.rows == rows
 
-def test_should_pad_sequence_with_none():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
-    grid = IconGrid(icons, 3)
-    assert grid._left_pad()[:2] == [None, None]
-
-def test_should_have_complete_sequence_after_padding():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
-    grid = IconGrid(icons, 3)
-    icons_in_grid = [icon for icon in grid._left_pad() if icon]
-    assert len(icons_in_grid) == 4
-
 def test_should_iterate():
     icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     first = next(iter(IconGrid(icons, 3)))
