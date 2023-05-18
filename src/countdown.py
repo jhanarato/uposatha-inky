@@ -131,8 +131,5 @@ class IconGrid:
         positions = zip(self._icons, positions, strict=True)
 
         for position in positions:
-            yield GridPosition(
-                icon=position[0],
-                row=position[1][0],
-                column=position[1][1]
-            )
+            row, col = position[1]
+            yield GridPosition(position[0], row, col)
