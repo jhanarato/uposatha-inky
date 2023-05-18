@@ -127,8 +127,10 @@ class IconGrid:
         return math.ceil(len(self._icons) / self._max_columns)
 
     def __iter__(self) -> Iterator[GridPosition]:
-        yield GridPosition(
-            icon=self._icons[0],
-            row=0,
-            column=2
-        )
+        for row in range(self.rows):
+            for column in range(self.columns):
+                yield GridPosition(
+                    icon=self._icons[0],
+                    row=row,
+                    column=column
+                )
