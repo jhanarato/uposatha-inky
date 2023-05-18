@@ -118,16 +118,11 @@ class IconGrid:
     def columns(self) -> int:
         if self.has_single_row():
             return len(self._icons)
-
         return self._max_columns
 
     @property
     def rows(self) -> int:
         return math.ceil(len(self._icons) / self._max_columns)
-
-    @property
-    def empty_positions(self) -> int:
-        return (self.rows * self.columns) - len(self._icons)
 
     def __iter__(self) -> Iterator[GridPosition]:
         positions = product(range(self.rows), range(self.columns))
