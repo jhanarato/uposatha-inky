@@ -212,3 +212,14 @@ def test_should_iterate_with_no_empty_positions():
     assert rows_columns == [
         (0, 0), (0, 1), (1, 0), (1, 1)
     ]
+
+def test_should_position_icon_in_row_and_column():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    grid = IconGrid(icons, 2)
+    grid_icons = [pos.icon for pos in grid]
+
+    grid_str = "".join(
+        [str(icon) for icon in grid_icons]
+    )
+
+    assert grid_str == "SMTW"

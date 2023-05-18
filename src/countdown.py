@@ -128,9 +128,11 @@ class IconGrid:
 
     def __iter__(self) -> Iterator[GridPosition]:
         positions = product(range(self.rows), range(self.columns))
+        positions = zip(self._icons, positions, strict=True)
+
         for position in positions:
             yield GridPosition(
-                icon=self._icons[0],
-                row=position[0],
-                column=position[1]
+                icon=position[0],
+                row=position[1][0],
+                column=position[1][1]
             )
