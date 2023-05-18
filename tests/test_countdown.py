@@ -205,12 +205,25 @@ def test_grid_row_count(icon_count, max_columns, rows):
     grid = IconGrid(spies, max_columns)
     assert grid.rows == rows
 
-def test_should_iterate_with_no_empty_positions():
+def test_should_iterate_grid_with_no_empty_positions():
     icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = IconGrid(icons, 2)
     rows_columns = [(pos.row, pos.column) for pos in grid]
     assert rows_columns == [
         (0, 0), (0, 1), (1, 0), (1, 1)
+    ]
+
+def test_should_calculate_empty_positions():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["M", "T", "W"])
+    grid = IconGrid(icons, 2)
+    assert grid.empty_positions == 1
+
+def test_should_iterate_grid_with_empty_positions():
+    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T"])
+    grid = IconGrid(icons, 2)
+    rows_columns = [(pos.row, pos.column) for pos in grid]
+    assert rows_columns == [
+        (0, 1), (1, 0), (1, 1)
     ]
 
 def test_should_position_icon_in_row_and_column():

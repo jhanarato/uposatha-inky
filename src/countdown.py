@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import math
 
-from itertools import product
+from itertools import product, islice
 from collections.abc import Sequence, Iterator
 from typing import TypeVar
 
@@ -126,8 +126,16 @@ class IconGrid:
     def rows(self) -> int:
         return math.ceil(len(self._icons) / self._max_columns)
 
+    @property
+    def empty_positions(self) -> int:
+        return (self.rows * self.columns) - len(self._icons)
+
     def __iter__(self) -> Iterator[GridPosition]:
         positions = product(range(self.rows), range(self.columns))
+
+        for _ in range(self.empty_positions):
+            next(positions)
+
         positions = zip(self._icons, positions, strict=True)
 
         for position in positions:
