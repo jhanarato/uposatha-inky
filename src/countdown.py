@@ -131,12 +131,11 @@ class IconGrid:
 
     def __iter__(self) -> Iterator[GridPosition]:
         positions = product(range(self.rows), range(self.columns))
+        skip_n(positions, (self.rows * self.columns) - len(self._icons))
 
-        for _ in range(self.empty_positions):
-            next(positions)
-
-        positions = zip(self._icons, positions, strict=True)
-
-        for position in positions:
+        for position in zip(self._icons, positions, strict=True):
             row, col = position[1]
             yield GridPosition(position[0], row, col)
+
+def skip_n(i: Iterator, n: int):
+    [next(i) for _ in range(n)]

@@ -3,7 +3,7 @@ from typing import cast
 
 import pytest
 
-from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows, IconGrid
+from countdown import Countdown, CountdownLayout, distribute_centers, seq_to_rows, IconGrid, skip_n
 from icons import CountdownIcons, LetterIcon
 from content import countdown_letters
 from layout import BoundingBox
@@ -235,3 +235,8 @@ def test_should_position_icon_in_row_and_column():
     )
 
     assert grid_str == "SMTW"
+
+def test_skip_n():
+    five_iter = iter([1, 2, 3, 4, 5])
+    skip_n(five_iter, 3)
+    assert list(five_iter) == [4, 5]
