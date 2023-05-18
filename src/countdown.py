@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import math
 
-from itertools import repeat, chain
+from itertools import product
 from collections.abc import Sequence, Iterator
 from typing import TypeVar
 
@@ -127,10 +127,10 @@ class IconGrid:
         return math.ceil(len(self._icons) / self._max_columns)
 
     def __iter__(self) -> Iterator[GridPosition]:
-        for row in range(self.rows):
-            for column in range(self.columns):
-                yield GridPosition(
-                    icon=self._icons[0],
-                    row=row,
-                    column=column
-                )
+        positions = product(range(self.rows), range(self.columns))
+        for position in positions:
+            yield GridPosition(
+                icon=self._icons[0],
+                row=position[0],
+                column=position[1]
+            )
