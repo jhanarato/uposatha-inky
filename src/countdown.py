@@ -1,10 +1,9 @@
+from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
+from typing import TypeVar
 
 import math
-
-from itertools import product, islice
-from collections.abc import Sequence, Iterator
-from typing import TypeVar
+from itertools import product
 
 from icons import CountdownIcons
 from layout import ImageComponent, BoundingBox
