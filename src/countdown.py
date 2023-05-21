@@ -12,10 +12,22 @@ from screen import ImageConfig
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, icons: "CountdownIcons", max_columns: int, gap: int):
-        self._icons = icons
+    def __init__(self, draw: ImageDraw,
+                 config: ImageConfig,
+                 letters: list[str],
+                 icon_size: int,
+                 max_columns: int,
+                 gap: int):
+
+        self._icons = CountdownIcons(
+            draw=draw,
+            config=config,
+            icon_size=icon_size,
+            letters=letters
+        )
+
         self._gap = gap
-        self._grid = Grid(icons, max_columns)
+        self._grid = Grid(self._icons, max_columns)
 
     def height(self) -> int:
         icon_height = self._icons.icon_size * self._grid.rows

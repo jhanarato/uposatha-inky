@@ -51,20 +51,32 @@ def four_icons():
     config = ImageConfig()
     return CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
 
-def test_should_report_height_for_two_rows(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, max_columns=2)
+def test_should_report_height_for_two_rows():
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=10, gap=2, max_columns=2)
+
     assert countdown.height() == 22
 
-def test_should_report_width_for_two_rows(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, max_columns=2)
+def test_should_report_width_for_two_rows():
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=10, gap=2, max_columns=2)
+
     assert countdown.width() == 22
 
-def test_should_report_width_for_shorter_first_row(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, max_columns=3)
+def test_should_report_width_for_shorter_first_row():
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=10, gap=2, max_columns=3)
+
     assert countdown.width() == 34
 
 def test_should_report_width_for_single_row(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, max_columns=5)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=10, gap=2, max_columns=5)
+
     assert countdown.width() == 46
 
 def make_letter_spies(count: int) -> list[LetterSpy]:
@@ -141,8 +153,10 @@ def test_skip_n():
 )
 def test_should_draw_icon_at_grid_position(row, column, drawn_at):
     icon_size = 10
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
-    countdown = Countdown(icons, max_columns=2, gap=2)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=icon_size, gap=2, max_columns=2)
+
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=row, column=column)
     assert spy.last_draw_at == drawn_at
@@ -158,8 +172,10 @@ def test_should_draw_icon_at_grid_position(row, column, drawn_at):
 )
 def test_should_space_icons_with_gap(gap, drawn_at):
     icon_size = 10
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
-    countdown = Countdown(icons, max_columns=2, gap=gap)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=icon_size, gap=gap, max_columns=2)
+
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
     assert spy.last_draw_at == drawn_at
@@ -173,8 +189,10 @@ def test_should_space_icons_with_gap(gap, drawn_at):
     ]
 )
 def test_should_space_with_icon_size(icon_size, drawn_at):
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
-    countdown = Countdown(icons, max_columns=2, gap=2)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=icon_size, gap=2, max_columns=2)
+
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
     assert spy.last_draw_at == drawn_at
@@ -188,8 +206,10 @@ def test_should_space_with_icon_size(icon_size, drawn_at):
 )
 def test_should_be_drawn_at_component_location(top, left, drawn_at):
     icon_size = 10
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
-    countdown = Countdown(icons, max_columns=2, gap=2)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          letters=["S", "M", "T", "W"],
+                          icon_size=icon_size, gap=2, max_columns=2)
+
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=top, left=left, row=1, column=1)
     assert spy.last_draw_at == drawn_at

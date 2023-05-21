@@ -39,14 +39,13 @@ class PillowImage:
         )
 
     def new_countdown(self, letters: list[str]) -> Countdown:
-        icons = CountdownIcons(
+        return Countdown(
             draw=self._draw,
             config=self._config,
             icon_size=20,
-            letters=letters
-        )
-
-        return Countdown(icons=icons, gap=4, max_columns=8)
+            letters=letters,
+            gap=4,
+            max_columns=8)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
