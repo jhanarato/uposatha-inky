@@ -159,19 +159,19 @@ def test_should_split_rows_if_sequence_is_icons(four_icons):
     assert len(rows[1]) == 3
 
 def test_should_report_height_for_two_rows(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, row_length=2)
+    countdown = Countdown(icons=four_icons, gap=2, max_columns=2)
     assert countdown.height() == 22
 
 def test_should_report_width_for_two_rows(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, row_length=2)
+    countdown = Countdown(icons=four_icons, gap=2, max_columns=2)
     assert countdown.width() == 22
 
 def test_should_report_width_for_shorter_first_row(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, row_length=3)
+    countdown = Countdown(icons=four_icons, gap=2, max_columns=3)
     assert countdown.width() == 34
 
 def test_should_report_width_for_single_row(four_icons):
-    countdown = Countdown(icons=four_icons, gap=2, row_length=5)
+    countdown = Countdown(icons=four_icons, gap=2, max_columns=5)
     assert countdown.width() == 46
 
 def make_letter_spies(count: int) -> list[LetterSpy]:

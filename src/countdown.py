@@ -11,11 +11,11 @@ from layout import ImageComponent, BoundingBox
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, icons: CountdownIcons, row_length: int, gap: int):
+    def __init__(self, icons: CountdownIcons, max_columns: int, gap: int):
         self._icons = icons
         self._gap = gap
-        self._rows = seq_to_rows(icons, row_length)
-        self._grid = IconGrid(icons, row_length)
+        self._rows = seq_to_rows(icons, max_columns)
+        self._grid = IconGrid(icons, max_columns)
 
     def height(self) -> int:
         icon_height = self._icons.icon_size * self._grid.rows
