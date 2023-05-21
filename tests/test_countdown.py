@@ -236,18 +236,20 @@ def test_skip_n():
     skip_n(five_iter, 3)
     assert list(five_iter) == [4, 5]
 
-def test_should_draw_icon_at_top_left():
+@pytest.mark.parametrize(
+    "row,column,drawn_at",
+    [
+        (0, 0, (0, 0)),
+        (0, 1, (12, 0)),
+        (1, 0, (0, 12)),
+        (1, 1, (12, 12)),
+        (3, 3, (36, 36))
+    ]
+)
+def test_should_draw_icon_at_grid_position(row, column, drawn_at):
     icon_size = 10
     icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
     countdown = Countdown(icons, max_columns=2, gap=2)
     spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=0, left=0, row=0, column=0)
-    assert spy.last_draw_at == (0, 0)
-
-def test_should_draw_icon_at_top_right():
-    icon_size = 10
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
-    countdown = Countdown(icons, max_columns=2, gap=2)
-    spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=0, left=0, row=0, column=1)
-    assert spy.last_draw_at == (12, 0)
+    countdown._draw_icon(spy, top=0, left=0, row=row, column=column)
+    assert spy.last_draw_at == drawn_at
