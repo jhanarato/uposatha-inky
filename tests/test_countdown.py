@@ -253,3 +253,20 @@ def test_should_draw_icon_at_grid_position(row, column, drawn_at):
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=row, column=column)
     assert spy.last_draw_at == drawn_at
+
+@pytest.mark.parametrize(
+    "gap,drawn_at",
+    [
+        (0, (10, 10)),
+        (1, (11, 11)),
+        (2, (12, 12)),
+        (3, (13, 13)),
+    ]
+)
+def test_should_space_icons_with_gap(gap, drawn_at):
+    icon_size = 10
+    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
+    countdown = Countdown(icons, max_columns=2, gap=gap)
+    spy = LetterSpy(icon_size)
+    countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
+    assert spy.last_draw_at == drawn_at
