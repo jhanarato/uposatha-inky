@@ -9,6 +9,7 @@ from uposatha.elements import MoonPhase
 
 @dataclass
 class NextUposatha:
+    falls_on: date
     date: str
     details: str
     countdown: List[str]
@@ -20,6 +21,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
     season = calendar.current_season(today)
 
     return NextUposatha(
+        falls_on=next_uposatha.falls_on,
         date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),
         countdown=countdown_letters(today, next_uposatha.falls_on),
