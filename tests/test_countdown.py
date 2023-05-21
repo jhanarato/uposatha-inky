@@ -270,3 +270,33 @@ def test_should_space_icons_with_gap(gap, drawn_at):
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
     assert spy.last_draw_at == drawn_at
+
+@pytest.mark.parametrize(
+    "icon_size,drawn_at",
+    [
+        (1, (3, 3)),
+        (2, (4, 4)),
+        (3, (5, 5)),
+    ]
+)
+def test_should_space_with_icon_size(icon_size, drawn_at):
+    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
+    countdown = Countdown(icons, max_columns=2, gap=2)
+    spy = LetterSpy(icon_size)
+    countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
+    assert spy.last_draw_at == drawn_at
+
+@pytest.mark.parametrize(
+    "top,left,drawn_at",
+    [
+        (0, 0, (12, 12)),
+        (5, 7, (19, 17)),
+    ]
+)
+def test_should_be_drawn_at_component_location(top, left, drawn_at):
+    icon_size = 10
+    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
+    countdown = Countdown(icons, max_columns=2, gap=2)
+    spy = LetterSpy(icon_size)
+    countdown._draw_icon(spy, top=top, left=left, row=1, column=1)
+    assert spy.last_draw_at == drawn_at
