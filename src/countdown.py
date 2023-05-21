@@ -43,23 +43,6 @@ class Countdown:
 
         layout.draw()
 
-T = TypeVar('T')
-
-def seq_to_rows(seq: Sequence[T], row_length: int) -> list[list[T]]:
-    full_rows, items_left_over = divmod(len(seq), row_length)
-
-    rows = []
-
-    if items_left_over > 0:
-        rows.append(list(seq[:items_left_over]))
-
-    for row_num in range(full_rows):
-        start = items_left_over + row_num * row_length
-        stop = start + row_length
-        rows.append(list(seq[start:stop]))
-
-    return rows
-
 
 @dataclass
 class GridPosition:
@@ -137,3 +120,20 @@ def distribute_centers(x_start: int, y_start: int, distance: int, number_of_icon
         (x_start + distance * number, y_start)
         for number in range(number_of_icons)
     ]
+
+T = TypeVar('T')
+
+def seq_to_rows(seq: Sequence[T], row_length: int) -> list[list[T]]:
+    full_rows, items_left_over = divmod(len(seq), row_length)
+
+    rows = []
+
+    if items_left_over > 0:
+        rows.append(list(seq[:items_left_over]))
+
+    for row_num in range(full_rows):
+        start = items_left_over + row_num * row_length
+        stop = start + row_length
+        rows.append(list(seq[start:stop]))
+
+    return rows
