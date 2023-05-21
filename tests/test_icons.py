@@ -1,6 +1,6 @@
 from collections.abc import Sequence
 
-from icons import CountdownIcons
+from countdown import CountdownIcons
 from screen import ImageConfig
 
 

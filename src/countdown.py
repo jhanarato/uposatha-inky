@@ -1,12 +1,49 @@
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
-from typing import TypeVar
 
 import math
 from itertools import product
 
-from icons import CountdownIcons
+from PIL import ImageDraw
+
+from icons import LetterIcon
 from layout import ImageComponent
+from screen import ImageConfig
+
+
+class CountdownIcons(Sequence[ImageComponent]):
+    """ A sequence of icons representing the days until the next uposatha """
+    def __init__(self,
+                 draw: ImageDraw,
+                 config: ImageConfig,
+                 icon_size: int,
+                 letters: list[str]):
+
+        self._icon_size = icon_size
+        self._icons = [
+            LetterIcon(draw=draw,
+                       font=config.font_styles.COUNTDOWN,
+                       background=config.palette.BLACK,
+                       foreground=config.palette.WHITE,
+                       letter=letter,
+                       size=icon_size)
+            for letter in letters
+        ]
+
+    def __len__(self):
+        return len(self._icons)
+
+    def __getitem__(self, item) -> ImageComponent:
+        return self._icons[item]
+
+    @property
+    def icon_size(self) -> int:
+        return self._icon_size
+
+    def __str__(self):
+        return "".join(
+            [str(icon) for icon in self._icons]
+        )
 
 
 class Countdown:
@@ -43,7 +80,6 @@ class GridPosition:
     row: int
     column: int
 
-
 class IconGrid:
     def __init__(self, icons: Sequence[ImageComponent], max_columns: int):
         self._icons = icons
@@ -69,6 +105,7 @@ class IconGrid:
         for position in zip(self._icons, positions, strict=True):
             row, col = position[1]
             yield GridPosition(position[0], row, col)
+
 
 def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
