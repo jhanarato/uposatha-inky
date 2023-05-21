@@ -1,10 +1,12 @@
 from typing import List
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date
 
 import uposatha.elements
 from uposatha.calendar import Calendar
 from uposatha.elements import MoonPhase
+
+from countdown import countdown_letters
 
 
 @dataclass
@@ -35,11 +37,3 @@ def uposatha_details(season, next_uposatha):
     season_name = season.name.name.capitalize()
     return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
 
-def countdown_letters(today: date, uposatha_date: date) -> List[str]:
-    day_letters = []
-    next_date = today
-    while next_date <= uposatha_date:
-        day_letter = next_date.strftime("%a")[0]
-        day_letters.append(day_letter)
-        next_date += timedelta(1)
-    return day_letters

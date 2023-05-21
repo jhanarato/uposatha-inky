@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 
 from components import Text, HorizontalLine
-from countdown import Countdown, CountdownIcons
+from countdown import Countdown, countdown_letters
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig

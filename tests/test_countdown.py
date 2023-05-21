@@ -2,8 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, CountdownIcons
-from content import countdown_letters
+from countdown import Countdown, Grid, skip_n, CountdownIcons, countdown_letters
 from screen import ImageConfig
 
 

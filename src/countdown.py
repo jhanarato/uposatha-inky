@@ -2,6 +2,8 @@ import math
 import itertools
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
+from datetime import date, timedelta
+from typing import List
 
 from PIL import ImageDraw
 
@@ -125,3 +127,13 @@ class Grid:
 
 def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
+
+
+def countdown_letters(today: date, uposatha_date: date) -> List[str]:
+    day_letters = []
+    next_date = today
+    while next_date <= uposatha_date:
+        day_letter = next_date.strftime("%a")[0]
+        day_letters.append(day_letter)
+        next_date += timedelta(1)
+    return day_letters
