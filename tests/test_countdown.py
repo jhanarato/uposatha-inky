@@ -238,8 +238,16 @@ def test_skip_n():
 
 def test_should_draw_icon_at_top_left():
     icon_size = 10
-    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T"])
+    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
     countdown = Countdown(icons, max_columns=2, gap=2)
     spy = LetterSpy(icon_size)
     countdown._draw_icon(spy, top=0, left=0, row=0, column=0)
     assert spy.last_draw_at == (0, 0)
+
+def test_should_draw_icon_at_top_right():
+    icon_size = 10
+    icons = CountdownIcons(None, ImageConfig(), icon_size, ["S", "M", "T", "W"])
+    countdown = Countdown(icons, max_columns=2, gap=2)
+    spy = LetterSpy(icon_size)
+    countdown._draw_icon(spy, top=0, left=0, row=0, column=1)
+    assert spy.last_draw_at == (12, 0)
