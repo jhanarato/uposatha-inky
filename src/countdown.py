@@ -6,7 +6,7 @@ from itertools import product
 
 from PIL import ImageDraw
 
-from icons import LetterIcon
+from components import DayOfWeekIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
@@ -21,12 +21,12 @@ class CountdownIcons(Sequence[ImageComponent]):
 
         self._icon_size = icon_size
         self._icons = [
-            LetterIcon(draw=draw,
-                       font=config.font_styles.COUNTDOWN,
-                       background=config.palette.BLACK,
-                       foreground=config.palette.WHITE,
-                       letter=letter,
-                       size=icon_size)
+            DayOfWeekIcon(draw=draw,
+                          font=config.font_styles.COUNTDOWN,
+                          background=config.palette.BLACK,
+                          foreground=config.palette.WHITE,
+                          letter=letter,
+                          size=icon_size)
             for letter in letters
         ]
 
