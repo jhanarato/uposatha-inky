@@ -15,7 +15,7 @@ class Countdown:
     def __init__(self, icons: "CountdownIcons", max_columns: int, gap: int):
         self._icons = icons
         self._gap = gap
-        self._grid = IconGrid(icons, max_columns)
+        self._grid = Grid(icons, max_columns)
 
     def height(self) -> int:
         icon_height = self._icons.icon_size * self._grid.rows
@@ -74,12 +74,12 @@ class CountdownIcons(Sequence[ImageComponent]):
 
 
 @dataclass
-class GridPosition:
+class Position:
     icon: ImageComponent
     row: int
     column: int
 
-class IconGrid:
+class Grid:
     def __init__(self, icons: Sequence[ImageComponent], max_columns: int):
         self._icons = icons
         self._max_columns = max_columns
@@ -97,13 +97,16 @@ class IconGrid:
     def rows(self) -> int:
         return math.ceil(len(self._icons) / self._max_columns)
 
-    def __iter__(self) -> Iterator[GridPosition]:
+    def _empty_positions(self) -> int:
+        return (self.rows * self.columns) - len(self._icons)
+
+    def __iter__(self) -> Iterator[Position]:
         positions = itertools.product(range(self.rows), range(self.columns))
-        skip_n(positions, (self.rows * self.columns) - len(self._icons))
+        skip_n(positions, self._empty_positions())
 
         for position in zip(self._icons, positions, strict=True):
             row, col = position[1]
-            yield GridPosition(position[0], row, col)
+            yield Position(position[0], row, col)
 
 
 def skip_n(i: Iterator, n: int):
