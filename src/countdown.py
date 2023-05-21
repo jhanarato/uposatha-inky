@@ -27,6 +27,9 @@ class Countdown:
         gap_height = self._gap * (self._grid.columns - 1)
         return icon_width + gap_height
 
+    def _draw_icon(self, icon: ImageComponent, top: int, left: int, row: int, column: int) -> None:
+        icon.draw(0, 0)
+
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
 
