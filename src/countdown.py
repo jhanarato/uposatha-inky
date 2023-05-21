@@ -18,12 +18,14 @@ class Countdown:
         self._grid = IconGrid(icons, row_length)
 
     def height(self) -> int:
-        gaps = self._grid.rows - 1
-        return (self._grid.rows * self._icons.icon_size) + (gaps * self._gap)
+        icon_height = self._icons.icon_size * self._grid.rows
+        gap_height = self._gap * (self._grid.rows - 1)
+        return icon_height + gap_height
 
     def width(self) -> int:
-        gaps = self._grid.columns - 1
-        return (self._grid.columns * self._icons.icon_size) + (gaps * self._gap)
+        icon_width = self._icons.icon_size * self._grid.columns
+        gap_height = self._gap * (self._grid.columns - 1)
+        return icon_width + gap_height
 
     def draw(self, x: int, y: int) -> None:
         bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
