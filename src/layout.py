@@ -3,13 +3,6 @@ from typing import Protocol
 from enum import Enum, auto
 
 
-@dataclass
-class BoundingBox:
-    top: int
-    left: int
-    height: int
-    width: int
-
 class Align(Enum):
     LEFT = auto()
     CENTRE = auto()

@@ -6,7 +6,7 @@ import math
 from itertools import product
 
 from icons import CountdownIcons
-from layout import ImageComponent, BoundingBox
+from layout import ImageComponent
 
 
 class Countdown:
