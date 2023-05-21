@@ -21,7 +21,7 @@ class Countdown:
                  max_columns: int,
                  gap: int):
 
-        self._icons = CountdownIcons(
+        self._icons = Icons(
             draw=draw,
             config=config,
             icon_size=icon_size,
@@ -52,7 +52,7 @@ class Countdown:
             self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
 
 
-class CountdownIcons(Sequence[ImageComponent]):
+class Icons(Sequence[ImageComponent]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
                  draw: ImageDraw,

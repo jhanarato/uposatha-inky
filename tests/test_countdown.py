@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, CountdownIcons, countdown_letters
+from countdown import Countdown, Grid, skip_n, Icons, countdown_letters
 from screen import ImageConfig
 
 
@@ -42,13 +42,13 @@ class LetterSpy:
 def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
-    icons = CountdownIcons(draw=None, config=config, icon_size=10, letters=letters)
+    icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
     assert len(icons) == 3
 
 @pytest.fixture
 def four_icons():
     config = ImageConfig()
-    return CountdownIcons(None, config, 10, ["S", "M", "T", "W"])
+    return Icons(None, config, 10, ["S", "M", "T", "W"])
 
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
@@ -110,7 +110,7 @@ def test_grid_row_count(icon_count, max_columns, rows):
     assert grid.rows == rows
 
 def test_should_iterate_grid_with_no_empty_positions():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
     rows_columns = [(pos.row, pos.column) for pos in grid]
     assert rows_columns == [
@@ -118,7 +118,7 @@ def test_should_iterate_grid_with_no_empty_positions():
     ]
 
 def test_should_iterate_grid_with_empty_positions():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T"])
+    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T"])
     grid = Grid(icons, 2)
     rows_columns = [(pos.row, pos.column) for pos in grid]
     assert rows_columns == [
@@ -126,7 +126,7 @@ def test_should_iterate_grid_with_empty_positions():
     ]
 
 def test_should_position_icon_in_row_and_column():
-    icons = CountdownIcons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
 
     grid_str = "".join(
