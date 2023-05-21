@@ -40,28 +40,6 @@ class LetterSpy:
         self.last_draw_at = (x, y)
 
 
-@pytest.fixture
-def one_icon_sequence():
-    config = ImageConfig()
-    icon_size = 10
-    icon_spies = [LetterSpy(size=10)]
-    icons = CountdownIcons(None, config, icon_size, [])
-    icons._icons = icon_spies
-    return icons
-
-@pytest.fixture
-def three_icon_sequence():
-    config = ImageConfig()
-    icon_size = 10
-    icon_spies = [
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-        LetterSpy(size=10),
-    ]
-    icons = CountdownIcons(None, config, icon_size, [])
-    icons._icons = icon_spies
-    return icons
-
 def test_should_create_icon_list():
     config = ImageConfig()
     letters = ["M", "T", "W"]
