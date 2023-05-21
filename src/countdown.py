@@ -1,9 +1,9 @@
 import math
 import itertools
+
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import List
 
 from PIL import ImageDraw
 
@@ -129,7 +129,7 @@ def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
 
 
-def countdown_letters(today: date, uposatha_date: date) -> List[str]:
+def countdown_letters(today: date, uposatha_date: date) -> list[str]:
     day_letters = []
     next_date = today
     while next_date <= uposatha_date:
