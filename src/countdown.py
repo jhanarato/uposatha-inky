@@ -11,6 +11,34 @@ from layout import ImageComponent
 from screen import ImageConfig
 
 
+class Countdown:
+    """ An image component displaying the days of the week up to the next uposatha """
+    def __init__(self, icons: "CountdownIcons", max_columns: int, gap: int):
+        self._icons = icons
+        self._gap = gap
+        self._grid = IconGrid(icons, max_columns)
+
+    def height(self) -> int:
+        icon_height = self._icons.icon_size * self._grid.rows
+        gap_height = self._gap * (self._grid.rows - 1)
+        return icon_height + gap_height
+
+    def width(self) -> int:
+        icon_width = self._icons.icon_size * self._grid.columns
+        gap_height = self._gap * (self._grid.columns - 1)
+        return icon_width + gap_height
+
+    def _draw_icon(self, icon: ImageComponent, top: int, left: int, row: int, column: int) -> None:
+        spacing = self._gap + self._icons.icon_size
+        x = left + column * spacing
+        y = top + row * spacing
+        icon.draw(x, y)
+
+    def draw(self, x: int, y: int) -> None:
+        for position in self._grid:
+            self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
+
+
 class CountdownIcons(Sequence[ImageComponent]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
@@ -44,34 +72,6 @@ class CountdownIcons(Sequence[ImageComponent]):
         return "".join(
             [str(icon) for icon in self._icons]
         )
-
-
-class Countdown:
-    """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, icons: CountdownIcons, max_columns: int, gap: int):
-        self._icons = icons
-        self._gap = gap
-        self._grid = IconGrid(icons, max_columns)
-
-    def height(self) -> int:
-        icon_height = self._icons.icon_size * self._grid.rows
-        gap_height = self._gap * (self._grid.rows - 1)
-        return icon_height + gap_height
-
-    def width(self) -> int:
-        icon_width = self._icons.icon_size * self._grid.columns
-        gap_height = self._gap * (self._grid.columns - 1)
-        return icon_width + gap_height
-
-    def _draw_icon(self, icon: ImageComponent, top: int, left: int, row: int, column: int) -> None:
-        spacing = self._gap + self._icons.icon_size
-        x = left + column * spacing
-        y = top + row * spacing
-        icon.draw(x, y)
-
-    def draw(self, x: int, y: int) -> None:
-        for position in self._grid:
-            self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
 
 
 @dataclass
