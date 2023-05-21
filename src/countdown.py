@@ -34,14 +34,8 @@ class Countdown:
         icon.draw(x, y)
 
     def draw(self, x: int, y: int) -> None:
-        bbox = BoundingBox(top=y, left=x, height=self.height(), width=self.width())
-
-        layout = CountdownLayout(
-            bbox=bbox,
-            icons=self._icons,
-            gap=self._gap)
-
-        layout.draw()
+        for position in self._grid:
+            self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
 
 
 @dataclass

@@ -47,7 +47,7 @@ class PillowImage:
             letters=letters
         )
 
-        return Countdown(icons=icons, gap=4, max_columns=15)
+        return Countdown(icons=icons, gap=4, max_columns=8)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
