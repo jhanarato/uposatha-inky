@@ -1,8 +1,7 @@
+import math
+import itertools
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
-
-import math
-from itertools import product
 
 from PIL import ImageDraw
 
@@ -99,7 +98,7 @@ class IconGrid:
         return math.ceil(len(self._icons) / self._max_columns)
 
     def __iter__(self) -> Iterator[GridPosition]:
-        positions = product(range(self.rows), range(self.columns))
+        positions = itertools.product(range(self.rows), range(self.columns))
         skip_n(positions, (self.rows * self.columns) - len(self._icons))
 
         for position in zip(self._icons, positions, strict=True):
