@@ -79,7 +79,9 @@ class Position:
     row: int
     column: int
 
+
 class Grid:
+    """ An iterable of icons in grid positions """
     def __init__(self, icons: Sequence[ImageComponent], max_columns: int):
         self._icons = icons
         self._max_columns = max_columns
