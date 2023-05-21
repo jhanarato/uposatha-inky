@@ -11,6 +11,7 @@ from countdown import countdown_letters
 
 @dataclass
 class NextUposatha:
+    today: date
     falls_on: date
     date: str
     details: str
@@ -23,6 +24,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
     season = calendar.current_season(today)
 
     return NextUposatha(
+        today=today,
         falls_on=next_uposatha.falls_on,
         date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),

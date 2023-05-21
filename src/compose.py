@@ -1,3 +1,5 @@
+from datetime import date
+
 from PIL import Image, ImageDraw
 
 from components import Text, HorizontalLine
@@ -38,7 +40,8 @@ class PillowImage:
             colour=self._foreground
         )
 
-    def new_countdown(self, letters: list[str]) -> Countdown:
+    def new_countdown(self, today: date, uposatha_falls_on: date) -> Countdown:
+        letters = countdown_letters(today, uposatha_falls_on)
         return Countdown(
             draw=self._draw,
             config=self._config,
@@ -71,7 +74,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         image.new_heading_text("Uposatha"),
         image.new_horizontal_line(300),
         image.new_info_text(content.date),
-        image.new_countdown(content.countdown),
+        image.new_countdown(content.today, content.falls_on),
         image.new_info_text(content.details)
     ]
 
