@@ -2,26 +2,35 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, Icons, letters_
+from countdown import Countdown, Grid, skip_n, Icons
 from screen import ImageConfig
 
 
 def test_letters_fifteen():
-    a_friday = date(2010, 3, 26)
-    uposatha = a_friday + timedelta(14)
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          start=date(2010, 3, 26), end=date(2010, 4, 9),
+                          icon_size=0, gap=0, max_columns=0)
+
+    actual = [str(icon) for icon in countdown._icons]
+
     expected = ["F", "S", "S", "M", "T", "W", "T",
                 "F", "S", "S", "M", "T", "W", "T", "F"]
-    assert letters_(a_friday, uposatha) == expected
+
+    assert actual == expected
 
 def test_letters_day_before():
-    a_friday = date(2010, 3, 26)
-    uposatha = date(2010, 3, 27)
-    assert letters_(a_friday, uposatha) == ["F", "S"]
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          start=date(2010, 3, 26), end=date(2010, 3, 27),
+                          icon_size=0, gap=0, max_columns=0)
+
+    assert [str(icon) for icon in countdown._icons] == ["F", "S"]
 
 def test_letters_on_day():
-    a_friday = date(2010, 3, 26)
-    uposatha = a_friday
-    assert letters_(a_friday, uposatha) == ["F"]
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          start=date(2010, 3, 26), end=date(2010, 3, 26),
+                          icon_size=0, gap=0, max_columns=0)
+
+    assert [str(icon) for icon in countdown._icons] == ["F"]
 
 
 class LetterSpy:

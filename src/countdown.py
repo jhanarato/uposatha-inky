@@ -27,7 +27,7 @@ class Countdown:
             draw=draw,
             config=config,
             icon_size=icon_size,
-            letters=letters_(start, end)
+            letters=self.letters(start, end)
         )
 
         self._gap = gap
@@ -42,6 +42,10 @@ class Countdown:
         icon_width = self._icons.icon_size * self._grid.columns
         gap_height = self._gap * (self._grid.columns - 1)
         return icon_width + gap_height
+
+    def letters(self, today: date, uposatha: date) -> list[str]:
+        return [date_.strftime("%a")[0]
+                for date_ in daterange(today, uposatha, inclusive=True)]
 
     def _draw_icon(self, icon: ImageComponent, top: int, left: int, row: int, column: int) -> None:
         spacing = self._gap + self._icons.icon_size
@@ -129,8 +133,3 @@ class Grid:
 
 def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
-
-
-def letters_(today: date, uposatha: date) -> list[str]:
-    return [date_.strftime("%a")[0]
-            for date_ in daterange(today, uposatha, inclusive=True)]
