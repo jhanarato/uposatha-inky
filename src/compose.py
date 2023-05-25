@@ -3,7 +3,7 @@ from datetime import date
 from PIL import Image, ImageDraw
 
 from components import Text, HorizontalLine
-from countdown import Countdown, letter
+from countdown import Countdown
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
@@ -41,14 +41,12 @@ class PillowImage:
         )
 
     def new_countdown(self, today: date, uposatha_falls_on: date) -> Countdown:
-        letters_ = letter(today, uposatha_falls_on)
         return Countdown(
             draw=self._draw,
             config=self._config,
             icon_size=20,
             start=today,
             end=uposatha_falls_on,
-            letters=letters_,
             gap=4,
             max_columns=8)
 

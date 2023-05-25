@@ -52,7 +52,6 @@ def four_icons():
 
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=2)
@@ -61,7 +60,6 @@ def test_should_report_height_for_two_rows():
 
 def test_should_report_width_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=2)
@@ -70,7 +68,6 @@ def test_should_report_width_for_two_rows():
 
 def test_should_report_width_for_shorter_first_row():
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=3)
@@ -79,7 +76,6 @@ def test_should_report_width_for_shorter_first_row():
 
 def test_should_report_width_for_single_row(four_icons):
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=5)
@@ -161,7 +157,6 @@ def test_skip_n():
 def test_should_draw_icon_at_grid_position(row, column, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
@@ -182,7 +177,6 @@ def test_should_draw_icon_at_grid_position(row, column, drawn_at):
 def test_should_space_icons_with_gap(gap, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=gap, max_columns=2)
@@ -201,7 +195,6 @@ def test_should_space_icons_with_gap(gap, drawn_at):
 )
 def test_should_space_with_icon_size(icon_size, drawn_at):
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
@@ -220,7 +213,6 @@ def test_should_space_with_icon_size(icon_size, drawn_at):
 def test_should_be_drawn_at_component_location(top, left, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
-                          letters=["S", "M", "T", "W"],
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)

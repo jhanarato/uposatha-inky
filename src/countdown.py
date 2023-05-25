@@ -17,7 +17,6 @@ class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
     def __init__(self, draw: ImageDraw,
                  config: ImageConfig,
-                 letters: list[str],
                  start: date,
                  end: date,
                  icon_size: int,
@@ -28,7 +27,7 @@ class Countdown:
             draw=draw,
             config=config,
             icon_size=icon_size,
-            letters=letters
+            letters=letters_(start, end)
         )
 
         self._gap = gap
