@@ -125,13 +125,14 @@ class Grid:
     def rows(self) -> int:
         return math.ceil(len(self._icons) / self._max_columns)
 
-    def _empty_positions(self) -> int:
-        return (self.rows * self.columns) - len(self._icons)
+    def _blanks(self) -> list[BlankIcon]:
+        empty = (self.rows * self.columns) - len(self._icons)
+        return [BlankIcon(size=self._icons.icon_size)
+                for _ in range(empty)]
 
     def __iter__(self) -> Iterator[Position]:
         positions = itertools.product(range(self.rows), range(self.columns))
-        blanks = [BlankIcon(size=self._icons.icon_size) for _ in range(self._empty_positions())]
-        icons = itertools.chain(blanks, self._icons)
+        icons = itertools.chain(self._blanks(), self._icons)
 
         for position in zip(icons, positions, strict=True):
             row, col = position[1]
