@@ -11,23 +11,21 @@ def test_letters_fifteen():
                           start=date(2010, 3, 26), end=date(2010, 4, 9),
                           icon_size=0, gap=0, max_columns=0)
 
-    expected = "FSSMTWTFSSMTWTF"
-
-    assert str(countdown) == expected
+    assert str(countdown) == "FSSMTWTFSSMTWTF"
 
 def test_letters_day_before():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2010, 3, 26), end=date(2010, 3, 27),
                           icon_size=0, gap=0, max_columns=0)
 
-    assert [str(icon) for icon in countdown._icons] == ["F", "S"]
+    assert str(countdown) == "FS"
 
 def test_letters_on_day():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2010, 3, 26), end=date(2010, 3, 26),
                           icon_size=0, gap=0, max_columns=0)
 
-    assert [str(icon) for icon in countdown._icons] == ["F"]
+    assert str(countdown) == "F"
 
 
 class LetterSpy:
