@@ -77,16 +77,14 @@ def make_letter_spies(count: int) -> Icons:
     "icon_count,max_columns,columns",
     [
         (2, 2, 2),
+        (3, 4, 3),
+        (3, 5, 3),
     ]
 )
 def test_grid_column_count(icon_count, max_columns, columns):
     spies = make_letter_spies(icon_count)
     grid = Grid(spies, max_columns)
     assert grid.columns == columns
-
-def test_fewer_icons_than_columns():
-    grid = Grid(make_letter_spies(3), 4)
-    assert grid.columns == 3
 
 @pytest.mark.parametrize(
     "icon_count,max_columns,rows",
