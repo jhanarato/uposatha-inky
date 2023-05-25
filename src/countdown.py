@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 
 from PIL import ImageDraw
+from boltons.timeutils import daterange
 
 from components import DayOfWeekIcon
 from layout import ImageComponent
@@ -130,10 +131,12 @@ def skip_n(i: Iterator, n: int):
 
 
 def countdown_letters(today: date, uposatha_date: date) -> list[str]:
-    day_letters = []
-    next_date = today
-    while next_date <= uposatha_date:
-        day_letter = next_date.strftime("%a")[0]
-        day_letters.append(day_letter)
-        next_date += timedelta(1)
-    return day_letters
+    return [date_.strftime("%a")[0]
+            for date_ in daterange(today, uposatha_date, inclusive=True)]
+    # day_letters = []
+    # next_date = today
+    # while next_date <= uposatha_date:
+    #     day_letter = next_date.strftime("%a")[0]
+    #     day_letters.append(day_letter)
+    #     next_date += timedelta(1)
+    # return day_letters
