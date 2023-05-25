@@ -5,7 +5,7 @@ from PIL import Image
 from inky import auto
 
 from content import next_uposatha_content
-from countdown import countdown_letters
+from countdown import letters
 from compose import next_uposatha
 
 

@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, Icons, countdown_letters
+from countdown import Countdown, Grid, skip_n, Icons, letters
 from screen import ImageConfig
 
 
@@ -11,17 +11,17 @@ def test_letters_fifteen():
     uposatha = a_friday + timedelta(14)
     expected = ["F", "S", "S", "M", "T", "W", "T",
                 "F", "S", "S", "M", "T", "W", "T", "F"]
-    assert countdown_letters(a_friday, uposatha) == expected
+    assert letters(a_friday, uposatha) == expected
 
 def test_letters_day_before():
     a_friday = date(2010, 3, 26)
     uposatha = date(2010, 3, 27)
-    assert countdown_letters(a_friday, uposatha) == ["F", "S"]
+    assert letters(a_friday, uposatha) == ["F", "S"]
 
 def test_letters_on_day():
     a_friday = date(2010, 3, 26)
     uposatha = a_friday
-    assert countdown_letters(a_friday, uposatha) == ["F"]
+    assert letters(a_friday, uposatha) == ["F"]
 
 
 class LetterSpy:

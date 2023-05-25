@@ -130,6 +130,6 @@ def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
 
 
-def countdown_letters(today: date, uposatha: date) -> list[str]:
+def letters(today: date, uposatha: date) -> list[str]:
     return [date_.strftime("%a")[0]
             for date_ in daterange(today, uposatha, inclusive=True)]

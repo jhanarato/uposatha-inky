@@ -6,7 +6,7 @@ import uposatha.elements
 from uposatha.calendar import Calendar
 from uposatha.elements import MoonPhase
 
-from countdown import countdown_letters
+from countdown import letters
 
 
 @dataclass
@@ -28,7 +28,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
         falls_on=next_uposatha.falls_on,
         date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),
-        countdown=countdown_letters(today, next_uposatha.falls_on),
+        countdown=letters(today, next_uposatha.falls_on),
         moon_phase=MoonPhase.FULL
     )
 
