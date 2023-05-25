@@ -60,6 +60,8 @@ class Countdown:
         for position in self._grid:
             self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
 
+    def __str__(self):
+        return "".join([str(icon) for icon in self._icons])
 
 class Icons(Sequence[ImageComponent]):
     """ A sequence of icons representing the days until the next uposatha """

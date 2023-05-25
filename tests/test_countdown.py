@@ -11,12 +11,9 @@ def test_letters_fifteen():
                           start=date(2010, 3, 26), end=date(2010, 4, 9),
                           icon_size=0, gap=0, max_columns=0)
 
-    actual = [str(icon) for icon in countdown._icons]
+    expected = "FSSMTWTFSSMTWTF"
 
-    expected = ["F", "S", "S", "M", "T", "W", "T",
-                "F", "S", "S", "M", "T", "W", "T", "F"]
-
-    assert actual == expected
+    assert str(countdown) == expected
 
 def test_letters_day_before():
     countdown = Countdown(draw=None, config=ImageConfig(),
