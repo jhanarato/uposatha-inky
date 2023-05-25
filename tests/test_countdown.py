@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, Icons, letters
+from countdown import Countdown, Grid, skip_n, Icons, letters_
 from screen import ImageConfig
 
 
@@ -11,17 +11,17 @@ def test_letters_fifteen():
     uposatha = a_friday + timedelta(14)
     expected = ["F", "S", "S", "M", "T", "W", "T",
                 "F", "S", "S", "M", "T", "W", "T", "F"]
-    assert letters(a_friday, uposatha) == expected
+    assert letters_(a_friday, uposatha) == expected
 
 def test_letters_day_before():
     a_friday = date(2010, 3, 26)
     uposatha = date(2010, 3, 27)
-    assert letters(a_friday, uposatha) == ["F", "S"]
+    assert letters_(a_friday, uposatha) == ["F", "S"]
 
 def test_letters_on_day():
     a_friday = date(2010, 3, 26)
     uposatha = a_friday
-    assert letters(a_friday, uposatha) == ["F"]
+    assert letters_(a_friday, uposatha) == ["F"]
 
 
 class LetterSpy:
@@ -53,6 +53,8 @@ def four_icons():
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=2)
 
     assert countdown.height() == 22
@@ -60,6 +62,8 @@ def test_should_report_height_for_two_rows():
 def test_should_report_width_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=2)
 
     assert countdown.width() == 22
@@ -67,6 +71,8 @@ def test_should_report_width_for_two_rows():
 def test_should_report_width_for_shorter_first_row():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=3)
 
     assert countdown.width() == 34
@@ -74,6 +80,8 @@ def test_should_report_width_for_shorter_first_row():
 def test_should_report_width_for_single_row(four_icons):
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=5)
 
     assert countdown.width() == 46
@@ -154,6 +162,8 @@ def test_should_draw_icon_at_grid_position(row, column, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
 
     spy = LetterSpy(icon_size)
@@ -173,6 +183,8 @@ def test_should_space_icons_with_gap(gap, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=icon_size, gap=gap, max_columns=2)
 
     spy = LetterSpy(icon_size)
@@ -190,6 +202,8 @@ def test_should_space_icons_with_gap(gap, drawn_at):
 def test_should_space_with_icon_size(icon_size, drawn_at):
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
 
     spy = LetterSpy(icon_size)
@@ -207,6 +221,8 @@ def test_should_be_drawn_at_component_location(top, left, drawn_at):
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
                           letters=["S", "M", "T", "W"],
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
 
     spy = LetterSpy(icon_size)

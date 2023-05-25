@@ -18,6 +18,8 @@ class Countdown:
     def __init__(self, draw: ImageDraw,
                  config: ImageConfig,
                  letters: list[str],
+                 start: date,
+                 end: date,
                  icon_size: int,
                  max_columns: int,
                  gap: int):
@@ -130,6 +132,6 @@ def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]
 
 
-def letters(today: date, uposatha: date) -> list[str]:
+def letters_(today: date, uposatha: date) -> list[str]:
     return [date_.strftime("%a")[0]
             for date_ in daterange(today, uposatha, inclusive=True)]
