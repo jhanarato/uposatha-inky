@@ -57,8 +57,8 @@ class Countdown:
         icon.draw(x, y)
 
     def draw(self, x: int, y: int) -> None:
-        for position in self._grid:
-            self._draw_icon(position.icon, top=y, left=x, row=position.row, column=position.column)
+        for icon, row, column in self._grid:
+            self._draw_icon(icon, top=y, left=x, row=row, column=column)
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
@@ -99,13 +99,6 @@ class Icons(Sequence[ImageComponent]):
         )
 
 
-@dataclass
-class Position:
-    icon: ImageComponent
-    row: int
-    column: int
-
-
 class Grid:
     """ An iterable of icons in grid positions """
     def __init__(self, icons: Icons, max_columns: int):
@@ -130,13 +123,12 @@ class Grid:
         return [BlankIcon(size=self._icons.icon_size)
                 for _ in range(empty)]
 
-    def __iter__(self) -> Iterator[Position]:
-        positions = itertools.product(range(self.rows), range(self.columns))
+    def __iter__(self) -> Iterator[tuple[ImageComponent, int, int]]:
         icons = itertools.chain(self._blanks(), self._icons)
+        positions = itertools.product(range(self.rows), range(self.columns))
 
-        for position in zip(icons, positions, strict=True):
-            row, col = position[1]
-            yield Position(position[0], row, col)
+        for icon, position in zip(icons, positions, strict=True):
+            yield icon, position[0], position[1]
 
     def __str__(self):
-        return "".join([str(pos.icon) for pos in self])
+        return "".join([str(pos[0]) for pos in self])

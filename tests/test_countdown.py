@@ -102,7 +102,7 @@ def test_grid_row_count(icon_count, max_columns, rows):
 def test_should_iterate_grid_with_no_empty_positions():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
-    rows_columns = [(pos.row, pos.column) for pos in grid]
+    rows_columns = [(pos[1], pos[2]) for pos in grid]
     assert rows_columns == [
         (0, 0), (0, 1), (1, 0), (1, 1)
     ]
