@@ -136,6 +136,9 @@ class Grid:
             row, col = position[1]
             yield Position(position[0], row, col)
 
+    def __str__(self):
+        return "".join([str(pos.icon) for pos in self])
+
 
 def skip_n(i: Iterator, n: int):
     [next(i) for _ in range(n)]

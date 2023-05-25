@@ -110,20 +110,12 @@ def test_should_iterate_grid_with_no_empty_positions():
 def test_should_iterate_grid_with_empty_positions():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T"])
     grid = Grid(icons, 2)
-    rows_columns = [(pos.row, pos.column) for pos in grid]
-    assert rows_columns == [
-        (0, 1), (1, 0), (1, 1)
-    ]
+    assert str(grid) == " SMT"
 
 def test_should_position_icon_in_row_and_column():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
-
-    grid_str = "".join(
-        [str(pos.icon) for pos in grid]
-    )
-
-    assert grid_str == "SMTW"
+    assert str(grid) == "SMTW"
 
 def test_skip_n():
     five_iter = iter([1, 2, 3, 4, 5])
