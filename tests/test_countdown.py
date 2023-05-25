@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date
 
 import pytest
 
@@ -20,33 +20,6 @@ def test_letters(start, end, seq):
                           icon_size=0, gap=0, max_columns=0)
 
     assert str(countdown) == "FSSMTWTFSSMTWTF"
-
-
-class LetterSpy:
-    def __init__(self, size: int):
-        self._size = size
-        self.last_draw_at = None
-
-    def height(self) -> int:
-        return self._size
-
-    def width(self) -> int:
-        return self._size
-
-    def draw(self, x: int, y: int) -> None:
-        self.last_draw_at = (x, y)
-
-
-def test_should_create_icon_list():
-    config = ImageConfig()
-    letters = ["M", "T", "W"]
-    icons = Icons(draw=None, config=config, icon_size=10, letters=letters)
-    assert len(icons) == 3
-
-@pytest.fixture
-def four_icons():
-    config = ImageConfig()
-    return Icons(None, config, 10, ["S", "M", "T", "W"])
 
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
@@ -72,13 +45,28 @@ def test_should_report_width_for_shorter_first_row():
 
     assert countdown.width() == 34
 
-def test_should_report_width_for_single_row(four_icons):
+def test_should_report_width_for_single_row():
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=10, gap=2, max_columns=5)
 
     assert countdown.width() == 46
+
+class LetterSpy:
+    def __init__(self, size: int):
+        self._size = size
+        self.last_draw_at = None
+
+    def height(self) -> int:
+        return self._size
+
+    def width(self) -> int:
+        return self._size
+
+    def draw(self, x: int, y: int) -> None:
+        self.last_draw_at = (x, y)
+
 
 def make_letter_spies(count: int) -> list[LetterSpy]:
     return [LetterSpy(10) for _ in range(count)]
