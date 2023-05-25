@@ -6,26 +6,20 @@ from countdown import Countdown, Grid, skip_n, Icons
 from screen import ImageConfig
 
 
-def test_letters_fifteen():
+@pytest.mark.parametrize(
+    "start,end,seq",
+    [
+        (date(2010, 3, 26), date(2010, 4, 9), "FSSMTWTFSSMTWTF"),
+        (date(2010, 3, 26), date(2010, 3, 27), "FS"),
+        (date(2010, 3, 26), date(2010, 3, 26), "F"),
+    ]
+)
+def test_letters(start, end, seq):
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2010, 3, 26), end=date(2010, 4, 9),
                           icon_size=0, gap=0, max_columns=0)
 
     assert str(countdown) == "FSSMTWTFSSMTWTF"
-
-def test_letters_day_before():
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2010, 3, 26), end=date(2010, 3, 27),
-                          icon_size=0, gap=0, max_columns=0)
-
-    assert str(countdown) == "FS"
-
-def test_letters_on_day():
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2010, 3, 26), end=date(2010, 3, 26),
-                          icon_size=0, gap=0, max_columns=0)
-
-    assert str(countdown) == "F"
 
 
 class LetterSpy:
