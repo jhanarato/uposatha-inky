@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from countdown import Countdown, Grid, skip_n, Icons
+from countdown import Countdown, Grid, Icons
 from screen import ImageConfig
 
 
@@ -68,8 +68,10 @@ class LetterSpy:
         self.last_draw_at = (x, y)
 
 
-def make_letter_spies(count: int) -> list[LetterSpy]:
-    return [LetterSpy(10) for _ in range(count)]
+def make_letter_spies(count: int) -> Icons:
+    icons = Icons(None, ImageConfig(), 10, [])
+    icons._icons = [LetterSpy(10) for _ in range(count)]
+    return icons
 
 @pytest.mark.parametrize(
     "icon_count,max_columns,columns",
@@ -116,11 +118,6 @@ def test_should_position_icon_in_row_and_column():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
     assert str(grid) == "SMTW"
-
-def test_skip_n():
-    five_iter = iter([1, 2, 3, 4, 5])
-    skip_n(five_iter, 3)
-    assert list(five_iter) == [4, 5]
 
 @pytest.mark.parametrize(
     "row,column,drawn_at",

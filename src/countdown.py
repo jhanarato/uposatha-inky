@@ -8,7 +8,7 @@ from datetime import date
 from PIL import ImageDraw
 from boltons.timeutils import daterange
 
-from components import DayOfWeekIcon
+from components import DayOfWeekIcon, BlankIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
@@ -108,7 +108,7 @@ class Position:
 
 class Grid:
     """ An iterable of icons in grid positions """
-    def __init__(self, icons: Sequence[ImageComponent], max_columns: int):
+    def __init__(self, icons: Icons, max_columns: int):
         self._icons = icons
         self._max_columns = max_columns
 
@@ -130,15 +130,12 @@ class Grid:
 
     def __iter__(self) -> Iterator[Position]:
         positions = itertools.product(range(self.rows), range(self.columns))
-        skip_n(positions, self._empty_positions())
+        blanks = [BlankIcon(size=self._icons.icon_size) for _ in range(self._empty_positions())]
+        icons = itertools.chain(blanks, self._icons)
 
-        for position in zip(self._icons, positions, strict=True):
+        for position in zip(icons, positions, strict=True):
             row, col = position[1]
             yield Position(position[0], row, col)
 
     def __str__(self):
         return "".join([str(pos.icon) for pos in self])
-
-
-def skip_n(i: Iterator, n: int):
-    [next(i) for _ in range(n)]
