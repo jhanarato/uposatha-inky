@@ -3,7 +3,7 @@ import itertools
 
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date
 
 from PIL import ImageDraw
 from boltons.timeutils import daterange
@@ -62,6 +62,7 @@ class Countdown:
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
+
 
 class Icons(Sequence[ImageComponent]):
     """ A sequence of icons representing the days until the next uposatha """
