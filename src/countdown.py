@@ -9,7 +9,7 @@ from boltons.timeutils import daterange
 
 from uposatha.elements import MoonPhase
 
-from components import DayOfWeekIcon, BlankIcon
+from components import DayOfWeekIcon, BlankIcon, FullMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
@@ -52,7 +52,7 @@ class Countdown:
 
     def letters(self) -> list[str]:
         return [date_.strftime("%a")[0]
-                for date_ in daterange(self._start, self._end, inclusive=True)]
+                for date_ in daterange(self._start, self._end)]
 
     def draw(self, x: int, y: int) -> None:
         spacing = self._gap + self._icons.icon_size
@@ -77,7 +77,7 @@ class Icons(Sequence[ImageComponent]):
                  moon_phase: MoonPhase):
 
         self._icon_size = icon_size
-        self._icons = [
+        self._icons: list[ImageComponent] = [
             DayOfWeekIcon(draw=draw,
                           font=config.font_styles.COUNTDOWN,
                           background=config.palette.BLACK,
@@ -86,6 +86,8 @@ class Icons(Sequence[ImageComponent]):
                           size=icon_size)
             for letter in letters
         ]
+
+        self._icons.append(FullMoonIcon(size=10))
 
     def __len__(self):
         return len(self._icons)

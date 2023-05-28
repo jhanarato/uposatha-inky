@@ -9,7 +9,7 @@ from screen import ImageConfig
 def test_icon_sequence_has_length():
     config = ImageConfig()
     icons = Icons(None, config, 1, ["M", "T", "W"], MoonPhase.FULL)
-    assert len(icons) == 3
+    assert len(icons) == 4
 
 def test_icon_sequence_can_be_iterated_over():
     config = ImageConfig()
@@ -30,8 +30,8 @@ def test_icon_instance_is_sequence():
 def test_icon_sequence_can_be_reversed():
     config = ImageConfig()
     icons = Icons(None, config, 1, ["M", "T", "W"], MoonPhase.FULL)
-    assert [str(icon) for icon in reversed(icons)] == ["W", "T", "M"]
+    assert [str(icon) for icon in reversed(icons)] == ["*", "W", "T", "M"]
 
 def test_should_convert_icon_collection_to_string():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"], MoonPhase.FULL)
-    assert str(icons) == "SMTW"
+    assert str(icons) == "SMTW*"

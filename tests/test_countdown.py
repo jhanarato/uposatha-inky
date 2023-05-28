@@ -11,9 +11,9 @@ from screen import ImageConfig
 @pytest.mark.parametrize(
     "start,end,seq",
     [
-        (date(2010, 3, 26), date(2010, 4, 9), "FSSMTWTFSSMTWTF"),
-        (date(2010, 3, 26), date(2010, 3, 27), "FS"),
-        (date(2010, 3, 26), date(2010, 3, 26), "F"),
+        (date(2010, 3, 26), date(2010, 4, 9), "FSSMTWTFSSMTWT*"),
+        (date(2010, 3, 26), date(2010, 3, 27), "F*"),
+        (date(2010, 3, 26), date(2010, 3, 26), "*"),
     ]
 )
 def test_letters(start, end, seq):
@@ -22,7 +22,7 @@ def test_letters(start, end, seq):
                           moon_phase=MoonPhase.FULL,
                           icon_size=0, gap=0, max_columns=0)
 
-    assert str(countdown) == "FSSMTWTFSSMTWTF"
+    assert str(countdown) == "FSSMTWTFSSMTWT*"
 
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
@@ -107,25 +107,25 @@ def test_grid_row_count(icon_count, max_columns, rows):
     assert grid.rows == rows
 
 def test_should_arrange_grid_without_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"], MoonPhase.FULL)
+    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T"], MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [
         ("S", 0, 0),
         ("M", 0, 1),
         ("T", 1, 0),
-        ("W", 1, 1)
+        ("*", 1, 1)
     ]
 
 def test_should_arrange_grid_with_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["M", "T", "W"], MoonPhase.FULL)
+    icons = Icons(None, ImageConfig(), 10, ["M", "T"], MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [
         (" ", 0, 0),
         ("M", 0, 1),
         ("T", 1, 0),
-        ("W", 1, 1)
+        ("*", 1, 1)
     ]
 
 def test_should_draw_icons():
