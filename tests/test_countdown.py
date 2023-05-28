@@ -76,7 +76,7 @@ class LetterSpy:
 
 
 def make_letter_spies(count: int) -> Icons:
-    icons = Icons(None, ImageConfig(), 10, [])
+    icons = Icons(None, ImageConfig(), 10, [], MoonPhase.FULL)
     icons._icons = [LetterSpy(10) for _ in range(count)]
     return icons
 
@@ -107,7 +107,7 @@ def test_grid_row_count(icon_count, max_columns, rows):
     assert grid.rows == rows
 
 def test_should_arrange_grid_without_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
+    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"], MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [
@@ -118,7 +118,7 @@ def test_should_arrange_grid_without_blanks():
     ]
 
 def test_should_arrange_grid_with_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["M", "T", "W"])
+    icons = Icons(None, ImageConfig(), 10, ["M", "T", "W"], MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [

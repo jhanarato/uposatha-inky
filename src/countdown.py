@@ -33,7 +33,8 @@ class Countdown:
             draw=draw,
             config=config,
             icon_size=icon_size,
-            letters=self.letters()
+            letters=self.letters(),
+            moon_phase=moon_phase
         )
 
         self._gap = gap
@@ -72,7 +73,8 @@ class Icons(Sequence[ImageComponent]):
                  draw: ImageDraw,
                  config: ImageConfig,
                  icon_size: int,
-                 letters: list[str]):
+                 letters: list[str],
+                 moon_phase: MoonPhase):
 
         self._icon_size = icon_size
         self._icons = [
