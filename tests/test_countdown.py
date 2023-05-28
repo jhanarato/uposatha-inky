@@ -121,79 +121,50 @@ def test_should_arrange_grid_with_blanks():
         ("W", 1, 1)
     ]
 
-@pytest.mark.parametrize(
-    "row,column,drawn_at",
-    [
-        (0, 0, (0, 0)),
-        (0, 1, (12, 0)),
-        (1, 0, (0, 12)),
-        (1, 1, (12, 12)),
-        (3, 3, (36, 36))
+def test_should_draw_icons():
+    icon_size = 10
+    countdown = Countdown(draw=None, config=ImageConfig(),
+                          start=date(2023, 5, 7),
+                          end=date(2023, 5, 10),
+                          icon_size=icon_size, gap=0, max_columns=2)
+
+    spies = [LetterSpy(10) for _ in range(4)]
+    countdown._grid._icons._icons = spies
+    countdown.draw(0, 0)
+
+    assert [spy.last_draw_at for spy in spies] == [
+        (0, 0), (10, 0),
+        (0, 10), (10, 10)
     ]
-)
-def test_should_draw_icon_at_grid_position(row, column, drawn_at):
+
+def test_should_put_gap_between_icons():
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
 
-    spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=0, left=0, row=row, column=column)
-    assert spy.last_draw_at == drawn_at
+    spies = [LetterSpy(10) for _ in range(4)]
+    countdown._grid._icons._icons = spies
+    countdown.draw(0, 0)
 
-@pytest.mark.parametrize(
-    "gap,drawn_at",
-    [
-        (0, (10, 10)),
-        (1, (11, 11)),
-        (2, (12, 12)),
-        (3, (13, 13)),
+    assert [spy.last_draw_at for spy in spies] == [
+        (0, 0), (12, 0),
+        (0, 12), (12, 12)
     ]
-)
-def test_should_space_icons_with_gap(gap, drawn_at):
-    icon_size = 10
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2023, 5, 7),
-                          end=date(2023, 5, 10),
-                          icon_size=icon_size, gap=gap, max_columns=2)
 
-    spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
-    assert spy.last_draw_at == drawn_at
-
-@pytest.mark.parametrize(
-    "icon_size,drawn_at",
-    [
-        (1, (3, 3)),
-        (2, (4, 4)),
-        (3, (5, 5)),
-    ]
-)
-def test_should_space_with_icon_size(icon_size, drawn_at):
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2023, 5, 7),
-                          end=date(2023, 5, 10),
-                          icon_size=icon_size, gap=2, max_columns=2)
-
-    spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=0, left=0, row=1, column=1)
-    assert spy.last_draw_at == drawn_at
-
-@pytest.mark.parametrize(
-    "top,left,drawn_at",
-    [
-        (0, 0, (12, 12)),
-        (5, 7, (19, 17)),
-    ]
-)
-def test_should_be_drawn_at_component_location(top, left, drawn_at):
+def test_should_draw_offset_from_component_coordinates():
     icon_size = 10
     countdown = Countdown(draw=None, config=ImageConfig(),
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           icon_size=icon_size, gap=2, max_columns=2)
 
-    spy = LetterSpy(icon_size)
-    countdown._draw_icon(spy, top=top, left=left, row=1, column=1)
-    assert spy.last_draw_at == drawn_at
+    spies = [LetterSpy(10) for _ in range(4)]
+    countdown._grid._icons._icons = spies
+    countdown.draw(6, 9)
+
+    assert [spy.last_draw_at for spy in spies] == [
+        (6, 9), (18, 9),
+        (6, 21), (18, 21)
+    ]
