@@ -9,7 +9,7 @@ from boltons.timeutils import daterange
 
 from uposatha.elements import MoonPhase
 
-from components import DayOfWeekIcon, BlankIcon, FullMoonIcon
+from components import DayOfWeekIcon, BlankIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
@@ -87,7 +87,12 @@ class Icons(Sequence[ImageComponent]):
             for letter in letters
         ]
 
-        self._icons.append(FullMoonIcon(size=10))
+        if moon_phase == MoonPhase.FULL:
+            self._icons.append(FullMoonIcon(size=10))
+        elif moon_phase == MoonPhase.NEW:
+            self._icons.append(NewMoonIcon(size=10))
+        else:
+            raise RuntimeError("Moon phase must be full or new")
 
     def __len__(self):
         return len(self._icons)

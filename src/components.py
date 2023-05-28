@@ -130,3 +130,19 @@ class FullMoonIcon:
 
     def __str__(self):
         return "*"
+
+class NewMoonIcon:
+    def __init__(self, size: int):
+        self._size = size
+
+    def height(self) -> int:
+        return self._size
+
+    def width(self) -> int:
+        return self._size
+
+    def draw(self, x: int, y: int) -> None:
+        pass
+
+    def __str__(self):
+        return "O"

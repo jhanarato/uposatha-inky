@@ -178,3 +178,14 @@ def test_should_draw_offset_from_component_coordinates():
         (6, 9), (18, 9),
         (6, 21), (18, 21)
     ]
+
+def test_should_show_new_moon_phase():
+    icons = Icons(None, ImageConfig(), 10, ["M", "T"], MoonPhase.NEW)
+    grid = Grid(icons, 2)
+    contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
+    assert contents == [
+        (" ", 0, 0),
+        ("M", 0, 1),
+        ("T", 1, 0),
+        ("O", 1, 1)
+    ]
