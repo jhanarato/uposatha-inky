@@ -99,23 +99,27 @@ def test_grid_row_count(icon_count, max_columns, rows):
     grid = Grid(spies, max_columns)
     assert grid.rows == rows
 
-def test_should_iterate_grid_with_no_empty_positions():
+def test_should_arrange_grid_without_blanks():
     icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
     grid = Grid(icons, 2)
-    rows_columns = [(pos[1], pos[2]) for pos in grid]
-    assert rows_columns == [
-        (0, 0), (0, 1), (1, 0), (1, 1)
+    contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
+    assert contents == [
+        ("S", 0, 0),
+        ("M", 0, 1),
+        ("T", 1, 0),
+        ("W", 1, 1)
     ]
 
-def test_should_iterate_grid_with_empty_positions():
-    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T"])
+def test_should_arrange_grid_with_blanks():
+    icons = Icons(None, ImageConfig(), 10, ["M", "T", "W"])
     grid = Grid(icons, 2)
-    assert str(grid) == " SMT"
-
-def test_should_position_icon_in_row_and_column():
-    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T", "W"])
-    grid = Grid(icons, 2)
-    assert str(grid) == "SMTW"
+    contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
+    assert contents == [
+        (" ", 0, 0),
+        ("M", 0, 1),
+        ("T", 1, 0),
+        ("W", 1, 1)
+    ]
 
 @pytest.mark.parametrize(
     "row,column,drawn_at",
