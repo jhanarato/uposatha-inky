@@ -146,8 +146,13 @@ class FullMoonIcon:
         return "*"
 
 class NewMoonIcon:
-    def __init__(self, size: int):
+    def __init__(self,
+                 draw: ImageDraw,
+                 size: int,
+                 fill: int):
+        self._draw = draw
         self._size = size
+        self._fill = fill
 
     def height(self) -> int:
         return self._size
@@ -156,7 +161,11 @@ class NewMoonIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        pass
+        self._draw.ellipse(
+            xy=[(x, y), (x + self.width(), y + self.height())],
+            fill=self._fill,
+            width=2
+        )
 
     def __str__(self):
         return "O"
