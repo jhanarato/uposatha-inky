@@ -91,8 +91,8 @@ class Icons(Sequence[ImageComponent]):
         if moon_phase == MoonPhase.FULL:
             self._icons.append(
                 FullMoonIcon(draw=draw,
-                             background=config.palette.WHITE,
-                             foreground=config.palette.YELLOW,
+                             fill=config.palette.YELLOW,
+                             outline=config.palette.BLACK,
                              size=icon_size)
             )
         elif moon_phase == MoonPhase.NEW:

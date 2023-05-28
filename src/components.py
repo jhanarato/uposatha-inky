@@ -119,14 +119,14 @@ class FullMoonIcon:
     def __init__(self,
                  draw: ImageDraw,
                  size: int,
-                 background: int,
-                 foreground: int,
+                 fill: int,
+                 outline: int,
                  ):
 
         self._draw = draw
         self._size = size
-        self._foreground = foreground
-        self._background = background
+        self._fill = fill
+        self._outline = outline
 
     def height(self) -> int:
         return self._size
@@ -137,7 +137,9 @@ class FullMoonIcon:
     def draw(self, x: int, y: int) -> None:
         self._draw.ellipse(
             xy=[(x, y), (x + self.width(), y + self.height())],
-            fill=self._foreground
+            fill=self._fill,
+            outline=self._outline,
+            width=2
         )
 
     def __str__(self):
