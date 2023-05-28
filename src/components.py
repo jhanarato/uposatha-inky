@@ -116,8 +116,17 @@ class BlankIcon:
         return " "
 
 class FullMoonIcon:
-    def __init__(self, size: int):
+    def __init__(self,
+                 draw: ImageDraw,
+                 size: int,
+                 background: int,
+                 foreground: int,
+                 ):
+
+        self._draw = draw
         self._size = size
+        self._foreground = foreground
+        self._background = background
 
     def height(self) -> int:
         return self._size
@@ -126,7 +135,10 @@ class FullMoonIcon:
         return self._size
 
     def draw(self, x: int, y: int) -> None:
-        pass
+        self._draw.ellipse(
+            xy=[(x, y), (x + self.width(), y + self.height())],
+            fill=self._foreground
+        )
 
     def __str__(self):
         return "*"

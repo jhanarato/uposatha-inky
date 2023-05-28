@@ -79,18 +79,26 @@ class Icons(Sequence[ImageComponent]):
         self._icon_size = icon_size
         self._icons: list[ImageComponent] = [
             DayOfWeekIcon(draw=draw,
+                          size=icon_size,
                           font=config.font_styles.COUNTDOWN,
                           background=config.palette.BLACK,
                           foreground=config.palette.WHITE,
-                          letter=letter,
-                          size=icon_size)
+                          letter=letter
+                          )
             for letter in letters
         ]
 
         if moon_phase == MoonPhase.FULL:
-            self._icons.append(FullMoonIcon(size=10))
+            self._icons.append(
+                FullMoonIcon(draw=draw,
+                             background=config.palette.WHITE,
+                             foreground=config.palette.YELLOW,
+                             size=icon_size)
+            )
         elif moon_phase == MoonPhase.NEW:
-            self._icons.append(NewMoonIcon(size=10))
+            self._icons.append(
+                NewMoonIcon(size=icon_size)
+            )
         else:
             raise RuntimeError("Moon phase must be full or new")
 
