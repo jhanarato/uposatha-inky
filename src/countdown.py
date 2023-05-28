@@ -7,6 +7,8 @@ from datetime import date
 from PIL import ImageDraw
 from boltons.timeutils import daterange
 
+from uposatha.elements import MoonPhase
+
 from components import DayOfWeekIcon, BlankIcon
 from layout import ImageComponent
 from screen import ImageConfig
@@ -18,9 +20,11 @@ class Countdown:
                  config: ImageConfig,
                  start: date,
                  end: date,
+                 moon_phase: MoonPhase,
                  icon_size: int,
-                 max_columns: int,
-                 gap: int):
+                 gap: int,
+                 max_columns: int
+                 ):
 
         self._start = start
         self._end = end

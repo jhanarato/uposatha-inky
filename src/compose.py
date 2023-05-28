@@ -2,6 +2,8 @@ from datetime import date
 
 from PIL import Image, ImageDraw
 
+from uposatha.elements import MoonPhase
+
 from components import Text, HorizontalLine
 from countdown import Countdown
 from content import NextUposatha
@@ -40,13 +42,17 @@ class PillowImage:
             colour=self._foreground
         )
 
-    def new_countdown(self, today: date, uposatha_falls_on: date) -> Countdown:
+    def new_countdown(self,
+                      today: date,
+                      uposatha_falls_on: date,
+                      moon_phase: MoonPhase) -> Countdown:
         return Countdown(
             draw=self._draw,
             config=self._config,
             icon_size=20,
             start=today,
             end=uposatha_falls_on,
+            moon_phase=moon_phase,
             gap=4,
             max_columns=8)
 
@@ -74,7 +80,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         image.new_heading_text("Uposatha"),
         image.new_horizontal_line(300),
         image.new_info_text(content.date),
-        image.new_countdown(content.today, content.falls_on),
+        image.new_countdown(content.today, content.falls_on, content.moon_phase),
         image.new_info_text(content.details)
     ]
 

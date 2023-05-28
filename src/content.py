@@ -24,7 +24,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
         falls_on=next_uposatha.falls_on,
         date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),
-        moon_phase=MoonPhase.FULL
+        moon_phase=next_uposatha.moon_phase
     )
 
 def uposatha_details(season, next_uposatha):
