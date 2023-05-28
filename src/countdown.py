@@ -49,15 +49,14 @@ class Countdown:
         return [date_.strftime("%a")[0]
                 for date_ in daterange(self._start, self._end, inclusive=True)]
 
-    def _draw_icon(self, icon: ImageComponent, top: int, left: int, row: int, column: int) -> None:
-        spacing = self._gap + self._icons.icon_size
-        x = left + column * spacing
-        y = top + row * spacing
-        icon.draw(x, y)
-
     def draw(self, x: int, y: int) -> None:
+        spacing = self._gap + self._icons.icon_size
+
         for icon, row, column in self._grid:
-            self._draw_icon(icon, top=y, left=x, row=row, column=column)
+            icon.draw(
+                x + (column * spacing),
+                y + (row * spacing)
+            )
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
