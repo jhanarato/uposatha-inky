@@ -20,8 +20,21 @@ class Appearance:
     max_columns: int
     gap: int
 
+
 def appearance(today: date, uposatha: date) -> Appearance:
-    return Appearance(icon_size=1, max_columns=1, gap=1)
+    days_inclusive = (uposatha - today).days + 1
+
+    small = Appearance(max_columns=8, icon_size=20, gap=4)
+    medium = Appearance(max_columns=days_inclusive, icon_size=40, gap=4)
+    large = Appearance(max_columns=days_inclusive, icon_size=80, gap=4)
+
+    if days_inclusive > 7:
+        return small
+    if days_inclusive > 3:
+        return medium
+    else:
+        return large
+
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
