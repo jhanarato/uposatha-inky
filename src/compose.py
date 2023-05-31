@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from countdown import Countdown
+from countdown import Countdown, appearance
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
@@ -46,15 +46,17 @@ class PillowImage:
                       today: date,
                       uposatha_falls_on: date,
                       moon_phase: MoonPhase) -> Countdown:
+        appear = appearance(today, uposatha_falls_on)
+
         return Countdown(
             draw=self._draw,
             config=self._config,
-            icon_size=20,
+            icon_size=appear.icon_size,
             start=today,
             end=uposatha_falls_on,
             moon_phase=moon_phase,
-            gap=4,
-            max_columns=8)
+            gap=appear.gap,
+            max_columns=appear.max_columns)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
