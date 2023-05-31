@@ -202,4 +202,3 @@ def test_should_show_new_moon_phase():
 )
 def test_should_adjust_size_as_uposatha_gets_closer(days_inclusive, appears):
     assert appearance(date(2023, 1, 1), date(2023, 1, days_inclusive)) == appears
-
