@@ -2,6 +2,7 @@ import math
 import itertools
 
 from collections.abc import Sequence, Iterator
+from dataclasses import dataclass
 from datetime import date
 
 from PIL import ImageDraw
@@ -13,6 +14,14 @@ from components import DayOfWeekIcon, BlankIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
+@dataclass
+class Appearance:
+    icon_size: int
+    max_columns: int
+    gap: int
+
+def appearance(today: date, uposatha: date) -> Appearance:
+    return Appearance(icon_size=1, max_columns=1, gap=1)
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """

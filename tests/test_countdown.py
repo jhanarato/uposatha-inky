@@ -4,7 +4,7 @@ import pytest
 
 from uposatha.elements import MoonPhase
 
-from countdown import Countdown, Grid, Icons
+from countdown import Countdown, Grid, Icons, Appearance, appearance
 from screen import ImageConfig
 
 
@@ -189,3 +189,6 @@ def test_should_show_new_moon_phase():
         ("T", 1, 0),
         ("O", 1, 1)
     ]
+
+def test_should_adjust_size_as_uposatha_gets_closer():
+    assert appearance(date(2023, 1, 1), date(2023, 1, 2)) == Appearance(icon_size=1, max_columns=1, gap=1)
