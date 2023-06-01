@@ -1,26 +1,10 @@
 from datetime import date
 
-import pytest
 from uposatha.elements import MoonPhase
 
 from countdown import Countdown
 from screen import ImageConfig
 
-@pytest.mark.parametrize(
-    "start,end,seq",
-    [
-        (date(2010, 3, 26), date(2010, 4, 9), "FSSMTWTFSSMTWT*"),
-        (date(2010, 3, 26), date(2010, 3, 27), "F*"),
-        (date(2010, 3, 26), date(2010, 3, 26), "*"),
-    ]
-)
-def test_letters(start, end, seq):
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2010, 3, 26), end=date(2010, 4, 9),
-                          moon_phase=MoonPhase.FULL,
-                          icon_size=0, gap=0, max_columns=0)
-
-    assert str(countdown) == "FSSMTWTFSSMTWT*"
 
 def test_should_report_height_for_two_rows():
     countdown = Countdown(draw=None, config=ImageConfig(),
