@@ -2,9 +2,23 @@ from datetime import date
 
 from uposatha.elements import MoonPhase
 
-from conftest import LetterSpy
 from countdown import Countdown
 from screen import ImageConfig
+
+
+class LetterSpy:
+    def __init__(self, size: int):
+        self._size = size
+        self.last_draw_at = None
+
+    def height(self) -> int:
+        return self._size
+
+    def width(self) -> int:
+        return self._size
+
+    def draw(self, x: int, y: int) -> None:
+        self.last_draw_at = (x, y)
 
 
 def test_should_draw_icons():
