@@ -24,7 +24,7 @@ class Appearance:
 def appearance(today: date, uposatha: date) -> Appearance:
     days_inclusive = (uposatha - today).days + 1
 
-    small = Appearance(max_columns=8, icon_size=20, gap=4)
+    small = Appearance(max_columns=8, icon_size=30, gap=4)
     medium = Appearance(max_columns=days_inclusive, icon_size=40, gap=4)
     large = Appearance(max_columns=days_inclusive, icon_size=80, gap=4)
 
