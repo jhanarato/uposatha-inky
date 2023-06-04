@@ -96,6 +96,8 @@ class Icons(Sequence[ImageComponent]):
                  end: date,
                  moon_phase: MoonPhase):
 
+        self._draw = draw
+        self._config = config
         self._start = start
         self._end = end
         self._moon_phase = moon_phase
@@ -112,21 +114,25 @@ class Icons(Sequence[ImageComponent]):
             for letter in self.letters()
         ]
 
-        if moon_phase == MoonPhase.FULL:
-            self._icons.append(
-                FullMoonIcon(draw=draw,
-                             fill=config.palette.YELLOW,
-                             outline=config.palette.BLACK,
-                             size=icon_size)
-            )
-        elif moon_phase == MoonPhase.NEW:
-            self._icons.append(
-                NewMoonIcon(draw=draw,
-                            fill=config.palette.BLACK,
-                            size=icon_size)
-            )
-        else:
-            raise RuntimeError("Moon phase must be full or new")
+        self._icons.append(self.moon_icon())
+
+    def moon_icon(self) -> ImageComponent:
+        match self._moon_phase:
+            case MoonPhase.FULL:
+                return FullMoonIcon(
+                    draw=self._draw,
+                    fill=self._config.palette.YELLOW,
+                    outline=self._config.palette.BLACK,
+                    size=self._icon_size)
+
+            case MoonPhase.NEW:
+                return NewMoonIcon(
+                   draw=self._draw,
+                   fill=self._config.palette.BLACK,
+                   size=self._icon_size)
+
+            case MoonPhase.WANING | MoonPhase.WAXING:
+                raise RuntimeError("Moon phase must be full or new")
 
     def letters(self) -> list[str]:
         return [date_.strftime("%a")[0]
@@ -136,6 +142,10 @@ class Icons(Sequence[ImageComponent]):
         return (self._end - self._start).days + 1
 
     def __getitem__(self, item) -> ImageComponent:
+        # TODO Rewrite without requiring prior icons construction.
+        #  If the position is last, return a FullMoonIcon or NewMoonIcon
+        #  Otherwise, get the date for the position and return a LetterIcon
+        #  using the first letter of the date's day of the week.
         return self._icons[item]
 
     @property
