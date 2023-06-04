@@ -1,12 +1,15 @@
-from datetime import date
+from datetime import date, timedelta
 
 import pytest
 from uposatha.elements import MoonPhase
 
-from conftest import make_letter_spies
 from countdown import Grid, Icons
 from screen import ImageConfig
 
+def icon_seq_of_length(n: int) -> Icons:
+    start = date(2023, 1, 1)
+    end = start + timedelta(n - 1)
+    return Icons(None, ImageConfig(), 10, start, end, MoonPhase.FULL)
 
 @pytest.mark.parametrize(
     "icon_count,max_columns,columns",
@@ -17,8 +20,8 @@ from screen import ImageConfig
     ]
 )
 def test_grid_column_count(icon_count, max_columns, columns):
-    spies = make_letter_spies(icon_count)
-    grid = Grid(spies, max_columns)
+    icons = icon_seq_of_length(icon_count)
+    grid = Grid(icons, max_columns)
     assert grid.columns == columns
 
 
@@ -31,8 +34,8 @@ def test_grid_column_count(icon_count, max_columns, columns):
     ]
 )
 def test_grid_row_count(icon_count, max_columns, rows):
-    spies = make_letter_spies(icon_count)
-    grid = Grid(spies, max_columns)
+    icons = icon_seq_of_length(icon_count)
+    grid = Grid(icons, max_columns)
     assert grid.rows == rows
 
 
