@@ -26,7 +26,7 @@ def appearance(today: date, uposatha: date) -> Appearance:
 
     small = Appearance(max_columns=8, icon_size=30, gap=4)
     medium = Appearance(max_columns=days_inclusive, icon_size=40, gap=4)
-    large = Appearance(max_columns=days_inclusive, icon_size=80, gap=4)
+    large = Appearance(max_columns=days_inclusive, icon_size=50, gap=4)
 
     if days_inclusive > 7:
         return small
