@@ -73,10 +73,6 @@ class Countdown:
         gap_height = self._gap * (self._grid.columns - 1)
         return icon_width + gap_height
 
-    def letters(self) -> list[str]:
-        return [date_.strftime("%a")[0]
-                for date_ in daterange(self._start, self._end)]
-
     def draw(self, x: int, y: int) -> None:
         spacing = self._gap + self._icons.icon_size
 
