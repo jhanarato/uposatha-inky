@@ -37,7 +37,7 @@ def test_grid_row_count(icon_count, max_columns, rows):
 
 
 def test_should_arrange_grid_without_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["S", "M", "T"], date(2023, 6, 4), date(2023, 6, 6), MoonPhase.FULL)
+    icons = Icons(None, ImageConfig(), 10, date(2023, 6, 4), date(2023, 6, 7), MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [
@@ -49,7 +49,7 @@ def test_should_arrange_grid_without_blanks():
 
 
 def test_should_arrange_grid_with_blanks():
-    icons = Icons(None, ImageConfig(), 10, ["M", "T"], date(2023, 6, 5), date(2023, 6, 6), MoonPhase.FULL)
+    icons = Icons(None, ImageConfig(), 10, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [
@@ -61,7 +61,7 @@ def test_should_arrange_grid_with_blanks():
 
 
 def test_should_show_new_moon_phase():
-    icons = Icons(None, ImageConfig(), 10, ["M", "T"], date(2023, 6, 5), date(2023, 6, 6), MoonPhase.NEW)
+    icons = Icons(None, ImageConfig(), 10, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.NEW)
     grid = Grid(icons, 2)
     contents = [(str(pos[0]), pos[1], pos[2]) for pos in grid]
     assert contents == [

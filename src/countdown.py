@@ -55,7 +55,6 @@ class Countdown:
             draw=draw,
             config=config,
             icon_size=icon_size,
-            letters=self.letters(),
             start=start,
             end=end,
             moon_phase=moon_phase
@@ -97,12 +96,15 @@ class Icons(Sequence[ImageComponent]):
                  draw: ImageDraw,
                  config: ImageConfig,
                  icon_size: int,
-                 letters: list[str],
                  start: date,
                  end: date,
                  moon_phase: MoonPhase):
 
+        self._start = start
+        self._end = end
+        self._moon_phase = moon_phase
         self._icon_size = icon_size
+
         self._icons: list[ImageComponent] = [
             DayOfWeekIcon(draw=draw,
                           size=icon_size,
@@ -111,7 +113,7 @@ class Icons(Sequence[ImageComponent]):
                           foreground=config.palette.WHITE,
                           letter=letter
                           )
-            for letter in letters
+            for letter in self.letters()
         ]
 
         if moon_phase == MoonPhase.FULL:
@@ -129,6 +131,10 @@ class Icons(Sequence[ImageComponent]):
             )
         else:
             raise RuntimeError("Moon phase must be full or new")
+
+    def letters(self) -> list[str]:
+        return [date_.strftime("%a")[0]
+                for date_ in daterange(self._start, self._end)]
 
     def __len__(self):
         return len(self._icons)

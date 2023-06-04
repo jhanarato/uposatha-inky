@@ -23,6 +23,6 @@ class LetterSpy:
 
 
 def make_letter_spies(count: int) -> Icons:
-    icons = Icons(None, ImageConfig(), 10, [], date(2000, 1, 1), date(2000, 1, 1), MoonPhase.FULL)
+    icons = Icons(None, ImageConfig(), 10, date(2000, 1, 1), date(2000, 1, 1), MoonPhase.FULL)
     icons._icons = [LetterSpy(10) for _ in range(count)]
     return icons
