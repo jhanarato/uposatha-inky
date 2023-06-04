@@ -133,7 +133,7 @@ class Icons(Sequence[ImageComponent]):
                 for date_ in daterange(self._start, self._end)]
 
     def __len__(self):
-        return len(self._icons)
+        return (self._end - self._start).days + 1
 
     def __getitem__(self, item) -> ImageComponent:
         return self._icons[item]
