@@ -56,6 +56,8 @@ class Countdown:
             config=config,
             icon_size=icon_size,
             letters=self.letters(),
+            start=start,
+            end=end,
             moon_phase=moon_phase
         )
 
@@ -96,6 +98,8 @@ class Icons(Sequence[ImageComponent]):
                  config: ImageConfig,
                  icon_size: int,
                  letters: list[str],
+                 start: date,
+                 end: date,
                  moon_phase: MoonPhase):
 
         self._icon_size = icon_size
