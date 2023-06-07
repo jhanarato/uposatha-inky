@@ -74,16 +74,22 @@ class Countdown:
         return icon_width + gap_height
 
     def draw(self, x: int, y: int) -> None:
-        spacing = self._gap + self._icons.icon_size
-
         for icon, row, column in self._grid:
             icon.draw(
-                x + (column * spacing),
-                y + (row * spacing)
+                *icon_xy(x, y, row, column, self._gap, self._icons.icon_size)
             )
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
+
+
+def icon_xy(parent_x: int, parent_y: int,
+            row: int, column: int,
+            gap: int, icon_size: int) -> tuple[int, int]:
+    spacing = gap + icon_size
+    icon_x = parent_x + (column * spacing)
+    icon_y = parent_y + (row * spacing)
+    return icon_x, icon_y
 
 
 class Icons(Sequence[ImageComponent]):
