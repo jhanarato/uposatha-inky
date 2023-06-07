@@ -3,7 +3,7 @@ import itertools
 
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, timedelta
 
 from PIL import ImageDraw
 from boltons.timeutils import daterange
@@ -147,11 +147,15 @@ class Icons(Sequence[ImageComponent]):
         return (self._end - self._start).days + 1
 
     def __getitem__(self, item) -> ImageComponent:
-        # TODO Rewrite without requiring prior icons construction.
-        #  If the position is last, return a FullMoonIcon or NewMoonIcon
-        #  Otherwise, get the date for the position and return a LetterIcon
-        #  using the first letter of the date's day of the week.
-        return self._icons[item]
+        if item < 0:
+            raise IndexError("Does not support negative indexes")
+        elif item >= len(self):
+            raise IndexError("No such icon")
+        elif item == len(self) - 1:
+            return self.moon_icon()
+        else:
+            day = self._start + timedelta(item)
+            return self.day_of_week_icon(day)
 
     @property
     def icon_size(self) -> int:

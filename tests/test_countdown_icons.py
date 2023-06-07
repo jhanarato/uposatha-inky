@@ -61,6 +61,7 @@ def test_should_get_icon_at():
     assert str(icons[1]) == "T"
     assert str(icons[2]) == "*"
 
-def test_should_allow_negative_index():
+def test_should_not_allow_negative_index():
     icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
-    assert str(icons[-1]) == "*"
+    with pytest.raises(IndexError):
+        _ = icons[-1]
