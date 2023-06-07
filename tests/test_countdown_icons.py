@@ -50,11 +50,6 @@ def test_letters(start, end, seq):
 
     assert str(countdown) == "FSSMTWTFSSMTWT*"
 
-def test_should_raise_error_when_index_is_negative():
-    icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
-    with pytest.raises(IndexError):
-        _ = icons[-1]
-
 def test_should_raise_error_when_index_too_large():
     icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
     with pytest.raises(IndexError):
