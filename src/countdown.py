@@ -75,9 +75,8 @@ class Countdown:
 
     def draw(self, x: int, y: int) -> None:
         for icon, row, column in self._grid:
-            icon.draw(
-                *icon_xy(x, y, row, column, self._gap, self._icons.icon_size)
-            )
+            xy = icon_xy(x, y, row, column, self._gap, self._icons.icon_size)
+            icon.draw(*xy)
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
