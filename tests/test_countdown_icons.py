@@ -49,3 +49,19 @@ def test_letters(start, end, seq):
                           icon_size=0, gap=0, max_columns=0)
 
     assert str(countdown) == "FSSMTWTFSSMTWT*"
+
+def test_should_raise_error_when_index_is_negative():
+    icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
+    with pytest.raises(IndexError):
+        _ = icons[-1]
+
+def test_should_raise_error_when_index_too_large():
+    icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
+    with pytest.raises(IndexError):
+        _ = icons[3]
+
+def test_should_get_icon_at():
+    icons = Icons(None, ImageConfig(), 1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
+    assert str(icons[0]) == "M"
+    assert str(icons[1]) == "T"
+    assert str(icons[2]) == "*"
