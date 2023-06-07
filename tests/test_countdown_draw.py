@@ -53,19 +53,18 @@ def test_should_distribute_icons_with_gap(row, column, xy):
         gap=2, icon_size=10
     ) == xy
 
-def test_should_draw_offset_from_component_coordinates():
-    icon_size = 10
-    countdown = Countdown(draw=None, config=ImageConfig(),
-                          start=date(2023, 5, 7),
-                          end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL,
-                          icon_size=icon_size, gap=2, max_columns=2)
-
-    spies = [LetterSpy(10) for _ in range(4)]
-    countdown._grid._icons._icons = spies
-    countdown.draw(6, 9)
-
-    assert [spy.last_draw_at for spy in spies] == [
-        (6, 9), (18, 9),
-        (6, 21), (18, 21)
+@pytest.mark.parametrize(
+    "row,column,xy",
+    [
+        (0, 0, (6, 9)),
+        (0, 1, (18, 9)),
+        (1, 0, (6, 21)),
+        (1, 1, (18, 21)),
     ]
+)
+def test_should_distribute_icons_within_parent(row, column, xy):
+    assert icon_xy(
+        parent_x=6, parent_y=9,
+        row=row, column=column,
+        gap=2, icon_size=10
+    ) == xy
