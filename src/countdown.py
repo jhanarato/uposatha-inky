@@ -147,14 +147,16 @@ class Icons(Sequence[ImageComponent]):
         return (self._end - self._start).days + 1
 
     def __getitem__(self, item) -> ImageComponent:
+        day = self._start + timedelta(item)
+
         if item < 0:
             raise IndexError("Does not support negative indexes")
-        elif item >= len(self):
+        if item >= len(self):
             raise IndexError("No such icon")
-        elif item == len(self) - 1:
+
+        if item == len(self) - 1:
             return self.moon_icon()
         else:
-            day = self._start + timedelta(item)
             return self.day_of_week_icon(day)
 
     @property
