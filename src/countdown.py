@@ -149,12 +149,11 @@ class Icons(Sequence[ImageComponent]):
         if item >= len(self):
             raise IndexError("No such icon")
 
-        day = self._start + timedelta(item)
-
         if item == len(self) - 1:
             return self.moon_icon()
-        else:
-            return self.day_of_week_icon(day)
+
+        day = self._start + timedelta(item)
+        return self.day_of_week_icon(day)
 
     @property
     def icon_size(self) -> int:
