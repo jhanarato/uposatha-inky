@@ -48,9 +48,6 @@ class Countdown:
                  max_columns: int
                  ):
 
-        self._start = start
-        self._end = end
-
         self._icons = Icons(
             draw=draw,
             config=config,
