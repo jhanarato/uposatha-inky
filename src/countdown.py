@@ -105,9 +105,6 @@ class Icons(Sequence[ImageComponent]):
         self._moon_phase = moon_phase
         self._icon_size = icon_size
 
-        self._icons: list[ImageComponent] = self.day_of_week_icons()
-        self._icons.append(self.moon_icon())
-
     def day_of_week_icon(self, day: date) -> ImageComponent:
         return DayOfWeekIcon(
             draw=self._draw,
@@ -136,10 +133,6 @@ class Icons(Sequence[ImageComponent]):
             case MoonPhase.WANING | MoonPhase.WAXING:
                 raise RuntimeError("Moon phase must be full or new")
 
-    def day_of_week_icons(self) -> list[ImageComponent]:
-        return [self.day_of_week_icon(date_)
-                for date_ in daterange(self._start, self._end)]
-
     def __len__(self):
         return (self._end - self._start).days + 1
 
@@ -161,7 +154,7 @@ class Icons(Sequence[ImageComponent]):
 
     def __str__(self):
         return "".join(
-            [str(icon) for icon in self._icons]
+            [str(icon) for icon in self]
         )
 
 
