@@ -191,3 +191,16 @@ class Grid:
 
     def __str__(self):
         return "".join([str(pos[0]) for pos in self])
+
+
+class IconPositions:
+    def __init__(self, icon_count: int, max_columns: int):
+        self._icon_count = icon_count
+        self._max_columns = max_columns
+
+    @property
+    def rows(self) -> int:
+        return math.ceil(self._icon_count / self._max_columns)
+
+    def __iter__(self) -> Iterator[tuple[int, int]]:
+        yield 0, 0
