@@ -237,11 +237,16 @@ class Positions:
     def spacing(self) -> int:
         return self._icon_size + self._gap
 
-    def positions(self):
-        positions = itertools.product(range(self.rows), range(self.columns))
+    def positions(self) -> Iterator[tuple[int, int]]:
+        positions = itertools.product(
+            range(self.rows),
+            range(self.columns)
+        )
+
         for _ in range(self.empty):
             next(positions)
-        return positions
+
+        yield from positions
 
     def __iter__(self) -> Iterator[tuple[int, int]]:
         for row, column in self.positions():
