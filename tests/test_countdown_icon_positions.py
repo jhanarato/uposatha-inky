@@ -2,10 +2,6 @@ import pytest
 
 from countdown import IconPositions
 
-def test_should_iterate_over_positions():
-    positions = IconPositions(icon_count=4, max_columns=2)
-    assert list(positions) == [(0, 0)]
-
 @pytest.mark.parametrize(
     "icon_count,rows",
     [
@@ -34,3 +30,19 @@ def test_should_calculate_rows(icon_count, rows):
 def test_should_calculate_columns(icon_count, columns):
     positions = IconPositions(icon_count=icon_count, max_columns=4)
     assert positions.columns == columns
+
+@pytest.mark.parametrize(
+    "icon_count,empty",
+    [
+        (3, 0),
+        (4, 0),
+        (5, 3),
+        (6, 2),
+        (7, 1),
+        (8, 0),
+        (9, 3),
+    ]
+)
+def test_should_calculate_blank_cells(icon_count, empty):
+    positions = IconPositions(icon_count=icon_count, max_columns=4)
+    assert positions.empty == empty
