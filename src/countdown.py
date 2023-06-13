@@ -9,7 +9,7 @@ from PIL import ImageDraw
 
 from uposatha.elements import MoonPhase
 
-from components import DayOfWeekIcon, BlankIcon, FullMoonIcon, NewMoonIcon
+from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
