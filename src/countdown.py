@@ -4,10 +4,8 @@ import itertools
 from collections.abc import Sequence, Iterator, Iterable
 from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import Tuple, Any
 
 from PIL import ImageDraw
-from boltons.timeutils import daterange
 
 from uposatha.elements import MoonPhase
 
@@ -61,6 +59,12 @@ class Countdown:
         self._gap = gap
         self._grid = Grid(self._icons, max_columns)
 
+        self._positions = Positions()
+        self._positions.icon_count(len(self._icons))
+        self._positions.icon_size(icon_size)
+        self._positions.gap(gap)
+        self._positions.max_columns(max_columns)
+
     def height(self) -> int:
         icon_height = self._icons.icon_size * self._grid.rows
         gap_height = self._gap * (self._grid.rows - 1)
@@ -72,9 +76,10 @@ class Countdown:
         return icon_width + gap_height
 
     def draw(self, x: int, y: int) -> None:
-        for icon, row, column in self._grid:
-            xy = icon_xy(x, y, row, column, self._gap, self._icons.icon_size)
-            icon.draw(*xy)
+        self._positions.start_at(x, y)
+
+        for position, icon in zip(self._positions, self._icons):
+            icon.draw(*position)
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
