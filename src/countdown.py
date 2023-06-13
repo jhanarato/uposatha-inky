@@ -57,7 +57,6 @@ class Countdown:
         )
 
         self._gap = gap
-        self._grid = Grid(self._icons, max_columns)
 
         self._positions = Positions()
         self._positions.icon_count(len(self._icons))
@@ -66,13 +65,13 @@ class Countdown:
         self._positions.max_columns(max_columns)
 
     def height(self) -> int:
-        icon_height = self._icons.icon_size * self._grid.rows
-        gap_height = self._gap * (self._grid.rows - 1)
+        icon_height = self._icons.icon_size * self._positions.rows
+        gap_height = self._gap * (self._positions.rows - 1)
         return icon_height + gap_height
 
     def width(self) -> int:
-        icon_width = self._icons.icon_size * self._grid.columns
-        gap_height = self._gap * (self._grid.columns - 1)
+        icon_width = self._icons.icon_size * self._positions.columns
+        gap_height = self._gap * (self._positions.columns - 1)
         return icon_width + gap_height
 
     def draw(self, x: int, y: int) -> None:
@@ -162,41 +161,6 @@ class Icons(Sequence[ImageComponent]):
         return "".join(
             [str(icon) for icon in self]
         )
-
-
-class Grid:
-    """ An iterable of icons in grid positions """
-    def __init__(self, icons: Icons, max_columns: int):
-        self._icons = icons
-        self._max_columns = max_columns
-
-    def has_single_row(self) -> bool:
-        return len(self._icons) <= self._max_columns
-
-    @property
-    def columns(self) -> int:
-        if self.has_single_row():
-            return len(self._icons)
-        return self._max_columns
-
-    @property
-    def rows(self) -> int:
-        return math.ceil(len(self._icons) / self._max_columns)
-
-    def _blanks(self) -> list[BlankIcon]:
-        empty = (self.rows * self.columns) - len(self._icons)
-        return [BlankIcon(size=self._icons.icon_size)
-                for _ in range(empty)]
-
-    def __iter__(self) -> Iterator[tuple[ImageComponent, int, int]]:
-        icons = itertools.chain(self._blanks(), self._icons)
-        positions = itertools.product(range(self.rows), range(self.columns))
-
-        for icon, position in zip(icons, positions, strict=True):
-            yield icon, position[0], position[1]
-
-    def __str__(self):
-        return "".join([str(pos[0]) for pos in self])
 
 
 class Positions(Iterable[tuple[int, int]]):
