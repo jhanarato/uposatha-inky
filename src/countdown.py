@@ -219,6 +219,10 @@ class IconPositions:
 
     def __iter__(self) -> Iterator[tuple[int, int]]:
         positions = itertools.product(range(self.rows), range(self.columns))
+
+        for _ in range(self.empty):
+            next(positions)
+
         for row, column in positions:
             x = column * self._icon_size
             y = row * self._icon_size
