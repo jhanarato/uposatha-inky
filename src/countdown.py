@@ -233,15 +233,18 @@ class Positions:
     def empty(self) -> int:
         return (self.rows * self.columns) - self._icon_count
 
-    def __iter__(self) -> Iterator[tuple[int, int]]:
-        positions = itertools.product(range(self.rows), range(self.columns))
+    @property
+    def spacing(self) -> int:
+        return self._icon_size + self._gap
 
+    def positions(self):
+        positions = itertools.product(range(self.rows), range(self.columns))
         for _ in range(self.empty):
             next(positions)
+        return positions
 
-        spacing = self._icon_size + self._gap
-
-        for row, column in positions:
-            x = (column * spacing) + self._start_x
-            y = (row * spacing) + self._start_y
+    def __iter__(self) -> Iterator[tuple[int, int]]:
+        for row, column in self.positions():
+            x = (column * self.spacing) + self._start_x
+            y = (row * self.spacing) + self._start_y
             yield x, y
