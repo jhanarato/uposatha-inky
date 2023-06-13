@@ -216,6 +216,6 @@ class GridLayout:
 
     def icon_coordinates(self) -> Iterator[tuple[int, int]]:
         for row, column in self.positions():
-            x = (column * self.spacing) + self._start_x
-            y = (row * self.spacing) + self._start_y
+            x = self._start_x + (column * self.spacing)
+            y = self._start_y + (row * self.spacing)
             yield x, y
