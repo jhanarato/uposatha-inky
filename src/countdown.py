@@ -69,9 +69,9 @@ class Countdown:
         return self._layout.total_width
 
     def draw(self, x: int, y: int) -> None:
-        self._layout.start_at(x, y)
+        self._layout.starting_coordinates(x, y)
 
-        for coordinates, icon in zip(self._layout.icon_coordinates(), self._icons):
+        for icon, coordinates in zip(self._icons, self._layout.icon_coordinates()):
             icon.draw(*coordinates)
 
     def __str__(self):
@@ -169,7 +169,7 @@ class GridLayout:
     def gap(self, gap: int) -> None:
         self._gap = gap
 
-    def start_at(self, x: int, y: int) -> None:
+    def starting_coordinates(self, x: int, y: int) -> None:
         self._start_x = x
         self._start_y = y
 

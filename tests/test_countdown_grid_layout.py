@@ -89,7 +89,7 @@ def test_should_accept_starting_coordinates():
     layout.icon_count(4)
     layout.icon_size(10)
     layout.gap(2)
-    layout.start_at(6, 9)
+    layout.starting_coordinates(6, 9)
     assert list(layout.icon_coordinates()) == [
         (6, 9),
         (18, 9),
