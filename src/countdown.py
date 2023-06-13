@@ -56,8 +56,6 @@ class Countdown:
             moon_phase=moon_phase
         )
 
-        self._gap = gap
-
         self._positions = Positions()
         self._positions.icon_count(len(self._icons))
         self._positions.icon_size(icon_size)
@@ -65,14 +63,10 @@ class Countdown:
         self._positions.max_columns(max_columns)
 
     def height(self) -> int:
-        icon_height = self._icons.icon_size * self._positions.rows
-        gap_height = self._gap * (self._positions.rows - 1)
-        return icon_height + gap_height
+        return self._positions.total_height
 
     def width(self) -> int:
-        icon_width = self._icons.icon_size * self._positions.columns
-        gap_height = self._gap * (self._positions.columns - 1)
-        return icon_width + gap_height
+        return self._positions.total_width
 
     def draw(self, x: int, y: int) -> None:
         self._positions.start_at(x, y)
