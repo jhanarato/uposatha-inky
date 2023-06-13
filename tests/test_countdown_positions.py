@@ -1,6 +1,6 @@
 import pytest
 
-from countdown import Positions
+from countdown import GridLayout
 
 @pytest.mark.parametrize(
     "icon_count,rows",
@@ -13,7 +13,7 @@ from countdown import Positions
     ]
 )
 def test_should_calculate_rows(icon_count, rows):
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.rows == rows
@@ -30,7 +30,7 @@ def test_should_calculate_rows(icon_count, rows):
     ]
 )
 def test_should_calculate_columns(icon_count, columns):
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.columns == columns
@@ -48,13 +48,13 @@ def test_should_calculate_columns(icon_count, columns):
     ]
 )
 def test_should_calculate_blank_cells(icon_count, empty):
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.empty == empty
 
 def test_should_yield_positions_without_gap():
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(2)
     positions.icon_count(4)
     positions.icon_size(10)
@@ -64,7 +64,7 @@ def test_should_yield_positions_without_gap():
     ]
 
 def test_should_skip_empty_positions():
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(2)
     positions.icon_count(3)
     positions.icon_size(10)
@@ -73,7 +73,7 @@ def test_should_skip_empty_positions():
     ]
 
 def test_should_yield_positions_with_gap():
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(2)
     positions.icon_count(4)
     positions.icon_size(10)
@@ -84,7 +84,7 @@ def test_should_yield_positions_with_gap():
     ]
 
 def test_should_accept_starting_coordinates():
-    positions = Positions()
+    positions = GridLayout()
     positions.max_columns(2)
     positions.icon_count(4)
     positions.icon_size(10)
@@ -98,7 +98,7 @@ def test_should_accept_starting_coordinates():
     ]
 
 def test_should_report_total_height():
-    positions = Positions()
+    positions = GridLayout()
     positions.icon_count(6)
     positions.max_columns(3)
     assert positions.rows == 2
@@ -107,7 +107,7 @@ def test_should_report_total_height():
     assert positions.total_height == (2 * 10) + 2
 
 def test_should_report_total_width():
-    positions = Positions()
+    positions = GridLayout()
     positions.icon_count(6)
     positions.max_columns(3)
     assert positions.columns == 3

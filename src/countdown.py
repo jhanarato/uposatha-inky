@@ -56,22 +56,22 @@ class Countdown:
             moon_phase=moon_phase
         )
 
-        self._positions = Positions()
-        self._positions.icon_count(len(self._icons))
-        self._positions.icon_size(icon_size)
-        self._positions.gap(gap)
-        self._positions.max_columns(max_columns)
+        self._layout = GridLayout()
+        self._layout.icon_count(len(self._icons))
+        self._layout.icon_size(icon_size)
+        self._layout.gap(gap)
+        self._layout.max_columns(max_columns)
 
     def height(self) -> int:
-        return self._positions.total_height
+        return self._layout.total_height
 
     def width(self) -> int:
-        return self._positions.total_width
+        return self._layout.total_width
 
     def draw(self, x: int, y: int) -> None:
-        self._positions.start_at(x, y)
+        self._layout.start_at(x, y)
 
-        for position, icon in zip(self._positions, self._icons):
+        for position, icon in zip(self._layout, self._icons):
             icon.draw(*position)
 
     def __str__(self):
@@ -148,7 +148,7 @@ class Icons(Sequence[ImageComponent]):
         )
 
 
-class Positions(Iterable[tuple[int, int]]):
+class GridLayout(Iterable[tuple[int, int]]):
     def __init__(self):
         self._max_columns = 0
         self._icon_count = 0
