@@ -47,13 +47,13 @@ def test_should_calculate_columns(icon_count, columns):
         (9, 3),
     ]
 )
-def test_should_calculate_blank_cells(icon_count, empty):
+def test_should_calculate_empty_positions(icon_count, empty):
     layout = GridLayout()
     layout.max_columns(4)
     layout.icon_count(icon_count)
     assert layout.empty == empty
 
-def test_should_yield_positions_without_gap():
+def test_should_yield_coordinates_without_gap():
     layout = GridLayout()
     layout.max_columns(2)
     layout.icon_count(4)
@@ -72,7 +72,7 @@ def test_should_skip_empty_positions():
         (10, 0), (0, 10), (10, 10),
     ]
 
-def test_should_yield_positions_with_gap():
+def test_should_yield_coordinates_with_gap():
     layout = GridLayout()
     layout.max_columns(2)
     layout.icon_count(4)
