@@ -4,6 +4,7 @@ import itertools
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
+from typing import Tuple, Any
 
 from PIL import ImageDraw
 from boltons.timeutils import daterange
@@ -197,6 +198,7 @@ class IconPositions:
     def __init__(self, icon_count: int, max_columns: int):
         self._icon_count = icon_count
         self._max_columns = max_columns
+        self._icon_size = 0
 
     @property
     def rows(self) -> int:
@@ -212,5 +214,12 @@ class IconPositions:
     def empty(self) -> int:
         return (self.rows * self.columns) - self._icon_count
 
+    def icon_size(self, size: int) -> None:
+        self._icon_size = size
+
     def __iter__(self) -> Iterator[tuple[int, int]]:
-        yield 0, 0
+        positions = itertools.product(range(self.rows), range(self.columns))
+        for row, column in positions:
+            x = column * self._icon_size
+            y = row * self._icon_size
+            yield x, y

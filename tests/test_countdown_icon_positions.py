@@ -46,3 +46,11 @@ def test_should_calculate_columns(icon_count, columns):
 def test_should_calculate_blank_cells(icon_count, empty):
     positions = IconPositions(icon_count=icon_count, max_columns=4)
     assert positions.empty == empty
+
+def test_should_yield_positions_without_gap():
+    positions = IconPositions(icon_count=4, max_columns=2)
+    positions.icon_size(10)
+    assert list(positions) == [
+        (0, 0), (10, 0),
+        (0, 10), (10, 10),
+    ]
