@@ -58,7 +58,7 @@ def test_should_yield_positions_without_gap():
     layout.max_columns(2)
     layout.icon_count(4)
     layout.icon_size(10)
-    assert list(layout.icon_positions()) == [
+    assert list(layout.icon_coordinates()) == [
         (0, 0), (10, 0),
         (0, 10), (10, 10),
     ]
@@ -68,7 +68,7 @@ def test_should_skip_empty_positions():
     layout.max_columns(2)
     layout.icon_count(3)
     layout.icon_size(10)
-    assert list(layout.icon_positions()) == [
+    assert list(layout.icon_coordinates()) == [
         (10, 0), (0, 10), (10, 10),
     ]
 
@@ -78,7 +78,7 @@ def test_should_yield_positions_with_gap():
     layout.icon_count(4)
     layout.icon_size(10)
     layout.gap(2)
-    assert list(layout.icon_positions()) == [
+    assert list(layout.icon_coordinates()) == [
         (0, 0), (12, 0),
         (0, 12), (12, 12),
     ]
@@ -90,7 +90,7 @@ def test_should_accept_starting_coordinates():
     layout.icon_size(10)
     layout.gap(2)
     layout.start_at(6, 9)
-    assert list(layout.icon_positions()) == [
+    assert list(layout.icon_coordinates()) == [
         (6, 9),
         (18, 9),
         (6, 21),
