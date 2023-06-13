@@ -14,6 +14,7 @@ from countdown import IconPositions
 )
 def test_should_calculate_rows(icon_count, rows):
     positions = IconPositions(max_columns=4)
+    positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.rows == rows
 
@@ -30,6 +31,7 @@ def test_should_calculate_rows(icon_count, rows):
 )
 def test_should_calculate_columns(icon_count, columns):
     positions = IconPositions(max_columns=4)
+    positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.columns == columns
 
@@ -47,11 +49,13 @@ def test_should_calculate_columns(icon_count, columns):
 )
 def test_should_calculate_blank_cells(icon_count, empty):
     positions = IconPositions(max_columns=4)
+    positions.max_columns(4)
     positions.icon_count(icon_count)
     assert positions.empty == empty
 
 def test_should_yield_positions_without_gap():
     positions = IconPositions(max_columns=2)
+    positions.max_columns(2)
     positions.icon_count(4)
     positions.icon_size(10)
     assert list(positions) == [
@@ -61,6 +65,7 @@ def test_should_yield_positions_without_gap():
 
 def test_should_skip_empty_positions():
     positions = IconPositions(max_columns=2)
+    positions.max_columns(2)
     positions.icon_count(3)
     positions.icon_size(10)
     assert list(positions) == [

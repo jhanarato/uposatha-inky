@@ -200,6 +200,9 @@ class IconPositions:
         self._icon_count = 0
         self._icon_size = 0
 
+    def max_columns(self, columns: int) -> None:
+        self._max_columns = columns
+
     def icon_count(self, count: int) -> None:
         self._icon_count = count
 
