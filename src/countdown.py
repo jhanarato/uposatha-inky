@@ -195,8 +195,8 @@ class Grid:
 
 
 class IconPositions:
-    def __init__(self, max_columns: int):
-        self._max_columns = max_columns
+    def __init__(self):
+        self._max_columns = 0
         self._icon_count = 0
         self._icon_size = 0
 
