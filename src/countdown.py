@@ -1,7 +1,7 @@
 import math
 import itertools
 
-from collections.abc import Sequence, Iterator
+from collections.abc import Sequence, Iterator, Iterable
 from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Tuple, Any
@@ -194,7 +194,7 @@ class Grid:
         return "".join([str(pos[0]) for pos in self])
 
 
-class Positions:
+class Positions(Iterable[tuple[int, int]]):
     def __init__(self):
         self._max_columns = 0
         self._icon_count = 0
