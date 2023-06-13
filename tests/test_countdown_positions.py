@@ -13,10 +13,10 @@ from countdown import GridLayout
     ]
 )
 def test_should_calculate_rows(icon_count, rows):
-    positions = GridLayout()
-    positions.max_columns(4)
-    positions.icon_count(icon_count)
-    assert positions.rows == rows
+    layout = GridLayout()
+    layout.max_columns(4)
+    layout.icon_count(icon_count)
+    assert layout.rows == rows
 
 @pytest.mark.parametrize(
     "icon_count,columns",
@@ -30,10 +30,10 @@ def test_should_calculate_rows(icon_count, rows):
     ]
 )
 def test_should_calculate_columns(icon_count, columns):
-    positions = GridLayout()
-    positions.max_columns(4)
-    positions.icon_count(icon_count)
-    assert positions.columns == columns
+    layout = GridLayout()
+    layout.max_columns(4)
+    layout.icon_count(icon_count)
+    assert layout.columns == columns
 
 @pytest.mark.parametrize(
     "icon_count,empty",
@@ -48,49 +48,49 @@ def test_should_calculate_columns(icon_count, columns):
     ]
 )
 def test_should_calculate_blank_cells(icon_count, empty):
-    positions = GridLayout()
-    positions.max_columns(4)
-    positions.icon_count(icon_count)
-    assert positions.empty == empty
+    layout = GridLayout()
+    layout.max_columns(4)
+    layout.icon_count(icon_count)
+    assert layout.empty == empty
 
 def test_should_yield_positions_without_gap():
-    positions = GridLayout()
-    positions.max_columns(2)
-    positions.icon_count(4)
-    positions.icon_size(10)
-    assert list(positions) == [
+    layout = GridLayout()
+    layout.max_columns(2)
+    layout.icon_count(4)
+    layout.icon_size(10)
+    assert list(layout.icon_positions()) == [
         (0, 0), (10, 0),
         (0, 10), (10, 10),
     ]
 
 def test_should_skip_empty_positions():
-    positions = GridLayout()
-    positions.max_columns(2)
-    positions.icon_count(3)
-    positions.icon_size(10)
-    assert list(positions) == [
+    layout = GridLayout()
+    layout.max_columns(2)
+    layout.icon_count(3)
+    layout.icon_size(10)
+    assert list(layout.icon_positions()) == [
         (10, 0), (0, 10), (10, 10),
     ]
 
 def test_should_yield_positions_with_gap():
-    positions = GridLayout()
-    positions.max_columns(2)
-    positions.icon_count(4)
-    positions.icon_size(10)
-    positions.gap(2)
-    assert list(positions) == [
+    layout = GridLayout()
+    layout.max_columns(2)
+    layout.icon_count(4)
+    layout.icon_size(10)
+    layout.gap(2)
+    assert list(layout.icon_positions()) == [
         (0, 0), (12, 0),
         (0, 12), (12, 12),
     ]
 
 def test_should_accept_starting_coordinates():
-    positions = GridLayout()
-    positions.max_columns(2)
-    positions.icon_count(4)
-    positions.icon_size(10)
-    positions.gap(2)
-    positions.start_at(6, 9)
-    assert list(positions) == [
+    layout = GridLayout()
+    layout.max_columns(2)
+    layout.icon_count(4)
+    layout.icon_size(10)
+    layout.gap(2)
+    layout.start_at(6, 9)
+    assert list(layout.icon_positions()) == [
         (6, 9),
         (18, 9),
         (6, 21),
@@ -98,19 +98,19 @@ def test_should_accept_starting_coordinates():
     ]
 
 def test_should_report_total_height():
-    positions = GridLayout()
-    positions.icon_count(6)
-    positions.max_columns(3)
-    assert positions.rows == 2
-    positions.icon_size(10)
-    positions.gap(2)
-    assert positions.total_height == (2 * 10) + 2
+    layout = GridLayout()
+    layout.icon_count(6)
+    layout.max_columns(3)
+    assert layout.rows == 2
+    layout.icon_size(10)
+    layout.gap(2)
+    assert layout.total_height == (2 * 10) + 2
 
 def test_should_report_total_width():
-    positions = GridLayout()
-    positions.icon_count(6)
-    positions.max_columns(3)
-    assert positions.columns == 3
-    positions.icon_size(10)
-    positions.gap(2)
-    assert positions.total_width == (3 * 10) + (2 * 2)
+    layout = GridLayout()
+    layout.icon_count(6)
+    layout.max_columns(3)
+    assert layout.columns == 3
+    layout.icon_size(10)
+    layout.gap(2)
+    assert layout.total_width == (3 * 10) + (2 * 2)

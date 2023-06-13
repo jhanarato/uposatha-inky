@@ -71,7 +71,7 @@ class Countdown:
     def draw(self, x: int, y: int) -> None:
         self._layout.start_at(x, y)
 
-        for position, icon in zip(self._layout, self._icons):
+        for position, icon in zip(self._layout.icon_positions(), self._icons):
             icon.draw(*position)
 
     def __str__(self):
@@ -148,7 +148,7 @@ class Icons(Sequence[ImageComponent]):
         )
 
 
-class GridLayout(Iterable[tuple[int, int]]):
+class GridLayout:
     def __init__(self):
         self._max_columns = 0
         self._icon_count = 0
@@ -214,7 +214,7 @@ class GridLayout(Iterable[tuple[int, int]]):
 
         yield from positions
 
-    def __iter__(self) -> Iterator[tuple[int, int]]:
+    def icon_positions(self) -> Iterator[tuple[int, int]]:
         for row, column in self.positions():
             x = (column * self.spacing) + self._start_x
             y = (row * self.spacing) + self._start_y
