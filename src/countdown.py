@@ -199,6 +199,7 @@ class IconPositions:
         self._max_columns = 0
         self._icon_count = 0
         self._icon_size = 0
+        self._gap = 0
 
     def max_columns(self, columns: int) -> None:
         self._max_columns = columns
@@ -208,6 +209,9 @@ class IconPositions:
 
     def icon_size(self, size: int) -> None:
         self._icon_size = size
+
+    def gap(self, gap: int) -> None:
+        self._gap = gap
 
     @property
     def rows(self) -> int:
@@ -229,7 +233,9 @@ class IconPositions:
         for _ in range(self.empty):
             next(positions)
 
+        spacing = self._icon_size + self._gap
+
         for row, column in positions:
-            x = column * self._icon_size
-            y = row * self._icon_size
+            x = column * spacing
+            y = row * spacing
             yield x, y

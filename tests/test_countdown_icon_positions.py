@@ -71,3 +71,14 @@ def test_should_skip_empty_positions():
     assert list(positions) == [
         (10, 0), (0, 10), (10, 10),
     ]
+
+def test_should_yield_positions_with_gap():
+    positions = IconPositions()
+    positions.max_columns(2)
+    positions.icon_count(4)
+    positions.icon_size(10)
+    positions.gap(2)
+    assert list(positions) == [
+        (0, 0), (12, 0),
+        (0, 12), (12, 12),
+    ]
