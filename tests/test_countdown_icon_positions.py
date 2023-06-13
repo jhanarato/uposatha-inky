@@ -82,3 +82,17 @@ def test_should_yield_positions_with_gap():
         (0, 0), (12, 0),
         (0, 12), (12, 12),
     ]
+
+def test_should_accept_starting_coordinates():
+    positions = IconPositions()
+    positions.max_columns(2)
+    positions.icon_count(4)
+    positions.icon_size(10)
+    positions.gap(2)
+    positions.start_at(6, 9)
+    assert list(positions) == [
+        (6, 9),
+        (18, 9),
+        (6, 21),
+        (18, 21),
+    ]
