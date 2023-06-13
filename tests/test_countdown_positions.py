@@ -96,3 +96,21 @@ def test_should_accept_starting_coordinates():
         (6, 21),
         (18, 21),
     ]
+
+def test_should_report_total_height():
+    positions = Positions()
+    positions.icon_count(6)
+    positions.max_columns(3)
+    assert positions.rows == 2
+    positions.icon_size(10)
+    positions.gap(2)
+    assert positions.total_height == (2 * 10) + 2
+
+def test_should_report_total_width():
+    positions = Positions()
+    positions.icon_count(6)
+    positions.max_columns(3)
+    assert positions.columns == 3
+    positions.icon_size(10)
+    positions.gap(2)
+    assert positions.total_width == (3 * 10) + (2 * 2)

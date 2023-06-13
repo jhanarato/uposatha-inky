@@ -190,6 +190,18 @@ class Positions(Iterable[tuple[int, int]]):
         return self._max_columns
 
     @property
+    def total_height(self) -> int:
+        icon_height = self._icon_size * self.rows
+        gap_height = self._gap * (self.rows - 1)
+        return icon_height + gap_height
+
+    @property
+    def total_width(self) -> int:
+        icon_width = self._icon_size * self.columns
+        gap_width = self._gap * (self.columns - 1)
+        return icon_width + gap_width
+
+    @property
     def empty(self) -> int:
         return (self.rows * self.columns) - self._icon_count
 
