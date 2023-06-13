@@ -194,7 +194,7 @@ class Grid:
         return "".join([str(pos[0]) for pos in self])
 
 
-class IconPositions:
+class Positions:
     def __init__(self):
         self._max_columns = 0
         self._icon_count = 0
