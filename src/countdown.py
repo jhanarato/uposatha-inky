@@ -1,7 +1,7 @@
 import math
 import itertools
 
-from collections.abc import Sequence, Iterator, Iterable
+from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
 
