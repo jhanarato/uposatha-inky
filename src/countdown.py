@@ -195,10 +195,16 @@ class Grid:
 
 
 class IconPositions:
-    def __init__(self, icon_count: int, max_columns: int):
-        self._icon_count = icon_count
+    def __init__(self, max_columns: int):
         self._max_columns = max_columns
+        self._icon_count = 0
         self._icon_size = 0
+
+    def icon_count(self, count: int) -> None:
+        self._icon_count = count
+
+    def icon_size(self, size: int) -> None:
+        self._icon_size = size
 
     @property
     def rows(self) -> int:
@@ -213,9 +219,6 @@ class IconPositions:
     @property
     def empty(self) -> int:
         return (self.rows * self.columns) - self._icon_count
-
-    def icon_size(self, size: int) -> None:
-        self._icon_size = size
 
     def __iter__(self) -> Iterator[tuple[int, int]]:
         positions = itertools.product(range(self.rows), range(self.columns))
