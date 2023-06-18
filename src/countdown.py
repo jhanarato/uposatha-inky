@@ -80,6 +80,10 @@ class Countdown:
         for icon, coordinates in zip(self._icons, self._layout.icon_coordinates()):
             icon.draw(*coordinates)
 
+    @property
+    def icon_size(self) -> int:
+        return self._icons.icon_size
+
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])
 
