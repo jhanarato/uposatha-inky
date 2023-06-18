@@ -14,27 +14,6 @@ from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
-@dataclass
-class Appearance:
-    icon_size: int
-    max_columns: int
-    gap: int
-
-
-def appearance(today: date, uposatha: date) -> Appearance:
-    days_inclusive = (uposatha - today).days + 1
-
-    small = Appearance(max_columns=8, icon_size=30, gap=4)
-    medium = Appearance(max_columns=days_inclusive, icon_size=40, gap=4)
-    large = Appearance(max_columns=days_inclusive, icon_size=50, gap=4)
-
-    if days_inclusive > 7:
-        return small
-    if days_inclusive > 3:
-        return medium
-    else:
-        return large
-
 Resizer = Callable[["Icons", "GridLayout"], None]
 
 class Countdown:

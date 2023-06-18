@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from countdown import Countdown, appearance, zoom_on_approach
+from countdown import Countdown, zoom_on_approach
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
