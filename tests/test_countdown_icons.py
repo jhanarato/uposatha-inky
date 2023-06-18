@@ -4,7 +4,7 @@ from datetime import date
 import pytest
 from uposatha.elements import MoonPhase
 
-from countdown import Icons, Countdown
+from countdown import Icons
 from screen import ImageConfig
 
 
