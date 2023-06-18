@@ -232,13 +232,19 @@ class GridLayout:
 
 def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
     if len(icons) > 7:
-        appears = Appearance(max_columns=8, icon_size=30, gap=4)
+        max_columns = 8
+        icon_size = 30
+        gap = 4
     elif len(icons) > 3:
-        appears = Appearance(max_columns=len(icons), icon_size=40, gap=4)
+        max_columns = len(icons)
+        icon_size = 40
+        gap = 4
     else:
-        appears = Appearance(max_columns=len(icons), icon_size=50, gap=4)
+        max_columns = len(icons)
+        icon_size = 50
+        gap = 4
 
-    icons._icon_size = appears.icon_size
-    grid._icon_size = appears.icon_size
-    grid._max_columns = appears.max_columns
-    grid._gap = appears.gap
+    icons._icon_size = icon_size
+    grid._icon_size = icon_size
+    grid._max_columns = max_columns
+    grid._gap = gap
