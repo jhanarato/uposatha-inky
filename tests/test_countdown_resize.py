@@ -23,7 +23,8 @@ def days(number_of_days: int) -> tuple[date, date]:
     ]
 )
 def test_should_adjust_size_as_uposatha_gets_closer(days_inclusive, appears):
-    assert appearance(date(2023, 1, 1), date(2023, 1, days_inclusive)) == appears
+    start, end = days(days_inclusive)
+    assert appearance(start, end) == appears
 
 def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
