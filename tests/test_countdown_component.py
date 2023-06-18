@@ -7,7 +7,7 @@ from screen import ImageConfig
 
 
 def test_should_report_height_for_two_rows():
-    countdown = Countdown(draw=None, config=ImageConfig(),
+    countdown = Countdown(draw=None, config=ImageConfig(), resizer=None,
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           moon_phase=MoonPhase.FULL,
@@ -17,7 +17,7 @@ def test_should_report_height_for_two_rows():
 
 
 def test_should_report_width_for_two_rows():
-    countdown = Countdown(draw=None, config=ImageConfig(),
+    countdown = Countdown(draw=None, config=ImageConfig(), resizer=None,
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           moon_phase=MoonPhase.FULL,
@@ -27,7 +27,7 @@ def test_should_report_width_for_two_rows():
 
 
 def test_should_report_width_for_shorter_first_row():
-    countdown = Countdown(draw=None, config=ImageConfig(),
+    countdown = Countdown(draw=None, config=ImageConfig(), resizer=None,
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           moon_phase=MoonPhase.FULL,
@@ -37,7 +37,7 @@ def test_should_report_width_for_shorter_first_row():
 
 
 def test_should_report_width_for_single_row():
-    countdown = Countdown(draw=None, config=ImageConfig(),
+    countdown = Countdown(draw=None, config=ImageConfig(), resizer=None,
                           start=date(2023, 5, 7),
                           end=date(2023, 5, 10),
                           moon_phase=MoonPhase.FULL,

@@ -1,9 +1,15 @@
-from datetime import date
+from datetime import date, timedelta
 
 import pytest
+from uposatha.elements import MoonPhase
 
-from countdown import Appearance, appearance
+from countdown import Appearance, appearance, Icons, GridLayout, Countdown
+from screen import ImageConfig
 
+def days(number_of_days: int) -> tuple[date, date]:
+    start = date(2023, 1, 1)
+    end = start + timedelta(days=number_of_days - 1)
+    return start, end
 
 @pytest.mark.parametrize(
     "days_inclusive,appears",
@@ -18,3 +24,14 @@ from countdown import Appearance, appearance
 )
 def test_should_adjust_size_as_uposatha_gets_closer(days_inclusive, appears):
     assert appearance(date(2023, 1, 1), date(2023, 1, days_inclusive)) == appears
+
+def test_should_modify_icon_size_with_resizer():
+    start, end = days(4)
+
+    def resizer(icons: Icons, grid: GridLayout) -> None:
+        icons._icon_size = 3
+        grid.icon_size(3)
+
+    countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL, 0, 0, 0)
+    assert countdown._icons._icon_size == 3
+    assert countdown._layout._icon_size == 3

@@ -51,6 +51,7 @@ class PillowImage:
         return Countdown(
             draw=self._draw,
             config=self._config,
+            resizer=None,
             icon_size=appear.icon_size,
             start=today,
             end=uposatha_falls_on,
