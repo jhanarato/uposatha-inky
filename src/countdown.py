@@ -98,17 +98,17 @@ class Icons(Sequence[ImageComponent]):
                  end: date,
                  moon_phase: MoonPhase):
 
+        self.icon_size = icon_size
         self._draw = draw
         self._config = config
         self._start = start
         self._end = end
         self._moon_phase = moon_phase
-        self._icon_size = icon_size
 
     def day_of_week_icon(self, day: date) -> ImageComponent:
         return DayOfWeekIcon(
             draw=self._draw,
-            size=self._icon_size,
+            size=self.icon_size,
             font=self._config.font_styles.COUNTDOWN,
             background=self._config.palette.BLACK,
             foreground=self._config.palette.WHITE,
@@ -122,13 +122,13 @@ class Icons(Sequence[ImageComponent]):
                     draw=self._draw,
                     fill=self._config.palette.YELLOW,
                     outline=self._config.palette.BLACK,
-                    size=self._icon_size)
+                    size=self.icon_size)
 
             case MoonPhase.NEW:
                 return NewMoonIcon(
                    draw=self._draw,
                    fill=self._config.palette.BLACK,
-                   size=self._icon_size)
+                   size=self.icon_size)
 
             case MoonPhase.WANING | MoonPhase.WAXING:
                 raise RuntimeError("Moon phase must be full or new")
@@ -147,10 +147,6 @@ class Icons(Sequence[ImageComponent]):
 
         day = self._start + timedelta(item)
         return self.day_of_week_icon(day)
-
-    @property
-    def icon_size(self) -> int:
-        return self._icon_size
 
     def __str__(self):
         return "".join(
@@ -244,7 +240,7 @@ def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
         icon_size = 50
         gap = 4
 
-    icons._icon_size = icon_size
+    icons.icon_size = icon_size
     grid._icon_size = icon_size
     grid._max_columns = max_columns
     grid._gap = gap

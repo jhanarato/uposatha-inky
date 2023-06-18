@@ -50,7 +50,7 @@ def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
 
     def resizer(icons: Icons, grid: GridLayout) -> None:
-        icons._icon_size = 3
+        icons.icon_size = 3
         grid.icon_size(3)
 
     countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL, 0, 0, 0)
