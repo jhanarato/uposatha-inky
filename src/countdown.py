@@ -229,3 +229,16 @@ class GridLayout:
             x = self._start_x + (column * self.spacing)
             y = self._start_y + (row * self.spacing)
             yield x, y
+
+def zoom_as_uposatha_approaches(icons: Icons, grid: GridLayout) -> None:
+    if len(icons) > 7:
+        appears = Appearance(max_columns=8, icon_size=30, gap=4)
+    elif len(icons) > 3:
+        appears = Appearance(max_columns=len(icons), icon_size=40, gap=4)
+    else:
+        appears = Appearance(max_columns=len(icons), icon_size=50, gap=4)
+
+    icons._icon_size = appears.icon_size
+    grid._icon_size = appears.icon_size
+    grid._max_columns = appears.max_columns
+    grid._gap = appears.gap

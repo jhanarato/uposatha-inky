@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import pytest
 from uposatha.elements import MoonPhase
 
-from countdown import Appearance, appearance, Icons, GridLayout, Countdown
+from countdown import Appearance, appearance, Icons, GridLayout, Countdown, zoom_as_uposatha_approaches
 from screen import ImageConfig
 
 def days(number_of_days: int) -> tuple[date, date]:
@@ -25,6 +25,27 @@ def days(number_of_days: int) -> tuple[date, date]:
 def test_should_adjust_size_as_uposatha_gets_closer(days_inclusive, appears):
     start, end = days(days_inclusive)
     assert appearance(start, end) == appears
+
+@pytest.mark.parametrize(
+    "days_inclusive,appears",
+    [
+        (15, Appearance(icon_size=30, max_columns=8, gap=4)),
+        (8, Appearance(icon_size=30, max_columns=8, gap=4)),
+        (7, Appearance(icon_size=40, max_columns=7, gap=4)),
+        (4, Appearance(icon_size=40, max_columns=4, gap=4)),
+        (3, Appearance(icon_size=50, max_columns=3, gap=4)),
+        (2, Appearance(icon_size=50, max_columns=2, gap=4)),
+    ]
+)
+def test_should_zoom_as_uposatha_approaches(days_inclusive, appears):
+    start, end = days(days_inclusive)
+    icons = Icons(None, ImageConfig(), 0, start, end, MoonPhase.FULL)
+    grid = GridLayout()
+    zoom_as_uposatha_approaches(icons, grid)
+
+    assert icons.icon_size == appears.icon_size
+    assert grid._gap == appears.gap
+    assert grid._max_columns == appears.max_columns
 
 def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
