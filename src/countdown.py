@@ -230,7 +230,7 @@ class GridLayout:
             y = self._start_y + (row * self.spacing)
             yield x, y
 
-def zoom_as_uposatha_approaches(icons: Icons, grid: GridLayout) -> None:
+def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
     if len(icons) > 7:
         appears = Appearance(max_columns=8, icon_size=30, gap=4)
     elif len(icons) > 3:
