@@ -2,9 +2,8 @@ import math
 import itertools
 
 from collections.abc import Sequence, Iterator
-from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import Callable, Optional
+from typing import Callable
 
 from PIL import ImageDraw
 
@@ -20,19 +19,16 @@ class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
     def __init__(self, draw: ImageDraw,
                  config: ImageConfig,
-                 resizer: Optional[Resizer],
+                 resizer: Resizer,
                  start: date,
                  end: date,
                  moon_phase: MoonPhase,
-                 icon_size: int,
-                 gap: int,
-                 max_columns: int
                  ):
 
         self._icons = Icons(
             draw=draw,
             config=config,
-            icon_size=icon_size,
+            icon_size=0,
             start=start,
             end=end,
             moon_phase=moon_phase
@@ -40,12 +36,7 @@ class Countdown:
 
         self._layout = GridLayout()
         self._layout.icon_count(len(self._icons))
-        self._layout.icon_size(icon_size)
-        self._layout.gap(gap)
-        self._layout.max_columns(max_columns)
-
-        if resizer:
-            resizer(self._icons, self._layout)
+        resizer(self._icons, self._layout)
 
     def height(self) -> int:
         return self._layout.total_height

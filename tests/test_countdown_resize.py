@@ -38,5 +38,5 @@ def test_should_modify_icon_size_with_resizer():
         icons.icon_size = 3
         grid.icon_size(3)
 
-    countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL, 0, 0, 0)
+    countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL)
     assert countdown.icon_size == 3
