@@ -40,3 +40,10 @@ def test_should_modify_icon_size_with_resizer():
 
     countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL)
     assert countdown.icon_size == 3
+
+def test_should_adjust_columns_while_zooming():
+    countdown = Countdown(draw=None, config=ImageConfig(), resizer=zoom_on_approach,
+                          start=date(2023, 5, 7), end=date(2023, 5, 10),
+                          moon_phase=MoonPhase.FULL)
+
+    assert countdown._layout.columns == 4
