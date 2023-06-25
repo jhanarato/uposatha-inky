@@ -44,14 +44,15 @@ class Countdown:
             moon_phase=moon_phase
         )
 
-        self._layout = GridLayout()
-        self._layout.icon_count(len(self._icons))
-        self._appearance = resizer(len(self._icons))
+        appearance = resizer(len(self._icons))
 
-        self._icons.icon_size = self._appearance.icon_size
-        self._layout.icon_size(self._appearance.icon_size)
-        self._layout.max_columns(self._appearance.max_columns)
-        self._layout.gap(self._appearance.gap)
+        self._layout = GridLayout(appearance)
+        self._layout.icon_count(len(self._icons))
+
+        self._icons.icon_size = appearance.icon_size
+        self._layout.icon_size(appearance.icon_size)
+        self._layout.max_columns(appearance.max_columns)
+        self._layout.gap(appearance.gap)
 
     def height(self) -> int:
         return self._layout.total_height
@@ -140,8 +141,8 @@ class Icons(Sequence[ImageComponent]):
 
 
 class GridLayout:
-    def __init__(self):
-        self._appears = Appearance
+    def __init__(self, appearance: Appearance):
+        self._appearance = appearance
         self._max_columns = 0
         self._icon_count = 0
         self._icon_size = 0
