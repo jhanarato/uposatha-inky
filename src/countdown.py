@@ -22,7 +22,7 @@ class Appearance:
     gap: int
 
 
-Resizer = Callable[[int], Appearance]
+Resizer = Callable[[int, bool], Appearance]
 
 
 class Countdown:
@@ -39,7 +39,7 @@ class Countdown:
             moon_phase=moon_phase
         )
 
-        appearance = resizer(len(self._icons))
+        appearance = resizer(len(self._icons), fourteen_day)
         self._icons.icon_size = appearance.icon_size
         self._layout = GridLayout(appearance, len(self._icons))
 
@@ -184,7 +184,7 @@ class GridLayout:
             y = start_y + (row * self.spacing)
             yield x, y
 
-def zoom_on_approach(icons: int) -> Appearance:
+def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
     if icons > 7:
         max_columns = 8
         icon_size = 30

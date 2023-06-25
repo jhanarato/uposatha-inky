@@ -7,7 +7,7 @@ from screen import ImageConfig
 
 
 def test_should_report_height_for_two_rows():
-    def resizer(icons: int) -> Appearance:
+    def resizer(icons: int, fourteen_day: bool) -> Appearance:
         return Appearance(icon_size=10, max_columns=2, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
@@ -18,7 +18,7 @@ def test_should_report_height_for_two_rows():
 
 
 def test_should_report_width_for_two_rows():
-    def resizer(icons: int) -> Appearance:
+    def resizer(icons: int, fourteen_day: bool) -> Appearance:
         return Appearance(icon_size=10, max_columns=2, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
@@ -29,7 +29,7 @@ def test_should_report_width_for_two_rows():
 
 
 def test_should_report_width_for_shorter_first_row():
-    def resizer(icons: int) -> Appearance:
+    def resizer(icons: int, fourteen_day: bool) -> Appearance:
         return Appearance(icon_size=10, max_columns=3, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
@@ -40,7 +40,7 @@ def test_should_report_width_for_shorter_first_row():
 
 
 def test_should_report_width_for_single_row():
-    def resizer(icons: int) -> Appearance:
+    def resizer(icons: int, fourteen_day: bool) -> Appearance:
         return Appearance(icon_size=10, max_columns=5, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,

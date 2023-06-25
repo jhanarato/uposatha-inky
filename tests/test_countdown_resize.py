@@ -23,7 +23,7 @@ def days(number_of_days: int) -> tuple[date, date]:
     ]
 )
 def test_should_increase_icon_size_as_uposatha_approaches(days_inclusive, icon_size):
-    appearance = zoom_on_approach(days_inclusive)
+    appearance = zoom_on_approach(icons=days_inclusive, fourteen_day=True)
     assert appearance.icon_size == icon_size
 
 def test_should_adjust_columns_while_zooming():
