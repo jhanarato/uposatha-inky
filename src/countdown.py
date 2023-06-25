@@ -202,10 +202,12 @@ def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
         icon_size = 30
         gap = 4
     elif len(icons) > 3:
+        # TODO We don't need to change max_columns here. It can resize itself.
         max_columns = len(icons)
         icon_size = 40
         gap = 4
     else:
+        # TODO: As above.
         max_columns = len(icons)
         icon_size = 50
         gap = 4
