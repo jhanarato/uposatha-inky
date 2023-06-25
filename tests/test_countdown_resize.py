@@ -29,7 +29,7 @@ def test_should_increase_icon_size_as_uposatha_approaches(days_inclusive, icon_s
     zoom_on_approach(icons, grid)
 
     assert icons.icon_size == icon_size
-    assert grid._icon_size == icon_size
+    assert grid.appearance.icon_size == icon_size
 
 def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
