@@ -176,11 +176,11 @@ class GridLayout:
 
     @property
     def rows(self) -> int:
-        return math.ceil(self._icon_count / self._max_columns)
+        return math.ceil(self._icon_count / self.appearance.max_columns)
 
     @property
     def columns(self) -> int:
-        if self._icon_count < self._max_columns:
+        if self._icon_count < self.appearance.max_columns:
             return self._icon_count
         return self._max_columns
 
