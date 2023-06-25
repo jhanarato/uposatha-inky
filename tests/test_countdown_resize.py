@@ -23,20 +23,13 @@ def days(number_of_days: int) -> tuple[date, date]:
     ]
 )
 def test_should_increase_icon_size_as_uposatha_approaches(days_inclusive, icon_size):
-    start, end = days(days_inclusive)
-    icons = Icons(None, ImageConfig(), 0, start, end, MoonPhase.FULL)
-    grid = GridLayout()
-    zoom_on_approach(icons, grid)
-
-    assert icons.icon_size == icon_size
-    assert grid.appearance.icon_size == icon_size
+    appearance = zoom_on_approach(days_inclusive)
+    assert appearance.icon_size == icon_size
 
 def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
 
-    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
-        icons.icon_size = 3
-        grid.icon_size(3)
+    def resizer(icons: int) -> Appearance:
         return Appearance(icon_size=3, max_columns=0, gap=0)
 
     countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL)

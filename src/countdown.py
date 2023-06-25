@@ -22,7 +22,7 @@ class Appearance:
     gap: int
 
 
-Resizer = Callable[["Icons", "GridLayout"], Appearance]
+Resizer = Callable[[int], Appearance]
 
 
 class Countdown:
@@ -46,7 +46,12 @@ class Countdown:
 
         self._layout = GridLayout()
         self._layout.icon_count(len(self._icons))
-        self._appearance = resizer(self._icons, self._layout)
+        self._appearance = resizer(len(self._icons))
+
+        self._icons.icon_size = self._appearance.icon_size
+        self._layout.icon_size(self._appearance.icon_size)
+        self._layout.max_columns(self._appearance.max_columns)
+        self._layout.gap(self._appearance.gap)
 
     def height(self) -> int:
         return self._layout.total_height
@@ -215,25 +220,20 @@ class GridLayout:
             y = self._start_y + (row * self.spacing)
             yield x, y
 
-def zoom_on_approach(icons: Icons, grid: GridLayout) -> Appearance:
-    if len(icons) > 7:
+def zoom_on_approach(icons: int) -> Appearance:
+    if icons > 7:
         max_columns = 8
         icon_size = 30
         gap = 4
-    elif len(icons) > 3:
+    elif icons > 3:
         # TODO We don't need to change max_columns here. It can resize itself.
-        max_columns = len(icons)
+        max_columns = icons
         icon_size = 40
         gap = 4
     else:
         # TODO: As above.
-        max_columns = len(icons)
+        max_columns = icons
         icon_size = 50
         gap = 4
-
-    icons.icon_size = icon_size
-    grid._icon_size = icon_size
-    grid._max_columns = max_columns
-    grid._gap = gap
 
     return Appearance(icon_size=icon_size, max_columns=max_columns, gap=gap)
