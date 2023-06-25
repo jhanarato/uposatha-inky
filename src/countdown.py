@@ -194,7 +194,7 @@ class GridLayout:
 
     @property
     def spacing(self) -> int:
-        return self._icon_size + self._gap
+        return self.appearance.icon_size + self._gap
 
     def positions(self) -> Iterator[tuple[int, int]]:
         positions = itertools.product(
