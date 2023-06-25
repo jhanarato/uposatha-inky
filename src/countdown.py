@@ -132,15 +132,6 @@ class GridLayout:
     def __init__(self, appearance: Appearance, icon_count: int):
         self._appearance = appearance
         self._icon_count = icon_count
-        self._start_x = 0
-        self._start_y = 0
-
-    def icon_count(self, count: int) -> None:
-        self._icon_count = count
-
-    def starting_coordinates(self, x: int, y: int) -> None:
-        self._start_x = x
-        self._start_y = y
 
     @property
     def appearance(self) -> Appearance:
