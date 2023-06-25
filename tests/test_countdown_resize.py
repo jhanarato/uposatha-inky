@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import pytest
 from uposatha.elements import MoonPhase
 
-from countdown import Countdown, Icons, GridLayout, zoom_on_approach
+from countdown import Countdown, Icons, GridLayout, zoom_on_approach, Appearance
 from screen import ImageConfig
 
 def days(number_of_days: int) -> tuple[date, date]:
@@ -34,9 +34,10 @@ def test_should_increase_icon_size_as_uposatha_approaches(days_inclusive, icon_s
 def test_should_modify_icon_size_with_resizer():
     start, end = days(4)
 
-    def resizer(icons: Icons, grid: GridLayout) -> None:
+    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
         icons.icon_size = 3
         grid.icon_size(3)
+        return Appearance(icon_size=3, max_columns=0, gap=0)
 
     countdown = Countdown(None, ImageConfig(), resizer, start, end, MoonPhase.FULL)
     assert countdown.icon_size == 3

@@ -22,7 +22,7 @@ class Appearance:
     gap: int
 
 
-Resizer = Callable[["Icons", "GridLayout"], None]
+Resizer = Callable[["Icons", "GridLayout"], Appearance]
 
 
 class Countdown:
@@ -46,7 +46,7 @@ class Countdown:
 
         self._layout = GridLayout()
         self._layout.icon_count(len(self._icons))
-        resizer(self._icons, self._layout)
+        self._appearance = resizer(self._icons, self._layout)
 
     def height(self) -> int:
         return self._layout.total_height
@@ -136,6 +136,7 @@ class Icons(Sequence[ImageComponent]):
 
 class GridLayout:
     def __init__(self):
+        self._appears = Appearance
         self._max_columns = 0
         self._icon_count = 0
         self._icon_size = 0
@@ -214,7 +215,7 @@ class GridLayout:
             y = self._start_y + (row * self.spacing)
             yield x, y
 
-def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
+def zoom_on_approach(icons: Icons, grid: GridLayout) -> Appearance:
     if len(icons) > 7:
         max_columns = 8
         icon_size = 30
@@ -234,3 +235,5 @@ def zoom_on_approach(icons: Icons, grid: GridLayout) -> None:
     grid._icon_size = icon_size
     grid._max_columns = max_columns
     grid._gap = gap
+
+    return Appearance(icon_size=icon_size, max_columns=max_columns, gap=gap)

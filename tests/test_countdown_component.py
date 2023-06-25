@@ -2,16 +2,17 @@ from datetime import date
 
 from uposatha.elements import MoonPhase
 
-from countdown import Countdown, Icons, GridLayout
+from countdown import Countdown, Icons, GridLayout, Appearance
 from screen import ImageConfig
 
 
 def test_should_report_height_for_two_rows():
-    def resizer(icons: Icons, grid: GridLayout) -> None:
+    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
         icons.icon_size = 10
         grid._icon_size = 10
         grid._max_columns = 2
         grid._gap = 2
+        return Appearance(icon_size=10, max_columns=2, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
@@ -21,11 +22,12 @@ def test_should_report_height_for_two_rows():
 
 
 def test_should_report_width_for_two_rows():
-    def resizer(icons: Icons, grid: GridLayout) -> None:
+    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
         icons.icon_size = 10
         grid._icon_size = 10
         grid._max_columns = 2
         grid._gap = 2
+        return Appearance(icon_size=10, max_columns=2, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
@@ -35,11 +37,12 @@ def test_should_report_width_for_two_rows():
 
 
 def test_should_report_width_for_shorter_first_row():
-    def resizer(icons: Icons, grid: GridLayout) -> None:
+    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
         icons.icon_size = 10
         grid._icon_size = 10
         grid._max_columns = 3
         grid._gap = 2
+        return Appearance(icon_size=10, max_columns=3, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
@@ -49,11 +52,12 @@ def test_should_report_width_for_shorter_first_row():
 
 
 def test_should_report_width_for_single_row():
-    def resizer(icons: Icons, grid: GridLayout) -> None:
+    def resizer(icons: Icons, grid: GridLayout) -> Appearance:
         icons.icon_size = 10
         grid._icon_size = 10
         grid._max_columns = 5
         grid._gap = 2
+        return Appearance(icon_size=10, max_columns=5, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
