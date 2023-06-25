@@ -178,7 +178,7 @@ class GridLayout:
     def columns(self) -> int:
         if self._icon_count < self.appearance.max_columns:
             return self._icon_count
-        return self._max_columns
+        return self.appearance.max_columns
 
     @property
     def total_height(self) -> int:
