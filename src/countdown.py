@@ -2,6 +2,7 @@ import math
 import itertools
 
 from collections.abc import Sequence, Iterator
+from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Callable
 
@@ -13,7 +14,16 @@ from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
+
+@dataclass(frozen=True)
+class Appearance:
+    icon_size: int
+    max_columns: int
+    gap: int
+
+
 Resizer = Callable[["Icons", "GridLayout"], None]
+
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
