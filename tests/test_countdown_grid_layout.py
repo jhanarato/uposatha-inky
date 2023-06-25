@@ -75,7 +75,6 @@ def test_should_yield_coordinates_with_gap():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance)
     layout.icon_count(4)
-    layout.gap(2)
     assert list(layout.icon_coordinates()) == [
         (0, 0), (12, 0),
         (0, 12), (12, 12),
@@ -85,7 +84,6 @@ def test_should_accept_starting_coordinates():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance)
     layout.icon_count(4)
-    layout.gap(2)
     layout.starting_coordinates(6, 9)
     assert list(layout.icon_coordinates()) == [
         (6, 9),
@@ -99,7 +97,6 @@ def test_should_report_total_height():
     layout = GridLayout(appearance)
     layout.icon_count(6)
     assert layout.rows == 2
-    layout.gap(2)
     assert layout.total_height == (2 * 10) + 2
 
 def test_should_report_total_width():
@@ -107,5 +104,4 @@ def test_should_report_total_width():
     layout = GridLayout(appearance)
     layout.icon_count(6)
     assert layout.columns == 3
-    layout.gap(2)
     assert layout.total_width == (3 * 10) + (2 * 2)

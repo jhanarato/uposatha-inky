@@ -50,7 +50,6 @@ class Countdown:
 
         self._layout = GridLayout(appearance)
         self._layout.icon_count(len(self._icons))
-        self._layout.gap(appearance.gap)
 
     def height(self) -> int:
         return self._layout.total_height
@@ -142,15 +141,11 @@ class GridLayout:
     def __init__(self, appearance: Appearance):
         self._appearance = appearance
         self._icon_count = 0
-        self._gap = 0
         self._start_x = 0
         self._start_y = 0
 
     def icon_count(self, count: int) -> None:
         self._icon_count = count
-
-    def gap(self, gap: int) -> None:
-        self._gap = gap
 
     def starting_coordinates(self, x: int, y: int) -> None:
         self._start_x = x
@@ -173,13 +168,13 @@ class GridLayout:
     @property
     def total_height(self) -> int:
         icon_height = self.appearance.icon_size * self.rows
-        gap_height = self._gap * (self.rows - 1)
+        gap_height = self.appearance.gap * (self.rows - 1)
         return icon_height + gap_height
 
     @property
     def total_width(self) -> int:
         icon_width = self.appearance.icon_size * self.columns
-        gap_width = self._gap * (self.columns - 1)
+        gap_width = self.appearance.gap * (self.columns - 1)
         return icon_width + gap_width
 
     @property
@@ -188,7 +183,7 @@ class GridLayout:
 
     @property
     def spacing(self) -> int:
-        return self.appearance.icon_size + self._gap
+        return self.appearance.icon_size + self.appearance.gap
 
     def positions(self) -> Iterator[tuple[int, int]]:
         positions = itertools.product(
