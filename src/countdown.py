@@ -27,13 +27,8 @@ Resizer = Callable[[int], Appearance]
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, draw: ImageDraw,
-                 config: ImageConfig,
-                 resizer: Resizer,
-                 start: date,
-                 end: date,
-                 moon_phase: MoonPhase,
-                 ):
+    def __init__(self, draw: ImageDraw, config: ImageConfig, resizer: Resizer,
+                 start: date, end: date, moon_phase: MoonPhase):
 
         self._icons = Icons(
             draw=draw,
