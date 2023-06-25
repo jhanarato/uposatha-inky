@@ -50,7 +50,12 @@ class Countdown:
         return self._layout.total_width
 
     def draw(self, x: int, y: int) -> None:
-        for icon, coordinates in zip(self._icons, self._layout.icon_coordinates(x, y)):
+        drawable = zip(
+            self._icons,
+            self._layout.icon_coordinates(start_x=x, start_y=y)
+        )
+
+        for icon, coordinates in drawable:
             icon.draw(*coordinates)
 
     def __str__(self):
