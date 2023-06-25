@@ -16,7 +16,6 @@ from countdown import GridLayout, Appearance
 def test_should_calculate_rows(icon_count, rows):
     appearance = Appearance(icon_size=0, max_columns=4, gap=0)
     layout = GridLayout(appearance)
-    layout.max_columns(4)
     layout.icon_count(icon_count)
     assert layout.rows == rows
 
