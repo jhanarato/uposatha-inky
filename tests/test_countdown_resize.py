@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import pytest
 from uposatha.elements import MoonPhase
 
-from countdown import Countdown, Icons, GridLayout, zoom_on_approach, Appearance
+from countdown import Countdown, zoom_on_approach
 from screen import ImageConfig
 
 def days(number_of_days: int) -> tuple[date, date]:
@@ -29,6 +29,6 @@ def test_should_increase_icon_size_as_uposatha_approaches(days_inclusive, icon_s
 def test_should_adjust_columns_while_zooming():
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=zoom_on_approach,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL)
+                          moon_phase=MoonPhase.FULL, fourteen_day=True)
 
     assert countdown._layout.columns == 4

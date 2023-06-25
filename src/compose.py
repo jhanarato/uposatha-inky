@@ -45,14 +45,16 @@ class PillowImage:
     def new_countdown(self,
                       today: date,
                       uposatha_falls_on: date,
-                      moon_phase: MoonPhase) -> Countdown:
+                      moon_phase: MoonPhase,
+                      fourteen_day: bool) -> Countdown:
         return Countdown(
             draw=self._draw,
             config=self._config,
             resizer=zoom_on_approach,
             start=today,
             end=uposatha_falls_on,
-            moon_phase=moon_phase)
+            moon_phase=moon_phase,
+            fourteen_day=fourteen_day)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
@@ -78,7 +80,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         image.new_heading_text("Uposatha"),
         image.new_horizontal_line(300),
         image.new_info_text(content.date),
-        image.new_countdown(content.today, content.falls_on, content.moon_phase),
+        image.new_countdown(content.today, content.falls_on, content.moon_phase, content.fourteen_day),
         image.new_info_text(content.details)
     ]
 

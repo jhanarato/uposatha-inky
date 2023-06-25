@@ -12,7 +12,7 @@ def test_should_report_height_for_two_rows():
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL)
+                          moon_phase=MoonPhase.FULL, fourteen_day=True)
 
     assert countdown.height() == 22
 
@@ -23,7 +23,7 @@ def test_should_report_width_for_two_rows():
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL)
+                          moon_phase=MoonPhase.FULL, fourteen_day=True)
 
     assert countdown.width() == 22
 
@@ -34,7 +34,7 @@ def test_should_report_width_for_shorter_first_row():
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL)
+                          moon_phase=MoonPhase.FULL, fourteen_day=True)
 
     assert countdown.width() == 34
 
@@ -45,6 +45,6 @@ def test_should_report_width_for_single_row():
 
     countdown = Countdown(draw=None, config=ImageConfig(), resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
-                          moon_phase=MoonPhase.FULL)
+                          moon_phase=MoonPhase.FULL, fourteen_day=True)
 
     assert countdown.width() == 46
