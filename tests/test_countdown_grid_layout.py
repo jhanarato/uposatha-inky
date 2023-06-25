@@ -51,14 +51,12 @@ def test_should_calculate_columns(icon_count, columns):
 def test_should_calculate_empty_positions(icon_count, empty):
     appearance = Appearance(icon_size=0, max_columns=4, gap=0)
     layout = GridLayout(appearance)
-    layout.max_columns(4)
     layout.icon_count(icon_count)
     assert layout.empty == empty
 
 def test_should_yield_coordinates_without_gap():
     appearance = Appearance(icon_size=10, max_columns=2, gap=0)
     layout = GridLayout(appearance)
-    layout.max_columns(2)
     layout.icon_count(4)
     layout.icon_size(10)
     assert list(layout.icon_coordinates()) == [
@@ -69,7 +67,6 @@ def test_should_yield_coordinates_without_gap():
 def test_should_skip_empty_positions():
     appearance = Appearance(icon_size=10, max_columns=2, gap=0)
     layout = GridLayout(appearance)
-    layout.max_columns(2)
     layout.icon_count(3)
     layout.icon_size(10)
     assert list(layout.icon_coordinates()) == [
@@ -79,7 +76,6 @@ def test_should_skip_empty_positions():
 def test_should_yield_coordinates_with_gap():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance)
-    layout.max_columns(2)
     layout.icon_count(4)
     layout.icon_size(10)
     layout.gap(2)
@@ -91,7 +87,6 @@ def test_should_yield_coordinates_with_gap():
 def test_should_accept_starting_coordinates():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance)
-    layout.max_columns(2)
     layout.icon_count(4)
     layout.icon_size(10)
     layout.gap(2)
@@ -107,7 +102,6 @@ def test_should_report_total_height():
     appearance = Appearance(icon_size=10, max_columns=3, gap=2)
     layout = GridLayout(appearance)
     layout.icon_count(6)
-    layout.max_columns(3)
     assert layout.rows == 2
     layout.icon_size(10)
     layout.gap(2)
@@ -117,7 +111,6 @@ def test_should_report_total_width():
     appearance = Appearance(icon_size=10, max_columns=3, gap=2)
     layout = GridLayout(appearance)
     layout.icon_count(6)
-    layout.max_columns(3)
     assert layout.columns == 3
     layout.icon_size(10)
     layout.gap(2)
