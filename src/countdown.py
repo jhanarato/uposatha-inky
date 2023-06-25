@@ -79,7 +79,7 @@ class Icons(Sequence[ImageComponent]):
         self._end = end
         self._moon_phase = moon_phase
 
-    def day_of_week_icon(self, day: date) -> ImageComponent:
+    def _day_of_week_icon(self, day: date) -> ImageComponent:
         return DayOfWeekIcon(
             draw=self._draw,
             size=self.icon_size,
@@ -89,7 +89,7 @@ class Icons(Sequence[ImageComponent]):
             letter=day.strftime("%a")[0]
         )
 
-    def moon_icon(self) -> ImageComponent:
+    def _moon_icon(self) -> ImageComponent:
         match self._moon_phase:
             case MoonPhase.FULL:
                 return FullMoonIcon(
@@ -117,10 +117,10 @@ class Icons(Sequence[ImageComponent]):
             raise IndexError("No such icon")
 
         if item == len(self) - 1:
-            return self.moon_icon()
+            return self._moon_icon()
 
         day = self._start + timedelta(item)
-        return self.day_of_week_icon(day)
+        return self._day_of_week_icon(day)
 
     def __str__(self):
         return "".join(
