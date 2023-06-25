@@ -54,7 +54,7 @@ def test_should_calculate_empty_positions(icon_count, empty):
 def test_should_yield_coordinates_without_gap():
     appearance = Appearance(icon_size=10, max_columns=2, gap=0)
     layout = GridLayout(appearance, 4)
-    assert list(layout.icon_coordinates()) == [
+    assert list(layout.icon_coordinates(0, 0)) == [
         (0, 0), (10, 0),
         (0, 10), (10, 10),
     ]
@@ -62,14 +62,14 @@ def test_should_yield_coordinates_without_gap():
 def test_should_skip_empty_positions():
     appearance = Appearance(icon_size=10, max_columns=2, gap=0)
     layout = GridLayout(appearance, 3)
-    assert list(layout.icon_coordinates()) == [
+    assert list(layout.icon_coordinates(0, 0)) == [
         (10, 0), (0, 10), (10, 10),
     ]
 
 def test_should_yield_coordinates_with_gap():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance, 4)
-    assert list(layout.icon_coordinates()) == [
+    assert list(layout.icon_coordinates(0, 0)) == [
         (0, 0), (12, 0),
         (0, 12), (12, 12),
     ]
@@ -77,8 +77,7 @@ def test_should_yield_coordinates_with_gap():
 def test_should_accept_starting_coordinates():
     appearance = Appearance(icon_size=10, max_columns=2, gap=2)
     layout = GridLayout(appearance, 4)
-    layout.starting_coordinates(6, 9)
-    assert list(layout.icon_coordinates()) == [
+    assert list(layout.icon_coordinates(6, 9)) == [
         (6, 9),
         (18, 9),
         (6, 21),

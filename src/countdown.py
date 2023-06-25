@@ -55,9 +55,7 @@ class Countdown:
         return self._layout.total_width
 
     def draw(self, x: int, y: int) -> None:
-        self._layout.starting_coordinates(x, y)
-
-        for icon, coordinates in zip(self._icons, self._layout.icon_coordinates()):
+        for icon, coordinates in zip(self._icons, self._layout.icon_coordinates(x, y)):
             icon.draw(*coordinates)
 
     def __str__(self):
@@ -189,10 +187,10 @@ class GridLayout:
 
         yield from positions
 
-    def icon_coordinates(self) -> Iterator[tuple[int, int]]:
+    def icon_coordinates(self, start_x: int, start_y: int) -> Iterator[tuple[int, int]]:
         for row, column in self.positions():
-            x = self._start_x + (column * self.spacing)
-            y = self._start_y + (row * self.spacing)
+            x = start_x + (column * self.spacing)
+            y = start_y + (row * self.spacing)
             yield x, y
 
 def zoom_on_approach(icons: int) -> Appearance:
