@@ -45,11 +45,8 @@ class Countdown:
         )
 
         appearance = resizer(len(self._icons))
-
         self._icons.icon_size = appearance.icon_size
-
-        self._layout = GridLayout(appearance)
-        self._layout.icon_count(len(self._icons))
+        self._layout = GridLayout(appearance, len(self._icons))
 
     def height(self) -> int:
         return self._layout.total_height
@@ -138,9 +135,9 @@ class Icons(Sequence[ImageComponent]):
 
 
 class GridLayout:
-    def __init__(self, appearance: Appearance):
+    def __init__(self, appearance: Appearance, icon_count: int):
         self._appearance = appearance
-        self._icon_count = 0
+        self._icon_count = icon_count
         self._start_x = 0
         self._start_y = 0
 
