@@ -13,6 +13,7 @@ class NextUposatha:
     date: str
     details: str
     moon_phase: uposatha.elements.MoonPhase
+    fourteen_day: bool
 
 def next_uposatha_content(today: date) -> NextUposatha:
     calendar = Calendar()
@@ -24,7 +25,8 @@ def next_uposatha_content(today: date) -> NextUposatha:
         falls_on=next_uposatha.falls_on,
         date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),
-        moon_phase=next_uposatha.moon_phase
+        moon_phase=next_uposatha.moon_phase,
+        fourteen_day=(next_uposatha.days_since_previous == 14)
     )
 
 def uposatha_details(season, next_uposatha):
@@ -33,4 +35,3 @@ def uposatha_details(season, next_uposatha):
     number_of_uposathas = len(season.uposathas)
     season_name = season.name.name.capitalize()
     return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
-
