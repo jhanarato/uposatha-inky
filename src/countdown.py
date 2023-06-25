@@ -160,6 +160,14 @@ class GridLayout:
         self._start_y = y
 
     @property
+    def appearance(self) -> Appearance:
+        return Appearance(
+            icon_size=self._icon_size,
+            max_columns=self._max_columns,
+            gap=self._gap
+        )
+
+    @property
     def rows(self) -> int:
         return math.ceil(self._icon_count / self._max_columns)
 
