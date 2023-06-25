@@ -46,10 +46,10 @@ class Countdown:
 
         appearance = resizer(len(self._icons))
 
+        self._icons.icon_size = appearance.icon_size
+
         self._layout = GridLayout(appearance)
         self._layout.icon_count(len(self._icons))
-
-        self._icons.icon_size = appearance.icon_size
         self._layout.icon_size(appearance.icon_size)
         self._layout.gap(appearance.gap)
 
