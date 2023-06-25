@@ -51,7 +51,6 @@ class Countdown:
 
         self._icons.icon_size = appearance.icon_size
         self._layout.icon_size(appearance.icon_size)
-        self._layout.max_columns(appearance.max_columns)
         self._layout.gap(appearance.gap)
 
     def height(self) -> int:
