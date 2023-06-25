@@ -168,11 +168,7 @@ class GridLayout:
 
     @property
     def appearance(self) -> Appearance:
-        return Appearance(
-            icon_size=self._icon_size,
-            max_columns=self._max_columns,
-            gap=self._gap
-        )
+        return self._appearance
 
     @property
     def rows(self) -> int:
