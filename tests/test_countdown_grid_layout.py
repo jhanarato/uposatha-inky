@@ -99,7 +99,6 @@ def test_should_report_total_height():
     layout = GridLayout(appearance)
     layout.icon_count(6)
     assert layout.rows == 2
-    layout.icon_size(10)
     layout.gap(2)
     assert layout.total_height == (2 * 10) + 2
 
@@ -108,6 +107,5 @@ def test_should_report_total_width():
     layout = GridLayout(appearance)
     layout.icon_count(6)
     assert layout.columns == 3
-    layout.icon_size(10)
     layout.gap(2)
     assert layout.total_width == (3 * 10) + (2 * 2)

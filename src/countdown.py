@@ -50,7 +50,6 @@ class Countdown:
 
         self._layout = GridLayout(appearance)
         self._layout.icon_count(len(self._icons))
-        self._layout.icon_size(appearance.icon_size)
         self._layout.gap(appearance.gap)
 
     def height(self) -> int:
@@ -152,9 +151,6 @@ class GridLayout:
     def icon_count(self, count: int) -> None:
         self._icon_count = count
 
-    def icon_size(self, size: int) -> None:
-        self._icon_size = size
-
     def gap(self, gap: int) -> None:
         self._gap = gap
 
@@ -178,13 +174,13 @@ class GridLayout:
 
     @property
     def total_height(self) -> int:
-        icon_height = self._icon_size * self.rows
+        icon_height = self.appearance.icon_size * self.rows
         gap_height = self._gap * (self.rows - 1)
         return icon_height + gap_height
 
     @property
     def total_width(self) -> int:
-        icon_width = self._icon_size * self.columns
+        icon_width = self.appearance.icon_size * self.columns
         gap_width = self._gap * (self.columns - 1)
         return icon_width + gap_width
 
