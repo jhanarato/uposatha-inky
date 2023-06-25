@@ -149,9 +149,6 @@ class GridLayout:
         self._start_x = 0
         self._start_y = 0
 
-    def max_columns(self, columns: int) -> None:
-        self._max_columns = columns
-
     def icon_count(self, count: int) -> None:
         self._icon_count = count
 
