@@ -141,9 +141,7 @@ class Icons(Sequence[ImageComponent]):
 class GridLayout:
     def __init__(self, appearance: Appearance):
         self._appearance = appearance
-        self._max_columns = 0
         self._icon_count = 0
-        self._icon_size = 0
         self._gap = 0
         self._start_x = 0
         self._start_y = 0
