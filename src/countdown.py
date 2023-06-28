@@ -185,19 +185,18 @@ class GridLayout:
             yield x, y
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    if icons > 7:
-        max_columns = 8
-        icon_size = 30
-        gap = 4
-    elif icons > 3:
-        # TODO We don't need to change max_columns here. It can resize itself.
-        max_columns = icons
-        icon_size = 40
-        gap = 4
+    gap = 4
+
+    if fourteen_day:
+        max_columns = 7
     else:
-        # TODO: As above.
-        max_columns = icons
+        max_columns = 8
+
+    if icons > max_columns:
+        icon_size = 30
+    elif icons > 3:
+        icon_size = 40
+    else:
         icon_size = 50
-        gap = 4
 
     return Appearance(icon_size=icon_size, max_columns=max_columns, gap=gap)
