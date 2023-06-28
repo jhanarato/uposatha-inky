@@ -193,7 +193,7 @@ def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
         max_columns = 8
 
     if icons > max_columns:
-        icon_size = 30
+        icon_size = 35
     elif icons > 3:
         icon_size = 40
     else:
