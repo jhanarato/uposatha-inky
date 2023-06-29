@@ -4,6 +4,7 @@ import itertools
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
+from enum import Enum, auto
 from typing import Callable
 
 from PIL import ImageDraw
@@ -203,3 +204,9 @@ def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
         icon_size = SMALL_ICON
 
     return Appearance(icon_size=icon_size, max_columns=max_columns, gap=GAP)
+
+class ColumnMode(Enum):
+    THREE_ROW = auto()
+
+def column_mode(icons: int, fourteen_day: bool) -> ColumnMode:
+    return ColumnMode.THREE_ROW
