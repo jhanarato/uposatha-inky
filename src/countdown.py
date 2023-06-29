@@ -14,6 +14,11 @@ from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
+GAP = 4
+SMALLEST_ICON = 0
+SMALL_ICON = 35
+MEDIUM_ICON = 40
+LARGE_ICON = 45
 
 @dataclass(frozen=True)
 class Appearance:
@@ -185,18 +190,16 @@ class GridLayout:
             yield x, y
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    gap = 4
-
     if fourteen_day:
         max_columns = 7
     else:
         max_columns = 8
 
     if icons < 4:
-        icon_size = 45
+        icon_size = LARGE_ICON
     elif icons < max_columns:
-        icon_size = 40
+        icon_size = MEDIUM_ICON
     else:
-        icon_size = 35
+        icon_size = SMALL_ICON
 
-    return Appearance(icon_size=icon_size, max_columns=max_columns, gap=gap)
+    return Appearance(icon_size=icon_size, max_columns=max_columns, gap=GAP)
