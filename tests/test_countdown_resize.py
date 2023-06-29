@@ -3,6 +3,7 @@ from datetime import date, timedelta
 import pytest
 from uposatha.elements import MoonPhase
 
+import countdown
 from countdown import Countdown, zoom_on_approach, ColumnMode, column_mode
 from screen import ImageConfig
 
@@ -55,3 +56,20 @@ def test_should_calculate_fifteen_day_column_mode(icons, mode):
 )
 def test_should_calculate_fourteen_day_column_mode(icons, mode):
     assert column_mode(icons, True) == mode
+
+@pytest.mark.parametrize(
+    "icons,fourteen_day,icon_size",
+    [
+        (3, True, countdown.LARGE_ICON),
+        (3, False, countdown.LARGE_ICON),
+    ]
+)
+def test_should_size_icons(icons, fourteen_day, icon_size):
+    assert zoom_on_approach(icons, fourteen_day).icon_size == icon_size
+
+def test_should_keep_gap_constant():
+    for icons in range(1, 16):
+        assert zoom_on_approach(icons, False).gap == countdown.GAP
+    for icons in range(1, 15):
+        assert zoom_on_approach(icons, True).gap == countdown.GAP
+        

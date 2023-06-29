@@ -5,7 +5,7 @@ from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
 from enum import Enum, auto
-from typing import Callable, TypedDict
+from typing import Callable
 
 from PIL import ImageDraw
 
@@ -16,7 +16,7 @@ from layout import ImageComponent
 from screen import ImageConfig
 
 GAP = 4
-SMALLEST_ICON = 0
+SMALLEST_ICON = 25
 SMALL_ICON = 35
 MEDIUM_ICON = 40
 LARGE_ICON = 45
@@ -190,27 +190,25 @@ class GridLayout:
             y = start_y + (row * self.spacing)
             yield x, y
 
-def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    if fourteen_day:
-        max_columns = 7
-    else:
-        max_columns = 8
-
-    if icons < 4:
-        icon_size = LARGE_ICON
-    elif icons < max_columns:
-        icon_size = MEDIUM_ICON
-    else:
-        icon_size = SMALL_ICON
-
-    return Appearance(icon_size=icon_size, max_columns=max_columns, gap=GAP)
-
 class ColumnMode(Enum):
     THREE_ROW = auto()
     TWO_ROW_15_DAY = auto()
     TWO_ROW_14_DAY = auto()
     ONE_ROW_MEDIUM_SIZE = auto()
     ONE_ROW_LARGE_SIZE = auto()
+
+def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
+    appearances = {
+        ColumnMode.THREE_ROW: Appearance(SMALLEST_ICON, 5, GAP),
+        ColumnMode.TWO_ROW_15_DAY: Appearance(SMALL_ICON, 8, GAP),
+        ColumnMode.TWO_ROW_14_DAY: Appearance(SMALL_ICON, 7, GAP),
+        ColumnMode.ONE_ROW_MEDIUM_SIZE: Appearance(MEDIUM_ICON, 7, GAP),
+        ColumnMode.ONE_ROW_LARGE_SIZE: Appearance(LARGE_ICON, 7, GAP)
+    }
+
+    mode = column_mode(icons, fourteen_day)
+
+    return appearances[mode]
 
 def column_mode(icons: int, fourteen_day: bool) -> ColumnMode:
     if fourteen_day:
