@@ -5,7 +5,7 @@ from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
 from enum import Enum, auto
-from typing import Callable
+from typing import Callable, TypedDict
 
 from PIL import ImageDraw
 
@@ -209,8 +209,23 @@ class ColumnMode(Enum):
     THREE_ROW = auto()
     TWO_ROW_15_DAY = auto()
     TWO_ROW_14_DAY = auto()
-    ONE_ROW_LONGER = auto()
-    ONE_ROW_SHORTER = auto()
+    ONE_ROW_MEDIUM_SIZE = auto()
+    ONE_ROW_LARGE_SIZE = auto()
 
 def column_mode(icons: int, fourteen_day: bool) -> ColumnMode:
-    return ColumnMode.THREE_ROW
+    if fourteen_day:
+        if icons <= 3:
+            return ColumnMode.ONE_ROW_LARGE_SIZE
+        elif icons <= 7:
+            return ColumnMode.ONE_ROW_MEDIUM_SIZE
+        else:
+            return ColumnMode.TWO_ROW_14_DAY
+    else:
+        if icons <= 3:
+            return ColumnMode.ONE_ROW_LARGE_SIZE
+        elif icons <= 8:
+            return ColumnMode.ONE_ROW_MEDIUM_SIZE
+        elif icons <= 10:
+            return ColumnMode.TWO_ROW_15_DAY
+        else:
+            return ColumnMode.THREE_ROW
