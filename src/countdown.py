@@ -207,6 +207,10 @@ def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
 
 class ColumnMode(Enum):
     THREE_ROW = auto()
+    TWO_ROW_15_DAY = auto()
+    TWO_ROW_14_DAY = auto()
+    ONE_ROW_LONGER = auto()
+    ONE_ROW_SHORTER = auto()
 
 def column_mode(icons: int, fourteen_day: bool) -> ColumnMode:
     return ColumnMode.THREE_ROW
