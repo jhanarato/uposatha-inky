@@ -209,6 +209,12 @@ class AppearanceForIconCount:
                 self._appearances[index] = value
 
     def __getitem__(self, item: int) -> Appearance:
+        if item < 1:
+            raise IndexError
+
+        if item > len(self._appearances):
+            raise IndexError
+
         return self._appearances[item - 1]
 
     def __iter__(self):

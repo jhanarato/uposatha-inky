@@ -39,10 +39,19 @@ def test_should_work_with_all():
     appearances = AppearanceForIconCount(fourteen_day=False)
     appearances[1, 14] = Appearance(1, 2, 3)
     assert not all(appearances)
-    appearances[15, 15] = Appearance(1, 2, 3)
+    appearances[15] = Appearance(1, 2, 3)
     assert all(appearances)
 
 def test_should_accept_a_single_icon_count():
     appearances = AppearanceForIconCount(fourteen_day=False)
     appearances[1] = Appearance(1, 2, 3)
     assert appearances[1] == Appearance(1, 2, 3)
+
+@pytest.mark.parametrize(
+    "index", [-1, 0, 15, 16]
+)
+def test_should_raise_index_error(index):
+    appearances = AppearanceForIconCount(fourteen_day=True)
+
+    with pytest.raises(IndexError):
+        a = appearances[index]
