@@ -231,18 +231,18 @@ class AppearanceForIconCount:
 
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    appearances_map = AppearanceForIconCount(fourteen_day)
+    appearances = AppearanceForIconCount(fourteen_day)
 
     if fourteen_day:
-        appearances_map[8, 14] = Appearance(SMALL_ICON, 7, GAP)
-        appearances_map[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
-        appearances_map[2, 3] = Appearance(LARGE_ICON, 7, GAP)
-        appearances_map[1] = Appearance(LARGEST_ICON, 7, GAP)
+        appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
+        appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
+        appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
+        appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
     else:
-        appearances_map[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
-        appearances_map[8, 10] = Appearance(SMALL_ICON, 8, GAP)
-        appearances_map[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
-        appearances_map[2, 3] = Appearance(LARGE_ICON, 8, GAP)
-        appearances_map[1] = Appearance(LARGEST_ICON, 8, GAP)
+        appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
+        appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
+        appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
+        appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
+        appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
 
-    return appearances_map[icons]
+    return appearances[icons]
