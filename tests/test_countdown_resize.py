@@ -1,11 +1,11 @@
 from datetime import date, timedelta
 
 import pytest
-from uposatha.elements import MoonPhase
 
-import countdown
-from countdown import Countdown, zoom_on_approach, ColumnMode, column_mode
-from screen import ImageConfig
+from countdown import (
+    zoom_on_approach, ColumnMode, column_mode, AppearanceForIconCount,
+    GAP, LARGE_ICON, Appearance
+)
 
 def days(number_of_days: int) -> tuple[date, date]:
     start = date(2023, 1, 1)
@@ -60,8 +60,8 @@ def test_should_calculate_fourteen_day_column_mode(icons, mode):
 @pytest.mark.parametrize(
     "icons,fourteen_day,icon_size",
     [
-        (3, True, countdown.LARGE_ICON),
-        (3, False, countdown.LARGE_ICON),
+        (3, True, LARGE_ICON),
+        (3, False, LARGE_ICON),
     ]
 )
 def test_should_size_icons(icons, fourteen_day, icon_size):
@@ -69,9 +69,9 @@ def test_should_size_icons(icons, fourteen_day, icon_size):
 
 def test_should_keep_gap_constant():
     for icons in range(1, 16):
-        assert zoom_on_approach(icons, False).gap == countdown.GAP
+        assert zoom_on_approach(icons, False).gap == GAP
     for icons in range(1, 15):
-        assert zoom_on_approach(icons, True).gap == countdown.GAP
+        assert zoom_on_approach(icons, True).gap == GAP
 
 @pytest.mark.parametrize(
     "fourteen_day,length",
@@ -81,5 +81,12 @@ def test_should_keep_gap_constant():
     ]
 )
 def test_should_be_of_correct_length(fourteen_day, length):
-    mapping = countdown.AppearanceForIconCount(fourteen_day=fourteen_day)
-    assert len(mapping) == length
+    appearances = AppearanceForIconCount(fourteen_day=fourteen_day)
+    assert len(appearances) == length
+
+def test_should_add_appearance_to_range():
+    appearances = AppearanceForIconCount(fourteen_day=False)
+    appearances[1, 3] = Appearance(1, 2, 3)
+    assert appearances[1] == Appearance(1, 2, 3)
+    assert appearances[2] == Appearance(1, 2, 3)
+    assert appearances[3] == Appearance(1, 2, 3)

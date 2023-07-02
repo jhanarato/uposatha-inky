@@ -5,7 +5,7 @@ from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
 from enum import Enum, auto
-from typing import Callable
+from typing import Callable, Optional
 
 from PIL import ImageDraw
 
@@ -190,6 +190,7 @@ class GridLayout:
             y = start_y + (row * self.spacing)
             yield x, y
 
+
 class AppearanceForIconCount:
     def __init__(self, fourteen_day: bool) -> None:
         if fourteen_day:
@@ -197,7 +198,14 @@ class AppearanceForIconCount:
         else:
             length = 15
 
-        self._appearances = list(itertools.repeat(None, length))
+        self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, length))
+
+    def __setitem__(self, key: tuple[int, int], value: Appearance):
+        for index in range(key[0] - 1, key[1]):
+            self._appearances[index] = value
+
+    def __getitem__(self, item: int) -> Appearance:
+        return self._appearances[item - 1]
 
     def __len__(self) -> int:
         return len(self._appearances)
