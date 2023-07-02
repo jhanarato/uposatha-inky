@@ -20,6 +20,7 @@ SMALLEST_ICON = 25
 SMALL_ICON = 35
 MEDIUM_ICON = 40
 LARGE_ICON = 45
+LARGEST_ICON = 80
 
 @dataclass(frozen=True)
 class Appearance:
@@ -214,40 +215,19 @@ class AppearanceForIconCount:
         return len(self._appearances)
 
 
-class ColumnMode(Enum):
-    THREE_ROW = auto()
-    TWO_ROW_15_DAY = auto()
-    TWO_ROW_14_DAY = auto()
-    ONE_ROW_MEDIUM_SIZE = auto()
-    ONE_ROW_LARGE_SIZE = auto()
-
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    appearances = {
-        ColumnMode.THREE_ROW: Appearance(SMALLEST_ICON, 5, GAP),
-        ColumnMode.TWO_ROW_15_DAY: Appearance(SMALL_ICON, 8, GAP),
-        ColumnMode.TWO_ROW_14_DAY: Appearance(SMALL_ICON, 7, GAP),
-        ColumnMode.ONE_ROW_MEDIUM_SIZE: Appearance(MEDIUM_ICON, 7, GAP),
-        ColumnMode.ONE_ROW_LARGE_SIZE: Appearance(LARGE_ICON, 7, GAP)
-    }
+    appearances_map = AppearanceForIconCount(fourteen_day)
 
-    mode = column_mode(icons, fourteen_day)
-
-    return appearances[mode]
-
-def column_mode(icons: int, fourteen_day: bool) -> ColumnMode:
     if fourteen_day:
-        if icons <= 3:
-            return ColumnMode.ONE_ROW_LARGE_SIZE
-        elif icons <= 7:
-            return ColumnMode.ONE_ROW_MEDIUM_SIZE
-        else:
-            return ColumnMode.TWO_ROW_14_DAY
+        appearances_map[8, 14] = Appearance(SMALL_ICON, 7, GAP)
+        appearances_map[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
+        appearances_map[2, 3] = Appearance(LARGE_ICON, 7, GAP)
+        appearances_map[1, 1] = Appearance(LARGEST_ICON, 7, GAP)
     else:
-        if icons <= 3:
-            return ColumnMode.ONE_ROW_LARGE_SIZE
-        elif icons <= 8:
-            return ColumnMode.ONE_ROW_MEDIUM_SIZE
-        elif icons <= 10:
-            return ColumnMode.TWO_ROW_15_DAY
-        else:
-            return ColumnMode.THREE_ROW
+        appearances_map[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
+        appearances_map[8, 10] = Appearance(SMALL_ICON, 8, GAP)
+        appearances_map[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
+        appearances_map[2, 3] = Appearance(LARGE_ICON, 8, GAP)
+        appearances_map[1, 1] = Appearance(LARGEST_ICON, 8, GAP)
+
+    return appearances_map[icons]
