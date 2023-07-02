@@ -190,6 +190,19 @@ class GridLayout:
             y = start_y + (row * self.spacing)
             yield x, y
 
+class AppearanceForIconCount:
+    def __init__(self, fourteen_day: bool) -> None:
+        if fourteen_day:
+            length = 14
+        else:
+            length = 15
+
+        self._numbers_of_icons = list(itertools.repeat(None, length))
+
+    def __len__(self) -> int:
+        return len(self._numbers_of_icons)
+
+
 class ColumnMode(Enum):
     THREE_ROW = auto()
     TWO_ROW_15_DAY = auto()

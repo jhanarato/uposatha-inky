@@ -72,4 +72,14 @@ def test_should_keep_gap_constant():
         assert zoom_on_approach(icons, False).gap == countdown.GAP
     for icons in range(1, 15):
         assert zoom_on_approach(icons, True).gap == countdown.GAP
-        
+
+@pytest.mark.parametrize(
+    "fourteen_day,length",
+    [
+        (True, 14),
+        (False, 15),
+    ]
+)
+def test_should_be_of_correct_length(fourteen_day, length):
+    mapping = countdown.AppearanceForIconCount(fourteen_day=fourteen_day)
+    assert len(mapping) == length
