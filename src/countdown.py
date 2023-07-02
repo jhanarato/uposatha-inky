@@ -208,26 +208,21 @@ class AppearanceForIconCount:
             keys = list(range(key[0], key[1] + 1))
 
         for key in keys:
-            if key < 1:
-                raise IndexError
-            if key > len(self._appearances):
-                raise IndexError
-
+            self._check_bounds(key)
             index = key - 1
-
             if self._appearances[index]:
                 raise IndexError("Cannot reassign item")
-
             self._appearances[index] = value
 
     def __getitem__(self, item: int) -> Appearance:
+        self._check_bounds(item)
+        return self._appearances[item - 1]
+
+    def _check_bounds(self, item):
         if item < 1:
             raise IndexError
-
         if item > len(self._appearances):
             raise IndexError
-
-        return self._appearances[item - 1]
 
     def __iter__(self):
         return iter(self._appearances)
