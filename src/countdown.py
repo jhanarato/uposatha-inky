@@ -201,9 +201,12 @@ class AppearanceForIconCount:
 
         self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, length))
 
-    def __setitem__(self, key: tuple[int, int], value: Appearance):
-        for index in range(key[0] - 1, key[1]):
-            self._appearances[index] = value
+    def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
+        if isinstance(key, int):
+            self._appearances[key - 1] = value
+        else:
+            for index in range(key[0] - 1, key[1]):
+                self._appearances[index] = value
 
     def __getitem__(self, item: int) -> Appearance:
         return self._appearances[item - 1]
@@ -222,12 +225,12 @@ def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
         appearances_map[8, 14] = Appearance(SMALL_ICON, 7, GAP)
         appearances_map[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
         appearances_map[2, 3] = Appearance(LARGE_ICON, 7, GAP)
-        appearances_map[1, 1] = Appearance(LARGEST_ICON, 7, GAP)
+        appearances_map[1] = Appearance(LARGEST_ICON, 7, GAP)
     else:
         appearances_map[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
         appearances_map[8, 10] = Appearance(SMALL_ICON, 8, GAP)
         appearances_map[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
         appearances_map[2, 3] = Appearance(LARGE_ICON, 8, GAP)
-        appearances_map[1, 1] = Appearance(LARGEST_ICON, 8, GAP)
+        appearances_map[1] = Appearance(LARGEST_ICON, 8, GAP)
 
     return appearances_map[icons]

@@ -41,3 +41,8 @@ def test_should_work_with_all():
     assert not all(appearances)
     appearances[15, 15] = Appearance(1, 2, 3)
     assert all(appearances)
+
+def test_should_accept_a_single_icon_count():
+    appearances = AppearanceForIconCount(fourteen_day=False)
+    appearances[1] = Appearance(1, 2, 3)
+    assert appearances[1] == Appearance(1, 2, 3)
