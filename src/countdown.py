@@ -207,6 +207,9 @@ class AppearanceForIconCount:
     def __getitem__(self, item: int) -> Appearance:
         return self._appearances[item - 1]
 
+    def __iter__(self):
+        return iter(self._appearances)
+
     def __len__(self) -> int:
         return len(self._appearances)
 
