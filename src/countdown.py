@@ -197,10 +197,10 @@ class AppearanceForIconCount:
         else:
             length = 15
 
-        self._numbers_of_icons = list(itertools.repeat(None, length))
+        self._appearances = list(itertools.repeat(None, length))
 
     def __len__(self) -> int:
-        return len(self._numbers_of_icons)
+        return len(self._appearances)
 
 
 class ColumnMode(Enum):
