@@ -90,3 +90,15 @@ def test_should_add_appearance_to_range():
     assert appearances[1] == Appearance(1, 2, 3)
     assert appearances[2] == Appearance(1, 2, 3)
     assert appearances[3] == Appearance(1, 2, 3)
+
+def test_should_work_with_any():
+    appearances = AppearanceForIconCount(fourteen_day=False)
+    appearances[1, 3] = Appearance(1, 2, 3)
+    assert any(appearances)
+
+def test_should_work_with_all():
+    appearances = AppearanceForIconCount(fourteen_day=False)
+    appearances[1, 14] = Appearance(1, 2, 3)
+    assert not all(appearances)
+    appearances[15, 15] = Appearance(1, 2, 3)
+    assert all(appearances)
