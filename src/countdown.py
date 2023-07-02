@@ -209,10 +209,9 @@ class AppearanceForIconCount:
 
         for key in keys:
             self._check_bounds(key)
-            index = key - 1
-            if self._appearances[index]:
+            if self._appearances[(key - 1)]:
                 raise IndexError("Cannot reassign item")
-            self._appearances[index] = value
+            self._appearances[(key - 1)] = value
 
     def __getitem__(self, item: int) -> Appearance:
         self._check_bounds(item)
