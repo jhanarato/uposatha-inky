@@ -50,8 +50,24 @@ def test_should_accept_a_single_icon_count():
 @pytest.mark.parametrize(
     "index", [-1, 0, 15, 16]
 )
-def test_should_raise_index_error(index):
+def test_should_raise_index_error_on_get(index):
     appearances = AppearanceForIconCount(fourteen_day=True)
 
     with pytest.raises(IndexError):
         a = appearances[index]
+
+@pytest.mark.parametrize(
+    "index", [-1, 0, 15, 16]
+)
+def test_should_raise_index_error_on_set(index):
+    appearances = AppearanceForIconCount(fourteen_day=True)
+
+    with pytest.raises(IndexError):
+        appearances[index] = Appearance(1, 2, 3)
+
+def test_should_not_allow_overlapping_ranges():
+    appearances = AppearanceForIconCount(fourteen_day=False)
+    appearances[1, 3] = Appearance(1, 2, 3)
+
+    with pytest.raises(IndexError):
+        appearances[3, 5] = Appearance(1, 2, 3)
