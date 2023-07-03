@@ -4,7 +4,7 @@ import itertools
 from collections.abc import Sequence, Iterator, MutableMapping
 from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import Callable
+from typing import Callable, TypeVar
 
 from PIL import ImageDraw
 
@@ -190,23 +190,24 @@ class GridLayout:
             y = start_y + (row * self.spacing)
             yield x, y
 
+T = TypeVar("T")
 
-class AppearanceForIconCount(MutableMapping):
+class IconCountMapping(MutableMapping[T]):
     def __init__(self, max_icons: int) -> None:
         self._max_icons = max_icons
-        self._appearances_dict: dict[int, Appearance] = {}
+        self._mapping: dict[int, T] = {}
 
-    def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
+    def __setitem__(self, key: tuple[int, int] | int, value: T):
         for key in self._key_range(key):
             self._check_bounds(key)
-            self._appearances_dict[key] = value
+            self._mapping[key] = value
 
-    def __getitem__(self, item: int) -> Appearance:
+    def __getitem__(self, item: int) -> T:
         self._check_bounds(item)
-        return self._appearances_dict[item]
+        return self._mapping[item]
 
     def __delitem__(self, key):
-        del(self._appearances_dict[key])
+        del(self._mapping[key])
 
     def _key_range(self, key) -> list[int]:
         if isinstance(key, int):
@@ -222,7 +223,7 @@ class AppearanceForIconCount(MutableMapping):
             raise KeyError("Index greater than maximum number of icons")
 
     def __iter__(self):
-        return iter(self._appearances_dict)
+        return iter(self._mapping)
 
     def __len__(self) -> int:
         return self._max_icons
@@ -230,13 +231,13 @@ class AppearanceForIconCount(MutableMapping):
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
     if fourteen_day:
-        appearances = AppearanceForIconCount(14)
+        appearances = IconCountMapping[Appearance](14)
         appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
         appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
         appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
         appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
     else:
-        appearances = AppearanceForIconCount(15)
+        appearances = IconCountMapping[Appearance](15)
         appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
         appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
         appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
