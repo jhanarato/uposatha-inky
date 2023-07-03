@@ -200,16 +200,16 @@ class AppearanceForIconCount:
             self._check_bounds(key)
             self._appearances[(key - 1)] = value
 
+    def __getitem__(self, item: int) -> Appearance:
+        self._check_bounds(item)
+        return self._appearances[item - 1]
+
     def _key_range(self, key) -> list[int]:
         if isinstance(key, int):
             keys = [key]
         else:
             keys = list(range(key[0], key[1] + 1))
         return keys
-
-    def __getitem__(self, item: int) -> Appearance:
-        self._check_bounds(item)
-        return self._appearances[item - 1]
 
     def _check_bounds(self, item):
         if item < 1:
