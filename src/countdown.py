@@ -201,16 +201,18 @@ class AppearanceForIconCount:
         self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, length))
 
     def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
-        if isinstance(key, int):
-            keys = [key]
-        else:
-            keys = list(range(key[0], key[1] + 1))
-
-        for key in keys:
+        for key in self._key_range(key):
             self._check_bounds(key)
             if self._appearances[(key - 1)]:
                 raise IndexError("Cannot reassign item")
             self._appearances[(key - 1)] = value
+
+    def _key_range(self, key) -> list[int]:
+        if isinstance(key, int):
+            keys = [key]
+        else:
+            keys = list(range(key[0], key[1] + 1))
+        return keys
 
     def __getitem__(self, item: int) -> Appearance:
         self._check_bounds(item)
