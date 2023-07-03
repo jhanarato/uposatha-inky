@@ -193,6 +193,10 @@ class GridLayout:
 T = TypeVar("T")
 
 class IconCountMapping(MutableMapping[T]):
+    """ Map a type to the number of icons being displayed.
+        The key is bounds-checked to be between 1 and the
+        maximum number of icons that can be displayed.
+    """
     def __init__(self, max_icons: int) -> None:
         self._max_icons = max_icons
         self._mapping: dict[int, T] = {}
