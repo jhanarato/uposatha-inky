@@ -192,13 +192,8 @@ class GridLayout:
 
 
 class AppearanceForIconCount:
-    def __init__(self, fourteen_day: bool) -> None:
-        if fourteen_day:
-            length = 14
-        else:
-            length = 15
-
-        self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, length))
+    def __init__(self, max_icons: int) -> None:
+        self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, max_icons))
 
     def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
         for key in self._key_range(key):
@@ -232,14 +227,14 @@ class AppearanceForIconCount:
 
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    appearances = AppearanceForIconCount(fourteen_day)
-
     if fourteen_day:
+        appearances = AppearanceForIconCount(14)
         appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
         appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
         appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
         appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
     else:
+        appearances = AppearanceForIconCount(15)
         appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
         appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
         appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
