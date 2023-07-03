@@ -51,9 +51,8 @@ def test_should_raise_index_error_on_set(index):
     with pytest.raises(IndexError):
         appearances[index] = Appearance(1, 2, 3)
 
-def test_should_not_allow_overlapping_ranges():
+def test_should_allow_overlapping_ranges():
     appearances = AppearanceForIconCount(15)
     appearances[1, 3] = Appearance(1, 2, 3)
-
-    with pytest.raises(IndexError):
-        appearances[3, 5] = Appearance(1, 2, 3)
+    appearances[3, 5] = Appearance(4, 5, 6)
+    assert appearances[3] == Appearance(4, 5, 6)

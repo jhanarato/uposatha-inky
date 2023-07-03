@@ -198,8 +198,6 @@ class AppearanceForIconCount:
     def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
         for key in self._key_range(key):
             self._check_bounds(key)
-            if self._appearances[(key - 1)]:
-                raise IndexError("Cannot reassign item")
             self._appearances[(key - 1)] = value
 
     def _key_range(self, key) -> list[int]:
