@@ -1,10 +1,10 @@
 import math
 import itertools
 
-from collections.abc import Sequence, Iterator
+from collections.abc import Sequence, Iterator, MutableMapping
 from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import Callable, Optional
+from typing import Callable
 
 from PIL import ImageDraw
 
@@ -191,7 +191,7 @@ class GridLayout:
             yield x, y
 
 
-class AppearanceForIconCount:
+class AppearanceForIconCount(MutableMapping):
     def __init__(self, max_icons: int) -> None:
         self._max_icons = max_icons
         self._appearances_dict: dict[int, Appearance] = {}
