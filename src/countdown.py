@@ -4,7 +4,6 @@ import itertools
 from collections.abc import Sequence, Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
-from enum import Enum, auto
 from typing import Callable, Optional
 
 from PIL import ImageDraw
