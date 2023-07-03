@@ -75,4 +75,8 @@ def test_should_delete_existing():
         _ = appearances[2]
 
 def test_should_raise_on_deleting_missing():
-    pass
+    appearances = AppearanceForIconCount(15)
+    appearances[1, 15] = Appearance(1, 2, 3)
+    del appearances[6]
+    with pytest.raises(KeyError):
+        del appearances[6]
