@@ -16,17 +16,26 @@ def test_should_add_appearance_to_range():
     assert appearances[2] == Appearance(1, 2, 3)
     assert appearances[3] == Appearance(1, 2, 3)
 
-def test_should_work_with_any():
+def test_should_be_any():
     appearances = AppearanceForIconCount(15)
-    appearances[1, 3] = Appearance(1, 2, 3)
+    appearances[3] = Appearance(1, 2, 3)
     assert any(appearances)
 
-def test_should_work_with_all():
+def test_should_not_be_any():
+    appearances = AppearanceForIconCount(15)
+    assert not any(appearances)
+
+def test_should_be_all_when_all_assigned():
+    appearances = AppearanceForIconCount(15)
+    appearances[1, 15] = Appearance(1, 2, 3)
+    appearances[15] = Appearance(1, 2, 3)
+    assert all(appearances)
+
+def should_not_be_all_when_one_missing():
     appearances = AppearanceForIconCount(15)
     appearances[1, 14] = Appearance(1, 2, 3)
     assert not all(appearances)
-    appearances[15] = Appearance(1, 2, 3)
-    assert all(appearances)
+
 
 def test_should_accept_a_single_icon_count():
     appearances = AppearanceForIconCount(15)
@@ -39,7 +48,7 @@ def test_should_accept_a_single_icon_count():
 def test_should_raise_index_error_on_get(index):
     appearances = AppearanceForIconCount(14)
 
-    with pytest.raises(IndexError):
+    with pytest.raises(KeyError):
         a = appearances[index]
 
 @pytest.mark.parametrize(
@@ -48,7 +57,7 @@ def test_should_raise_index_error_on_get(index):
 def test_should_raise_index_error_on_set(index):
     appearances = AppearanceForIconCount(14)
 
-    with pytest.raises(IndexError):
+    with pytest.raises(KeyError):
         appearances[index] = Appearance(1, 2, 3)
 
 def test_should_allow_overlapping_ranges():
@@ -56,3 +65,14 @@ def test_should_allow_overlapping_ranges():
     appearances[1, 3] = Appearance(1, 2, 3)
     appearances[3, 5] = Appearance(4, 5, 6)
     assert appearances[3] == Appearance(4, 5, 6)
+
+def test_should_delete_existing():
+    appearances = AppearanceForIconCount(15)
+    appearances[1, 15] = Appearance(1, 2, 3)
+    assert appearances[2] == Appearance(1, 2, 3)
+    del(appearances[2])
+    with pytest.raises(KeyError):
+        _ = appearances[2]
+
+def test_should_raise_on_deleting_missing():
+    pass

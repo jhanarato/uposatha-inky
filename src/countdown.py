@@ -193,16 +193,20 @@ class GridLayout:
 
 class AppearanceForIconCount:
     def __init__(self, max_icons: int) -> None:
-        self._appearances: list[Optional[Appearance]] = list(itertools.repeat(None, max_icons))
+        self._max_icons = max_icons
+        self._appearances_dict: dict[int, Appearance] = {}
 
     def __setitem__(self, key: tuple[int, int] | int, value: Appearance):
         for key in self._key_range(key):
             self._check_bounds(key)
-            self._appearances[(key - 1)] = value
+            self._appearances_dict[key] = value
 
     def __getitem__(self, item: int) -> Appearance:
         self._check_bounds(item)
-        return self._appearances[item - 1]
+        return self._appearances_dict[item]
+
+    def __delitem__(self, key):
+        del(self._appearances_dict[key])
 
     def _key_range(self, key) -> list[int]:
         if isinstance(key, int):
@@ -213,15 +217,15 @@ class AppearanceForIconCount:
 
     def _check_bounds(self, item):
         if item < 1:
-            raise IndexError
-        if item > len(self._appearances):
-            raise IndexError
+            raise KeyError("Number of icons is always positive")
+        if item > self._max_icons:
+            raise KeyError("Index greater than maximum number of icons")
 
     def __iter__(self):
-        return iter(self._appearances)
+        return iter(self._appearances_dict)
 
     def __len__(self) -> int:
-        return len(self._appearances)
+        return self._max_icons
 
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
