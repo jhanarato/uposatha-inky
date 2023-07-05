@@ -42,13 +42,19 @@ def test_should_accept_a_single_icon_count():
     assert appearances[1] == Appearance(1, 2, 3)
 
 @pytest.mark.parametrize(
-    "index", [-1, 0, 15, 16]
+    "index", [-1, 0, 16]
 )
-def test_should_raise_index_error_on_get(index):
+def test_should_get_error_when_get_is_out_of_bounds(index):
     appearances = IconCountMapping[Appearance](14)
-
     with pytest.raises(KeyError):
         a = appearances[index]
+
+@pytest.mark.parametrize(
+    "index", [1, 7, 14]
+)
+def test_should_get_none_when_in_bounds(index):
+    appearances = IconCountMapping[Appearance](14)
+    assert appearances[index] is None
 
 @pytest.mark.parametrize(
     "index", [-1, 0, 15, 16]
@@ -70,8 +76,7 @@ def test_should_delete_existing():
     appearances[1, 15] = Appearance(1, 2, 3)
     assert appearances[2] == Appearance(1, 2, 3)
     del(appearances[2])
-    with pytest.raises(KeyError):
-        _ = appearances[2]
+    assert appearances[2] is None
 
 def test_should_raise_on_deleting_missing():
     appearances = IconCountMapping[Appearance](15)

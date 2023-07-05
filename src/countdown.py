@@ -208,7 +208,7 @@ class IconCountMapping(MutableMapping[T]):
 
     def __getitem__(self, item: int) -> T:
         self._check_bounds(item)
-        return self._mapping[item]
+        return self._mapping.get(item)
 
     def __delitem__(self, key):
         del(self._mapping[key])
