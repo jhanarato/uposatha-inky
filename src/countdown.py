@@ -227,7 +227,8 @@ class IconCountMapping(MutableMapping[T]):
             raise KeyError("Index greater than maximum number of icons")
 
     def __iter__(self):
-        return iter(self._mapping)
+        for i in range(1, self._max_icons + 1):
+            yield self._mapping.get(i)
 
     def __len__(self) -> int:
         return self._max_icons

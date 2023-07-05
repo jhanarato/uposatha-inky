@@ -28,10 +28,9 @@ def test_should_not_be_any():
 def test_should_be_all_when_all_assigned():
     appearances = IconCountMapping[Appearance](15)
     appearances[1, 15] = Appearance(1, 2, 3)
-    appearances[15] = Appearance(1, 2, 3)
     assert all(appearances)
 
-def should_not_be_all_when_one_missing():
+def test_should_not_be_all_when_one_missing():
     appearances = IconCountMapping[Appearance](15)
     appearances[1, 14] = Appearance(1, 2, 3)
     assert not all(appearances)
