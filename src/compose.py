@@ -5,7 +5,8 @@ from PIL import Image, ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from countdown import Countdown, zoom_on_approach, IconCountMapping, Appearance
+from countdown import Countdown, zoom_on_approach, IconCountMapping, Appearance, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, \
+    LARGEST_ICON, GAP, SMALLEST_ICON
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
@@ -48,7 +49,19 @@ class PillowImage:
                       moon_phase: MoonPhase,
                       fourteen_day: bool) -> Countdown:
 
-        appearances = IconCountMapping[Appearance](14)
+        if fourteen_day:
+            appearances = IconCountMapping[Appearance](14)
+            appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
+            appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
+            appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
+            appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
+        else:
+            appearances = IconCountMapping[Appearance](15)
+            appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
+            appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
+            appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
+            appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
+            appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
 
         return Countdown(
             draw=self._draw,

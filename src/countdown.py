@@ -89,7 +89,7 @@ class Countdown:
             moon_phase=moon_phase
         )
 
-        appearance = resizer(len(self._icons), fourteen_day)
+        appearance = appearances[len(self._icons)]
         self._icons.icon_size = appearance.icon_size
         self._layout = GridLayout(appearance, len(self._icons))
 

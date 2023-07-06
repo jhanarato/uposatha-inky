@@ -11,6 +11,7 @@ def test_should_report_height_for_two_rows():
         return Appearance(icon_size=10, max_columns=2, gap=2)
 
     appearances = IconCountMapping[Appearance](14)
+    appearances[1, 14] = Appearance(icon_size=10, max_columns=2, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(),
                           appearances=appearances, resizer=resizer,
@@ -25,7 +26,7 @@ def test_should_report_width_for_two_rows():
         return Appearance(icon_size=10, max_columns=2, gap=2)
 
     appearances = IconCountMapping[Appearance](14)
-
+    appearances[1, 14] = Appearance(icon_size=10, max_columns=2, gap=2)
     countdown = Countdown(draw=None, config=ImageConfig(),
                           appearances=appearances, resizer=resizer,
                           start=date(2023, 5, 7), end=date(2023, 5, 10),
@@ -39,6 +40,7 @@ def test_should_report_width_for_shorter_first_row():
         return Appearance(icon_size=10, max_columns=3, gap=2)
 
     appearances = IconCountMapping[Appearance](14)
+    appearances[1, 14] = Appearance(icon_size=10, max_columns=3, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(),
                           appearances=appearances, resizer=resizer,
@@ -53,6 +55,7 @@ def test_should_report_width_for_single_row():
         return Appearance(icon_size=10, max_columns=5, gap=2)
 
     appearances = IconCountMapping[Appearance](14)
+    appearances[1, 14] = Appearance(icon_size=10, max_columns=5, gap=2)
 
     countdown = Countdown(draw=None, config=ImageConfig(),
                           appearances=appearances, resizer=resizer,
