@@ -29,6 +29,7 @@ class IconCountMapping(MutableMapping[T]):
     """ Map a type to the number of icons being displayed.
         The key is bounds-checked to be between 1 and the
         maximum number of icons that can be displayed.
+        Keys can be provided individually, or as a range.
     """
     def __init__(self, max_icons: int) -> None:
         self._max_icons = max_icons
