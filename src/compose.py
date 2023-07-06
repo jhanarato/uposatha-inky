@@ -5,11 +5,17 @@ from PIL import Image, ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from countdown import Countdown, IconCountMapping, Appearance, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, \
-    LARGEST_ICON, GAP, SMALLEST_ICON
+from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
+
+GAP = 4
+SMALLEST_ICON = 25
+SMALL_ICON = 35
+MEDIUM_ICON = 40
+LARGE_ICON = 45
+LARGEST_ICON = 80
 
 class PillowImage:
     """ Wraps a Pillow Image and allows components to be created with less boilerplate. """

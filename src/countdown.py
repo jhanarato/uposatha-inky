@@ -14,13 +14,6 @@ from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon
 from layout import ImageComponent
 from screen import ImageConfig
 
-GAP = 4
-SMALLEST_ICON = 25
-SMALL_ICON = 35
-MEDIUM_ICON = 40
-LARGE_ICON = 45
-LARGEST_ICON = 80
-
 @dataclass(frozen=True)
 class Appearance:
     icon_size: int
