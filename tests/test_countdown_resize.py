@@ -84,3 +84,9 @@ def test_should_raise_on_deleting_missing():
     del appearances[6]
     with pytest.raises(KeyError):
         del appearances[6]
+
+def test_should_iterate_over_values():
+    appearances = IconCountMapping[str](3)
+    appearances[1] = "XYZ"
+    appearances[2] = "ABC"
+    assert list(appearances) == ["XYZ", "ABC", None]
