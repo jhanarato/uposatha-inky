@@ -30,10 +30,54 @@ class Appearance:
 
 Resizer = Callable[[int, bool], Appearance]
 
+T = TypeVar("T")
+
+class IconCountMapping(MutableMapping[T]):
+    """ Map a type to the number of icons being displayed.
+        The key is bounds-checked to be between 1 and the
+        maximum number of icons that can be displayed.
+    """
+    def __init__(self, max_icons: int) -> None:
+        self._max_icons = max_icons
+        self._mapping: dict[int, T] = {}
+
+    def __setitem__(self, key: tuple[int, int] | int, value: T):
+        for key in self._key_range(key):
+            self._check_bounds(key)
+            self._mapping[key] = value
+
+    def __getitem__(self, item: int) -> T:
+        self._check_bounds(item)
+        return self._mapping.get(item)
+
+    def __delitem__(self, key):
+        del(self._mapping[key])
+
+    def _key_range(self, key) -> list[int]:
+        if isinstance(key, int):
+            keys = [key]
+        else:
+            keys = list(range(key[0], key[1] + 1))
+        return keys
+
+    def _check_bounds(self, item):
+        if item < 1:
+            raise KeyError("Number of icons is always positive")
+        if item > self._max_icons:
+            raise KeyError("Index greater than maximum number of icons")
+
+    def __iter__(self):
+        for i in range(1, self._max_icons + 1):
+            yield self._mapping.get(i)
+
+    def __len__(self) -> int:
+        return self._max_icons
+
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, draw: ImageDraw, config: ImageConfig, resizer: Resizer,
+    def __init__(self, draw: ImageDraw, config: ImageConfig,
+                 resizer: Resizer, appearances: IconCountMapping[Appearance],
                  start: date, end: date, moon_phase: MoonPhase, fourteen_day: bool):
 
         self._icons = Icons(
@@ -189,49 +233,6 @@ class GridLayout:
             x = start_x + (column * self.spacing)
             y = start_y + (row * self.spacing)
             yield x, y
-
-T = TypeVar("T")
-
-class IconCountMapping(MutableMapping[T]):
-    """ Map a type to the number of icons being displayed.
-        The key is bounds-checked to be between 1 and the
-        maximum number of icons that can be displayed.
-    """
-    def __init__(self, max_icons: int) -> None:
-        self._max_icons = max_icons
-        self._mapping: dict[int, T] = {}
-
-    def __setitem__(self, key: tuple[int, int] | int, value: T):
-        for key in self._key_range(key):
-            self._check_bounds(key)
-            self._mapping[key] = value
-
-    def __getitem__(self, item: int) -> T:
-        self._check_bounds(item)
-        return self._mapping.get(item)
-
-    def __delitem__(self, key):
-        del(self._mapping[key])
-
-    def _key_range(self, key) -> list[int]:
-        if isinstance(key, int):
-            keys = [key]
-        else:
-            keys = list(range(key[0], key[1] + 1))
-        return keys
-
-    def _check_bounds(self, item):
-        if item < 1:
-            raise KeyError("Number of icons is always positive")
-        if item > self._max_icons:
-            raise KeyError("Index greater than maximum number of icons")
-
-    def __iter__(self):
-        for i in range(1, self._max_icons + 1):
-            yield self._mapping.get(i)
-
-    def __len__(self) -> int:
-        return self._max_icons
 
 
 def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:

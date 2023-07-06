@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from countdown import Countdown, zoom_on_approach
+from countdown import Countdown, zoom_on_approach, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import ImageConfig
@@ -47,9 +47,13 @@ class PillowImage:
                       uposatha_falls_on: date,
                       moon_phase: MoonPhase,
                       fourteen_day: bool) -> Countdown:
+
+        appearances = IconCountMapping[Appearance](14)
+
         return Countdown(
             draw=self._draw,
             config=self._config,
+            appearances=appearances,
             resizer=zoom_on_approach,
             start=today,
             end=uposatha_falls_on,
