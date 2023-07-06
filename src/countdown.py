@@ -233,21 +233,3 @@ class GridLayout:
             x = start_x + (column * self.spacing)
             y = start_y + (row * self.spacing)
             yield x, y
-
-
-def zoom_on_approach(icons: int, fourteen_day: bool) -> Appearance:
-    if fourteen_day:
-        appearances = IconCountMapping[Appearance](14)
-        appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
-        appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
-        appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
-        appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
-    else:
-        appearances = IconCountMapping[Appearance](15)
-        appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
-        appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
-        appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
-        appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
-        appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
-
-    return appearances[icons]
