@@ -73,11 +73,9 @@ class PillowImage:
             draw=self._draw,
             config=self._config,
             appearances=appearances,
-            resizer=zoom_on_approach,
             start=today,
             end=uposatha_falls_on,
-            moon_phase=moon_phase,
-            fourteen_day=fourteen_day)
+            moon_phase=moon_phase)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
