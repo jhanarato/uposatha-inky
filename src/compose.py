@@ -64,7 +64,7 @@ class PillowImage:
         else:
             appearances = IconCountMapping[Appearance](15)
             appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
-            appearances[8, 10] = Appearance(SMALL_ICON, 8, GAP)
+            appearances[8, 10] = Appearance(SMALL_ICON, 5, GAP)
             appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
             appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
             appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
