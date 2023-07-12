@@ -73,14 +73,6 @@ class ScreenLayout:
         arranged = ArrangedComponent(component, Align.CENTRE)
         self._arrangement.append(arranged)
 
-    def draw(self) -> None:
-        """ Draw all components in the image """
-        y = 0
-        for arranged in self._arrangement:
-            x = self._align_x(arranged.component, arranged.align)
-            arranged.component.draw(x, y)
-            y += arranged.component.height()
-
     def _align_x(self, area: Area, align: Align) -> int:
         x = 0
         if align == Align.LEFT:

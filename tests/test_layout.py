@@ -74,7 +74,6 @@ def test_should_centre_align_component():
     component = LoggerComponent(height=10, width=20, log=log)
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add_centred(component)
-    layout.draw()
 
     coords = list(layout.coordinates())
 
@@ -85,7 +84,6 @@ def test_should_left_align_component():
     component = LoggerComponent(height=10, width=20, log=log)
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add_left(component)
-    layout.draw()
 
     coords = list(layout.coordinates())
 
