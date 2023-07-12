@@ -47,19 +47,19 @@ def test_three_components_spaced():
     assert coords[2][1] == 130
 
 
-def test_should_centre_align_component():
-    component = Area(height=10, width=20)
+def test_should_centre_align_area():
+    area = Area(height=10, width=20)
     layout = ScreenLayout(screen_height=100, screen_width=200)
-    layout.add_centred(component)
+    layout.add_centred(area)
 
     coords = list(layout.coordinates())
 
     assert coords[0][0] == 90
 
-def test_should_left_align_component():
-    component = Area(height=10, width=20)
+def test_should_left_align_area():
+    area = Area(height=10, width=20)
     layout = ScreenLayout(screen_height=100, screen_width=200)
-    layout.add_left(component)
+    layout.add_left(area)
 
     coords = list(layout.coordinates())
 
