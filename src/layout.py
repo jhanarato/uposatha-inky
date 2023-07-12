@@ -1,5 +1,4 @@
 from collections.abc import Iterator
-from dataclasses import dataclass
 from typing import Protocol
 from enum import Enum, auto
 
@@ -27,37 +26,24 @@ class VerticalSpace:
         return 0
 
 
-@dataclass
-class ArrangedComponent:
-    """ A component paired with its alignment """
-    component: Area
-    align: Align
-
 class ScreenLayout:
     """ A layout of ImageComponents on the full image """
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height
         self._screen_width = screen_width
-        self._arrangement: list[ArrangedComponent] = []
+        self._arrangement: list[tuple[Area, Align]] = []
 
     def add_space(self, height: int) -> None:
-        component = ArrangedComponent(
-            component=VerticalSpace(height=height),
-            align=Align.CENTRE
-        )
-        self._arrangement.append(component)
+        self._arrangement.append((VerticalSpace(height=height), Align.CENTRE))
 
     def add_left(self, component: Area) -> None:
-        arranged = ArrangedComponent(component, Align.LEFT)
-        self._arrangement.append(arranged)
+        self._arrangement.append((component, Align.LEFT))
 
     def add_right(self, component: Area) -> None:
-        arranged = ArrangedComponent(component, Align.RIGHT)
-        self._arrangement.append(arranged)
+        self._arrangement.append((component, Align.RIGHT))
 
     def add_centred(self, component: Area) -> None:
-        arranged = ArrangedComponent(component, Align.CENTRE)
-        self._arrangement.append(arranged)
+        self._arrangement.append((component, Align.CENTRE))
 
     def _align_x(self, area: Area, align: Align) -> int:
         x = 0
@@ -71,8 +57,8 @@ class ScreenLayout:
 
     def coordinates(self) -> Iterator[tuple[int, int]]:
         y = 0
-        for arranged in self._arrangement:
-            x = self._align_x(arranged.component, arranged.align)
-            if not isinstance(arranged.component, VerticalSpace):
+        for area, align in self._arrangement:
+            x = self._align_x(area, align)
+            if not isinstance(area, VerticalSpace):
                 yield x, y
-            y += arranged.component.height()
+            y += area.height()
