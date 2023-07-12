@@ -94,6 +94,9 @@ class PillowImage:
     def pillow_image(self) -> Image:
         return self._image
 
+    def pillow_draw(self) -> ImageDraw:
+        return self._draw
+
 def next_uposatha(content: NextUposatha) -> Image:
     image = PillowImage()
 
@@ -112,6 +115,6 @@ def next_uposatha(content: NextUposatha) -> Image:
         layout.add_centred(component)
 
     for component, coordinates in zip(components, layout.coordinates(), strict=True):
-        component.draw(*coordinates)
+        component.draw(image.pillow_draw(), *coordinates)
 
     return image.pillow_image()

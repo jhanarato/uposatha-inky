@@ -92,14 +92,14 @@ class Countdown:
     def width(self) -> int:
         return self._layout.total_width
 
-    def draw(self, x: int, y: int) -> None:
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         drawable = zip(
             self._icons,
             self._layout.coordinates(start_x=x, start_y=y)
         )
 
         for icon, coordinates in drawable:
-            icon.draw(*coordinates)
+            icon.draw(draw, *coordinates)
 
     def __str__(self):
         return "".join([str(icon) for icon in self._icons])

@@ -3,7 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw, ImageFont
 
 class Drawable(Protocol):
-    def draw(self, x: int, y: int) -> None: ...
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
 
 class Text:
@@ -19,11 +19,11 @@ class Text:
     def width(self) -> int:
         return self._font.getbbox(self._text)[2]
 
-    def draw(self, x: int, y: int) -> None:
-        self._draw.text(xy=(x, y),
-                        text=self._text,
-                        fill=self._colour,
-                        font=self._font)
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        draw.text(xy=(x, y),
+                  text=self._text,
+                  fill=self._colour,
+                  font=self._font)
 
 class HorizontalLine:
     def __init__(self, draw: ImageDraw, length: int, thickness: int, colour: int):
@@ -38,8 +38,8 @@ class HorizontalLine:
     def width(self) -> int:
         return self._length
 
-    def draw(self, x: int, y: int):
-        self._draw.line(
+    def draw(self, draw: ImageDraw, x: int, y: int):
+        draw.line(
             xy=[(x, y), (x + self._length, y)],
             fill=self._colour,
             width=self._thickness
@@ -59,8 +59,8 @@ class Rectangle:
     def width(self) -> int:
         return self._width
 
-    def draw(self, x: int, y: int) -> None:
-        self._draw.rectangle(
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        draw.rectangle(
             xy=[x, y, x + self.width(), y + self.height()],
             fill=self._colour
         )
@@ -96,9 +96,9 @@ class DayOfWeekIcon:
     def _text_y(self, component_y: int) -> int:
         return component_y + (self.height() - self._text.height()) // 2
 
-    def draw(self, x: int, y: int) -> None:
-        self._rect.draw(x, y)
-        self._text.draw(self._text_x(x), self._text_y(y))
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        self._rect.draw(draw, x, y)
+        self._text.draw(draw, self._text_x(x), self._text_y(y))
 
     def __str__(self):
         return self.letter
@@ -123,8 +123,8 @@ class FullMoonIcon:
     def width(self) -> int:
         return self._size
 
-    def draw(self, x: int, y: int) -> None:
-        self._draw.ellipse(
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        draw.ellipse(
             xy=[(x, y), (x + self.width(), y + self.height())],
             fill=self._fill,
             outline=self._outline,
@@ -149,8 +149,8 @@ class NewMoonIcon:
     def width(self) -> int:
         return self._size
 
-    def draw(self, x: int, y: int) -> None:
-        self._draw.ellipse(
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        draw.ellipse(
             xy=[(x, y), (x + self.width(), y + self.height())],
             fill=self._fill,
             width=2
