@@ -37,14 +37,11 @@ class Space:
     def width(self) -> int:
         return 0
 
-    def draw(self, x: int, y: int) -> None:
-        pass
-
 
 @dataclass
 class ArrangedComponent:
     """ A component paired with its alignment """
-    component: ImageComponent
+    component: Area
     align: Align
 
 class ScreenLayout:
@@ -61,15 +58,15 @@ class ScreenLayout:
         )
         self._arrangement.append(component)
 
-    def add_left(self, component: ImageComponent) -> None:
+    def add_left(self, component: Area) -> None:
         arranged = ArrangedComponent(component, Align.LEFT)
         self._arrangement.append(arranged)
 
-    def add_right(self, component: ImageComponent) -> None:
+    def add_right(self, component: Area) -> None:
         arranged = ArrangedComponent(component, Align.RIGHT)
         self._arrangement.append(arranged)
 
-    def add_centred(self, component: ImageComponent) -> None:
+    def add_centred(self, component: Area) -> None:
         arranged = ArrangedComponent(component, Align.CENTRE)
         self._arrangement.append(arranged)
 
