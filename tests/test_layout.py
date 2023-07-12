@@ -38,6 +38,7 @@ def test_should_draw_component_with_space_after():
     layout.add_centred(LoggerComponent(10, 20, log))
 
     coords = list(layout.coordinates())
+
     assert coords[1][1] == 40
 
 def test_should_draw_component_with_space_before():
@@ -46,10 +47,10 @@ def test_should_draw_component_with_space_before():
 
     layout.add_space(20)
     layout.add_centred(LoggerComponent(20, 50, log))
-    layout.draw()
 
-    assert log.pixels[0].y == 20
+    coords = list(layout.coordinates())
 
+    assert coords[0][1] == 20
 
 def test_three_components_spaced():
     log = DrawLog()
@@ -60,11 +61,12 @@ def test_three_components_spaced():
     layout.add_centred(LoggerComponent(height=30, width=20, log=log))
     layout.add_space(30)
     layout.add_centred(LoggerComponent(height=40, width=20, log=log))
-    layout.draw()
 
-    assert log.pixels[0].y == 0
-    assert log.pixels[1].y == 70
-    assert log.pixels[2].y == 130
+    coords = list(layout.coordinates())
+
+    assert coords[0][1] == 0
+    assert coords[1][1] == 70
+    assert coords[2][1] == 130
 
 
 def test_should_centre_align_component():
