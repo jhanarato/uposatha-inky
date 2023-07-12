@@ -15,7 +15,7 @@ class Area(Protocol):
     def width(self) -> int: ...
 
 
-class Space:
+class VerticalSpace:
     """ A blank area between components. """
     def __init__(self, height: 0):
         self._height = height
@@ -42,7 +42,7 @@ class ScreenLayout:
 
     def add_space(self, height: int) -> None:
         component = ArrangedComponent(
-            component=Space(height=height),
+            component=VerticalSpace(height=height),
             align=Align.CENTRE
         )
         self._arrangement.append(component)
@@ -73,6 +73,6 @@ class ScreenLayout:
         y = 0
         for arranged in self._arrangement:
             x = self._align_x(arranged.component, arranged.align)
-            if not isinstance(arranged.component, Space):
+            if not isinstance(arranged.component, VerticalSpace):
                 yield x, y
             y += arranged.component.height()
