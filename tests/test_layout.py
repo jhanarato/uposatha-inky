@@ -37,8 +37,8 @@ def test_should_draw_component_with_space_after():
     layout.add_space(30)
     layout.add_centred(LoggerComponent(10, 20, log))
 
-    layout.draw()
-    assert log.pixels[1].y == 40
+    coords = list(layout.coordinates())
+    assert coords[1][1] == 40
 
 def test_should_draw_component_with_space_before():
     log = DrawLog()
