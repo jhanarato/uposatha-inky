@@ -21,6 +21,11 @@ class ImageComponent(Protocol):
     """ Draw given the top left coordinates """
 
 
+class Area(Protocol):
+    def height(self) -> int: ...
+    def width(self) -> int: ...
+
+
 class Space:
     """ A blank area between components. """
     def __init__(self, height: 0):
