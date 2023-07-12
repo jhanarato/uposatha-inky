@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from dataclasses import dataclass
 from typing import Protocol
 from enum import Enum, auto
@@ -84,3 +85,11 @@ class ScreenLayout:
         elif align == Align.RIGHT:
             x = self._screen_width - component.width()
         return x
+
+    def coordinates(self) -> Iterator[tuple[int, int]]:
+        y = 0
+        for arranged in self._arrangement:
+            x = self._align_x(arranged.component, arranged.align)
+            if not isinstance(arranged.component, Space):
+                yield x, y
+            y += arranged.component.height()

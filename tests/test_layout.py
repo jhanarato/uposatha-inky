@@ -84,3 +84,16 @@ def test_should_left_align_component():
     layout.draw()
 
     assert component.log.pixels[0].x == 0
+
+def test_should_generate_coordinates():
+    log = DrawLog()
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+
+    layout.add_centred(LoggerComponent(height=20, width=20, log=log))
+    layout.add_space(50)
+    layout.add_centred(LoggerComponent(height=30, width=20, log=log))
+    layout.add_space(30)
+    layout.add_centred(LoggerComponent(height=40, width=20, log=log))
+
+    coordinates = list(layout.coordinates())
+    assert coordinates == [(90, 0), (90, 70), (90, 130)]
