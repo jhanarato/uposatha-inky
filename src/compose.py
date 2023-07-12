@@ -34,24 +34,13 @@ class PillowImage:
         self._draw = ImageDraw.Draw(self._image)
 
     def new_heading_text(self, text: str) -> Text:
-        return Text(
-            text=text,
-            font=self._config.font_styles.HEADING,
-            colour=self._foreground
-        )
+        return Text(text=text, font=self._config.font_styles.HEADING, colour=self._foreground)
 
     def new_info_text(self, text: str) -> Text:
-        return Text(
-            text=text,
-            font=self._config.font_styles.INFO,
-            colour=self._foreground
-        )
+        return Text(text=text, font=self._config.font_styles.INFO, colour=self._foreground)
 
-    def new_countdown(self,
-                      today: date,
-                      uposatha_falls_on: date,
-                      moon_phase: MoonPhase,
-                      fourteen_day: bool) -> Countdown:
+    def new_countdown(self, today: date, uposatha_falls_on: date,
+                      moon_phase: MoonPhase, fourteen_day: bool) -> Countdown:
 
         if fourteen_day:
             appearances = IconCountMapping[Appearance](14)
@@ -67,12 +56,8 @@ class PillowImage:
             appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
             appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
 
-        return Countdown(
-            config=self._config,
-            appearances=appearances,
-            start=today,
-            end=uposatha_falls_on,
-            moon_phase=moon_phase)
+        return Countdown(config=self._config, appearances=appearances,
+                         start=today, end=uposatha_falls_on, moon_phase=moon_phase)
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
