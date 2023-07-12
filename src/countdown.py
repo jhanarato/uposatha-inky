@@ -95,7 +95,7 @@ class Countdown:
     def draw(self, x: int, y: int) -> None:
         drawable = zip(
             self._icons,
-            self._layout.icon_coordinates(start_x=x, start_y=y)
+            self._layout.coordinates(start_x=x, start_y=y)
         )
 
         for icon, coordinates in drawable:
@@ -221,7 +221,7 @@ class GridLayout:
 
         yield from positions
 
-    def icon_coordinates(self, start_x: int, start_y: int) -> Iterator[tuple[int, int]]:
+    def coordinates(self, start_x: int, start_y: int) -> Iterator[tuple[int, int]]:
         for row, column in self.positions():
             x = start_x + (column * self.spacing)
             y = start_y + (row * self.spacing)
