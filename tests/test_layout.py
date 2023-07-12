@@ -76,7 +76,9 @@ def test_should_centre_align_component():
     layout.add_centred(component)
     layout.draw()
 
-    assert component.log.pixels[0].x == 90
+    coords = list(layout.coordinates())
+
+    assert coords[0][0] == 90
 
 def test_should_left_align_component():
     log = DrawLog()
@@ -85,7 +87,9 @@ def test_should_left_align_component():
     layout.add_left(component)
     layout.draw()
 
-    assert component.log.pixels[0].x == 0
+    coords = list(layout.coordinates())
+
+    assert coords[0][0] == 0
 
 def test_should_generate_coordinates():
     log = DrawLog()
