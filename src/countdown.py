@@ -69,12 +69,11 @@ class IconCountMapping(MutableMapping[T]):
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, draw: ImageDraw, config: ImageConfig,
+    def __init__(self, config: ImageConfig,
                  appearances: IconCountMapping[Appearance],
                  start: date, end: date, moon_phase: MoonPhase):
 
         self._icons = Icons(
-            draw=draw,
             config=config,
             icon_size=0,
             start=start,
@@ -108,7 +107,6 @@ class Countdown:
 class Icons(Sequence[Drawable]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
-                 draw: ImageDraw,
                  config: ImageConfig,
                  icon_size: int,
                  start: date,
@@ -116,7 +114,6 @@ class Icons(Sequence[Drawable]):
                  moon_phase: MoonPhase):
 
         self.icon_size = icon_size
-        self._draw = draw
         self._config = config
         self._start = start
         self._end = end
@@ -124,7 +121,6 @@ class Icons(Sequence[Drawable]):
 
     def _day_of_week_icon(self, day: date) -> Drawable:
         return DayOfWeekIcon(
-            draw=self._draw,
             size=self.icon_size,
             font=self._config.font_styles.COUNTDOWN,
             background=self._config.palette.BLACK,
@@ -136,14 +132,12 @@ class Icons(Sequence[Drawable]):
         match self._moon_phase:
             case MoonPhase.FULL:
                 return FullMoonIcon(
-                    draw=self._draw,
                     fill=self._config.palette.YELLOW,
                     outline=self._config.palette.BLACK,
                     size=self.icon_size)
 
             case MoonPhase.NEW:
                 return NewMoonIcon(
-                   draw=self._draw,
                    fill=self._config.palette.BLACK,
                    size=self.icon_size)
 

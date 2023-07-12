@@ -35,7 +35,6 @@ class PillowImage:
 
     def new_heading_text(self, text: str) -> Text:
         return Text(
-            draw=self._draw,
             text=text,
             font=self._config.font_styles.HEADING,
             colour=self._foreground
@@ -43,7 +42,6 @@ class PillowImage:
 
     def new_info_text(self, text: str) -> Text:
         return Text(
-            draw=self._draw,
             text=text,
             font=self._config.font_styles.INFO,
             colour=self._foreground
@@ -70,7 +68,6 @@ class PillowImage:
             appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
 
         return Countdown(
-            draw=self._draw,
             config=self._config,
             appearances=appearances,
             start=today,
@@ -79,7 +76,6 @@ class PillowImage:
 
     def new_horizontal_line(self, length: int) -> HorizontalLine:
         return HorizontalLine(
-            draw=self._draw,
             length=length,
             thickness=2,
             colour=self._foreground

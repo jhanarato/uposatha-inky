@@ -7,8 +7,7 @@ class Drawable(Protocol):
     """ Draw given the top left coordinates """
 
 class Text:
-    def __init__(self, draw: ImageDraw, text: str, font: ImageFont, colour: int):
-        self._draw = draw
+    def __init__(self, text: str, font: ImageFont, colour: int):
         self._text = text
         self._font = font
         self._colour = colour
@@ -26,8 +25,7 @@ class Text:
                   font=self._font)
 
 class HorizontalLine:
-    def __init__(self, draw: ImageDraw, length: int, thickness: int, colour: int):
-        self._draw = draw
+    def __init__(self, length: int, thickness: int, colour: int):
         self._length = length
         self._thickness = thickness
         self._colour = colour
@@ -47,8 +45,7 @@ class HorizontalLine:
 
 
 class Rectangle:
-    def __init__(self, draw: ImageDraw, height: int, width: int, colour: int):
-        self._draw = draw
+    def __init__(self, height: int, width: int, colour: int):
         self._height = height
         self._width = width
         self._colour = colour
@@ -69,15 +66,14 @@ class Rectangle:
 class DayOfWeekIcon:
     """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
     def __init__(self,
-                 draw: ImageDraw,
                  font: ImageFont,
                  background: int,
                  foreground: int,
                  letter: str,
                  size: int) -> None:
         self._size = size
-        self._rect = Rectangle(draw, self.height(), self.width(), background)
-        self._text = Text(draw, letter, font, foreground)
+        self._rect = Rectangle(self.height(), self.width(), background)
+        self._text = Text(letter, font, foreground)
         self._letter = letter
 
     def height(self) -> int:
@@ -106,13 +102,10 @@ class DayOfWeekIcon:
 
 class FullMoonIcon:
     def __init__(self,
-                 draw: ImageDraw,
                  size: int,
                  fill: int,
                  outline: int,
                  ):
-
-        self._draw = draw
         self._size = size
         self._fill = fill
         self._outline = outline
@@ -136,10 +129,8 @@ class FullMoonIcon:
 
 class NewMoonIcon:
     def __init__(self,
-                 draw: ImageDraw,
                  size: int,
                  fill: int):
-        self._draw = draw
         self._size = size
         self._fill = fill
 
