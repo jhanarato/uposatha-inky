@@ -111,6 +111,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         layout.add_space(20)
         layout.add_centred(component)
 
-    layout.draw()
+    for component, coordinates in zip(components, layout.coordinates(), strict=True):
+        component.draw(*coordinates)
 
     return image.pillow_image()
