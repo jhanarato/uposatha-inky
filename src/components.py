@@ -2,17 +2,9 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
-class ImageComponent(Protocol):
-    """ Part of a large image to be placed by the layout """
-    def height(self) -> int: ...
-    """ Distance from the highest point to the lowest point"""
-
-    def width(self) -> int: ...
-    """ Distance from the leftmost point to the rightmost point """
-
+class Drawable(Protocol):
     def draw(self, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
-
 
 class Text:
     def __init__(self, draw: ImageDraw, text: str, font: ImageFont, colour: int):

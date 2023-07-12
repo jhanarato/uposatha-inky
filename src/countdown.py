@@ -10,7 +10,7 @@ from PIL import ImageDraw
 
 from uposatha.elements import MoonPhase
 
-from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon, ImageComponent
+from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon, Drawable
 from screen import ImageConfig
 
 @dataclass(frozen=True)
@@ -105,7 +105,7 @@ class Countdown:
         return "".join([str(icon) for icon in self._icons])
 
 
-class Icons(Sequence[ImageComponent]):
+class Icons(Sequence[Drawable]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self,
                  draw: ImageDraw,
@@ -122,7 +122,7 @@ class Icons(Sequence[ImageComponent]):
         self._end = end
         self._moon_phase = moon_phase
 
-    def _day_of_week_icon(self, day: date) -> ImageComponent:
+    def _day_of_week_icon(self, day: date) -> Drawable:
         return DayOfWeekIcon(
             draw=self._draw,
             size=self.icon_size,
@@ -132,7 +132,7 @@ class Icons(Sequence[ImageComponent]):
             letter=day.strftime("%a")[0]
         )
 
-    def _moon_icon(self) -> ImageComponent:
+    def _moon_icon(self) -> Drawable:
         match self._moon_phase:
             case MoonPhase.FULL:
                 return FullMoonIcon(
@@ -153,7 +153,7 @@ class Icons(Sequence[ImageComponent]):
     def __len__(self):
         return (self._end - self._start).days + 1
 
-    def __getitem__(self, item) -> ImageComponent:
+    def __getitem__(self, item) -> Drawable:
         if item < 0:
             raise IndexError("No negative indexes")
         if item >= len(self):
