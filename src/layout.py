@@ -81,14 +81,14 @@ class ScreenLayout:
             arranged.component.draw(x, y)
             y += arranged.component.height()
 
-    def _align_x(self, component: ImageComponent, align: Align) -> int:
+    def _align_x(self, area: Area, align: Align) -> int:
         x = 0
         if align == Align.LEFT:
             x = 0
         elif align == Align.CENTRE:
-            x = (self._screen_width - component.width()) // 2
+            x = (self._screen_width - area.width()) // 2
         elif align == Align.RIGHT:
-            x = self._screen_width - component.width()
+            x = self._screen_width - area.width()
         return x
 
     def coordinates(self) -> Iterator[tuple[int, int]]:
