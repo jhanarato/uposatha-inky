@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 import pytest
 
-from layout import ScreenLayout, ArrangedComponent, Align
+from layout import ScreenLayout
 
 @dataclass
 class Pixel:
