@@ -24,10 +24,7 @@ def test_should_draw_component_with_space_before():
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add_space(20)
     layout.add_centred(Area(20, 50))
-
-    coords = list(layout.coordinates())
-
-    assert coords[0][1] == 20
+    assert list(layout.coordinates()) == [(75, 20)]
 
 def test_three_components_spaced():
     layout = ScreenLayout(screen_height=100, screen_width=200)
@@ -36,31 +33,19 @@ def test_three_components_spaced():
     layout.add_centred(Area(height=30, width=20))
     layout.add_space(30)
     layout.add_centred(Area(height=40, width=20))
-
-    coords = list(layout.coordinates())
-
-    assert coords[0][1] == 0
-    assert coords[1][1] == 70
-    assert coords[2][1] == 130
-
+    assert list(layout.coordinates()) == [(90, 0), (90, 70), (90, 130)]
 
 def test_should_centre_align_area():
     area = Area(height=10, width=20)
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add_centred(area)
-
-    coords = list(layout.coordinates())
-
-    assert coords[0][0] == 90
+    assert list(layout.coordinates()) == [(90, 0)]
 
 def test_should_left_align_area():
     area = Area(height=10, width=20)
     layout = ScreenLayout(screen_height=100, screen_width=200)
     layout.add_left(area)
-
-    coords = list(layout.coordinates())
-
-    assert coords[0][0] == 0
+    assert list(layout.coordinates()) == [(0, 0)]
 
 def test_should_generate_coordinates():
     layout = ScreenLayout(screen_height=100, screen_width=200)
@@ -72,3 +57,12 @@ def test_should_generate_coordinates():
 
     coordinates = list(layout.coordinates())
     assert coordinates == [(90, 0), (90, 70), (90, 130)]
+
+def test_should_handle_no_components():
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+    assert list(layout.coordinates()) == []
+
+def test_should_handle_space_only():
+    layout = ScreenLayout(screen_height=100, screen_width=200)
+    layout.add_space(50)
+    assert list(layout.coordinates()) == []
