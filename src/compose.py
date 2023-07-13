@@ -26,7 +26,6 @@ def fifteen_day_appearance():
     appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
     return appearances
 
-
 def fourteen_day_appearance():
     appearances = IconCountMapping[Appearance](14)
     appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
@@ -34,7 +33,6 @@ def fourteen_day_appearance():
     appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
     appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
     return appearances
-
 
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
