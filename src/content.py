@@ -23,7 +23,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
     return NextUposatha(
         today=today,
         falls_on=next_uposatha.falls_on,
-        date=next_uposatha.falls_on.strftime("%a %d/%m/%y"),
+        date=next_uposatha.falls_on.strftime("%A %d/%m/%y"),
         details=uposatha_details(season, next_uposatha),
         moon_phase=next_uposatha.moon_phase,
         fourteen_day=(next_uposatha.days_since_previous == 14)
