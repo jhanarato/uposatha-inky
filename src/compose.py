@@ -39,6 +39,9 @@ class PillowImage:
     def new_info_text(self, text: str) -> Text:
         return Text(text=text, font=self._config.font_styles.INFO, colour=self._foreground)
 
+    def new_horizontal_line(self, length: int) -> HorizontalLine:
+        return HorizontalLine(length=length, thickness=2, colour=self._foreground)
+
     def new_countdown(self, today: date, uposatha_falls_on: date,
                       moon_phase: MoonPhase, fourteen_day: bool) -> Countdown:
 
@@ -59,13 +62,6 @@ class PillowImage:
         return Countdown(config=self._config, appearances=appearances,
                          start=today, end=uposatha_falls_on, moon_phase=moon_phase)
 
-    def new_horizontal_line(self, length: int) -> HorizontalLine:
-        return HorizontalLine(
-            length=length,
-            thickness=2,
-            colour=self._foreground
-        )
-
     def height(self) -> int:
         return self._config.height
 
@@ -78,15 +74,38 @@ class PillowImage:
     def pillow_draw(self) -> ImageDraw:
         return self._draw
 
+def new_countdown(config: ImageConfig, today: date, uposatha_falls_on: date,
+                  moon_phase: MoonPhase, fourteen_day: bool) -> Countdown:
+
+    if fourteen_day:
+        appearances = IconCountMapping[Appearance](14)
+        appearances[8, 14] = Appearance(SMALL_ICON, 7, GAP)
+        appearances[4, 7] = Appearance(MEDIUM_ICON, 7, GAP)
+        appearances[2, 3] = Appearance(LARGE_ICON, 7, GAP)
+        appearances[1] = Appearance(LARGEST_ICON, 7, GAP)
+    else:
+        appearances = IconCountMapping[Appearance](15)
+        appearances[11, 15] = Appearance(SMALLEST_ICON, 5, GAP)
+        appearances[8, 10] = Appearance(SMALL_ICON, 5, GAP)
+        appearances[4, 7] = Appearance(MEDIUM_ICON, 8, GAP)
+        appearances[2, 3] = Appearance(LARGE_ICON, 8, GAP)
+        appearances[1] = Appearance(LARGEST_ICON, 8, GAP)
+
+    return Countdown(config=config, appearances=appearances,
+                     start=today, end=uposatha_falls_on, moon_phase=moon_phase)
+
 def next_uposatha(content: NextUposatha) -> Image:
     image = PillowImage()
+    config = ImageConfig()
+    font_styles = config.font_styles
+    palette = config.palette
 
     components = [
-        image.new_heading_text("Uposatha"),
-        image.new_horizontal_line(300),
-        image.new_info_text(content.date),
-        image.new_countdown(content.today, content.falls_on, content.moon_phase, content.fourteen_day),
-        image.new_info_text(content.details)
+        Text("Uposatha", font_styles.HEADING, palette.BLACK),
+        HorizontalLine(length=300, thickness=2, colour=palette.BLACK),
+        Text(content.date, font_styles.INFO, palette.BLACK),
+        new_countdown(config, content.today, content.falls_on, content.moon_phase, content.fourteen_day),
+        Text(content.details, font_styles.INFO, palette.BLACK),
     ]
 
     layout = ScreenLayout(image.height(), image.width())
