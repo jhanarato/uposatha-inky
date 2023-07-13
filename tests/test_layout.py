@@ -18,10 +18,7 @@ def test_should_draw_component_with_space_after():
     layout.add_centred(Area(10, 20))
     layout.add_space(30)
     layout.add_centred(Area(10, 20))
-
-    coords = list(layout.coordinates())
-
-    assert coords[1][1] == 40
+    assert list(layout.coordinates()) == [(90, 0), (90, 40)]
 
 def test_should_draw_component_with_space_before():
     layout = ScreenLayout(screen_height=100, screen_width=200)
