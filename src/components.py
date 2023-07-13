@@ -25,9 +25,8 @@ class Text:
                   font=self._font)
 
 class HorizontalLine:
-    def __init__(self, length: int, thickness: int, colour: int):
+    def __init__(self, length: int, colour: int):
         self._length = length
-        self._thickness = thickness
         self._colour = colour
 
     def height(self) -> int:
@@ -40,7 +39,7 @@ class HorizontalLine:
         draw.line(
             xy=[(x, y), (x + self._length, y)],
             fill=self._colour,
-            width=self._thickness
+            width=2
         )
 
 
