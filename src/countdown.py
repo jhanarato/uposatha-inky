@@ -119,9 +119,7 @@ class Icons(Sequence[Drawable]):
             case MoonPhase.FULL:
                 return FullMoonIcon(self.icon_size)
             case MoonPhase.NEW:
-                return NewMoonIcon(
-                   fill=self._config.palette.BLACK,
-                   size=self.icon_size)
+                return NewMoonIcon(size=self.icon_size)
 
             case MoonPhase.WANING | MoonPhase.WAXING:
                 raise RuntimeError("Moon phase must be full or new")

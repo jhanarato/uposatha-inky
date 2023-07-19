@@ -134,18 +134,15 @@ class FullMoonIcon:
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         palette = ImageConfig().palette
-        circle = Circle(diameter=self._size, fill=palette.BLACK, outline=palette.BLACK)
+        circle = Circle(self._size, palette.YELLOW, palette.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
         return "*"
 
 class NewMoonIcon:
-    def __init__(self,
-                 size: int,
-                 fill: int):
+    def __init__(self, size: int):
         self._size = size
-        self._fill = fill
 
     def height(self) -> int:
         return self._size
@@ -154,11 +151,9 @@ class NewMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        draw.ellipse(
-            xy=[(x, y), (x + self.width(), y + self.height())],
-            fill=self._fill,
-            width=2
-        )
+        palette = ImageConfig().palette
+        circle = Circle(self._size, palette.BLACK, palette.BLACK)
+        circle.draw(draw, x, y)
 
     def __str__(self):
         return "O"
