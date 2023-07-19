@@ -2,7 +2,8 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
-from screen import Colour, FontStyles
+from screen import Colour
+from fonts import FontStyles
 
 
 class Drawable(Protocol):

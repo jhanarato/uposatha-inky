@@ -4,7 +4,8 @@ from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
-from screen import Colour, FontStyles, HEIGHT, WIDTH
+from screen import Colour, HEIGHT, WIDTH
+from fonts import FontStyles
 
 GAP = 4
 SMALLEST_ICON = 25
