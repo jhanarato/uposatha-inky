@@ -3,7 +3,6 @@ from datetime import date
 
 import uposatha.elements
 from uposatha.calendar import Calendar
-from uposatha.elements import MoonPhase
 
 
 @dataclass
