@@ -71,13 +71,7 @@ class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
     def __init__(self, appearances: IconCountMapping[Appearance], start: date, end: date, moon_phase: MoonPhase):
 
-        self._icons = Icons(
-            config=ImageConfig(),
-            icon_size=0,
-            start=start,
-            end=end,
-            moon_phase=moon_phase
-        )
+        self._icons = Icons(icon_size=0, start=start, end=end, moon_phase=moon_phase)
 
         appearance = appearances[len(self._icons)]
         self._icons.icon_size = appearance.icon_size
@@ -104,15 +98,9 @@ class Countdown:
 
 class Icons(Sequence[Drawable]):
     """ A sequence of icons representing the days until the next uposatha """
-    def __init__(self,
-                 config: ImageConfig,
-                 icon_size: int,
-                 start: date,
-                 end: date,
-                 moon_phase: MoonPhase):
-
+    def __init__(self, icon_size: int, start: date, end: date, moon_phase: MoonPhase):
         self.icon_size = icon_size
-        self._config = config
+        self._config = ImageConfig()
         self._start = start
         self._end = end
         self._moon_phase = moon_phase
