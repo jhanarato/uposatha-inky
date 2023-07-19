@@ -37,7 +37,6 @@ def fourteen_day_appearance():
 def next_uposatha(content: NextUposatha) -> Image:
     config = ImageConfig()
     font_styles = config.font_styles
-    palette = config.palette
 
     image = Image.new(
         mode="P",

@@ -9,11 +9,6 @@ class Colour(Enum):
     BLACK = 1
     YELLOW = 2
 
-@dataclass
-class Palette:
-    WHITE: int = 0
-    BLACK: int = 1
-    YELLOW: int = 2
 
 @dataclass
 class FontStyles:
@@ -26,5 +21,4 @@ class FontStyles:
 class ImageConfig:
     height: int = 300
     width:  int = 400
-    palette: Palette = field(default_factory=Palette)
     font_styles: FontStyles = field(default_factory=FontStyles)
