@@ -106,13 +106,7 @@ class Icons(Sequence[Drawable]):
         self._moon_phase = moon_phase
 
     def _day_of_week_icon(self, day: date) -> Drawable:
-        return DayOfWeekIcon(
-            size=self.icon_size,
-            font=self._config.font_styles.COUNTDOWN,
-            background=self._config.palette.BLACK,
-            foreground=self._config.palette.WHITE,
-            letter=day.strftime("%a")[0]
-        )
+        return DayOfWeekIcon(font=self._config.font_styles.COUNTDOWN, letter=day.strftime("%a")[0], size=self.icon_size)
 
     def _moon_icon(self) -> Drawable:
         match self._moon_phase:

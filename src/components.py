@@ -28,7 +28,7 @@ class Text:
                   font=self._font)
 
 class HorizontalLine:
-    def __init__(self, length: int, colour: int):
+    def __init__(self, length: int, colour: Colour):
         self._length = length
         self._colour = colour
 
@@ -41,13 +41,13 @@ class HorizontalLine:
     def draw(self, draw: ImageDraw, x: int, y: int):
         draw.line(
             xy=[(x, y), (x + self._length, y)],
-            fill=self._colour,
+            fill=self._colour.value,
             width=2
         )
 
 
 class Rectangle:
-    def __init__(self, height: int, width: int, colour: int):
+    def __init__(self, height: int, width: int, colour: Colour):
         self._height = height
         self._width = width
         self._colour = colour
@@ -61,20 +61,15 @@ class Rectangle:
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         draw.rectangle(
             xy=[x, y, x + self.width(), y + self.height()],
-            fill=self._colour
+            fill=self._colour.value
         )
 
 
 class DayOfWeekIcon:
     """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
-    def __init__(self,
-                 font: ImageFont,
-                 background: int,
-                 foreground: int,
-                 letter: str,
-                 size: int) -> None:
+    def __init__(self, font: ImageFont, letter: str, size: int) -> None:
         self._size = size
-        self._rect = Rectangle(self.height(), self.width(), background)
+        self._rect = Rectangle(self.height(), self.width(), Colour.BLACK)
         self._text = Text(letter, font, Colour.WHITE)
         self._letter = letter
 

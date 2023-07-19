@@ -54,7 +54,7 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     components = [
         Text("Uposatha", font_styles.HEADING, Colour.BLACK),
-        HorizontalLine(300, palette.BLACK),
+        HorizontalLine(300, Colour.BLACK),
         Text(content.date, font_styles.INFO, Colour.BLACK),
         Countdown(appearance, content.today, content.falls_on, content.moon_phase),
         Text(content.details, font_styles.INFO, Colour.BLACK),
