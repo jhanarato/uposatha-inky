@@ -1,14 +1,10 @@
-from datetime import date
-
 from PIL import Image, ImageDraw
-
-from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
-from screen import ImageConfig, Colour, HEIGHT, WIDTH, FontStyles
+from screen import Colour, FontStyles, HEIGHT, WIDTH
 
 GAP = 4
 SMALLEST_ICON = 25

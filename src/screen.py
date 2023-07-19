@@ -17,8 +17,3 @@ class FontStyles:
     HEADING: ImageFont = ImageFont.truetype(font=RobotoBold, size=30)
     INFO: ImageFont = ImageFont.truetype(font=RobotoBold, size=24)
     COUNTDOWN: ImageFont = ImageFont.truetype(font=RobotoBold, size=16)
-
-
-@dataclass
-class ImageConfig:
-    font_styles: FontStyles = field(default_factory=FontStyles)

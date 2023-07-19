@@ -3,7 +3,6 @@ from datetime import date
 from uposatha.elements import MoonPhase
 
 from countdown import Countdown, Appearance, IconCountMapping
-from screen import ImageConfig
 
 
 def test_should_report_height_for_two_rows():

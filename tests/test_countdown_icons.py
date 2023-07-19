@@ -5,7 +5,6 @@ import pytest
 from uposatha.elements import MoonPhase
 
 from countdown import Icons
-from screen import ImageConfig
 
 
 def test_icon_sequence_has_length():
