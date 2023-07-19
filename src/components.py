@@ -66,7 +66,7 @@ class Rectangle:
 
 
 class Circle:
-    def __init__(self, diameter: int, fill: int, outline: int):
+    def __init__(self, diameter: int, fill: Colour, outline: Colour):
         self._diameter = diameter
         self._fill = fill
         self._outline = outline
@@ -80,8 +80,8 @@ class Circle:
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         draw.ellipse(
             xy=[(x, y), (x + self.width(), y + self.height())],
-            fill=self._fill,
-            outline=self._outline,
+            fill=self._fill.value,
+            outline=self._outline.value,
             width=2
         )
 
@@ -129,8 +129,7 @@ class FullMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        palette = ImageConfig().palette
-        circle = Circle(self._size, palette.YELLOW, palette.BLACK)
+        circle = Circle(self._size, fill=Colour.YELLOW, outline=Colour.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
@@ -147,8 +146,7 @@ class NewMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        palette = ImageConfig().palette
-        circle = Circle(self._size, palette.BLACK, palette.BLACK)
+        circle = Circle(self._size, fill=Colour.BLACK, outline=Colour.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
