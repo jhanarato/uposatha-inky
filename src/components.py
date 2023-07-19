@@ -65,6 +65,27 @@ class Rectangle:
         )
 
 
+class Circle:
+    def __init__(self, diameter: int, fill: int, outline: int):
+        self._diameter = diameter
+        self._fill = fill
+        self._outline = outline
+
+    def height(self) -> int:
+        return self._diameter
+
+    def width(self) -> int:
+        return self._diameter
+
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        draw.ellipse(
+            xy=[(x, y), (x + self.width(), y + self.height())],
+            fill=self._fill,
+            outline=self._outline,
+            width=2
+        )
+
+
 class DayOfWeekIcon:
     """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
     def __init__(self, font: ImageFont, letter: str, size: int) -> None:
@@ -96,26 +117,6 @@ class DayOfWeekIcon:
     def __str__(self):
         return self.letter
 
-
-class Circle:
-    def __init__(self, diameter: int, fill: int, outline: int):
-        self._diameter = diameter
-        self._fill = fill
-        self._outline = outline
-
-    def height(self) -> int:
-        return self._diameter
-
-    def width(self) -> int:
-        return self._diameter
-
-    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        draw.ellipse(
-            xy=[(x, y), (x + self.width(), y + self.height())],
-            fill=self._fill,
-            outline=self._outline,
-            width=2
-        )
 
 class FullMoonIcon:
     def __init__(self, size: int):
