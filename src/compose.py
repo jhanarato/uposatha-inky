@@ -42,7 +42,7 @@ def next_uposatha(content: NextUposatha) -> Image:
     image = Image.new(
         mode="P",
         size=(config.width, config.height),
-        color=config.palette.WHITE
+        color=Colour.WHITE.value
     )
 
     draw = ImageDraw.Draw(image)
