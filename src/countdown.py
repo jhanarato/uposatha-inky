@@ -69,12 +69,10 @@ class IconCountMapping(MutableMapping[T]):
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, config: ImageConfig,
-                 appearances: IconCountMapping[Appearance],
-                 start: date, end: date, moon_phase: MoonPhase):
+    def __init__(self, appearances: IconCountMapping[Appearance], start: date, end: date, moon_phase: MoonPhase):
 
         self._icons = Icons(
-            config=config,
+            config=ImageConfig(),
             icon_size=0,
             start=start,
             end=end,

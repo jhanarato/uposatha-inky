@@ -56,7 +56,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         Text("Uposatha", font_styles.HEADING, palette.BLACK),
         HorizontalLine(300, palette.BLACK),
         Text(content.date, font_styles.INFO, palette.BLACK),
-        Countdown(config, appearance, content.today, content.falls_on, content.moon_phase),
+        Countdown(appearance, content.today, content.falls_on, content.moon_phase),
         Text(content.details, font_styles.INFO, palette.BLACK),
     ]
 
