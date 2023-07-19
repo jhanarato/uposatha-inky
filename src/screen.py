@@ -1,7 +1,13 @@
 from dataclasses import dataclass, field
+from enum import Enum
 
 from PIL import ImageFont
 from font_roboto import RobotoBold
+
+class Colour(Enum):
+    WHITE = 0
+    BLACK = 1
+    YELLOW = 2
 
 @dataclass
 class Palette:

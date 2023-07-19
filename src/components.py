@@ -2,7 +2,7 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
-from screen import ImageConfig
+from screen import ImageConfig, Colour
 
 
 class Drawable(Protocol):
@@ -10,7 +10,7 @@ class Drawable(Protocol):
     """ Draw given the top left coordinates """
 
 class Text:
-    def __init__(self, text: str, font: ImageFont, colour: int):
+    def __init__(self, text: str, font: ImageFont, colour: Colour):
         self._text = text
         self._font = font
         self._colour = colour
@@ -24,7 +24,7 @@ class Text:
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         draw.text(xy=(x, y),
                   text=self._text,
-                  fill=self._colour,
+                  fill=self._colour.value,
                   font=self._font)
 
 class HorizontalLine:
@@ -75,7 +75,7 @@ class DayOfWeekIcon:
                  size: int) -> None:
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), background)
-        self._text = Text(letter, font, foreground)
+        self._text = Text(letter, font, Colour.WHITE)
         self._letter = letter
 
     def height(self) -> int:
