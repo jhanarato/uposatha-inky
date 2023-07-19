@@ -11,7 +11,7 @@ from PIL import ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon, Drawable
-from screen import ImageConfig
+
 
 @dataclass(frozen=True)
 class Appearance:
@@ -100,13 +100,12 @@ class Icons(Sequence[Drawable]):
     """ A sequence of icons representing the days until the next uposatha """
     def __init__(self, icon_size: int, start: date, end: date, moon_phase: MoonPhase):
         self.icon_size = icon_size
-        self._config = ImageConfig()
         self._start = start
         self._end = end
         self._moon_phase = moon_phase
 
     def _day_of_week_icon(self, day: date) -> Drawable:
-        return DayOfWeekIcon(font=self._config.font_styles.COUNTDOWN, letter=day.strftime("%a")[0], size=self.icon_size)
+        return DayOfWeekIcon(letter=day.strftime("%a")[0], size=self.icon_size)
 
     def _moon_icon(self) -> Drawable:
         match self._moon_phase:

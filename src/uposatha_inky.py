@@ -19,9 +19,9 @@ def inky_available() -> bool:
 
 def display_on_screen(image: Image) -> None:
     palette = [
-        255, 255, 255, # 0 = WHITE
-        0, 0, 0,       # 1 = BLACK
-        255, 255, 0    # 2 = YELLOW
+        255, 255, 255,  # 0 = WHITE
+        0, 0, 0,        # 1 = BLACK
+        255, 255, 0     # 2 = YELLOW
     ]
     image.putpalette(palette)
     converted = image.convert(mode="RGB")

@@ -2,7 +2,7 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
-from screen import ImageConfig, Colour
+from screen import Colour, FontStyles
 
 
 class Drawable(Protocol):
@@ -88,11 +88,12 @@ class Circle:
 
 class DayOfWeekIcon:
     """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
-    def __init__(self, font: ImageFont, letter: str, size: int) -> None:
+    def __init__(self, letter: str, size: int) -> None:
+        self._letter = letter
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), Colour.BLACK)
-        self._text = Text(letter, font, Colour.WHITE)
-        self._letter = letter
+        fonts = FontStyles()
+        self._text = Text(letter, fonts.COUNTDOWN, Colour.WHITE)
 
     def height(self) -> int:
         return self._size
