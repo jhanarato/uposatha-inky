@@ -8,7 +8,7 @@ from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
-from screen import ImageConfig, Colour
+from screen import ImageConfig, Colour, HEIGHT, WIDTH
 
 GAP = 4
 SMALLEST_ICON = 25
@@ -40,7 +40,7 @@ def next_uposatha(content: NextUposatha) -> Image:
 
     image = Image.new(
         mode="P",
-        size=(config.width, config.height),
+        size=(WIDTH, HEIGHT),
         color=Colour.WHITE.value
     )
 
@@ -59,7 +59,7 @@ def next_uposatha(content: NextUposatha) -> Image:
         Text(content.details, font_styles.INFO, Colour.BLACK),
     ]
 
-    layout = ScreenLayout(config.height, config.width)
+    layout = ScreenLayout(HEIGHT, WIDTH)
 
     for component in components:
         layout.add_space(20)

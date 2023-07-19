@@ -4,11 +4,13 @@ from enum import Enum
 from PIL import ImageFont
 from font_roboto import RobotoBold
 
+HEIGHT = 300
+WIDTH = 400
+
 class Colour(Enum):
     WHITE = 0
     BLACK = 1
     YELLOW = 2
-
 
 @dataclass
 class FontStyles:
@@ -19,6 +21,4 @@ class FontStyles:
 
 @dataclass
 class ImageConfig:
-    height: int = 300
-    width:  int = 400
     font_styles: FontStyles = field(default_factory=FontStyles)
