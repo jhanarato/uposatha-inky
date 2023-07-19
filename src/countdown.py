@@ -117,11 +117,7 @@ class Icons(Sequence[Drawable]):
     def _moon_icon(self) -> Drawable:
         match self._moon_phase:
             case MoonPhase.FULL:
-                return FullMoonIcon(
-                    fill=self._config.palette.YELLOW,
-                    outline=self._config.palette.BLACK,
-                    size=self.icon_size)
-
+                return FullMoonIcon(self.icon_size)
             case MoonPhase.NEW:
                 return NewMoonIcon(
                    fill=self._config.palette.BLACK,

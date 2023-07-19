@@ -2,6 +2,9 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
+from screen import ImageConfig
+
+
 class Drawable(Protocol):
     def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
@@ -99,21 +102,17 @@ class DayOfWeekIcon:
         return self.letter
 
 
-class FullMoonIcon:
-    def __init__(self,
-                 size: int,
-                 fill: int,
-                 outline: int,
-                 ):
-        self._size = size
+class Circle:
+    def __init__(self, diameter: int, fill: int, outline: int):
+        self._diameter = diameter
         self._fill = fill
         self._outline = outline
 
     def height(self) -> int:
-        return self._size
+        return self._diameter
 
     def width(self) -> int:
-        return self._size
+        return self._diameter
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         draw.ellipse(
@@ -122,6 +121,21 @@ class FullMoonIcon:
             outline=self._outline,
             width=2
         )
+
+class FullMoonIcon:
+    def __init__(self, size: int):
+        self._size = size
+
+    def height(self) -> int:
+        return self._size
+
+    def width(self) -> int:
+        return self._size
+
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        palette = ImageConfig().palette
+        circle = Circle(diameter=self._size, fill=palette.BLACK, outline=palette.BLACK)
+        circle.draw(draw, x, y)
 
     def __str__(self):
         return "*"
