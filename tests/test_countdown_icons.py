@@ -14,8 +14,10 @@ def test_icon_sequence_has_length():
 
 def test_icon_sequence_can_be_iterated_over():
     icons = Icons(1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
+    icon_list = []
     for icon in icons:
-        pass
+        icon_list.append(icon)
+    assert len(icon_list) == 3
 
 def test_icon_sequence_can_be_accessed_by_index():
     icons = Icons(1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
