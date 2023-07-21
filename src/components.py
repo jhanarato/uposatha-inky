@@ -3,7 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw, ImageFont
 
 from screen import Ink
-from fonts import FontStyles
+from fonts import FontStyles, Font
 
 
 class Drawable(Protocol):
@@ -11,22 +11,22 @@ class Drawable(Protocol):
     """ Draw given the top left coordinates """
 
 class Text:
-    def __init__(self, text: str, font: ImageFont, colour: Ink):
+    def __init__(self, text: str, size, font: ImageFont, colour: Ink):
         self._text = text
-        self._font = font
+        self._font = Font(size)
         self._colour = colour
 
     def height(self) -> int:
-        return self._font.getbbox(self._text)[3]
+        return self._font.height(self._text)
 
     def width(self) -> int:
-        return self._font.getbbox(self._text)[2]
+        return self._font.width(self._text)
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         draw.text(xy=(x, y),
                   text=self._text,
                   fill=self._colour.value,
-                  font=self._font)
+                  font=self._font.pil_font())
 
 class HorizontalLine:
     def __init__(self, length: int, colour: Ink):
@@ -94,7 +94,7 @@ class DayOfWeekIcon:
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
         fonts = FontStyles()
-        self._text = Text(letter, fonts.COUNTDOWN, Ink.WHITE)
+        self._text = Text(letter, 16, fonts.COUNTDOWN, Ink.WHITE)
 
     def height(self) -> int:
         return self._size
