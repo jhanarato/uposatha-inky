@@ -4,7 +4,7 @@ from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
-from screen import Colour, HEIGHT, WIDTH
+from screen import Ink, HEIGHT, WIDTH
 from fonts import FontStyles
 
 GAP = 4
@@ -37,7 +37,7 @@ def next_uposatha(content: NextUposatha) -> Image:
     image = Image.new(
         mode="P",
         size=(WIDTH, HEIGHT),
-        color=Colour.WHITE.value
+        color=Ink.WHITE.value
     )
 
     draw = ImageDraw.Draw(image)
@@ -48,11 +48,11 @@ def next_uposatha(content: NextUposatha) -> Image:
         appearance = fifteen_day_appearance()
 
     components = [
-        Text("Uposatha", font_styles.HEADING, Colour.BLACK),
-        HorizontalLine(300, Colour.BLACK),
-        Text(content.date, font_styles.INFO, Colour.BLACK),
+        Text("Uposatha", font_styles.HEADING, Ink.BLACK),
+        HorizontalLine(300, Ink.BLACK),
+        Text(content.date, font_styles.INFO, Ink.BLACK),
         Countdown(appearance, content.today, content.falls_on, content.moon_phase),
-        Text(content.details, font_styles.INFO, Colour.BLACK),
+        Text(content.details, font_styles.INFO, Ink.BLACK),
     ]
 
     layout = ScreenLayout(HEIGHT, WIDTH)

@@ -2,7 +2,7 @@ from typing import Protocol
 
 from PIL import ImageDraw, ImageFont
 
-from screen import Colour
+from screen import Ink
 from fonts import FontStyles
 
 
@@ -11,7 +11,7 @@ class Drawable(Protocol):
     """ Draw given the top left coordinates """
 
 class Text:
-    def __init__(self, text: str, font: ImageFont, colour: Colour):
+    def __init__(self, text: str, font: ImageFont, colour: Ink):
         self._text = text
         self._font = font
         self._colour = colour
@@ -29,7 +29,7 @@ class Text:
                   font=self._font)
 
 class HorizontalLine:
-    def __init__(self, length: int, colour: Colour):
+    def __init__(self, length: int, colour: Ink):
         self._length = length
         self._colour = colour
 
@@ -48,7 +48,7 @@ class HorizontalLine:
 
 
 class Rectangle:
-    def __init__(self, height: int, width: int, colour: Colour):
+    def __init__(self, height: int, width: int, colour: Ink):
         self._height = height
         self._width = width
         self._colour = colour
@@ -67,7 +67,7 @@ class Rectangle:
 
 
 class Circle:
-    def __init__(self, diameter: int, fill: Colour, outline: Colour):
+    def __init__(self, diameter: int, fill: Ink, outline: Ink):
         self._diameter = diameter
         self._fill = fill
         self._outline = outline
@@ -92,9 +92,9 @@ class DayOfWeekIcon:
     def __init__(self, letter: str, size: int) -> None:
         self._letter = letter
         self._size = size
-        self._rect = Rectangle(self.height(), self.width(), Colour.BLACK)
+        self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
         fonts = FontStyles()
-        self._text = Text(letter, fonts.COUNTDOWN, Colour.WHITE)
+        self._text = Text(letter, fonts.COUNTDOWN, Ink.WHITE)
 
     def height(self) -> int:
         return self._size
@@ -131,7 +131,7 @@ class FullMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        circle = Circle(self._size, fill=Colour.YELLOW, outline=Colour.BLACK)
+        circle = Circle(self._size, fill=Ink.YELLOW, outline=Ink.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
@@ -148,7 +148,7 @@ class NewMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        circle = Circle(self._size, fill=Colour.BLACK, outline=Colour.BLACK)
+        circle = Circle(self._size, fill=Ink.BLACK, outline=Ink.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
