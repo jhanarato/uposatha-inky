@@ -5,7 +5,6 @@ from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from layout import ScreenLayout
 from screen import Ink, HEIGHT, WIDTH
-from fonts import FontStyles
 
 GAP = 4
 SMALLEST_ICON = 25
@@ -32,8 +31,6 @@ def fourteen_day_appearance():
     return appearances
 
 def next_uposatha(content: NextUposatha) -> Image:
-    font_styles = FontStyles()
-
     image = Image.new(
         mode="P",
         size=(WIDTH, HEIGHT),

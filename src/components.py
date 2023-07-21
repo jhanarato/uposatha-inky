@@ -3,7 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from screen import Ink
-from fonts import FontStyles, Font
+from fonts import Font
 
 
 class Drawable(Protocol):
@@ -93,7 +93,6 @@ class DayOfWeekIcon:
         self._letter = letter
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
-        fonts = FontStyles()
         self._text = Text(letter, 16, Ink.WHITE)
 
     def height(self) -> int:
