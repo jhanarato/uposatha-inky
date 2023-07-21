@@ -11,7 +11,7 @@ class Drawable(Protocol):
     """ Draw given the top left coordinates """
 
 class Text:
-    def __init__(self, text: str, size, font: ImageFont, colour: Ink):
+    def __init__(self, text: str, size: int, colour: Ink):
         self._text = text
         self._font = Font(size)
         self._colour = colour
@@ -94,7 +94,7 @@ class DayOfWeekIcon:
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
         fonts = FontStyles()
-        self._text = Text(letter, 16, fonts.COUNTDOWN, Ink.WHITE)
+        self._text = Text(letter, 16, Ink.WHITE)
 
     def height(self) -> int:
         return self._size

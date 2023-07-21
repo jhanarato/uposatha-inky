@@ -48,11 +48,11 @@ def next_uposatha(content: NextUposatha) -> Image:
         appearance = fifteen_day_appearance()
 
     components = [
-        Text("Uposatha", 30, font_styles.HEADING, Ink.BLACK),
+        Text("Uposatha", 30, Ink.BLACK),
         HorizontalLine(300, Ink.BLACK),
-        Text(content.date, 24, font_styles.INFO, Ink.BLACK),
+        Text(content.date, 24, Ink.BLACK),
         Countdown(appearance, content.today, content.falls_on, content.moon_phase),
-        Text(content.details, 24, font_styles.INFO, Ink.BLACK),
+        Text(content.details, 24, Ink.BLACK),
     ]
 
     layout = ScreenLayout(HEIGHT, WIDTH)
