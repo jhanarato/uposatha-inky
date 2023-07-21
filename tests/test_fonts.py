@@ -12,9 +12,6 @@ def test_should_have_family(font):
 def test_should_have_style(font):
     assert font.style == "Bold"
 
-def test_should_have_size(font):
-    assert font.size == 30
-
 def test_should_measure_height_of_text(font):
     assert font.height("Hello") == 28
 

@@ -21,10 +21,6 @@ class Font:
     def style(self) -> str:
         return self._font.font.style
 
-    @property
-    def size(self) -> int:
-        return self._font.font.size
-
     def height(self, text: str) -> int:
         return self._font.getbbox(text)[3]
 
