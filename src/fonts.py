@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from PIL import ImageFont
 from font_roboto import RobotoBold
 
