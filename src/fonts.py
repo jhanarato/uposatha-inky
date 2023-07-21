@@ -18,6 +18,10 @@ class Font:
         return self._font.font.family
 
     @property
+    def style(self) -> str:
+        return self._font.font.style
+
+    @property
     def size(self) -> int:
         return self._font.font.size
 
@@ -26,3 +30,6 @@ class Font:
 
     def width(self, text: str) -> int:
         return self._font.getbbox(text)[2]
+
+    def pil_font(self) -> ImageFont:
+        return self._font

@@ -9,6 +9,9 @@ def font():
 def test_should_have_family(font):
     assert font.family == "Roboto"
 
+def test_should_have_style(font):
+    assert font.style == "Bold"
+
 def test_should_have_size(font):
     assert font.size == 30
 
