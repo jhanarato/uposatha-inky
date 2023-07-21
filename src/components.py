@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from PIL import ImageDraw, ImageFont
+from PIL import ImageDraw
 
 from screen import Ink
 from fonts import FontStyles, Font
