@@ -35,3 +35,4 @@ def test_should_make_font_bbox(font):
     assert bbox.top == 7
     assert bbox.right == 21
     assert bbox.bottom == 28
+
