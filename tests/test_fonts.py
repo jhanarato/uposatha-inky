@@ -3,8 +3,7 @@ import pytest
 from PIL import Image, ImageFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, BBox, font_bbox, black_pixels, pixels_to_bbox
-from screen import Ink
+from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox
 
 
 @pytest.fixture
@@ -54,3 +53,13 @@ def test_should_convert_pixels_to_bounding_box(font):
     assert bbox.top == 17
     assert bbox.right == 55
     assert bbox.bottom == 77
+
+def test_should_create_pixel_bbox_one_shorter_than_image():
+    text = "Hello"
+    font = ImageFont.truetype(RobotoBold, 30)
+    image = image_bbox(text, font)
+    pixel = pixel_bbox(text, font)
+    assert pixel.left == image.left
+    assert pixel.top == image.top
+    assert pixel.right + 1 == image.right
+    assert pixel.bottom + 1 == image.bottom
