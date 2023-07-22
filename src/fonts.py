@@ -74,6 +74,6 @@ def pixels_to_bbox(pixels: Iterator[tuple[int, int]]) -> BBox:
         left = min(left, column)
         right = max(right, column)
         top = min(top, row)
-        bottom = min(bottom, row)
+        bottom = max(bottom, row)
 
     return BBox(left=left, right=right, top=top, bottom=bottom)

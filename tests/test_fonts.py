@@ -3,7 +3,7 @@ import pytest
 from PIL import Image, ImageFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, BBox, font_bbox, black_pixels
+from fonts import Font, image_bbox, BBox, font_bbox, black_pixels, pixels_to_bbox
 from screen import Ink
 
 
@@ -43,3 +43,14 @@ def test_should_get_black_pixel_coordinates(font):
     pixels[13, 17] = 1
     pixels[55, 77] = 1
     assert list(black_pixels(image)) == [(13, 17), (55, 77)]
+
+def test_should_convert_pixels_to_bounding_box(font):
+    image = Image.new(mode="P", size=(100, 100), color=0)
+    pixels = image.load()
+    pixels[13, 17] = 1
+    pixels[55, 77] = 1
+    bbox = pixels_to_bbox(black_pixels(image))
+    assert bbox.left == 13
+    assert bbox.top == 17
+    assert bbox.right == 55
+    assert bbox.bottom == 77
