@@ -1,9 +1,10 @@
 import pytest
 
-from PIL import ImageFont
+from PIL import Image, ImageFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, BBox, font_bbox
+from fonts import Font, image_bbox, BBox, font_bbox, black_pixels
+from screen import Ink
 
 
 @pytest.fixture
@@ -36,3 +37,9 @@ def test_should_make_font_bbox(font):
     assert bbox.right == 21
     assert bbox.bottom == 28
 
+def test_should_get_black_pixel_coordinates(font):
+    image = Image.new(mode="P", size=(100, 100), color=0)
+    pixels = image.load()
+    pixels[13, 17] = 1
+    pixels[55, 77] = 1
+    assert list(black_pixels(image)) == [(13, 17), (55, 77)]
