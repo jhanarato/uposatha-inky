@@ -48,7 +48,7 @@ def pixel_bbox(text: str, font: ImageFont) -> BBox:
     pixels = black_pixels(image)
     return pixels_to_bbox(pixels)
 
-def text_image(text, font):
+def text_image(text: str, font: ImageFont):
     image = Image.new(mode="P", size=(100, 100), color=0)
     draw = ImageDraw.Draw(image)
     draw.text((0, 0), text, 1, font)
