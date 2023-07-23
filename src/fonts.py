@@ -34,6 +34,14 @@ class BBox:
     right: int
     bottom: int
 
+    @property
+    def height(self) -> int:
+        return self.bottom - self.top + 1
+
+    @property
+    def width(self) -> int:
+        return self.right - self.left + 1
+
 def font_bbox(text: str, font: ImageFont) -> BBox:
     bbox = font.getbbox(text)
     return BBox(*bbox)

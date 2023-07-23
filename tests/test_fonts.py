@@ -3,7 +3,7 @@ import pytest
 from PIL import Image, ImageFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox
+from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, BBox
 
 
 @pytest.fixture
@@ -21,6 +21,14 @@ def test_should_measure_height_of_text(font):
 
 def test_should_measure_width_of_text(font):
     assert font.width("Hello") == 70
+
+def test_should_calculate_height_of_bbox():
+    bbox = BBox(top=5, bottom=9, left=0, right=0)
+    assert bbox.height == 5
+
+def test_should_calculate_width_of_bbox():
+    bbox = BBox(left=7, right=12, top=0, bottom=0)
+    assert bbox.width == 6
 
 def test_should_make_image_bbox(font):
     bbox = image_bbox("H", ImageFont.truetype(RobotoBold, 30))
