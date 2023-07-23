@@ -34,8 +34,8 @@ def test_should_make_image_bbox(font):
     bbox = image_bbox("H", ImageFont.truetype(RobotoBold, 30))
     assert bbox.left == 2
     assert bbox.top == 7
-    assert bbox.right == 19
-    assert bbox.bottom == 28
+    assert bbox.right == 18
+    assert bbox.bottom == 27
 
 def test_should_make_font_bbox(font):
     bbox = font_bbox("H", ImageFont.truetype(RobotoBold, 30))
@@ -62,15 +62,15 @@ def test_should_convert_pixels_to_bounding_box(font):
     assert bbox.right == 55
     assert bbox.bottom == 77
 
-def test_should_create_pixel_bbox_one_shorter_than_image():
+def test_should_adjust_image_bbox_to_match_pixel_bbox():
     text = "Hello"
     font = ImageFont.truetype(RobotoBold, 30)
     image = image_bbox(text, font)
     pixel = pixel_bbox(text, font)
     assert pixel.left == image.left
     assert pixel.top == image.top
-    assert pixel.right + 1 == image.right
-    assert pixel.bottom + 1 == image.bottom
+    assert pixel.right == image.right
+    assert pixel.bottom == image.bottom
 
 def test_should_align_text_baseline_when_no_descent():
     text = "Hello"
