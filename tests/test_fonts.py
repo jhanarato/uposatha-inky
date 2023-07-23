@@ -63,3 +63,15 @@ def test_should_create_pixel_bbox_one_shorter_than_image():
     assert pixel.top == image.top
     assert pixel.right + 1 == image.right
     assert pixel.bottom + 1 == image.bottom
+
+def test_should_align_text_baseline_when_no_descent():
+    text = "Hello"
+    font = ImageFont.truetype(RobotoBold, 30)
+    bottoms = [pixel_bbox(c, font).bottom for c in text]
+    assert len(set(bottoms)) == 1
+
+def test_should_be_below_baseline_when_descent():
+    font = ImageFont.truetype(RobotoBold, 30)
+    above = pixel_bbox("H", font).bottom
+    below = pixel_bbox("y", font).bottom
+    assert below > above
