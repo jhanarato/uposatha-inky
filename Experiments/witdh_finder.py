@@ -6,7 +6,7 @@ from font_roboto import RobotoBold
 
 font = TTFont(RobotoBold)
 cmap = font['cmap']
-t = cmap.getcmap(3,1).cmap
+t = cmap.getcmap(3, 1).cmap
 s = font.getGlyphSet()
 units_per_em = font['head'].unitsPerEm
 
