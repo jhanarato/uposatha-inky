@@ -2,7 +2,6 @@
 # https://stackoverflow.com/questions/4190667/how-to-get-width-of-a-truetype-font-character-in-1200ths-of-an-inch-with-python#61647653
 
 from fontTools.ttLib import TTFont
-from fontTools.ttLib.tables._c_m_a_p import CmapSubtable
 from font_roboto import RobotoBold
 
 font = TTFont(RobotoBold)
