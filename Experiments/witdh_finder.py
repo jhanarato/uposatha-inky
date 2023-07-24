@@ -24,8 +24,8 @@ text = 'This is a test'
 
 width = get_text_width(text, 12)
 
-print ('Text: "%s"' % text)
-print ('Width in points: %f' % width)
-print ('Width in inches: %f' % (width/72))
-print ('Width in cm: %f' % (width*2.54/72))
-print ('Width in WP Units: %f' % (width*1200/72))
+print('Text: "%s"' % text)
+print('Width in points: %f' % width)
+print('Width in inches: %f' % (width/72))
+print('Width in cm: %f' % (width*2.54/72))
+print('Width in WP Units: %f' % (width*1200/72))
