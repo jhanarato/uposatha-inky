@@ -17,7 +17,7 @@ def get_text_width(text, point_size):
             total += s[t[ord(c)]].width
         else:
             total += s['.notdef'].width
-    total = total * float(point_size) / units_per_em;
+    total = total * float(point_size) / units_per_em
     return total
 
 text = 'This is a test'
