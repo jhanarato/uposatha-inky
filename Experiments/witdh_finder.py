@@ -3,8 +3,9 @@
 
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._c_m_a_p import CmapSubtable
+from font_roboto import RobotoBold
 
-font = TTFont('/Library/Fonts/Arial.ttf')
+font = TTFont(RobotoBold)
 cmap = font['cmap']
 t = cmap.getcmap(3,1).cmap
 s = font.getGlyphSet()
