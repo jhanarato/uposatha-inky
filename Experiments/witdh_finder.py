@@ -15,5 +15,5 @@ def get_text_width(text: str, font: TTFont, point_size: int):
             total += glyph_set[character_map[code_point]].width
         else:
             total += glyph_set['.notdef'].width
-    total = total * float(point_size) / units_per_em
+    total = total * (point_size / units_per_em)
     return total
