@@ -15,8 +15,10 @@ def size_factor(font: TTFont, point_size: int) -> float:
     return factor
 
 def code_point_width(code_point, character_map, glyph_set):
-    if code_point in character_map and character_map[code_point] in glyph_set:
-        point_width = glyph_set[character_map[code_point]].width
-    else:
-        point_width = glyph_set['.notdef'].width
-    return point_width
+    if code_point not in character_map:
+        raise RuntimeError("Code point not in character map")
+
+    if character_map[code_point] not in glyph_set:
+        raise RuntimeError("Character not in glyph set")
+
+    return glyph_set[character_map[code_point]].width
