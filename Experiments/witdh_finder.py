@@ -4,7 +4,7 @@
 from fontTools.ttLib import TTFont
 
 def get_text_width(text: str, font: TTFont, points: int):
-    widths = [code_point_width(ord(c), font) for c in text]
+    widths = [glyph(ord(c), font).width for c in text]
     total_width = sum(widths)
     return width_in_pixels(total_width, font, points)
 
@@ -22,6 +22,3 @@ def glyph(code_point: int, font: TTFont):
         return None
 
     return glyph_set[character_map[code_point]]
-
-def code_point_width(code_point, font):
-    return glyph(code_point, font).width
