@@ -13,8 +13,9 @@ units_per_em = font['head'].unitsPerEm
 def get_text_width(text, point_size):
     total = 0
     for c in text:
-        if ord(c) in t and t[ord(c)] in s:
-            total += s[t[ord(c)]].width
+        code_point = ord(c)
+        if code_point in t and t[code_point] in s:
+            total += s[t[code_point]].width
         else:
             total += s['.notdef'].width
     total = total * float(point_size) / units_per_em
