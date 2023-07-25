@@ -9,11 +9,15 @@ def get_text_width(text: str, font: TTFont, point_size: int):
     units_per_em = font['head'].unitsPerEm
 
     total = 0
+
     for c in text:
         code_point = ord(c)
         if code_point in character_map and character_map[code_point] in glyph_set:
-            total += glyph_set[character_map[code_point]].width
+            point_width = glyph_set[character_map[code_point]].width
+            total += point_width
         else:
-            total += glyph_set['.notdef'].width
+            point_width = glyph_set['.notdef'].width
+            total += point_width
+
     total = total * (point_size / units_per_em)
     return total
