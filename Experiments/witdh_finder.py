@@ -20,7 +20,8 @@ def glyph(code: int, font: TTFont):
     return glyph_set[character_map[code]]
 
 def width_in_pixels(width: int, font: TTFont, points: int) -> float:
-    return width * points / units_per_em(font)
+    return width * scale_factor(font, points)
 
-def units_per_em(font: TTFont) -> int:
-    return font['head'].unitsPerEm
+def scale_factor(font, points):
+    return points / font['head'].unitsPerEm
+
