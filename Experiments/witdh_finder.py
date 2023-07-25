@@ -10,7 +10,7 @@ t = cmap.getcmap(3, 1).cmap
 s = font.getGlyphSet()
 units_per_em = font['head'].unitsPerEm
 
-def get_text_width(text, point_size):
+def get_text_width(text: str, point_size: int):
     total = 0
     for c in text:
         code_point = ord(c)
