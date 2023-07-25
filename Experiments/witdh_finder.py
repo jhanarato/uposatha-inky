@@ -5,8 +5,7 @@ from fontTools.ttLib import TTFont
 
 def get_text_width(text: str, font: TTFont, points: int):
     widths = [glyph(ord(c), font).width for c in text]
-    total_width = sum(widths)
-    return total_width * scale_factor(font, points)
+    return sum(widths) * scale_factor(font, points)
 
 def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
