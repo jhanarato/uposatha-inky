@@ -9,7 +9,7 @@ def get_text_width(text: str, font: TTFont, point_size: int):
     widths = [code_point_width(ord(c), character_map, glyph_set) for c in text]
     return sum(widths) * size_factor(font, point_size)
 
-def size_factor(font, point_size):
+def size_factor(font: TTFont, point_size: int) -> float:
     units_per_em = font['head'].unitsPerEm
     factor = point_size / units_per_em
     return factor
