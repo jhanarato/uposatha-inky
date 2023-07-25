@@ -3,7 +3,7 @@
 
 from fontTools.ttLib import TTFont
 
-def get_text_width(text: str, font: TTFont, points: int):
+def pixel_width(text: str, font: TTFont, points: int):
     widths = [glyph(ord(c), font).width for c in text]
     return sum(widths) * scale_factor(font, points)
 
@@ -20,4 +20,3 @@ def glyph(code: int, font: TTFont):
 
 def scale_factor(font, points):
     return points / font['head'].unitsPerEm
-
