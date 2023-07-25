@@ -6,14 +6,8 @@ from fontTools.ttLib import TTFont
 def get_text_width(text: str, font: TTFont, point_size: int):
     character_map = font['cmap'].getcmap(3, 1).cmap
     glyph_set = font.getGlyphSet()
-
-    total = 0
-
-    for c in text:
-        code_point = ord(c)
-        total += code_point_width(code_point, character_map, glyph_set)
-    total = total * size_factor(font, point_size)
-    return total
+    widths = [code_point_width(ord(c), character_map, glyph_set) for c in text]
+    return sum(widths) * size_factor(font, point_size)
 
 def size_factor(font, point_size):
     units_per_em = font['head'].unitsPerEm
