@@ -12,13 +12,13 @@ def width_in_pixels(width: int, font: TTFont, points: int) -> float:
     units_per_em = font['head'].unitsPerEm
     return width * points / units_per_em
 
-def glyph(code_point: int, font: TTFont):
+def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
     glyph_set = font.getGlyphSet()
 
-    if code_point not in character_map:
+    if code not in character_map:
         return None
-    if character_map[code_point] not in glyph_set:
+    if character_map[code] not in glyph_set:
         return None
 
-    return glyph_set[character_map[code_point]]
+    return glyph_set[character_map[code]]
