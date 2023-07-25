@@ -6,11 +6,11 @@ from font_roboto import RobotoBold
 
 font = TTFont(RobotoBold)
 
-character_map = font['cmap'].getcmap(3, 1).cmap
-glyph_set = font.getGlyphSet()
-units_per_em = font['head'].unitsPerEm
-
 def get_text_width(text: str, point_size: int):
+    character_map = font['cmap'].getcmap(3, 1).cmap
+    glyph_set = font.getGlyphSet()
+    units_per_em = font['head'].unitsPerEm
+
     total = 0
     for c in text:
         code_point = ord(c)
