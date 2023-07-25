@@ -6,7 +6,9 @@ from PIL import ImageFont
 
 from Experiments.witdh_finder import get_text_width
 
-# Approval test for refactoring.
+# Approval test for refactoring. I just switched the
+# font in the original script, the value is what was returned
+# before I changed anything else.
 def test_width_finder():
     text = 'This is a test'
     font = TTFont(RobotoBold)
