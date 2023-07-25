@@ -8,10 +8,6 @@ def get_text_width(text: str, font: TTFont, points: int):
     total_width = sum(widths)
     return width_in_pixels(total_width, font, points)
 
-def width_in_pixels(width: int, font: TTFont, points: int) -> float:
-    units_per_em = font['head'].unitsPerEm
-    return width * points / units_per_em
-
 def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
     glyph_set = font.getGlyphSet()
@@ -22,3 +18,9 @@ def glyph(code: int, font: TTFont):
         return None
 
     return glyph_set[character_map[code]]
+
+def width_in_pixels(width: int, font: TTFont, points: int) -> float:
+    return width * points / units_per_em(font)
+
+def units_per_em(font: TTFont) -> int:
+    return font['head'].unitsPerEm
