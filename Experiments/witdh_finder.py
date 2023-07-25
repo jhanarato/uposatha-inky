@@ -14,11 +14,12 @@ def width_in_pixels(width: int, font: TTFont, point_size: int) -> float:
     units_per_em = font['head'].unitsPerEm
     return width * point_size / units_per_em
 
-def code_point_width(code_point, character_map, glyph_set):
+def glyph(code_point, character_map, glyph_set):
     if code_point not in character_map:
-        raise RuntimeError("Code point not in character map")
-
+        return None
     if character_map[code_point] not in glyph_set:
-        raise RuntimeError("Character not in glyph set")
+        return None
+    return glyph_set[character_map[code_point]]
 
-    return glyph_set[character_map[code_point]].width
+def code_point_width(code_point, character_map, glyph_set):
+    return glyph(code_point, character_map, glyph_set).width
