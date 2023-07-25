@@ -20,13 +20,3 @@ def get_text_width(text: str, point_size: int):
             total += s['.notdef'].width
     total = total * float(point_size) / units_per_em
     return total
-
-text = 'This is a test'
-
-width = get_text_width(text, 12)
-
-print('Text: "%s"' % text)
-print('Width in points: %f' % width)
-print('Width in inches: %f' % (width/72))
-print('Width in cm: %f' % (width*2.54/72))
-print('Width in WP Units: %f' % (width*1200/72))
