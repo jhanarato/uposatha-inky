@@ -11,8 +11,7 @@ def get_text_width(text: str, font: TTFont, point_size: int):
 
     for c in text:
         code_point = ord(c)
-        point_width = code_point_width(code_point, character_map, glyph_set)
-        total += point_width
+        total += code_point_width(code_point, character_map, glyph_set)
     total = total * size_factor(font, point_size)
     return total
 
