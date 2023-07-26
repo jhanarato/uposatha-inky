@@ -17,5 +17,5 @@ def glyph(code: int, font: TTFont):
 
     return glyph_set[character_map[code]]
 
-def scale_factor(font, points):
+def scale_factor(font: TTFont, points: int) -> float:
     return points / font['head'].unitsPerEm
