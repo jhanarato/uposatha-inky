@@ -3,8 +3,7 @@
 from fontTools.ttLib import TTFont
 
 def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> float:
-    design_units = [glyph(ord(c), font).width for c in text]
-    return font_points_per_em * sum(design_units) / units_per_em(font)
+    return sum([glyph_width_in_points(ord(c), font, font_points_per_em) for c in text])
 
 def glyph_width_in_points(code: int, font: TTFont, font_points_per_em: int) -> float:
     design_units = glyph(code, font).width
