@@ -21,4 +21,5 @@ def glyph(code: int, font: TTFont):
     return glyph_set[character]
 
 def scale_factor(font: TTFont, font_points: int) -> float:
-    return font_points / font['head'].unitsPerEm
+    upm = font['head'].unitsPerEm
+    return font_points / upm
