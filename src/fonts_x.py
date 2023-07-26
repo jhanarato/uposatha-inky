@@ -30,3 +30,17 @@ def glyph(code: int, font: TTFont):
         raise RuntimeError(f"Character {character} not in glyph set.")
 
     return glyph_set[character]
+
+class Glyph:
+    def __init__(self, font: TTFont, points: int, code: int):
+        self._font = font
+        self._points = points
+        self._glyph = glyph(code, font)
+
+    @property
+    def width_in_units(self) -> int:
+        return self._glyph.width
+
+    @property
+    def units_per_em(self) -> int:
+        return self._font['head'].unitsPerEm
