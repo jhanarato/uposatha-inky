@@ -2,9 +2,9 @@
 
 from fontTools.ttLib import TTFont
 
-def text_width(text: str, font: TTFont, points: int) -> float:
+def text_width(text: str, font: TTFont, font_points: int) -> float:
     widths = [glyph(ord(c), font).width for c in text]
-    return sum(widths) * scale_factor(font, points)
+    return sum(widths) * scale_factor(font, font_points)
 
 def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
@@ -17,5 +17,5 @@ def glyph(code: int, font: TTFont):
 
     return glyph_set[character_map[code]]
 
-def scale_factor(font: TTFont, points: int) -> float:
-    return points / font['head'].unitsPerEm
+def scale_factor(font: TTFont, font_points: int) -> float:
+    return font_points / font['head'].unitsPerEm
