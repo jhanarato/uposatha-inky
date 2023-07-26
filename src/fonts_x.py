@@ -11,11 +11,14 @@ def glyph(code: int, font: TTFont):
     glyph_set = font.getGlyphSet()
 
     if code not in character_map:
-        return None
-    if character_map[code] not in glyph_set:
-        return None
+        raise RuntimeError(f"Code {code} not in character map")
 
-    return glyph_set[character_map[code]]
+    character = character_map[code]
+
+    if character not in glyph_set:
+        raise RuntimeError(f"Character {character} not in glyph set.")
+
+    return glyph_set[character]
 
 def scale_factor(font: TTFont, font_points: int) -> float:
     return font_points / font['head'].unitsPerEm
