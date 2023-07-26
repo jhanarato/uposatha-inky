@@ -6,24 +6,24 @@ def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> fl
     glyphs = [Glyph(font, ord(c)) for c in text]
     return sum([glyph.width_in_points(font_points_per_em) for glyph in glyphs])
 
-def glyph(code: int, font: TTFont):
-    character_map = font['cmap'].getcmap(3, 1).cmap
-    glyph_set = font.getGlyphSet()
-
-    if code not in character_map:
-        raise RuntimeError(f"Code {code} not in character map")
-
-    character = character_map[code]
-
-    if character not in glyph_set:
-        raise RuntimeError(f"Character {character} not in glyph set.")
-
-    return glyph_set[character]
-
 class Glyph:
     def __init__(self, font: TTFont, code: int):
         self._font = font
-        self._glyph = glyph(code, font)
+        self._set_glyph(code, font)
+
+    def _set_glyph(self, code: int, font: TTFont):
+        character_map = font['cmap'].getcmap(3, 1).cmap
+        glyph_set = font.getGlyphSet()
+
+        if code not in character_map:
+            raise RuntimeError(f"Code {code} not in character map")
+
+        character = character_map[code]
+
+        if character not in glyph_set:
+            raise RuntimeError(f"Character {character} not in glyph set.")
+
+        self._glyph = glyph_set[character]
 
     @property
     def width_in_units(self) -> int:
