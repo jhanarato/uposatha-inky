@@ -13,7 +13,11 @@ def test_approval():
     font = TTFont(RobotoBold)
     assert text_width_in_points(text, font, 12) == 69.029296875
 
-def test_pillow_sets_point_equal_to_pixel():
+def test_pillow_pixels_equal_points():
+    """
+    Pillow pixels per em (PPM) is the same as points per em
+    i.e. One pixel equals one point when drawing text.
+    """
     size = 30
     text = "H"
 
