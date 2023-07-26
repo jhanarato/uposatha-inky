@@ -1,6 +1,7 @@
 """ Experimental fonts module. """
 
 from fontTools.ttLib import TTFont
+import glyphtools
 
 def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> float:
     glyphs = [Glyph(font, ord(c)) for c in text]
@@ -34,3 +35,6 @@ class Glyph:
 
     def width_in_points(self, font_points: int) -> float:
         return self.width_in_em() * font_points
+
+    def left_side_bearing(self) -> int:
+        return self._glyph.lsb
