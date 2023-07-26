@@ -42,5 +42,10 @@ class Glyph:
         return self._glyph.width
 
     @property
+    def width_in_em(self) -> float:
+        return self.width_in_units / self.units_per_em
+
+    @property
     def units_per_em(self) -> int:
         return self._font['head'].unitsPerEm
+

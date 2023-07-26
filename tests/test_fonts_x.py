@@ -42,3 +42,9 @@ def test_upm():
     glyph = Glyph(font, points, code)
     assert glyph.units_per_em == 2048
 
+def test_glyph_width_in_em():
+    font = TTFont(RobotoBold)
+    code = ord("H")
+    points = 16
+    glyph = Glyph(font, points, code)
+    assert glyph.width_in_em == glyph_width_in_em(code, font)
