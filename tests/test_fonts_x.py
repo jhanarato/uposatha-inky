@@ -31,8 +31,7 @@ def test_pillow_sets_point_equal_to_pixel():
 def glyph():
     font = TTFont(RobotoBold)
     code = ord("H")
-    points = 16
-    return Glyph(font, points, code)
+    return Glyph(font, code)
 
 def test_upm(glyph):
     assert glyph.units_per_em == 2048
@@ -44,4 +43,4 @@ def test_glyph_width_in_em(glyph):
     assert glyph.width_in_em == 0.70703125
 
 def test_glyph_width_in_points(glyph):
-    assert glyph.width_in_points == 11.3125
+    assert glyph.width_in_points(16) == 11.3125
