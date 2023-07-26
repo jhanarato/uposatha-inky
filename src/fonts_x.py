@@ -2,7 +2,7 @@
 
 from fontTools.ttLib import TTFont
 
-def text_width(text: str, font: TTFont, font_points: int) -> float:
+def text_width_in_points(text: str, font: TTFont, font_points: int) -> float:
     design_units = [glyph(ord(c), font).width for c in text]
     return sum(design_units) * scale_factor(font, font_points)
 
