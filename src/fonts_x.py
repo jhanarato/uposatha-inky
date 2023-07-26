@@ -10,9 +10,9 @@ class Glyph:
     def __init__(self, font: TTFont, code: int):
         self._font = font
         self._units_per_em = self._font['head'].unitsPerEm
-        self._set_glyph(code, font)
+        self._glyph = self._get_glyph(code, font)
 
-    def _set_glyph(self, code: int, font: TTFont):
+    def _get_glyph(self, code: int, font: TTFont):
         character_map = font['cmap'].getcmap(3, 1).cmap
         glyph_set = font.getGlyphSet()
 
@@ -24,7 +24,7 @@ class Glyph:
         if character not in glyph_set:
             raise RuntimeError(f"Character {character} not in glyph set.")
 
-        self._glyph = glyph_set[character]
+        return glyph_set[character]
 
     @property
     def width_in_units(self) -> int:
