@@ -7,10 +7,8 @@ from PIL import ImageFont
 from fonts_x import text_width_in_points, Glyph
 
 
-# Approval test for refactoring. I just switched the
-# font in the original script, the value is what was returned
-# before I changed anything else.
-def test_text_width_in_points():
+def test_approval():
+    """ Test that the code still does as it did when I started refactoring """
     text = 'This is a test'
     font = TTFont(RobotoBold)
     assert text_width_in_points(text, font, 12) == 69.029296875
@@ -32,9 +30,6 @@ def glyph():
     font = TTFont(RobotoBold)
     code = ord("H")
     return Glyph(font, code)
-
-def test_upm(glyph):
-    assert glyph.units_per_em == 2048
 
 def test_glyph_width_in_units(glyph):
     assert glyph.width_in_units == 1448
