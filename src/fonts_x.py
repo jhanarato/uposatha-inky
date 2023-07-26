@@ -6,7 +6,7 @@ def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> fl
     return sum([glyph_width_in_points(ord(c), font, font_points_per_em) for c in text])
 
 def glyph_width_in_points(code: int, font: TTFont, font_points_per_em: int) -> float:
-    return font_points_per_em * glyph(code, font).width / units_per_em(font)
+    return glyph(code, font).width * font_points_per_em / units_per_em(font)
 
 def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
