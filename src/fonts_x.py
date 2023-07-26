@@ -6,7 +6,8 @@ def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> fl
     return sum([glyph_width_in_points(ord(c), font, font_points_per_em) for c in text])
 
 def glyph_width_in_points(code: int, font: TTFont, font_points_per_em: int) -> float:
-    return glyph_width_in_em(code, font) * font_points_per_em
+    glyph = Glyph(font, font_points_per_em, code)
+    return glyph.width_in_points
 
 def glyph_width_in_em(code: int, font: TTFont) -> float:
     return glyph_width_in_units(code, font) / units_per_em(font)

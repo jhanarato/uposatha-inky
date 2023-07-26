@@ -6,6 +6,12 @@ from PIL import ImageFont
 
 from fonts_x import text_width_in_points, glyph_width_in_units, Glyph, glyph_width_in_em, glyph_width_in_points
 
+@pytest.fixture
+def glyph():
+    font = TTFont(RobotoBold)
+    code = ord("H")
+    points = 16
+    return Glyph(font, points, code)
 
 # Approval test for refactoring. I just switched the
 # font in the original script, the value is what was returned
@@ -27,14 +33,6 @@ def test_pillow_sets_point_equal_to_pixel():
 
     assert ft_width == pytest.approx(pil_width, 0.001)
 
-def test_glyph_width_in_units():
-    font = TTFont(RobotoBold)
-    code = ord("H")
-    points = 16
-
-    glyph = Glyph(font, points, code)
-    assert glyph.width_in_units == glyph_width_in_units(code, font)
-
 def test_upm():
     font = TTFont(RobotoBold)
     code = ord("H")
@@ -42,16 +40,24 @@ def test_upm():
     glyph = Glyph(font, points, code)
     assert glyph.units_per_em == 2048
 
+def test_glyph_width_in_units():
+    font = TTFont(RobotoBold)
+    code = ord("H")
+    points = 16
+
+    glyph = Glyph(font, points, code)
+    assert glyph.width_in_units == 1448
+
 def test_glyph_width_in_em():
     font = TTFont(RobotoBold)
     code = ord("H")
     points = 16
     glyph = Glyph(font, points, code)
-    assert glyph.width_in_em == glyph_width_in_em(code, font)
+    assert glyph.width_in_em == 0.70703125
 
 def test_glyph_width_in_points():
     font = TTFont(RobotoBold)
     code = ord("H")
     points = 16
     glyph = Glyph(font, points, code)
-    assert glyph.width_in_points == glyph_width_in_points(code, font, points)
+    assert glyph.width_in_points == 11.3125
