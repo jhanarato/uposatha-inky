@@ -3,8 +3,8 @@
 from fontTools.ttLib import TTFont
 
 def text_width(text: str, font: TTFont, font_points: int) -> float:
-    widths = [glyph(ord(c), font).width for c in text]
-    return sum(widths) * scale_factor(font, font_points)
+    design_units = [glyph(ord(c), font).width for c in text]
+    return sum(design_units) * scale_factor(font, font_points)
 
 def glyph(code: int, font: TTFont):
     character_map = font['cmap'].getcmap(3, 1).cmap
