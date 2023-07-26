@@ -26,13 +26,11 @@ class Glyph:
 
         return glyph_set[character]
 
-    @property
     def width_in_units(self) -> int:
         return self._glyph.width
 
-    @property
     def width_in_em(self) -> float:
-        return self.width_in_units / self._units_per_em
+        return self.width_in_units() / self._units_per_em
 
     def width_in_points(self, font_points: int) -> float:
-        return self.width_in_em * font_points
+        return self.width_in_em() * font_points

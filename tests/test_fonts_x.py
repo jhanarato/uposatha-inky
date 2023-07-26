@@ -32,10 +32,10 @@ def glyph():
     return Glyph(font, code)
 
 def test_glyph_width_in_units(glyph):
-    assert glyph.width_in_units == 1448
+    assert glyph.width_in_units() == 1448
 
 def test_glyph_width_in_em(glyph):
-    assert glyph.width_in_em == 0.70703125
+    assert glyph.width_in_em() == 0.70703125
 
 def test_glyph_width_in_points(glyph):
     assert glyph.width_in_points(16) == 11.3125
