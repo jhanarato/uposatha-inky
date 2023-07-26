@@ -46,6 +46,9 @@ class Glyph:
         return self.width_in_units / self.units_per_em
 
     @property
+    def width_in_points(self) -> float:
+        return self.width_in_em * self._points
+
+    @property
     def units_per_em(self) -> int:
         return self._font['head'].unitsPerEm
-

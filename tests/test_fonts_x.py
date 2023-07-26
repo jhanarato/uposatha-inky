@@ -4,7 +4,7 @@ from font_roboto import RobotoBold
 from fontTools.ttLib import TTFont
 from PIL import ImageFont
 
-from fonts_x import text_width_in_points, glyph_width_in_units, Glyph, glyph_width_in_em
+from fonts_x import text_width_in_points, glyph_width_in_units, Glyph, glyph_width_in_em, glyph_width_in_points
 
 
 # Approval test for refactoring. I just switched the
@@ -48,3 +48,10 @@ def test_glyph_width_in_em():
     points = 16
     glyph = Glyph(font, points, code)
     assert glyph.width_in_em == glyph_width_in_em(code, font)
+
+def test_glyph_width_in_points():
+    font = TTFont(RobotoBold)
+    code = ord("H")
+    points = 16
+    glyph = Glyph(font, points, code)
+    assert glyph.width_in_points == glyph_width_in_points(code, font, points)
