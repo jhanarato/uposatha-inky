@@ -38,3 +38,13 @@ class Glyph:
 
     def left_side_bearing(self) -> int:
         return self._glyph.lsb
+
+
+class DesignUnits:
+    def __init__(self, units: int, units_per_em: int):
+        self._units = units
+        self._units_per_em = units_per_em
+
+    def units(self) -> int:
+        return self._units
+

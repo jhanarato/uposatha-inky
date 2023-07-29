@@ -4,7 +4,7 @@ from font_roboto import RobotoBold
 from fontTools.ttLib import TTFont
 from PIL import ImageFont
 
-from fonts_x import text_width_in_points, Glyph
+from fonts_x import text_width_in_points, Glyph, DesignUnits
 
 
 def test_approval():
@@ -47,3 +47,7 @@ def test_glyph_width_in_points(glyph):
 def test_glyph_left_side_bearing(glyph):
     # I assume the result is in units. That is to be confirmed.
     assert glyph.left_side_bearing() == 130
+
+def test_design_units_available():
+    units = DesignUnits(units=100, units_per_em=2000)
+    assert units.units() == 100
