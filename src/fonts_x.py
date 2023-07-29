@@ -30,7 +30,7 @@ class Glyph:
         return self._font['head'].unitsPerEm
 
     def width(self) -> DesignUnits:
-        return DesignUnits(self._glyph.width, self._units_per_em())
+        return DesignUnits(self._metrics["width"], self._units_per_em())
 
     def left_side_bearing(self) -> DesignUnits:
         return DesignUnits(self._metrics["lsb"], self._units_per_em())
