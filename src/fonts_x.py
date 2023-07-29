@@ -26,25 +26,26 @@ class Glyph:
     def __init__(self, font: TTFont, code: int):
         self._font = font
         self._units_per_em = self._font['head'].unitsPerEm
-        self._glyph = self._get_glyph(code, font)
+        self._glyph = get_glyph(code, font)
         self._width = DesignUnits(self._glyph.width, self._font['head'].unitsPerEm)
-
-    def _get_glyph(self, code: int, font: TTFont):
-        character_map = font['cmap'].getcmap(3, 1).cmap
-        glyph_set = font.getGlyphSet()
-
-        if code not in character_map:
-            raise RuntimeError(f"Code {code} not in character map")
-
-        character = character_map[code]
-
-        if character not in glyph_set:
-            raise RuntimeError(f"Character {character} not in glyph set.")
-
-        return glyph_set[character]
 
     def width(self) -> DesignUnits:
         return self._width
 
     def left_side_bearing(self) -> int:
         return self._glyph.lsb
+
+
+def get_glyph(code: int, font: TTFont):
+    character_map = font['cmap'].getcmap(3, 1).cmap
+    glyph_set = font.getGlyphSet()
+
+    if code not in character_map:
+        raise RuntimeError(f"Code {code} not in character map")
+
+    character = character_map[code]
+
+    if character not in glyph_set:
+        raise RuntimeError(f"Character {character} not in glyph set.")
+
+    return glyph_set[character]
