@@ -2,7 +2,6 @@ import pytest
 
 from font_roboto import RobotoBold
 from fontTools.ttLib import TTFont
-from PIL import ImageFont
 
 from fonts_x import Glyph, DesignUnits
 
