@@ -51,3 +51,7 @@ def test_glyph_left_side_bearing(glyph):
 def test_design_units_available():
     units = DesignUnits(units=100, units_per_em=2000)
     assert units.units() == 100
+
+def test_design_units_converts_to_em():
+    units = DesignUnits(units=100, units_per_em=2000)
+    assert units.to_em() == 0.05

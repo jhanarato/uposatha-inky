@@ -48,3 +48,5 @@ class DesignUnits:
     def units(self) -> int:
         return self._units
 
+    def to_em(self) -> float:
+        return self._units / self._units_per_em
