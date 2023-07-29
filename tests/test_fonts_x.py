@@ -55,3 +55,7 @@ def test_design_units_available():
 def test_design_units_converts_to_em():
     units = DesignUnits(units=100, units_per_em=2000)
     assert units.to_em() == 0.05
+
+def test_design_converts_font_points_to_glyph_points():
+    units = DesignUnits(units=100, units_per_em=2000)
+    assert units.to_points(font_size=10) == 0.5

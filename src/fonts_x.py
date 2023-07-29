@@ -49,4 +49,7 @@ class DesignUnits:
         return self._units
 
     def to_em(self) -> float:
-        return self._units / self._units_per_em
+        return self.units() / self._units_per_em
+
+    def to_points(self, font_size: int) -> float:
+        return self.to_em() * font_size
