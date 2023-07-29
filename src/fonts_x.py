@@ -7,11 +7,27 @@ def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> fl
     glyphs = [Glyph(font, ord(c)) for c in text]
     return sum([glyph.width_in_points(font_points_per_em) for glyph in glyphs])
 
+class DesignUnits:
+    def __init__(self, units: int, units_per_em: int):
+        self._units = units
+        self._units_per_em = units_per_em
+
+    def units(self) -> int:
+        return self._units
+
+    def to_em(self) -> float:
+        return self.units() / self._units_per_em
+
+    def to_points(self, font_size: int) -> float:
+        return self.to_em() * font_size
+
+
 class Glyph:
     def __init__(self, font: TTFont, code: int):
         self._font = font
         self._units_per_em = self._font['head'].unitsPerEm
         self._glyph = self._get_glyph(code, font)
+        self._width = DesignUnits(self._glyph.width, self._font['head'].unitsPerEm)
 
     def _get_glyph(self, code: int, font: TTFont):
         character_map = font['cmap'].getcmap(3, 1).cmap
@@ -27,6 +43,9 @@ class Glyph:
 
         return glyph_set[character]
 
+    def width(self) -> DesignUnits:
+        return self._width
+
     def width_in_units(self) -> int:
         return self._glyph.width
 
@@ -38,18 +57,3 @@ class Glyph:
 
     def left_side_bearing(self) -> int:
         return self._glyph.lsb
-
-
-class DesignUnits:
-    def __init__(self, units: int, units_per_em: int):
-        self._units = units
-        self._units_per_em = units_per_em
-
-    def units(self) -> int:
-        return self._units
-
-    def to_em(self) -> float:
-        return self.units() / self._units_per_em
-
-    def to_points(self, font_size: int) -> float:
-        return self.to_em() * font_size
