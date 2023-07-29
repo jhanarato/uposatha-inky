@@ -25,7 +25,6 @@ class DesignUnits:
 class Glyph:
     def __init__(self, font: TTFont, code: int):
         self._font = font
-        self._units_per_em = self._font['head'].unitsPerEm
         self._glyph = get_glyph(code, font)
         self._width = DesignUnits(self._glyph.width, self._font['head'].unitsPerEm)
 
