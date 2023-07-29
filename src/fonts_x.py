@@ -5,7 +5,7 @@ import glyphtools
 
 def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> float:
     glyphs = [Glyph(font, ord(c)) for c in text]
-    return sum([glyph.width_in_points(font_points_per_em) for glyph in glyphs])
+    return sum([glyph.width().to_points(font_points_per_em) for glyph in glyphs])
 
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
@@ -45,15 +45,6 @@ class Glyph:
 
     def width(self) -> DesignUnits:
         return self._width
-
-    def width_in_units(self) -> int:
-        return self._glyph.width
-
-    def width_in_em(self) -> float:
-        return self.width_in_units() / self._units_per_em
-
-    def width_in_points(self, font_points: int) -> float:
-        return self.width_in_em() * font_points
 
     def left_side_bearing(self) -> int:
         return self._glyph.lsb
