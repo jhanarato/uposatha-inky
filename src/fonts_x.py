@@ -3,9 +3,6 @@
 from fontTools.ttLib import TTFont
 import glyphtools
 
-def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> float:
-    glyphs = [Glyph(font, c) for c in text]
-    return sum([glyph.width().to_points(font_points_per_em) for glyph in glyphs])
 
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
@@ -25,7 +22,9 @@ class DesignUnits:
 class Glyph:
     def __init__(self, font: TTFont, char: str):
         self._font = font
+        self._char = char
         self._glyph = get_glyph(ord(char), font)
+        self._metrics = glyphtools.get_glyph_metrics(font, char)
 
     def _units_per_em(self) -> int:
         return self._font['head'].unitsPerEm
@@ -34,7 +33,7 @@ class Glyph:
         return DesignUnits(self._glyph.width, self._units_per_em())
 
     def left_side_bearing(self) -> DesignUnits:
-        return DesignUnits(self._glyph.lsb, self._units_per_em())
+        return DesignUnits(self._metrics["lsb"], self._units_per_em())
 
 
 def get_glyph(code: int, font: TTFont):

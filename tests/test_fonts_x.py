@@ -4,30 +4,8 @@ from font_roboto import RobotoBold
 from fontTools.ttLib import TTFont
 from PIL import ImageFont
 
-from fonts_x import text_width_in_points, Glyph, DesignUnits
+from fonts_x import Glyph, DesignUnits
 
-
-def test_approval():
-    """ Test that the code still does as it did when I started refactoring """
-    text = 'This is a test'
-    font = TTFont(RobotoBold)
-    assert text_width_in_points(text, font, 12) == 69.029296875
-
-def test_pillow_pixels_equal_points():
-    """
-    Pillow pixels per em (PPM) is the same as points per em
-    i.e. One pixel equals one point when drawing text.
-    """
-    size = 30
-    text = "H"
-
-    ft_font = TTFont(RobotoBold)
-    pil_font = ImageFont.truetype(RobotoBold, size)
-
-    ft_width = text_width_in_points(text, ft_font, size)
-    pil_width = pil_font.getlength(text)
-
-    assert ft_width == pytest.approx(pil_width, 0.001)
 
 @pytest.fixture
 def glyph():
