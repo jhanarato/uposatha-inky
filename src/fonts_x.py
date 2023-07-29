@@ -26,13 +26,15 @@ class Glyph:
     def __init__(self, font: TTFont, char: str):
         self._font = font
         self._glyph = get_glyph(ord(char), font)
-        self._units_per_em = self._font['head'].unitsPerEm
+
+    def _units_per_em(self) -> int:
+        return self._font['head'].unitsPerEm
 
     def width(self) -> DesignUnits:
-        return DesignUnits(self._glyph.width, self._units_per_em)
+        return DesignUnits(self._glyph.width, self._units_per_em())
 
     def left_side_bearing(self) -> DesignUnits:
-        return DesignUnits(self._glyph.lsb, self._units_per_em)
+        return DesignUnits(self._glyph.lsb, self._units_per_em())
 
 
 def get_glyph(code: int, font: TTFont):
