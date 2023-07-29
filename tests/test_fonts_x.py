@@ -32,8 +32,7 @@ def test_pillow_pixels_equal_points():
 @pytest.fixture
 def glyph():
     font = TTFont(RobotoBold)
-    code = ord("H")
-    return Glyph(font, code)
+    return Glyph(font, "H")
 
 def test_glyph_width_in_units(glyph):
     assert glyph.width().units() == 1448

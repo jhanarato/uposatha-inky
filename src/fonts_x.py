@@ -4,7 +4,7 @@ from fontTools.ttLib import TTFont
 import glyphtools
 
 def text_width_in_points(text: str, font: TTFont, font_points_per_em: int) -> float:
-    glyphs = [Glyph(font, ord(c)) for c in text]
+    glyphs = [Glyph(font, c) for c in text]
     return sum([glyph.width().to_points(font_points_per_em) for glyph in glyphs])
 
 class DesignUnits:
@@ -23,9 +23,9 @@ class DesignUnits:
 
 
 class Glyph:
-    def __init__(self, font: TTFont, code: int):
+    def __init__(self, font: TTFont, char: str):
         self._font = font
-        self._glyph = get_glyph(code, font)
+        self._glyph = get_glyph(ord(char), font)
 
     def width(self) -> DesignUnits:
         return DesignUnits(self._glyph.width, self._font['head'].unitsPerEm)
