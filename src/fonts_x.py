@@ -30,8 +30,8 @@ class Glyph:
     def width(self) -> DesignUnits:
         return DesignUnits(self._glyph.width, self._font['head'].unitsPerEm)
 
-    def left_side_bearing(self) -> int:
-        return self._glyph.lsb
+    def left_side_bearing(self) -> DesignUnits:
+        return DesignUnits(self._glyph.lsb, self._font['head'].unitsPerEm)
 
 
 def get_glyph(code: int, font: TTFont):

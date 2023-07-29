@@ -45,8 +45,7 @@ def test_glyph_width_in_points(glyph):
     assert glyph.width().to_points(font_size=16) == 11.3125
 
 def test_glyph_left_side_bearing(glyph):
-    # I assume the result is in units. That is to be confirmed.
-    assert glyph.left_side_bearing() == 130
+    assert glyph.left_side_bearing().units() == 130
 
 def test_design_units_available():
     units = DesignUnits(units=100, units_per_em=2000)
