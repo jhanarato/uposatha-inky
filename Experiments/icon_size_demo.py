@@ -21,13 +21,21 @@ def draw_icons(draw: ImageDraw):
             x += LARGEST_ICON + GAP
         y += size + GAP
 
-def main():
+def image_width():
     border_size = border * 2
     icons_width = len(letters) * LARGEST_ICON
     gap_width = (len(letters) - 1) * GAP
-    width = border_size + icons_width + gap_width
-    height = 500
-    image = Image.new(mode="P", size=(width, height), color=0)
+    return border_size + icons_width + gap_width
+
+
+def image_height():
+    border_size = border * 2
+    icons_height = sum(sizes)
+    gap_height = (len(sizes) - 1) * GAP
+    return border_size + icons_height + gap_height
+
+def main():
+    image = Image.new(mode="P", size=(image_width(), image_height()), color=0)
     draw = ImageDraw.Draw(image)
     draw_icons(draw)
     palette = [
