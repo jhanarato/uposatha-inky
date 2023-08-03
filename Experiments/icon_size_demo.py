@@ -3,16 +3,17 @@ from PIL import Image, ImageDraw
 from components import DayOfWeekIcon
 from compose import SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON, GAP
 
+border = 20
+letters = "SMTWF"
+sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
 
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
 
 def draw_icons(draw: ImageDraw):
-    letters = "SMTWF"
-    sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
-    y = 20
+    y = border
     for size in sizes:
-        x = 20
+        x = border
         for letter in letters:
             icon = DayOfWeekIcon(letter, size)
             center_offset = (LARGEST_ICON - size) / 2
@@ -21,7 +22,12 @@ def draw_icons(draw: ImageDraw):
         y += size + GAP
 
 def main():
-    image = Image.new(mode="P", size=(500, 500), color=0)
+    border_size = border * 2
+    icons_width = len(letters) * LARGEST_ICON
+    gap_width = (len(letters) - 1) * GAP
+    width = border_size + icons_width + gap_width
+    height = 500
+    image = Image.new(mode="P", size=(width, height), color=0)
     draw = ImageDraw.Draw(image)
     draw_icons(draw)
     palette = [
