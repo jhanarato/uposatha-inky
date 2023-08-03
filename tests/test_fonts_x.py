@@ -38,3 +38,6 @@ def test_design_converts_font_points_to_glyph_points():
 def test_glyph_with_space():
     with pytest.raises(KeyError):
         glyph = Glyph(TTFont(RobotoBold), " ")
+
+def test_lsb_as_points(glyph):
+    assert glyph.left_side_bearing().to_points(font_size=30) == 1.904296875
