@@ -12,15 +12,12 @@ def draw_icons(draw: ImageDraw):
     sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
     y = 0
     for size in sizes:
-        draw_row(draw, letters, size, y)
+        x = 0
+        for letter in letters:
+            icon = DayOfWeekIcon(letter, size)
+            icon.draw(draw, x, y)
+            x += LARGEST_ICON + GAP
         y += size + GAP
-
-def draw_row(draw: ImageDraw, letters: str, size: int, y: int):
-    x = 0
-    for letter in letters:
-        icon = DayOfWeekIcon(letter, size)
-        icon.draw(draw, x, y)
-        x += LARGEST_ICON + GAP
 
 def main():
     image = Image.new(mode="P", size=(500, 500), color=0)
