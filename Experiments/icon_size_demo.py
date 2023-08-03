@@ -10,12 +10,13 @@ def days(size: int) -> list[DayOfWeekIcon]:
 def draw_icons(draw: ImageDraw):
     letters = "SMTWF"
     sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
-    y = 0
+    y = 20
     for size in sizes:
-        x = 0
+        x = 20
         for letter in letters:
             icon = DayOfWeekIcon(letter, size)
-            icon.draw(draw, x, y)
+            center_offset = (LARGEST_ICON - size) / 2
+            icon.draw(draw, x + center_offset, y)
             x += LARGEST_ICON + GAP
         y += size + GAP
 
