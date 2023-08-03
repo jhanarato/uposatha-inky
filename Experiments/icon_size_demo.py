@@ -10,9 +10,12 @@ def days(size: int) -> list[DayOfWeekIcon]:
 def draw_icons(draw: ImageDraw):
     letters = "SMTWF"
     sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
-    draw_row(draw, letters, sizes[0])
+    y = 0
+    for size in sizes:
+        draw_row(draw, letters, size, y)
+        y += size + GAP
 
-def draw_row(draw: ImageDraw, letters: str, size: int, y: int = 0):
+def draw_row(draw: ImageDraw, letters: str, size: int, y: int):
     x = 0
     for letter in letters:
         icon = DayOfWeekIcon(letter, size)
