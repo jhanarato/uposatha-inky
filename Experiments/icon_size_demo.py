@@ -20,7 +20,7 @@ def draw_row(draw: ImageDraw, letters: str, size: int, y: int):
     for letter in letters:
         icon = DayOfWeekIcon(letter, size)
         icon.draw(draw, x, y)
-        x += size + GAP
+        x += LARGEST_ICON + GAP
 
 def main():
     image = Image.new(mode="P", size=(500, 500), color=0)
