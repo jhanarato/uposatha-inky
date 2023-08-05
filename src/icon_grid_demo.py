@@ -1,3 +1,6 @@
+from collections import deque
+from collections.abc import Iterator
+
 from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
@@ -7,6 +10,12 @@ def image_width() -> int:
 
 def image_height() -> int:
     return 100
+
+def create_icons(letters: str, size: int) -> Iterator[DayOfWeekIcon]:
+    icons = deque([DayOfWeekIcon(letter, size) for letter in letters])
+    for _ in range(len(letters)):
+        yield from icons
+        icons.rotate(-1)
 
 def draw_icons(draw: ImageDraw) -> None:
     icon = DayOfWeekIcon("S", 30)
