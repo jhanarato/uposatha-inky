@@ -22,16 +22,16 @@ def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tupl
             x += LARGEST_ICON + GAP
         y += size + GAP
 
-def draw_icons(draw: ImageDraw):
-    y = border
+def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
     for size in sizes:
-        x = border
         for letter in letters:
-            icon = DayOfWeekIcon(letter, size)
-            center_offset = (LARGEST_ICON - size) / 2
-            icon.draw(draw, x + center_offset, y)
-            x += LARGEST_ICON + GAP
-        y += size + GAP
+            yield DayOfWeekIcon(letter, size)
+
+def draw_icons(draw: ImageDraw):
+    i = icons(letters, sizes)
+    p = positions(border, len(letters), sizes)
+    for icon, position in zip(i, p, strict=True):
+        icon.draw(draw, position[0], position[1])
 
 def image_width():
     border_size = border * 2
