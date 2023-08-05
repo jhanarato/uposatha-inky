@@ -5,9 +5,6 @@ from PIL import Image, ImageDraw
 from components import DayOfWeekIcon
 from compose import SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON, GAP
 
-border = 20
-letters = "SMTWF"
-sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
 
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
@@ -47,7 +44,12 @@ def image_height(border: int, letters: str, sizes: list[int]):
     return border_size + icons_height + gap_height
 
 def main():
-    image = Image.new(mode="P", size=(image_width(border, letters, sizes), image_height(border, letters, sizes)), color=0)
+    border = 20
+    letters = "SMTWF"
+    sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
+    width = image_width(border, letters, sizes)
+    height = image_height(border, letters, sizes)
+    image = Image.new(mode="P", size=(width, height), color=0)
     draw = ImageDraw.Draw(image)
     draw_icons(draw, border, letters, sizes)
     palette = [
