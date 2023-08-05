@@ -12,4 +12,4 @@ def test_image_width():
     assert image_width(20, "abc", [10, 20, 30]) == 288
 
 def test_image_height():
-    assert image_height(20, "abc", [10, 20, 30]) == 108
+    assert image_height(20, [10, 20, 30]) == 108

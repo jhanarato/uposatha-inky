@@ -37,7 +37,7 @@ def image_width(border: int, letters: str, sizes: list[int]):
     return border_size + icons_width + gap_width
 
 
-def image_height(border: int, letters: str, sizes: list[int]):
+def image_height(border: int, sizes: list[int]):
     border_size = border * 2
     icons_height = sum(sizes)
     gap_height = (len(sizes) - 1) * GAP
@@ -48,7 +48,7 @@ def main():
     letters = "SMTWF"
     sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
     width = image_width(border, letters, sizes)
-    height = image_height(border, letters, sizes)
+    height = image_height(border, sizes)
     image = Image.new(mode="P", size=(width, height), color=0)
     draw = ImageDraw.Draw(image)
     draw_icons(draw, border, letters, sizes)
