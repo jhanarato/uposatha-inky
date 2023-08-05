@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
 
-ICON_SIZE = 10
+ICON_SIZE = 30
 BORDER = 20
 GAP = 2
 
@@ -35,9 +35,12 @@ def shifted_grid(letters: str) -> Iterator[DayOfWeekIcon]:
 def icon_row(letters: str) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, ICON_SIZE) for letter in letters]
 
-def draw_icons(draw: ImageDraw) -> None:
-    icon = DayOfWeekIcon("S", 30)
-    icon.draw(draw, 35, 35)
+def draw_icons(draw: ImageDraw, letters: str) -> None:
+    coords = grid_coordinates(len(letters))
+    icons = shifted_grid(letters)
+
+    for xy, icon in zip(coords, icons):
+        icon.draw(draw, xy[0], xy[1])
 
 def main():
     letters = "SMTWF"
@@ -46,7 +49,7 @@ def main():
     image = Image.new(mode="P", size=(size, size), color=0)
     draw = ImageDraw.Draw(image)
 
-    draw_icons(draw)
+    draw_icons(draw, letters)
 
     palette = [
         255, 255, 255,  # 0 = WHITE
