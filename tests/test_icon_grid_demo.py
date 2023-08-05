@@ -2,12 +2,9 @@ from icon_grid_demo import icon_row, shifted_grid, axis_coordinates
 
 
 def test_shifted_grid():
-    rows = shifted_grid("ABC")
-    row_str = []
-    for row in rows:
-        row_str.append("".join([icon.letter for icon in row]))
-
-    assert row_str == ["ABC", "BCA", "CAB"]
+    icons = shifted_grid("ABC")
+    row_str = "".join([icon.letter for icon in icons])
+    assert row_str == "ABCBCACAB"
 
 def test_icon_rows():
     row = icon_row("ABC")

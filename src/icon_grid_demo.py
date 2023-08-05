@@ -19,10 +19,10 @@ def image_height() -> int:
 def axis_coordinates(position: int) -> list[int]:
     return [(ICON_SIZE + GAP) * column for column in range(position)]
 
-def shifted_grid(letters: str) -> Iterator[list[DayOfWeekIcon]]:
+def shifted_grid(letters: str) -> Iterator[DayOfWeekIcon]:
     icons = deque(icon_row(letters))
     for _ in range(len(letters)):
-        yield icons
+        yield from icons
         icons.rotate(-1)
 
 def icon_row(letters: str) -> list[DayOfWeekIcon]:
