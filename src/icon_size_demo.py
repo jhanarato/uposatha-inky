@@ -46,8 +46,8 @@ def image_height(border: int, sizes: list[int]):
 def main():
     border = 20
     letters = "SMTWF"
-    sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
-
+    # sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
+    sizes = list(range(10, 80, 10))
     width = image_width(border, letters, sizes)
     height = image_height(border, sizes)
 
