@@ -12,8 +12,15 @@ sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
 
-def positions(border: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
-    yield 20, 20
+def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
+    y = border
+    for size in sizes:
+        x = border
+        for _ in range(letter_count):
+            center_offset = (LARGEST_ICON - size) // 2
+            yield x + center_offset, y
+            x += LARGEST_ICON + GAP
+        y += size + GAP
 
 def draw_icons(draw: ImageDraw):
     y = border
