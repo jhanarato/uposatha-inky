@@ -1,3 +1,4 @@
+import itertools
 from collections import deque
 from collections.abc import Iterator
 
@@ -5,29 +6,27 @@ from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
 
+ICON_SIZE = 10
+BORDER = 20
+GAP = 2
+
 def image_width() -> int:
     return 100
 
 def image_height() -> int:
     return 100
 
-def icon_coordinates(icon_count: int, icon_size: int) -> Iterator[tuple[int, int]]:
-    yield 0, 0
+def axis_coordinates(position: int) -> list[int]:
+    return [(ICON_SIZE + GAP) * column for column in range(position)]
 
-def create_icons(letters: str, size: int) -> Iterator[DayOfWeekIcon]:
-    icons = deque([DayOfWeekIcon(letter, size) for letter in letters])
+def shifted_grid(letters: str) -> Iterator[list[DayOfWeekIcon]]:
+    icons = deque(icon_row(letters))
     for _ in range(len(letters)):
-        yield from icons
+        yield icons
         icons.rotate(-1)
 
-def shifted_grid(letters: str, size: int) -> Iterator[list[DayOfWeekIcon]]:
-    yield icon_row("ABC", 10)
-    yield icon_row("BCA", 10)
-    yield icon_row("CAB", 10)
-
-
-def icon_row(letters: str, size: int) -> list[DayOfWeekIcon]:
-    return [DayOfWeekIcon(letter, size) for letter in letters]
+def icon_row(letters: str) -> list[DayOfWeekIcon]:
+    return [DayOfWeekIcon(letter, ICON_SIZE) for letter in letters]
 
 def draw_icons(draw: ImageDraw) -> None:
     icon = DayOfWeekIcon("S", 30)
