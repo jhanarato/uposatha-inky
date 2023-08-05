@@ -11,6 +11,9 @@ def image_width() -> int:
 def image_height() -> int:
     return 100
 
+def icon_coordinates(icon_count: int, icon_size: int) -> Iterator[tuple[int, int]]:
+    yield 0, 0
+
 def create_icons(letters: str, size: int) -> Iterator[DayOfWeekIcon]:
     icons = deque([DayOfWeekIcon(letter, size) for letter in letters])
     for _ in range(len(letters)):
