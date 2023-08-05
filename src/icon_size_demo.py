@@ -27,13 +27,13 @@ def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
         for letter in letters:
             yield DayOfWeekIcon(letter, size)
 
-def draw_icons(draw: ImageDraw):
+def draw_icons(draw: ImageDraw, border: int, letters: str, sizes: list[int]) -> None:
     i = icons(letters, sizes)
     p = positions(border, len(letters), sizes)
     for icon, position in zip(i, p, strict=True):
         icon.draw(draw, position[0], position[1])
 
-def image_width():
+def image_width(border: int, letters: str, sizes: list[int]):
     border_size = border * 2
     icons_width = len(letters) * LARGEST_ICON
     gap_width = (len(letters) - 1) * GAP
@@ -47,9 +47,9 @@ def image_height():
     return border_size + icons_height + gap_height
 
 def main():
-    image = Image.new(mode="P", size=(image_width(), image_height()), color=0)
+    image = Image.new(mode="P", size=(image_width(border, letters, sizes), image_height()), color=0)
     draw = ImageDraw.Draw(image)
-    draw_icons(draw)
+    draw_icons(draw, border, letters, sizes)
     palette = [
         255, 255, 255,  # 0 = WHITE
         0, 0, 0,  # 1 = BLACK
