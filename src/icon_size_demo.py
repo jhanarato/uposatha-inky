@@ -1,3 +1,5 @@
+from collections.abc import Iterator
+
 from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
@@ -9,6 +11,9 @@ sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
 
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
+
+def positions(border: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
+    yield 20, 20
 
 def draw_icons(draw: ImageDraw):
     y = border
