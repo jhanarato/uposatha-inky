@@ -20,6 +20,15 @@ def create_icons(letters: str, size: int) -> Iterator[DayOfWeekIcon]:
         yield from icons
         icons.rotate(-1)
 
+def shifted_grid(letters: str, size: int) -> Iterator[list[DayOfWeekIcon]]:
+    yield icon_row("ABC", 10)
+    yield icon_row("BCA", 10)
+    yield icon_row("CAB", 10)
+
+
+def icon_row(letters: str, size: int) -> list[DayOfWeekIcon]:
+    return [DayOfWeekIcon(letter, size) for letter in letters]
+
 def draw_icons(draw: ImageDraw) -> None:
     icon = DayOfWeekIcon("S", 30)
     icon.draw(draw, 35, 35)
