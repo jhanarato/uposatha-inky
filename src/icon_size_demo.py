@@ -3,20 +3,21 @@ from collections.abc import Iterator
 from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
-from compose import SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON, GAP
+from compose import GAP
 
 
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
 
 def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
+    largest_icon = max(sizes)
     y = border
     for size in sizes:
         x = border
         for _ in range(letter_count):
-            center_offset = (LARGEST_ICON - size) // 2
+            center_offset = (largest_icon - size) // 2
             yield x + center_offset, y
-            x += LARGEST_ICON + GAP
+            x += largest_icon + GAP
         y += size + GAP
 
 def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
@@ -31,8 +32,9 @@ def draw_icons(draw: ImageDraw, border: int, letters: str, sizes: list[int]) -> 
         icon.draw(draw, position[0], position[1])
 
 def image_width(border: int, letters: str, sizes: list[int]):
+    largest_icon = max(sizes)
     border_size = border * 2
-    icons_width = len(letters) * LARGEST_ICON
+    icons_width = len(letters) * largest_icon
     gap_width = (len(letters) - 1) * GAP
     return border_size + icons_width + gap_width
 
@@ -46,7 +48,6 @@ def image_height(border: int, sizes: list[int]):
 def main():
     border = 20
     letters = "SMTWF"
-    # sizes = [SMALLEST_ICON, SMALL_ICON, MEDIUM_ICON, LARGE_ICON, LARGEST_ICON]
     sizes = list(range(10, 80, 10))
     width = image_width(border, letters, sizes)
     height = image_height(border, sizes)
