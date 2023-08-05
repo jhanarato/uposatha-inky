@@ -1,4 +1,4 @@
-from icon_size_demo import positions, image_width
+from icon_size_demo import positions, image_width, image_height
 
 
 def test_positions():
@@ -10,3 +10,6 @@ def test_positions():
 
 def test_image_width():
     assert image_width(20, "abc", [10, 20, 30]) == 288
+
+def test_image_height():
+    assert image_height(20, "abc", [10, 20, 30]) == 108

@@ -40,7 +40,7 @@ def image_width(border: int, letters: str, sizes: list[int]):
     return border_size + icons_width + gap_width
 
 
-def image_height():
+def image_height(border: int, letters: str, sizes: list[int]):
     border_size = border * 2
     icons_height = sum(sizes)
     gap_height = (len(sizes) - 1) * GAP
