@@ -47,7 +47,7 @@ def image_height(border: int, letters: str, sizes: list[int]):
     return border_size + icons_height + gap_height
 
 def main():
-    image = Image.new(mode="P", size=(image_width(border, letters, sizes), image_height()), color=0)
+    image = Image.new(mode="P", size=(image_width(border, letters, sizes), image_height(border, letters, sizes)), color=0)
     draw = ImageDraw.Draw(image)
     draw_icons(draw, border, letters, sizes)
     palette = [
