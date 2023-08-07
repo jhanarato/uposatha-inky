@@ -45,7 +45,7 @@ class IconCountMapping(MutableMapping[T]):
         return self._mapping.get(item)
 
     def __delitem__(self, key):
-        del(self._mapping[key])
+        del self._mapping[key]
 
     def _key_range(self, key) -> list[int]:
         if isinstance(key, int):
