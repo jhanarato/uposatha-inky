@@ -23,7 +23,6 @@ class Glyph:
     def __init__(self, font: TTFont, char: str):
         self._font = font
         self._char = char
-        self._glyph = get_glyph(ord(char), font)
         self._metrics = glyphtools.get_glyph_metrics(font, char)
 
     def _units_per_em(self) -> int:
