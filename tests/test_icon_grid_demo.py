@@ -13,10 +13,10 @@ def test_icon_rows():
 
 def test_grid_coordinates():
     assert list(grid_coordinates(3)) == [
-        (20, 20), (32, 20), (44, 20),
-        (20, 32), (32, 32), (44, 32),
-        (20, 44), (32, 44), (44, 44)
+        (20, 20), (52, 20), (84, 20),
+        (20, 52), (52, 52), (84, 52),
+        (20, 84), (52, 84), (84, 84)
     ]
 
 def test_image_size():
-    assert image_size(letter_count=3) == 74
+    assert image_size(letter_count=3) == 134
