@@ -10,6 +10,7 @@ class Drawable(Protocol):
     def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
     """ Draw given the top left coordinates """
 
+
 class Text:
     def __init__(self, text: str, size: int, colour: Ink):
         self._text = text
@@ -27,6 +28,7 @@ class Text:
                   text=self._text,
                   fill=self._colour.value,
                   font=self._font.pil_font())
+
 
 class HorizontalLine:
     def __init__(self, length: int, colour: Ink):
@@ -88,7 +90,9 @@ class Circle:
 
 
 class DayOfWeekIcon:
-    """ An icon displaying the abbreviated day of the week. e.g. M for Monday. """
+    """
+    An icon displaying the abbreviated day of the week. e.g. M for Monday.
+    """
     def __init__(self, letter: str, size: int) -> None:
         self._letter = letter
         self._size = size
@@ -135,6 +139,7 @@ class FullMoonIcon:
 
     def __str__(self):
         return "*"
+
 
 class NewMoonIcon:
     def __init__(self, size: int):
