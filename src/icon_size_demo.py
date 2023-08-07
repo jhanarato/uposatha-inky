@@ -9,6 +9,7 @@ from compose import GAP
 def days(size: int) -> list[DayOfWeekIcon]:
     return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
 
+
 def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
     largest_icon = max(sizes)
     y = border
@@ -20,16 +21,19 @@ def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tupl
             x += largest_icon + GAP
         y += size + GAP
 
+
 def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
     for size in sizes:
         for letter in letters:
             yield DayOfWeekIcon(letter, size)
+
 
 def draw_icons(draw: ImageDraw, border: int, letters: str, sizes: list[int]) -> None:
     i = icons(letters, sizes)
     p = positions(border, len(letters), sizes)
     for icon, position in zip(i, p, strict=True):
         icon.draw(draw, position[0], position[1])
+
 
 def image_width(border: int, letters: str, sizes: list[int]):
     largest_icon = max(sizes)
@@ -44,6 +48,7 @@ def image_height(border: int, sizes: list[int]):
     icons_height = sum(sizes)
     gap_height = (len(sizes) - 1) * GAP
     return border_size + icons_height + gap_height
+
 
 def main():
     border = 20
@@ -66,6 +71,7 @@ def main():
     image.putpalette(palette)
     converted = image.convert(mode="RGB")
     converted.show()
+
 
 if __name__ == "__main__":
     main()

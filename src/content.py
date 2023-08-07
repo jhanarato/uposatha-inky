@@ -14,6 +14,7 @@ class NextUposatha:
     moon_phase: uposatha.elements.MoonPhase
     fourteen_day: bool
 
+
 def next_uposatha_content(today: date) -> NextUposatha:
     calendar = Calendar()
     next_uposatha = calendar.next_uposatha(today)
@@ -27,6 +28,7 @@ def next_uposatha_content(today: date) -> NextUposatha:
         moon_phase=next_uposatha.moon_phase,
         fourteen_day=(next_uposatha.days_since_previous == 14)
     )
+
 
 def uposatha_details(season, next_uposatha):
     days_since_previous = next_uposatha.days_since_previous

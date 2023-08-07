@@ -17,21 +17,24 @@ def inky_available() -> bool:
     except RuntimeError:
         return False
 
+
 def display_on_screen(image: Image) -> None:
     palette = [
         255, 255, 255,  # 0 = WHITE
-        0, 0, 0,        # 1 = BLACK
-        255, 255, 0     # 2 = YELLOW
+        0, 0, 0,  # 1 = BLACK
+        255, 255, 0  # 2 = YELLOW
     ]
     image.putpalette(palette)
     converted = image.convert(mode="RGB")
     converted.show()
+
 
 def display_on_inky(image: Image) -> None:
     display = auto()
     display.set_border(display.WHITE)
     display.set_image(image)
     display.show()
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -55,6 +58,7 @@ def main():
         display_on_inky(image)
     else:
         display_on_screen(image)
+
 
 if __name__ == "__main__":
     main()
