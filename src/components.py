@@ -97,7 +97,7 @@ class DayOfWeekIcon:
         self._letter = letter
         self._size = size
         self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
-        self._text = Text(letter, 16, Ink.WHITE)
+        self._text = Text(letter, size, Ink.WHITE)
 
     def height(self) -> int:
         return self._size
