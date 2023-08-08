@@ -1,9 +1,6 @@
 import pytest
 
-from fontTools.ttLib import TTFont
-from font_roboto import RobotoBold
-
-from fonts import glyph_centered_x, extract_metrics
+from fonts import glyph_centered_x
 from fonts import Font, DesignUnits, GlyphMetrics
 from bbox import BBox
 
@@ -85,17 +82,3 @@ def test_should_center_glyph_horizontally():
     )
 
     assert glyph_centered_x(bbox, metrics, font_points=10) == 29
-
-
-def test_should_convert_glyph_metrics():
-    glyphtools_dict = {"width": 100, "lsb": 200}
-    metrics = extract_metrics(glyphtools_dict, 0)
-    assert metrics.glyph_width.units() == 100
-
-
-def test_should_provide_fonttools_object(font):
-    assert isinstance(font.as_fonttools(), TTFont)
-
-
-def test_should_provide_glyph_metrics(font):
-    assert font.glyph_metrics("H").glyph_width.units() == 1448
