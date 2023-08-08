@@ -4,8 +4,9 @@ from PIL import Image, ImageFont
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, BBox
+from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, BBox, glyph_centered_xy
 from fonts import DesignUnits, Glyph
+
 
 @pytest.fixture
 def font():
@@ -36,6 +37,11 @@ def test_should_calculate_height_of_bbox():
 def test_should_calculate_width_of_bbox():
     bbox = BBox(left=7, right=12, top=0, bottom=0)
     assert bbox.width == 6
+
+
+def test_should_calculate_center_of_bbox():
+    bbox = BBox(top=18, bottom=28, left=7, right=11)
+    assert bbox.center == (9, 23)
 
 
 def test_should_make_image_bbox(font):
@@ -143,3 +149,10 @@ def test_glyph_with_space():
 
 def test_lsb_as_points(glyph):
     assert glyph.left_side_bearing().to_points(font_size=30) == 1.904296875
+
+
+def test_should_center_glyph_horizontally():
+    bbox = BBox(left=10, right=60, top=20, bottom=40)
+    glyph_width_in_pixels = 20
+    glyph_lsb_in_pixels = 5
+    assert glyph_centered_xy(bbox, glyph_width_in_pixels, glyph_lsb_in_pixels)[0] == 0

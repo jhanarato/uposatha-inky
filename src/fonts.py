@@ -76,6 +76,16 @@ class BBox:
     def width(self) -> int:
         return self.right - self.left + 1
 
+    @property
+    def center(self) -> tuple[int, int]:
+        x = self.left + self.width // 2
+        y = self.top + self.height // 2
+        return x, y
+
+
+def glyph_centered_xy(bbox: BBox, glyph_width: int, glyph_lsb: int) -> tuple[int, int]:
+    return 0, 0
+
 
 def font_bbox(text: str, font: ImageFont) -> BBox:
     bbox = font.getbbox(text)
