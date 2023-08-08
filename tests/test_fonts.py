@@ -15,6 +15,11 @@ def metrics(font):
     return font.glyph_metrics("H")
 
 
+@pytest.fixture
+def units():
+    return DesignUnits(units=100, units_per_em=2000)
+
+
 def test_should_have_family(font):
     assert font.family == "Roboto"
 
@@ -29,6 +34,11 @@ def test_should_measure_height_of_text(font):
 
 def test_should_measure_width_of_text(font):
     assert font.width("Hello") == 70
+
+
+def test_should_raise_if_missing_glyph(font):
+    with pytest.raises(KeyError):
+        _ = font.glyph_metrics(" ")
 
 
 def test_glyph_width_in_units(metrics):
@@ -51,24 +61,16 @@ def test_lsb_as_points(metrics):
     assert metrics.left_side_bearing.to_points(font_size=30) == 1.904296875
 
 
-def test_design_units_available():
-    units = DesignUnits(units=100, units_per_em=2000)
+def test_design_units_available(units):
     assert units.units() == 100
 
 
-def test_design_units_converts_to_em():
-    units = DesignUnits(units=100, units_per_em=2000)
+def test_design_units_converts_to_em(units):
     assert units.to_em() == 0.05
 
 
-def test_design_converts_font_points_to_glyph_points():
-    units = DesignUnits(units=100, units_per_em=2000)
+def test_design_converts_font_points_to_glyph_points(units):
     assert units.to_points(font_size=10) == 0.5
-
-
-def test_should_raise_if_missing_glyph(font):
-    with pytest.raises(KeyError):
-        _ = font.glyph_metrics(" ")
 
 
 def test_should_center_glyph_horizontally():
