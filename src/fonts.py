@@ -29,13 +29,6 @@ class GlyphMetrics:
     left_side_bearing: DesignUnits
 
 
-def extract_metrics(from_glyphtools: dict[str, int], units_per_em: int) -> GlyphMetrics:
-    return GlyphMetrics(
-        glyph_width=DesignUnits(from_glyphtools["width"], units_per_em),
-        left_side_bearing=DesignUnits(from_glyphtools["lsb"], units_per_em),
-    )
-
-
 class Font:
     def __init__(self, size: int):
         self._pil_font = ImageFont.truetype(font=RobotoBold, size=size)
@@ -64,7 +57,10 @@ class Font:
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
         upm = self._ft_font['head'].unitsPerEm
-        return extract_metrics(gt_metrics, upm)
+        return GlyphMetrics(
+            glyph_width=DesignUnits(gt_metrics["width"], upm),
+            left_side_bearing=DesignUnits(gt_metrics["lsb"], upm),
+        )
 
 
 def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
