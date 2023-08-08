@@ -144,8 +144,9 @@ def test_design_converts_font_points_to_glyph_points():
 
 
 def test_glyph_with_space():
+    glyph = Glyph(TTFont(RobotoBold), " ")
     with pytest.raises(KeyError):
-        glyph = Glyph(TTFont(RobotoBold), " ")
+        _ = glyph.metrics()
 
 
 def test_lsb_as_points(glyph):
