@@ -31,8 +31,8 @@ class GlyphMetrics:
 
 def extract_metrics(from_glyphtools: dict[str, int], units_per_em: int) -> GlyphMetrics:
     return GlyphMetrics(
-        glyph_width=DesignUnits(from_glyphtools["width"], 0),
-        left_side_bearing=DesignUnits(from_glyphtools["lsb"], 0),
+        glyph_width=DesignUnits(from_glyphtools["width"], units_per_em),
+        left_side_bearing=DesignUnits(from_glyphtools["lsb"], units_per_em),
     )
 
 
@@ -51,10 +51,10 @@ class Glyph:
         return extract_metrics(gt_metrics, upm)
 
     def width(self) -> DesignUnits:
-        return DesignUnits(self._metrics["width"], self._units_per_em())
+        return self.metrics().glyph_width
 
     def left_side_bearing(self) -> DesignUnits:
-        return DesignUnits(self._metrics["lsb"], self._units_per_em())
+        return self.metrics().left_side_bearing
 
 
 class Font:
