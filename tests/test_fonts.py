@@ -156,4 +156,4 @@ def test_should_center_glyph_horizontally():
     assert bbox.center[0] == 35
     glyph_width_in_pixels = 10
     glyph_lsb_in_pixels = 5
-    assert glyph_centered_xy(bbox, glyph_width_in_pixels, glyph_lsb_in_pixels)[0] == 25
+    assert glyph_centered_x(bbox, glyph_width_in_pixels, glyph_lsb_in_pixels) == 25
