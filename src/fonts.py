@@ -7,6 +7,8 @@ from PIL import Image, ImageFont, ImageDraw
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
+from bbox import BBox
+
 
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
@@ -75,28 +77,6 @@ class Font:
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         glyph = Glyph(self._ft_font, char)
         return glyph.metrics()
-
-
-@dataclass
-class BBox:
-    left: int
-    top: int
-    right: int
-    bottom: int
-
-    @property
-    def height(self) -> int:
-        return self.bottom - self.top + 1
-
-    @property
-    def width(self) -> int:
-        return self.right - self.left + 1
-
-    @property
-    def center(self) -> tuple[int, int]:
-        x = self.left + self.width // 2
-        y = self.top + self.height // 2
-        return x, y
 
 
 def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
