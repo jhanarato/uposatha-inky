@@ -10,16 +10,6 @@ def font():
     return Font(size=30)
 
 
-@pytest.fixture
-def metrics(font):
-    return font.glyph_metrics("H")
-
-
-@pytest.fixture
-def units():
-    return DesignUnits(units=100, units_per_em=2000)
-
-
 def test_should_have_family(font):
     assert font.family == "Roboto"
 
@@ -41,6 +31,11 @@ def test_should_raise_if_missing_glyph(font):
         _ = font.glyph_metrics(" ")
 
 
+@pytest.fixture
+def metrics(font):
+    return font.glyph_metrics("H")
+
+
 def test_glyph_width_in_units(metrics):
     assert metrics.glyph_width.units() == 1448
 
@@ -59,6 +54,11 @@ def test_glyph_left_side_bearing(metrics):
 
 def test_lsb_as_points(metrics):
     assert metrics.left_side_bearing.to_points(font_size=30) == 1.904296875
+
+
+@pytest.fixture
+def units():
+    return DesignUnits(units=100, units_per_em=2000)
 
 
 def test_design_units_available(units):
