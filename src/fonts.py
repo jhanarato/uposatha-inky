@@ -72,6 +72,10 @@ class Font:
     def fonttools_font(self) -> TTFont:
         return self._ft_font
 
+    def glyph_metrics(self, char: str) -> GlyphMetrics:
+        glyph = Glyph(self._ft_font, char)
+        return glyph.metrics()
+
 
 @dataclass
 class BBox:

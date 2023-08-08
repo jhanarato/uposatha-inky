@@ -169,3 +169,7 @@ def test_should_convert_glyph_metrics():
 
 def test_should_provide_fonttools_object(font):
     assert isinstance(font.fonttools_font(), TTFont)
+
+
+def test_should_provide_glyph_metrics(font):
+    assert font.glyph_metrics("H").glyph_width.units() == 1448
