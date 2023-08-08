@@ -35,8 +35,8 @@ def glyph():
     return Glyph(font, "H")
 
 
-def test_glyph_width_in_units(glyph):
-    assert glyph.metrics().glyph_width.units() == 1448
+def test_glyph_width_in_units(font):
+    assert font.glyph_metrics("H").glyph_width.units() == 1448
 
 
 def test_glyph_width_in_em(glyph):
