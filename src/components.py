@@ -27,7 +27,7 @@ class Text:
         draw.text(xy=(x, y),
                   text=self._text,
                   fill=self._colour.value,
-                  font=self._font.pil_font())
+                  font=self._font.as_pillow())
 
 
 class HorizontalLine:

@@ -66,10 +66,10 @@ class Font:
     def width(self, text: str) -> int:
         return self._pil_font.getbbox(text)[2]
 
-    def pil_font(self) -> ImageFont:
+    def as_pillow(self) -> ImageFont:
         return self._pil_font
 
-    def fonttools_font(self) -> TTFont:
+    def as_fonttools(self) -> TTFont:
         return self._ft_font
 
     def glyph_metrics(self, char: str) -> GlyphMetrics:
