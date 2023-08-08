@@ -51,9 +51,6 @@ class Font:
     def as_pillow(self) -> ImageFont:
         return self._pil_font
 
-    def as_fonttools(self) -> TTFont:
-        return self._ft_font
-
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
         upm = self._ft_font['head'].unitsPerEm
