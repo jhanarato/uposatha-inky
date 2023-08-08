@@ -73,8 +73,9 @@ class Font:
         return self._ft_font
 
     def glyph_metrics(self, char: str) -> GlyphMetrics:
-        glyph = Glyph(self._ft_font, char)
-        return glyph.metrics()
+        gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
+        upm = self._ft_font['head'].unitsPerEm
+        return extract_metrics(gt_metrics, upm)
 
 
 def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
