@@ -99,9 +99,9 @@ class BBox:
         return x, y
 
 
-def glyph_centered_x(bbox: BBox, glyph_width: int, glyph_lsb: int) -> int:
-    glyph_left = bbox.center[0] - (glyph_width // 2)
-    return glyph_left - glyph_lsb
+def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
+    glyph_left = bbox.center[0] - (metrics.glyph_width.to_points(font_points) // 2)
+    return round(glyph_left - metrics.left_side_bearing.to_points(font_points))
 
 
 def font_bbox(text: str, font: ImageFont) -> BBox:
