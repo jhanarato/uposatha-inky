@@ -50,12 +50,6 @@ class Glyph:
         upm = self._units_per_em()
         return extract_metrics(gt_metrics, upm)
 
-    def width(self) -> DesignUnits:
-        return self.metrics().glyph_width
-
-    def left_side_bearing(self) -> DesignUnits:
-        return self.metrics().left_side_bearing
-
 
 class Font:
     def __init__(self, size: int):

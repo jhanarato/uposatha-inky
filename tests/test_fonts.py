@@ -113,7 +113,7 @@ def glyph():
 
 
 def test_glyph_width_in_units(glyph):
-    assert glyph.width().units() == 1448
+    assert glyph.metrics().glyph_width.units() == 1448
 
 
 def test_glyph_width_in_em(glyph):
@@ -121,11 +121,11 @@ def test_glyph_width_in_em(glyph):
 
 
 def test_glyph_width_in_points(glyph):
-    assert glyph.width().to_points(font_size=16) == 11.3125
+    assert glyph.metrics().glyph_width.to_points(font_size=16) == 11.3125
 
 
 def test_glyph_left_side_bearing(glyph):
-    assert glyph.left_side_bearing().units() == 130
+    assert glyph.metrics().left_side_bearing.units() == 130
 
 
 def test_design_units_available():
@@ -149,7 +149,7 @@ def test_glyph_with_space():
 
 
 def test_lsb_as_points(glyph):
-    assert glyph.left_side_bearing().to_points(font_size=30) == 1.904296875
+    assert glyph.metrics().left_side_bearing.to_points(font_size=30) == 1.904296875
 
 
 def test_should_center_glyph_horizontally():
