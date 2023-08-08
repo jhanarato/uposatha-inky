@@ -4,10 +4,9 @@ from PIL import Image, ImageFont
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
-from fonts import Font, black_pixels, pixels_to_bbox, pixel_bbox, glyph_centered_x, \
-    extract_metrics, GlyphMetrics
-from bbox import BBox, font_bbox, image_bbox
-from fonts import DesignUnits, Glyph
+from fonts import glyph_centered_x, extract_metrics
+from fonts import Font, DesignUnits, Glyph, GlyphMetrics
+from bbox import BBox, font_bbox, image_bbox, pixel_bbox, black_pixels, pixels_to_bbox
 
 
 @pytest.fixture
