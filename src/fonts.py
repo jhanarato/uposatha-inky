@@ -23,6 +23,19 @@ class DesignUnits:
         return self.to_em() * font_size
 
 
+@dataclass
+class GlyphMetrics:
+    glyph_width: DesignUnits
+    left_side_bearing: DesignUnits
+
+
+def extract_metrics(from_glyphtools: dict[str, int], units_per_em: int) -> GlyphMetrics:
+    return GlyphMetrics(
+        glyph_width=DesignUnits(from_glyphtools["width"], 0),
+        left_side_bearing=DesignUnits(from_glyphtools["lsb"], 0),
+    )
+
+
 class Glyph:
     def __init__(self, font: TTFont, char: str):
         self._font = font
@@ -31,6 +44,10 @@ class Glyph:
 
     def _units_per_em(self) -> int:
         return self._font['head'].unitsPerEm
+
+    def metrics(self) -> GlyphMetrics:
+        gt_metrics = glyphtools.get_glyph_metrics(self._font, self._char)
+        return extract_metrics(gt_metrics, self._units_per_em())
 
     def width(self) -> DesignUnits:
         return DesignUnits(self._metrics["width"], self._units_per_em())
