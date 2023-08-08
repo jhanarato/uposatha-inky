@@ -117,7 +117,7 @@ def test_glyph_width_in_units(glyph):
 
 
 def test_glyph_width_in_em(glyph):
-    assert glyph.width().to_em() == 0.70703125
+    assert glyph.metrics().glyph_width.to_em() == 0.70703125
 
 
 def test_glyph_width_in_points(glyph):
