@@ -84,7 +84,8 @@ class BBox:
 
 
 def glyph_centered_x(bbox: BBox, glyph_width: int, glyph_lsb: int) -> int:
-    return 25
+    glyph_left = bbox.center[0] - (glyph_width // 2)
+    return glyph_left - glyph_lsb
 
 
 def font_bbox(text: str, font: ImageFont) -> BBox:
