@@ -49,24 +49,28 @@ class Glyph:
 
 class Font:
     def __init__(self, size: int):
-        self._font = ImageFont.truetype(font=RobotoBold, size=size)
+        self._pil_font = ImageFont.truetype(font=RobotoBold, size=size)
+        self._ft_font = TTFont(RobotoBold)
 
     @property
     def family(self) -> str:
-        return self._font.font.family
+        return self._pil_font.font.family
 
     @property
     def style(self) -> str:
-        return self._font.font.style
+        return self._pil_font.font.style
 
     def height(self, text: str) -> int:
-        return self._font.getbbox(text)[3]
+        return self._pil_font.getbbox(text)[3]
 
     def width(self, text: str) -> int:
-        return self._font.getbbox(text)[2]
+        return self._pil_font.getbbox(text)[2]
 
     def pil_font(self) -> ImageFont:
-        return self._font
+        return self._pil_font
+
+    def fonttools_font(self) -> TTFont:
+        return self._ft_font
 
 
 @dataclass

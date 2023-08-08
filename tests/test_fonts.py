@@ -165,3 +165,7 @@ def test_should_convert_glyph_metrics():
     glyphtools_dict = {"width": 100, "lsb": 200}
     metrics = extract_metrics(glyphtools_dict, 0)
     assert metrics.glyph_width.units() == 100
+
+
+def test_should_provide_fonttools_object(font):
+    assert isinstance(font.fonttools_font(), TTFont)
