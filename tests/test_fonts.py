@@ -4,7 +4,7 @@ from PIL import Image, ImageFont
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, BBox, glyph_centered_xy
+from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, BBox, glyph_centered_x
 from fonts import DesignUnits, Glyph
 
 
@@ -153,6 +153,7 @@ def test_lsb_as_points(glyph):
 
 def test_should_center_glyph_horizontally():
     bbox = BBox(left=10, right=60, top=20, bottom=40)
-    glyph_width_in_pixels = 20
+    assert bbox.center[0] == 35
+    glyph_width_in_pixels = 10
     glyph_lsb_in_pixels = 5
-    assert glyph_centered_xy(bbox, glyph_width_in_pixels, glyph_lsb_in_pixels)[0] == 0
+    assert glyph_centered_xy(bbox, glyph_width_in_pixels, glyph_lsb_in_pixels)[0] == 25

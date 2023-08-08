@@ -83,8 +83,8 @@ class BBox:
         return x, y
 
 
-def glyph_centered_xy(bbox: BBox, glyph_width: int, glyph_lsb: int) -> tuple[int, int]:
-    return 0, 0
+def glyph_centered_x(bbox: BBox, glyph_width: int, glyph_lsb: int) -> int:
+    return 25
 
 
 def font_bbox(text: str, font: ImageFont) -> BBox:
