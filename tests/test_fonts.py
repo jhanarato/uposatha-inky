@@ -13,6 +13,11 @@ def font():
     return Font(size=30)
 
 
+@pytest.fixture
+def metrics(font):
+    return font.glyph_metrics("H")
+
+
 def test_should_have_family(font):
     assert font.family == "Roboto"
 
@@ -29,24 +34,24 @@ def test_should_measure_width_of_text(font):
     assert font.width("Hello") == 70
 
 
-def test_glyph_width_in_units(font):
-    assert font.glyph_metrics("H").glyph_width.units() == 1448
+def test_glyph_width_in_units(metrics):
+    assert metrics.glyph_width.units() == 1448
 
 
-def test_glyph_width_in_em(font):
-    assert font.glyph_metrics("H").glyph_width.to_em() == 0.70703125
+def test_glyph_width_in_em(metrics):
+    assert metrics.glyph_width.to_em() == 0.70703125
 
 
-def test_glyph_width_in_points(font):
-    assert font.glyph_metrics("H").glyph_width.to_points(font_size=16) == 11.3125
+def test_glyph_width_in_points(metrics):
+    assert metrics.glyph_width.to_points(font_size=16) == 11.3125
 
 
-def test_glyph_left_side_bearing(font):
-    assert font.glyph_metrics("H").left_side_bearing.units() == 130
+def test_glyph_left_side_bearing(metrics):
+    assert metrics.left_side_bearing.units() == 130
 
 
-def test_lsb_as_points(font):
-    assert font.glyph_metrics("H").left_side_bearing.to_points(font_size=30) == 1.904296875
+def test_lsb_as_points(metrics):
+    assert metrics.left_side_bearing.to_points(font_size=30) == 1.904296875
 
 
 def test_design_units_available():
