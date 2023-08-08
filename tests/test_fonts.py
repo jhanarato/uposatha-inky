@@ -4,9 +4,9 @@ from PIL import Image, ImageFont
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
-from fonts import Font, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox, glyph_centered_x, \
+from fonts import Font, image_bbox, black_pixels, pixels_to_bbox, pixel_bbox, glyph_centered_x, \
     extract_metrics, GlyphMetrics
-from bbox import BBox
+from bbox import BBox, font_bbox
 from fonts import DesignUnits, Glyph
 
 

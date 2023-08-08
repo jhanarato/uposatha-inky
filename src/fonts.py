@@ -88,11 +88,6 @@ def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int
     return round(glyph_left - lsb)
 
 
-def font_bbox(text: str, font: ImageFont) -> BBox:
-    bbox = font.getbbox(text)
-    return BBox(*bbox)
-
-
 def image_bbox(text: str, font: ImageFont) -> BBox:
     image = text_image(text, font)
     bbox = image.getbbox()

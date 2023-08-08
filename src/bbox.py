@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from PIL import ImageFont
+
 
 @dataclass
 class BBox:
@@ -21,3 +23,8 @@ class BBox:
         x = self.left + self.width // 2
         y = self.top + self.height // 2
         return x, y
+
+
+def font_bbox(text: str, font: ImageFont) -> BBox:
+    bbox = font.getbbox(text)
+    return BBox(*bbox)

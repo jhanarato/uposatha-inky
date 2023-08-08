@@ -1,6 +1,7 @@
 from PIL import ImageFont
 from font_roboto import RobotoBold
-from fonts import Font, image_bbox, font_bbox, pixel_bbox
+from fonts import Font, image_bbox, pixel_bbox
+from bbox import font_bbox
 
 
 def test_font_bbox(benchmark):
