@@ -41,12 +41,9 @@ class Glyph:
         self._font = font
         self._char = char
 
-    def _units_per_em(self) -> int:
-        return self._font['head'].unitsPerEm
-
     def metrics(self) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._font, self._char)
-        upm = self._units_per_em()
+        upm = self._font['head'].unitsPerEm
         return extract_metrics(gt_metrics, upm)
 
 
