@@ -51,6 +51,10 @@ def test_glyph_left_side_bearing(glyph):
     assert glyph.metrics().left_side_bearing.units() == 130
 
 
+def test_lsb_as_points(glyph):
+    assert glyph.metrics().left_side_bearing.to_points(font_size=30) == 1.904296875
+
+
 def test_design_units_available():
     units = DesignUnits(units=100, units_per_em=2000)
     assert units.units() == 100
@@ -70,10 +74,6 @@ def test_glyph_with_space():
     glyph = Glyph(TTFont(RobotoBold), " ")
     with pytest.raises(KeyError):
         _ = glyph.metrics()
-
-
-def test_lsb_as_points(glyph):
-    assert glyph.metrics().left_side_bearing.to_points(font_size=30) == 1.904296875
 
 
 def test_should_center_glyph_horizontally():
