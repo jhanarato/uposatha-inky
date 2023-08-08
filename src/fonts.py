@@ -36,17 +36,6 @@ def extract_metrics(from_glyphtools: dict[str, int], units_per_em: int) -> Glyph
     )
 
 
-class Glyph:
-    def __init__(self, font: TTFont, char: str):
-        self._font = font
-        self._char = char
-
-    def metrics(self) -> GlyphMetrics:
-        gt_metrics = glyphtools.get_glyph_metrics(self._font, self._char)
-        upm = self._font['head'].unitsPerEm
-        return extract_metrics(gt_metrics, upm)
-
-
 class Font:
     def __init__(self, size: int):
         self._pil_font = ImageFont.truetype(font=RobotoBold, size=size)

@@ -4,7 +4,7 @@ from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
 from fonts import glyph_centered_x, extract_metrics
-from fonts import Font, DesignUnits, Glyph, GlyphMetrics
+from fonts import Font, DesignUnits, GlyphMetrics
 from bbox import BBox
 
 
@@ -69,10 +69,9 @@ def test_design_converts_font_points_to_glyph_points():
     assert units.to_points(font_size=10) == 0.5
 
 
-def test_glyph_with_space():
-    glyph = Glyph(TTFont(RobotoBold), " ")
+def test_should_raise_if_missing_glyph(font):
     with pytest.raises(KeyError):
-        _ = glyph.metrics()
+        _ = font.glyph_metrics(" ")
 
 
 def test_should_center_glyph_horizontally():
