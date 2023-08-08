@@ -47,7 +47,8 @@ class Glyph:
 
     def metrics(self) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._font, self._char)
-        return extract_metrics(gt_metrics, self._units_per_em())
+        upm = self._units_per_em()
+        return extract_metrics(gt_metrics, upm)
 
     def width(self) -> DesignUnits:
         return DesignUnits(self._metrics["width"], self._units_per_em())
