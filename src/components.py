@@ -31,7 +31,7 @@ class Text:
 
 
 class Glyph:
-    def __init__(self, font_size: int, char: str):
+    def __init__(self, char: str, font_size: int):
         self._font = Font(font_size)
         self._font_size = font_size
         self._char = char
