@@ -52,6 +52,12 @@ class Font:
     def descent(self) -> int:
         return self._pil_font.getmetrics()[1]
 
+    def y_min(self) -> DesignUnits:
+        return DesignUnits(self._ft_font['head'].yMin, self.upm())
+
+    def y_max(self) -> DesignUnits:
+        return DesignUnits(self._ft_font['head'].yMax, self.upm())
+
     def height(self, text: str) -> int:
         return self._pil_font.getbbox(text)[3]
 
@@ -63,15 +69,17 @@ class Font:
 
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
-        upm = self._ft_font['head'].unitsPerEm
         return GlyphMetrics(
-            glyph_width=DesignUnits(gt_metrics["width"], upm),
-            left_side_bearing=DesignUnits(gt_metrics["lsb"], upm),
-            x_min=DesignUnits(gt_metrics["xMin"], upm),
-            x_max=DesignUnits(gt_metrics["xMax"], upm),
-            y_min=DesignUnits(gt_metrics["yMin"], upm),
-            y_max=DesignUnits(gt_metrics["yMax"], upm),
+            glyph_width=DesignUnits(gt_metrics["width"], self.upm()),
+            left_side_bearing=DesignUnits(gt_metrics["lsb"], self.upm()),
+            x_min=DesignUnits(gt_metrics["xMin"], self.upm()),
+            x_max=DesignUnits(gt_metrics["xMax"], self.upm()),
+            y_min=DesignUnits(gt_metrics["yMin"], self.upm()),
+            y_max=DesignUnits(gt_metrics["yMax"], self.upm()),
         )
+
+    def upm(self):
+        return self._ft_font['head'].unitsPerEm
 
 
 def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
