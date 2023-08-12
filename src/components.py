@@ -38,7 +38,8 @@ class Glyph:
 
     def width(self) -> int:
         metrics = self._font.glyph_metrics(self._char)
-        return round(metrics.glyph_width.to_points(self._font_size))
+        width_as_points = metrics.glyph_width.to_points(self._font_size)
+        return round(width_as_points)
 
 
 class HorizontalLine:
