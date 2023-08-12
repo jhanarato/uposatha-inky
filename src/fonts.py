@@ -27,6 +27,10 @@ class DesignUnits:
 class GlyphMetrics:
     glyph_width: DesignUnits
     left_side_bearing: DesignUnits
+    x_min: DesignUnits
+    x_max: DesignUnits
+    y_min: DesignUnits
+    y_max: DesignUnits
 
 
 class Font:
@@ -57,6 +61,10 @@ class Font:
         return GlyphMetrics(
             glyph_width=DesignUnits(gt_metrics["width"], upm),
             left_side_bearing=DesignUnits(gt_metrics["lsb"], upm),
+            x_min=DesignUnits(gt_metrics["xMin"], upm),
+            x_max=DesignUnits(gt_metrics["xMax"], upm),
+            y_min=DesignUnits(gt_metrics["yMin"], upm),
+            y_max=DesignUnits(gt_metrics["yMax"], upm),
         )
 
 

@@ -81,6 +81,10 @@ def test_should_center_glyph_horizontally():
     metrics = GlyphMetrics(
         glyph_width=DesignUnits(800, 1000),        # 8 points for 10 point font
         left_side_bearing=DesignUnits(200, 1000),  # 2 points for 10 point font
+        x_min=DesignUnits(0, 0),
+        x_max=DesignUnits(0, 0),
+        y_min=DesignUnits(0, 0),
+        y_max=DesignUnits(0, 0),
     )
 
     assert glyph_centered_x(bbox, metrics, font_points=10) == 29
