@@ -46,6 +46,12 @@ class Font:
     def style(self) -> str:
         return self._pil_font.font.style
 
+    def ascent(self) -> int:
+        return self._pil_font.getmetrics()[0]
+
+    def descent(self) -> int:
+        return self._pil_font.getmetrics()[1]
+
     def height(self, text: str) -> int:
         return self._pil_font.getbbox(text)[3]
 
