@@ -27,6 +27,13 @@ class BBox:
         y = self.top + self.height // 2
         return x, y
 
+    def __str__(self):
+        out = f"Top: {self.top}"
+        out += f" Bottom: {self.bottom}"
+        out += f" Left: {self.left}"
+        out += f" Right: {self.right}"
+        return out
+
 
 def font_bbox(text: str, font: ImageFont) -> BBox:
     bbox = font.getbbox(text)
