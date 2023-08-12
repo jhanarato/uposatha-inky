@@ -31,10 +31,11 @@ class Text:
 
 
 class Glyph:
-    def __init__(self, char: str, font_size: int):
+    def __init__(self, char: str, font_size: int, colour: Ink):
         self._font = Font(font_size)
         self._font_size = font_size
         self._char = char
+        self._colour = colour
 
     def width(self) -> int:
         metrics = self._font.glyph_metrics(self._char)
@@ -57,6 +58,12 @@ class Glyph:
         ascent = self._font.ascent()
         y_max = metrics.y_max.to_points(self._font_size)
         return y - round(ascent - y_max)
+
+    def draw(self, draw: ImageDraw, x: int, y: int):
+        draw.text(xy=(self.relative_x(x), self.relative_y(y)),
+                  text=self._char,
+                  fill=self._colour.value,
+                  font=self._font.as_pillow())
 
 
 class HorizontalLine:
