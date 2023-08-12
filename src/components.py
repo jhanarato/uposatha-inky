@@ -52,6 +52,12 @@ class Glyph:
         lsb = metrics.left_side_bearing.to_points(self._font_size)
         return x - round(lsb)
 
+    def relative_y(self, y: int) -> int:
+        metrics = self._font.glyph_metrics(self._char)
+        ascent = self._font.ascent()
+        y_max = metrics.y_max.to_points(self._font_size)
+        return y - round(ascent - y_max)
+
 
 class HorizontalLine:
     def __init__(self, length: int, colour: Ink):

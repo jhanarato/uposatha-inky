@@ -14,3 +14,8 @@ def test_should_give_height_in_pixels():
 def test_should_find_relative_x():
     glyph = Glyph("W", 30)
     assert glyph.relative_x(10) == 9
+
+
+def test_should_find_relative_y():
+    glyph = Glyph("W", 30)
+    assert glyph.relative_y(11) == 4
