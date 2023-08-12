@@ -30,6 +30,17 @@ class Text:
                   font=self._font.as_pillow())
 
 
+class Glyph:
+    def __init__(self, font_size: int, char: str):
+        self._font = Font(font_size)
+        self._font_size = font_size
+        self._char = char
+
+    def width(self) -> int:
+        metrics = self._font.glyph_metrics(self._char)
+        return round(metrics.glyph_width.to_points(self._font_size))
+
+
 class HorizontalLine:
     def __init__(self, length: int, colour: Ink):
         self._length = length
