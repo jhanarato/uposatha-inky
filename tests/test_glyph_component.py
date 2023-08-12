@@ -1,9 +1,4 @@
-import pytest
-from font_roboto import RobotoBold
-
 from components import Glyph
-from bbox import image_bbox
-from fonts import DesignUnits
 
 
 def test_should_give_width_in_pixels():
@@ -12,5 +7,10 @@ def test_should_give_width_in_pixels():
 
 
 def test_should_give_height_in_pixels():
-    glyph = Glyph(char="W", font_size=30)
+    glyph = Glyph("W", 30)
     assert glyph.height() == 21
+
+
+def test_should_find_relative_x():
+    glyph = Glyph("W", 30)
+    assert glyph.relative_x(10) == 9
