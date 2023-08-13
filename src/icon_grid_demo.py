@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
+from viewer import ImageViewer
 
 ICON_SIZE = 30
 BORDER = 20
@@ -52,20 +53,9 @@ def main():
     letters = "SMTWF"
     size = image_size(len(letters))
 
-    image = Image.new(mode="P", size=(size, size), color=0)
-    draw = ImageDraw.Draw(image)
-
-    draw_icons(draw, letters)
-
-    palette = [
-        255, 255, 255,  # 0 = WHITE
-        0, 0, 0,  # 1 = BLACK
-        255, 255, 0  # 2 = YELLOW
-    ]
-
-    image.putpalette(palette)
-    converted = image.convert(mode="RGB")
-    converted.show()
+    with ImageViewer(size, size) as image:
+        draw = ImageDraw.Draw(image)
+        draw_icons(draw, letters)
 
 
 if __name__ == "__main__":

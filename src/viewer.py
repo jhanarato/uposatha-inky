@@ -3,18 +3,18 @@ from PIL import Image, ImageDraw
 from screen import Ink
 
 
-class Drawing:
+class ImageViewer:
     def __init__(self, height: int, width: int):
         self._height = height
         self._width = width
 
-    def __enter__(self) -> ImageDraw:
+    def __enter__(self) -> Image:
         self._image = Image.new(
             mode="P",
             size=(self._width, self._height),
             color=Ink.WHITE.value
         )
-        return ImageDraw.Draw(self._image)
+        return self._image
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if not exc_type:
