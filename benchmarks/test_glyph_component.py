@@ -20,6 +20,18 @@ def test_glyph_height(benchmark):
     assert height == 26
 
 
+def test_relative_x(benchmark):
+    glyph = Glyph("W", 30, Ink.BLACK)
+    x = benchmark(glyph.relative_x, 10)
+    assert x == 9
+
+
+def test_relative_y(benchmark):
+    glyph = Glyph("W", 30, Ink.BLACK)
+    y = benchmark(glyph.relative_y, 11)
+    assert y == 4
+
+
 def test_glyph_draw(benchmark):
     image = Image.new(
         mode="P",
