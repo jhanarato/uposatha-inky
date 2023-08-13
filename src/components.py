@@ -132,9 +132,7 @@ class DayOfWeekIcon:
     def __init__(self, letter: str, size: int) -> None:
         self._letter = letter
         self._size = size
-        self._rect = Rectangle(self.height(), self.width(), Ink.BLACK)
-        letter_size = round(size * 0.8)
-        self._text = Text(letter, letter_size, Ink.WHITE)
+        self._circle = Circle(self._size, fill=Ink.WHITE, outline=Ink.BLACK)
 
     def height(self) -> int:
         return self._size
@@ -153,8 +151,19 @@ class DayOfWeekIcon:
         return component_y + (self.height() - self._text.height()) // 2
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        self._rect.draw(draw, x, y)
-        self._text.draw(draw, self._text_x(x), self._text_y(y))
+        self._circle.draw(draw, x, y)
+
+        center_x = x + (self._size // 2)
+        center_y = y + (self._size // 2)
+        letter_size = round(self._size * 0.7)
+        font = Font(letter_size)
+        draw.text(
+            xy=(center_x, center_y),
+            text=self._letter,
+            fill=Ink.BLACK.value,
+            font=font.as_pillow(),
+            anchor="mm"
+        )
 
     def __str__(self):
         return self.letter
