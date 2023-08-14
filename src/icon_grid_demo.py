@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
-from viewer import ImageViewer
+from viewer import DrawingViewer
 
 ICON_SIZE = 30
 BORDER = 20
@@ -53,9 +53,8 @@ def main():
     letters = "SMTWF"
     size = image_size(len(letters))
 
-    with ImageViewer(size, size) as image:
-        draw = ImageDraw.Draw(image)
-        draw_icons(draw, letters)
+    with DrawingViewer(size, size) as drawing:
+        draw_icons(drawing, letters)
 
 
 if __name__ == "__main__":

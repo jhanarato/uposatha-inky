@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 
 from components import DayOfWeekIcon
 from compose import GAP
-from viewer import ImageViewer
+from viewer import DrawingViewer
 
 
 def days(size: int) -> list[DayOfWeekIcon]:
@@ -58,9 +58,8 @@ def main():
     width = image_width(border, letters, sizes)
     height = image_height(border, sizes)
 
-    with ImageViewer(width=width, height=height) as image:
-        draw = ImageDraw.Draw(image)
-        draw_icons(draw, border, letters, sizes)
+    with DrawingViewer(width=width, height=height) as drawing:
+        draw_icons(drawing, border, letters, sizes)
 
 
 if __name__ == "__main__":
