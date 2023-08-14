@@ -4,7 +4,7 @@ from screen import Ink
 
 def test_should_give_width_in_pixels():
     glyph = Glyph("W", 30, Ink.BLACK)
-    assert glyph.width() == 26
+    assert glyph.width() == 25
 
 
 def test_should_give_height_in_pixels():

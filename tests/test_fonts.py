@@ -21,8 +21,10 @@ def test_should_have_style(font):
 def test_should_have_ascent(font):
     assert font.ascent() == 28
 
+
 def test_should_have_descent(font):
     assert font.descent() == 8
+
 
 def test_should_measure_height_of_text(font):
     assert font.height("Hello") == 28
@@ -43,15 +45,15 @@ def metrics(font):
 
 
 def test_glyph_width_in_units(metrics):
-    assert metrics.glyph_width.units() == 1448
+    assert metrics.glyph_width.units() == 1186
 
 
 def test_glyph_width_in_em(metrics):
-    assert metrics.glyph_width.to_em() == 0.70703125
+    assert metrics.glyph_width.to_em() == 0.5791015625
 
 
 def test_glyph_width_in_points(metrics):
-    assert metrics.glyph_width.to_points(font_size=16) == 11.3125
+    assert metrics.glyph_width.to_points(font_size=16) == 9.265625
 
 
 def test_glyph_left_side_bearing(metrics):

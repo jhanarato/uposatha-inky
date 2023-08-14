@@ -70,7 +70,7 @@ class Font:
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
         return GlyphMetrics(
-            glyph_width=DesignUnits(gt_metrics["width"], self.upm()),
+            glyph_width=DesignUnits(gt_metrics["fullwidth"], self.upm()),
             left_side_bearing=DesignUnits(gt_metrics["lsb"], self.upm()),
             x_min=DesignUnits(gt_metrics["xMin"], self.upm()),
             x_max=DesignUnits(gt_metrics["xMax"], self.upm()),
