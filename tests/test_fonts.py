@@ -62,6 +62,11 @@ def test_lsb_as_points(metrics):
     assert metrics.left_side_bearing.to_points(font_size=30) == 1.904296875
 
 
+def test_width_is_xmin_xmax_difference(metrics):
+    difference = metrics.x_max.units() - metrics.x_min.units()
+    assert metrics.glyph_width.units() == difference
+
+
 @pytest.fixture
 def units():
     return DesignUnits(units=100, units_per_em=2000)
