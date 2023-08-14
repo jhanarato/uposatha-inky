@@ -1,8 +1,6 @@
 import pytest
 
-from fonts import glyph_centered_x
-from fonts import Font, DesignUnits, GlyphMetrics
-from bbox import BBox
+from fonts import Font, DesignUnits
 
 
 @pytest.fixture
@@ -79,20 +77,3 @@ def test_design_units_converts_to_em(units):
 
 def test_design_converts_font_points_to_glyph_points(units):
     assert units.to_points(font_size=10) == 0.5
-
-
-def test_should_center_glyph_horizontally():
-    bbox = BBox(left=10, right=60, top=20, bottom=40)
-
-    assert bbox.center[0] == 35
-
-    metrics = GlyphMetrics(
-        glyph_width=DesignUnits(800, 1000),        # 8 points for 10 point font
-        left_side_bearing=DesignUnits(200, 1000),  # 2 points for 10 point font
-        x_min=DesignUnits(0, 0),
-        x_max=DesignUnits(0, 0),
-        y_min=DesignUnits(0, 0),
-        y_max=DesignUnits(0, 0),
-    )
-
-    assert glyph_centered_x(bbox, metrics, font_points=10) == 29

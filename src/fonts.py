@@ -80,12 +80,3 @@ class Font:
 
     def upm(self):
         return self._ft_font['head'].unitsPerEm
-
-
-def glyph_centered_x(bbox: BBox, metrics: GlyphMetrics, font_points: int) -> int:
-    width = metrics.glyph_width.to_points(font_points)
-    lsb = metrics.left_side_bearing.to_points(font_points)
-
-    glyph_left = bbox.center[0] - (width // 2)
-
-    return round(glyph_left - lsb)
