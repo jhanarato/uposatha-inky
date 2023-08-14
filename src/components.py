@@ -133,6 +133,7 @@ class DayOfWeekIcon:
         self._letter = letter
         self._size = size
         self._circle = Circle(self._size, fill=Ink.WHITE, outline=Ink.BLACK)
+        self._glyph = Glyph(letter, round(self._size * 0.7), Ink.BLACK)
 
     def height(self) -> int:
         return self._size
@@ -144,26 +145,11 @@ class DayOfWeekIcon:
     def letter(self):
         return self._letter
 
-    def _text_x(self, component_x: int) -> int:
-        return component_x + (self.width() - self._text.width()) // 2
-
-    def _text_y(self, component_y: int) -> int:
-        return component_y + (self.height() - self._text.height()) // 2
-
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
         self._circle.draw(draw, x, y)
-
-        center_x = x + (self._size // 2)
-        center_y = y + (self._size // 2)
-        letter_size = round(self._size * 0.7)
-        font = Font(letter_size)
-        draw.text(
-            xy=(center_x, center_y),
-            text=self._letter,
-            fill=Ink.BLACK.value,
-            font=font.as_pillow(),
-            anchor="mm"
-        )
+        glyph_x = x + round((self.width() / 2) - (self._glyph.width() / 2))
+        glyph_y = y + round((self.height() / 2) - (self._glyph.height() / 2))
+        self._glyph.draw(draw, glyph_x, glyph_y)
 
     def __str__(self):
         return self.letter
