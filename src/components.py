@@ -14,7 +14,7 @@ class Drawable(Protocol):
 class Text:
     def __init__(self, text: str, size: int, colour: Ink):
         self._text = text
-        self._font = Font(size)
+        self._font = Font("roboto-bold", size)
         self._colour = colour
 
     def height(self) -> int:
@@ -32,7 +32,7 @@ class Text:
 
 class Glyph:
     def __init__(self, char: str, font_size: int, colour: Ink):
-        self._font = Font(font_size)
+        self._font = Font("roboto-bold", font_size)
         self._font_size = font_size
         self._char = char
         self._colour = colour

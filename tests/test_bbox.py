@@ -22,7 +22,7 @@ def test_should_calculate_center_of_bbox():
 
 
 def test_should_make_image_bbox():
-    font = Font(size=30)
+    font = Font("roboto-bold", size=30)
     bbox = image_bbox("H", ImageFont.truetype(RobotoBold, 30))
     assert bbox.left == 2
     assert bbox.top == 7
@@ -31,7 +31,7 @@ def test_should_make_image_bbox():
 
 
 def test_should_make_font_bbox():
-    font = Font(size=30)
+    font = Font("roboto-bold", size=30)
     bbox = font_bbox("H", ImageFont.truetype(RobotoBold, 30))
     assert bbox.left == 0
     assert bbox.top == 7

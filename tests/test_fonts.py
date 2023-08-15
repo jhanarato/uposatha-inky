@@ -5,7 +5,7 @@ from fonts import Font, DesignUnits
 
 @pytest.fixture
 def font():
-    return Font(size=30)
+    return Font("roboto-bold", size=30)
 
 
 def test_should_have_family(font):

@@ -32,7 +32,7 @@ class GlyphMetrics:
 
 
 class Font:
-    def __init__(self, size: int):
+    def __init__(self, name: str, size: int):
         self._pil_font = ImageFont.truetype(font=RobotoBold, size=size)
         self._ft_font = TTFont(RobotoBold)
 
