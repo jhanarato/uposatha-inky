@@ -32,6 +32,11 @@ def test_should_measure_width_of_text(font):
     assert font.width("Hello") == 70
 
 
+def test_should_raise_if_font_unavailable():
+    with pytest.raises(KeyError):
+        _ = Font("Not-a-font", 100)
+
+
 def test_should_raise_if_missing_glyph(font):
     with pytest.raises(KeyError):
         _ = font.glyph_metrics(" ")

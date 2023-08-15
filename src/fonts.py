@@ -6,6 +6,10 @@ from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
 
+_fonts = {
+    "roboto-bold": RobotoBold,
+}
+
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
         self._units = units
@@ -33,8 +37,8 @@ class GlyphMetrics:
 
 class Font:
     def __init__(self, name: str, size: int):
-        self._pil_font = ImageFont.truetype(font=RobotoBold, size=size)
-        self._ft_font = TTFont(RobotoBold)
+        self._pil_font = ImageFont.truetype(font=_fonts[name], size=size)
+        self._ft_font = TTFont(_fonts[name])
 
     @property
     def family(self) -> str:
