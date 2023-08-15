@@ -5,8 +5,6 @@ from PIL import ImageFont
 from fontTools.ttLib import TTFont
 from font_roboto import RobotoBold
 
-from bbox import BBox
-
 
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
