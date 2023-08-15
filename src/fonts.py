@@ -3,12 +3,24 @@ from dataclasses import dataclass
 import glyphtools
 from PIL import ImageFont
 from fontTools.ttLib import TTFont
-from font_roboto import RobotoBold
+import font_roboto
 
 
-_fonts = {
-    "roboto-bold": RobotoBold,
+fonts = {
+    "roboto": font_roboto.Roboto,
+    "roboto-black": font_roboto.RobotoBlack,
+    "roboto-black-italic": font_roboto.RobotoBlackItalic,
+    "roboto-bold": font_roboto.RobotoBold,
+    "roboto-bold-italic": font_roboto.RobotoItalic,
+    "roboto-italic": font_roboto.RobotoItalic,
+    "roboto-light": font_roboto.RobotoLight,
+    "roboto-light-italic": font_roboto.RobotoLightItalic,
+    "roboto-medium": font_roboto.RobotoMedium,
+    "roboto-medium-italic": font_roboto.RobotoMediumItalic,
+    "roboto-thin": font_roboto.RobotoThin,
+    "roboto-thin-italic": font_roboto.RobotoThinItalic,
 }
+
 
 class DesignUnits:
     def __init__(self, units: int, units_per_em: int):
@@ -37,8 +49,8 @@ class GlyphMetrics:
 
 class Font:
     def __init__(self, name: str, size: int):
-        self._pil_font = ImageFont.truetype(font=_fonts[name], size=size)
-        self._ft_font = TTFont(_fonts[name])
+        self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
+        self._ft_font = TTFont(fonts[name])
 
     @property
     def family(self) -> str:

@@ -1,6 +1,11 @@
 import pytest
 
-from fonts import Font, DesignUnits
+from fonts import fonts, Font, DesignUnits
+
+
+def test_font_dictionary():
+    for _, path in fonts.items():
+        assert path[-4:] == ".ttf"
 
 
 @pytest.fixture
