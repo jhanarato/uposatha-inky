@@ -36,27 +36,24 @@ class Glyph:
         self._font_size = font_size
         self._char = char
         self._colour = colour
+        self._metrics = self._font.glyph_metrics(char)
 
     def width(self) -> int:
-        metrics = self._font.glyph_metrics(self._char)
-        width = metrics.glyph_width.to_points(self._font_size)
+        width = self._metrics.glyph_width.to_points(self._font_size)
         return round(width)
 
     def height(self) -> int:
-        metrics = self._font.glyph_metrics(self._char)
-        y_max = metrics.y_max.to_points(self._font_size)
-        y_min = metrics.y_min.to_points(self._font_size)
+        y_max = self._metrics.y_max.to_points(self._font_size)
+        y_min = self._metrics.y_min.to_points(self._font_size)
         return round(y_max - y_min)
 
     def relative_x(self, x: int) -> int:
-        metrics = self._font.glyph_metrics(self._char)
-        lsb = metrics.left_side_bearing.to_points(self._font_size)
+        lsb = self._metrics.left_side_bearing.to_points(self._font_size)
         return x - round(lsb)
 
     def relative_y(self, y: int) -> int:
-        metrics = self._font.glyph_metrics(self._char)
         ascent = self._font.ascent()
-        y_max = metrics.y_max.to_points(self._font_size)
+        y_max = self._metrics.y_max.to_points(self._font_size)
         return y - round(ascent - y_max)
 
     def draw(self, draw: ImageDraw, x: int, y: int):
