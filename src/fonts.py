@@ -52,12 +52,6 @@ class Font:
     def descent(self) -> int:
         return self._pil_font.getmetrics()[1]
 
-    def y_min(self) -> DesignUnits:
-        return DesignUnits(self._ft_font['head'].yMin, self.upm())
-
-    def y_max(self) -> DesignUnits:
-        return DesignUnits(self._ft_font['head'].yMax, self.upm())
-
     def height(self, text: str) -> int:
         return self._pil_font.getbbox(text)[3]
 
