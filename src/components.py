@@ -12,9 +12,9 @@ class Drawable(Protocol):
 
 
 class Text:
-    def __init__(self, text: str, size: int, colour: Ink):
+    def __init__(self, text: str, font: Font, colour: Ink):
         self._text = text
-        self._font = Font("roboto-bold", size)
+        self._font = font
         self._colour = colour
 
     def height(self) -> int:

@@ -3,6 +3,7 @@ from PIL import Image, ImageDraw
 from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
+from fonts import Font
 from layout import ScreenLayout
 from screen import Ink, HEIGHT, WIDTH
 
@@ -48,11 +49,11 @@ def next_uposatha(content: NextUposatha) -> Image:
         appearance = fifteen_day_appearance()
 
     components = [
-        Text("Uposatha", 30, Ink.BLACK),
+        Text("Uposatha", Font("roboto-bold", 30), Ink.BLACK),
         HorizontalLine(300, Ink.BLACK),
-        Text(content.date, 24, Ink.BLACK),
+        Text(content.date, Font("roboto-bold", 24), Ink.BLACK),
         Countdown(appearance, content.today, content.falls_on, content.moon_phase),
-        Text(content.details, 24, Ink.BLACK),
+        Text(content.details, Font("roboto-bold", 24), Ink.BLACK),
     ]
 
     layout = ScreenLayout(HEIGHT, WIDTH)
