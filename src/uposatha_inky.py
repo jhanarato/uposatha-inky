@@ -52,12 +52,7 @@ def parse_args():
 def main():
     args = parse_args()
     content = next_uposatha_content(args.date)
-    image = next_uposatha(content)
-
-    if inky_available():
-        display_on_inky(image)
-    else:
-        display_on_screen(image)
+    next_uposatha(content)
 
 
 if __name__ == "__main__":

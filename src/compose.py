@@ -6,6 +6,7 @@ from content import NextUposatha
 from fonts import Font
 from layout import ScreenLayout
 from screen import Ink, HEIGHT, WIDTH
+from viewer import DrawingViewer
 
 GAP = 4
 SMALLEST_ICON = 25
@@ -34,15 +35,7 @@ def fourteen_day_appearance():
     return appearances
 
 
-def next_uposatha(content: NextUposatha) -> Image:
-    image = Image.new(
-        mode="P",
-        size=(WIDTH, HEIGHT),
-        color=Ink.WHITE.value
-    )
-
-    draw = ImageDraw.Draw(image)
-
+def next_uposatha(content: NextUposatha) -> None:
     if content.fourteen_day:
         appearance = fourteen_day_appearance()
     else:
@@ -62,7 +55,6 @@ def next_uposatha(content: NextUposatha) -> Image:
         layout.add_space(20)
         layout.add_centred(component)
 
-    for component, coordinates in zip(components, layout.coordinates(), strict=True):
-        component.draw(draw, *coordinates)
-
-    return image
+    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
+        for component, coordinates in zip(components, layout.coordinates(), strict=True):
+            component.draw(draw, *coordinates)
