@@ -4,6 +4,7 @@ import glyphtools
 from PIL import ImageFont
 from fontTools.ttLib import TTFont
 import font_roboto
+import font_fredoka_one
 
 
 fonts = {
@@ -19,6 +20,7 @@ fonts = {
     "roboto-medium-italic": font_roboto.RobotoMediumItalic,
     "roboto-thin": font_roboto.RobotoThin,
     "roboto-thin-italic": font_roboto.RobotoThinItalic,
+    "fredoka-one": font_fredoka_one.FredokaOne,
 }
 
 
