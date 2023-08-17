@@ -7,7 +7,7 @@ class Area(Protocol):
     def width(self) -> int: ...
 
 
-class ScreenLayout:
+class ColumnLayout:
     """ A layout of ImageComponents on the full image """
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height
