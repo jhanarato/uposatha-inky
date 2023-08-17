@@ -117,7 +117,7 @@ class Circle:
             xy=[(x, y), (x + self.width(), y + self.height())],
             fill=self._fill.value,
             outline=self._outline.value,
-            width=2
+            width=3
         )
 
 
