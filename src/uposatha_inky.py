@@ -1,39 +1,9 @@
 import argparse
-import datetime
 
-from PIL import Image
-from inky import auto
+import datetime
 
 from content import next_uposatha_content
 from compose import next_uposatha
-
-
-def inky_available() -> bool:
-    try:
-        # auto() will throw a RuntimeError if the
-        # InkyWHAT is not available.
-        display = auto()
-        return True
-    except RuntimeError:
-        return False
-
-
-def display_on_screen(image: Image) -> None:
-    palette = [
-        255, 255, 255,  # 0 = WHITE
-        0, 0, 0,  # 1 = BLACK
-        255, 255, 0  # 2 = YELLOW
-    ]
-    image.putpalette(palette)
-    converted = image.convert(mode="RGB")
-    converted.show()
-
-
-def display_on_inky(image: Image) -> None:
-    display = auto()
-    display.set_border(display.WHITE)
-    display.set_image(image)
-    display.show()
 
 
 def parse_args():
