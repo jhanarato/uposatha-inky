@@ -31,29 +31,28 @@ class Text:
 
 
 class Glyph:
-    def __init__(self, char: str, font_size: int, colour: Ink):
-        self._font = Font("roboto-bold", font_size)
-        self._font_size = font_size
+    def __init__(self, char: str, font: Font, colour: Ink):
+        self._font = font
         self._char = char
         self._colour = colour
         self._metrics = self._font.glyph_metrics(char)
 
     def width(self) -> int:
-        width = self._metrics.glyph_width.to_points(self._font_size)
+        width = self._metrics.glyph_width.to_points(self._font.size)
         return round(width)
 
     def height(self) -> int:
-        y_max = self._metrics.y_max.to_points(self._font_size)
-        y_min = self._metrics.y_min.to_points(self._font_size)
+        y_max = self._metrics.y_max.to_points(self._font.size)
+        y_min = self._metrics.y_min.to_points(self._font.size)
         return round(y_max - y_min)
 
     def relative_x(self, x: int) -> int:
-        lsb = self._metrics.left_side_bearing.to_points(self._font_size)
+        lsb = self._metrics.left_side_bearing.to_points(self._font.size)
         return x - round(lsb)
 
     def relative_y(self, y: int) -> int:
         ascent = self._font.ascent()
-        y_max = self._metrics.y_max.to_points(self._font_size)
+        y_max = self._metrics.y_max.to_points(self._font.size)
         return y - round(ascent - y_max)
 
     def draw(self, draw: ImageDraw, x: int, y: int):
@@ -130,7 +129,8 @@ class DayOfWeekIcon:
         self._letter = letter
         self._size = size
         self._circle = Circle(self._size, fill=Ink.WHITE, outline=Ink.BLACK)
-        self._glyph = Glyph(letter, round(self._size * 0.7), Ink.BLACK)
+        font = Font("roboto-bold", round(self._size * 0.7))
+        self._glyph = Glyph(letter, font, Ink.BLACK)
 
     def height(self) -> int:
         return self._size

@@ -51,6 +51,7 @@ class Font:
     def __init__(self, name: str, size: int):
         self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
         self._ft_font = TTFont(fonts[name])
+        self._size = size
 
     @property
     def family(self) -> str:
@@ -59,6 +60,10 @@ class Font:
     @property
     def style(self) -> str:
         return self._pil_font.font.style
+
+    @property
+    def size(self) -> int:
+        return self._size
 
     def ascent(self) -> int:
         return self._pil_font.getmetrics()[0]
