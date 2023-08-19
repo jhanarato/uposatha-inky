@@ -1,8 +1,9 @@
 from datetime import date
 
 import pytest
+from uposatha.calendar import Calendar
 
-from content import next_uposatha_content
+from content import next_uposatha_content, Context
 
 
 @pytest.mark.parametrize(
@@ -15,3 +16,11 @@ from content import next_uposatha_content
 )
 def test_should_flag_fourteen_day(today, is_fourteen_day):
     assert next_uposatha_content(today=today).fourteen_day == is_fourteen_day
+
+
+def test_should_provide_today_is_uposatha():
+    cal = Calendar()
+    today = date(2023, 6, 17)
+    uposatha = cal.next_uposatha(today)
+    context = Context(today, uposatha, None)
+    assert context.today_is_uposatha()
