@@ -23,7 +23,6 @@ def test_should_provide_today_is_uposatha():
     cal = Calendar()
     today = date(2023, 6, 17)
     uposatha = cal.next_uposatha(today)
-    season = cal.current_season(today)
     context = Context(today, SeasonName.RAINY, uposatha, None)
     assert context.today_is_uposatha()
 
