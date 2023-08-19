@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from datetime import date
+from typing import Optional
 
-import uposatha.elements
+from uposatha.elements import Uposatha, MoonPhase, Holiday
 from uposatha.calendar import Calendar
 
 
@@ -11,7 +12,7 @@ class NextUposatha:
     falls_on: date
     date: str
     details: str
-    moon_phase: uposatha.elements.MoonPhase
+    moon_phase: MoonPhase
     fourteen_day: bool
 
 
@@ -36,3 +37,10 @@ def uposatha_details(season, next_uposatha):
     number_of_uposathas = len(season.uposathas)
     season_name = season.name.name.capitalize()
     return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
+
+
+@dataclass
+class Context:
+    today: date
+    uposatha: Uposatha
+    holiday: Optional[Holiday]

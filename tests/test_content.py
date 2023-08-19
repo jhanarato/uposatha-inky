@@ -4,6 +4,7 @@ import pytest
 
 from content import next_uposatha_content
 
+
 @pytest.mark.parametrize(
     "today,is_fourteen_day",
     [
