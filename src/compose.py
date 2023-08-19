@@ -4,7 +4,7 @@ from components import Text, HorizontalLine
 from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
 from fonts import Font
-from layout import ColumnLayout
+from layout import VerticalLayout
 from screen import Ink, HEIGHT, WIDTH
 from viewer import DrawingViewer
 
@@ -49,7 +49,7 @@ def next_uposatha(content: NextUposatha) -> None:
         Text(content.details, Font("roboto-bold", 24), Ink.BLACK),
     ]
 
-    layout = ColumnLayout(HEIGHT, WIDTH)
+    layout = VerticalLayout(HEIGHT, WIDTH)
 
     for component in components:
         layout.add_space(20)
