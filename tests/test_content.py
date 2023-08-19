@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 from uposatha.calendar import Calendar
 
-from content import next_uposatha_content, Context
+from content import next_uposatha_content, Context, get_context
 
 
 @pytest.mark.parametrize(
@@ -24,3 +24,17 @@ def test_should_provide_today_is_uposatha():
     uposatha = cal.next_uposatha(today)
     context = Context(today, uposatha, None)
     assert context.today_is_uposatha()
+
+
+def test_should_create_context_with_no_holiday():
+    cal = Calendar()
+    today = date(2023, 8, 15)
+    uposatha = cal.next_uposatha(today)
+
+    assert uposatha.falls_on == date(2023, 8, 16)
+
+    context = get_context(today)
+
+    assert context.today == date(2023, 8, 15)
+    assert context.uposatha == uposatha
+    assert context.holiday is None

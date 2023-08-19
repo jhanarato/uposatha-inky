@@ -47,3 +47,9 @@ class Context:
 
     def today_is_uposatha(self) -> bool:
         return self.today == self.uposatha.falls_on
+
+
+def get_context(today: date) -> Context:
+    cal = Calendar()
+    uposatha = cal.next_uposatha(today)
+    return Context(today, uposatha, None)
