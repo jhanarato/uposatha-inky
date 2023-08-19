@@ -2,8 +2,7 @@ import argparse
 
 import datetime
 
-from content import next_uposatha_content
-from compose import next_uposatha
+from update import update
 
 
 def parse_args():
@@ -21,8 +20,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-    content = next_uposatha_content(args.date)
-    next_uposatha(content)
+    update(args.date)
 
 
 if __name__ == "__main__":
