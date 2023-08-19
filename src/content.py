@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Optional
 
-from uposatha.elements import Uposatha, MoonPhase, Holiday
+from uposatha.elements import Uposatha, MoonPhase, Holiday, Season, SeasonName
 from uposatha.calendar import Calendar
 
 
@@ -42,6 +42,7 @@ def uposatha_details(season, next_uposatha):
 @dataclass
 class Context:
     today: date
+    season: SeasonName
     uposatha: Uposatha
     holiday: Optional[Holiday]
 
@@ -52,4 +53,5 @@ class Context:
 def get_context(today: date) -> Context:
     cal = Calendar()
     uposatha = cal.next_uposatha(today)
-    return Context(today, uposatha, None)
+    season = cal.current_season(today)
+    return Context(today, season.name, uposatha, None)

@@ -2,6 +2,7 @@ from datetime import date
 
 import pytest
 from uposatha.calendar import Calendar
+from uposatha.elements import SeasonName
 
 from content import next_uposatha_content, Context, get_context
 
@@ -22,7 +23,8 @@ def test_should_provide_today_is_uposatha():
     cal = Calendar()
     today = date(2023, 6, 17)
     uposatha = cal.next_uposatha(today)
-    context = Context(today, uposatha, None)
+    season = cal.current_season(today)
+    context = Context(today, SeasonName.RAINY, uposatha, None)
     assert context.today_is_uposatha()
 
 
@@ -37,4 +39,5 @@ def test_should_create_context_with_no_holiday():
 
     assert context.today == date(2023, 8, 15)
     assert context.uposatha == uposatha
+    assert context.season == SeasonName.RAINY
     assert context.holiday is None
