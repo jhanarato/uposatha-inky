@@ -54,4 +54,4 @@ def get_context(today: date) -> Context:
     cal = Calendar()
     uposatha = cal.next_uposatha(today)
     season = cal.current_season(today)
-    return Context(today, season.name, uposatha, None)
+    return Context(today, season.name, uposatha, uposatha.holiday)
