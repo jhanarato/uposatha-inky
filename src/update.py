@@ -10,7 +10,6 @@ def update(today: date):
 
     if context.holiday:
         views.holiday(context)
-
     elif context.today_is_uposatha():
         views.uposatha(context)
     else:
