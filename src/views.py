@@ -1,36 +1,25 @@
-from enum import Enum, auto
-from PIL import ImageDraw
-
+from compose import next_uposatha
 from screen import Ink, WIDTH, HEIGHT
 from components import Text
-from content import Context
+from content import Context, next_uposatha_content
 from fonts import Font
 from viewer import DrawingViewer
 
 
-class View(Enum):
-    BETWEEN = auto()
-    UPOSATHA = auto()
-    HOLIDAY = auto()
-
-
 def between_uposathas(context: Context):
-    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        font = Font("roboto", 30)
-        text = Text("Future Uposatha View", font, Ink.BLACK)
-        text.draw(draw, 50, 50)
+    content = next_uposatha_content(context.today)
+    next_uposatha(content)
 
 
 def uposatha(context: Context):
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
         font = Font("roboto", 30)
-        text = Text("Uposatha Is Today View", font, Ink.BLACK)
-        text.draw(draw, 50, 50)
+        text = Text("Today is the uposatha", font, Ink.BLACK)
+        text.draw(draw, 10, 10)
 
 
 def holiday(context: Context):
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
         font = Font("roboto", 30)
-        text = Text("Holiday Today View", font, Ink.BLACK)
-        text.draw(draw, 50, 50)
-
+        text = Text("Today is a holiday", font, Ink.BLACK)
+        text.draw(draw, 10, 10)
