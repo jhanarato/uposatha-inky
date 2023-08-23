@@ -5,7 +5,7 @@ from screen import Ink
 
 
 class DrawingViewer:
-    def __init__(self, height: int, width: int):
+    def __init__(self, height: int, width: int, show: bool = True):
         self._image = Image.new(mode="P", size=(width, height), color=Ink.WHITE.value)
 
         self._palette = [
@@ -14,14 +14,17 @@ class DrawingViewer:
             255, 255, 0  # 2 = YELLOW
         ]
 
+        self._show = show
+
     def __enter__(self) -> ImageDraw:
         return ImageDraw.Draw(self._image)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        try:
-            self._view_on_inky()
-        except RuntimeError:
-            self._view_on_screen()
+        if self._show:
+            try:
+                self._view_on_inky()
+            except RuntimeError:
+                self._view_on_screen()
 
     def _view_on_inky(self):
         display = auto()
