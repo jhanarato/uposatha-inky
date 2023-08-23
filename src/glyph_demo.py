@@ -1,6 +1,7 @@
 from PIL import ImageDraw
 
 from components import Glyph, Circle
+from fonts import Font
 from screen import Ink
 from viewer import DrawingViewer
 
@@ -27,7 +28,7 @@ def draw_glyph_in_frame():
 
         circle.draw(drawing, circle_x, circle_y)
 
-        glyph = Glyph("H", 60, Ink.BLACK)
+        glyph = Glyph("H", Font("roboto-bold", 60), Ink.BLACK)
         glyph_x = center_x - (glyph.width() // 2)
         glyph_y = center_y - (glyph.height() // 2)
 
