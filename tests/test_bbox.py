@@ -1,5 +1,4 @@
 from PIL import ImageFont, Image
-
 from font_roboto import RobotoBold
 
 from bbox import BBox, image_bbox, font_bbox, black_pixels, pixels_to_bbox, pixel_bbox
