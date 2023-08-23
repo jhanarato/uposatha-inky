@@ -1,7 +1,6 @@
 from datetime import date
 
 import views
-
 from content import get_context
 
 

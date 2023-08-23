@@ -36,4 +36,3 @@ class DrawingViewer:
         self._image.putpalette(self._palette)
         converted = self._image.convert(mode="RGB")
         converted.show()
-

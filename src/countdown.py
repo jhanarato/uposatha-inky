@@ -1,13 +1,11 @@
-import math
 import itertools
-
+import math
 from collections.abc import Sequence, Iterator, MutableMapping
 from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Callable, TypeVar
 
 from PIL import ImageDraw
-
 from uposatha.elements import MoonPhase
 
 from components import DayOfWeekIcon, FullMoonIcon, NewMoonIcon, Drawable
@@ -31,6 +29,7 @@ class IconCountMapping(MutableMapping[T]):
         maximum number of icons that can be displayed.
         Keys can be provided individually, or as a range.
     """
+
     def __init__(self, max_icons: int) -> None:
         self._max_icons = max_icons
         self._mapping: dict[int, T] = {}
@@ -70,8 +69,8 @@ class IconCountMapping(MutableMapping[T]):
 
 class Countdown:
     """ An image component displaying the days of the week up to the next uposatha """
-    def __init__(self, appearances: IconCountMapping[Appearance], start: date, end: date, moon_phase: MoonPhase):
 
+    def __init__(self, appearances: IconCountMapping[Appearance], start: date, end: date, moon_phase: MoonPhase):
         self._icons = Icons(icon_size=0, start=start, end=end, moon_phase=moon_phase)
 
         appearance = appearances[len(self._icons)]
@@ -99,6 +98,7 @@ class Countdown:
 
 class Icons(Sequence[Drawable]):
     """ A sequence of icons representing the days until the next uposatha """
+
     def __init__(self, icon_size: int, start: date, end: date, moon_phase: MoonPhase):
         self.icon_size = icon_size
         self._start = start

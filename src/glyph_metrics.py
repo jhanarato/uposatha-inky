@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from glyphtools import get_glyph_metrics
 from fontTools.ttLib import TTFont
+from glyphtools import get_glyph_metrics
 
 
 class DesignUnits:

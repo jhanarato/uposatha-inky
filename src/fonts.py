@@ -1,6 +1,6 @@
+import font_roboto
 from PIL import ImageFont
 from fontTools.ttLib import TTFont
-import font_roboto
 
 from glyph_metrics import GlyphMetrics, glyph_metrics
 

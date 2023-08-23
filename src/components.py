@@ -2,12 +2,13 @@ from typing import Protocol
 
 from PIL import ImageDraw
 
-from screen import Ink
 from fonts import Font
+from screen import Ink
 
 
 class Drawable(Protocol):
     def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
+
     """ Draw given the top left coordinates """
 
 
@@ -125,6 +126,7 @@ class DayOfWeekIcon:
     """
     An icon displaying the abbreviated day of the week. e.g. M for Monday.
     """
+
     def __init__(self, letter: str, size: int) -> None:
         self._letter = letter
         self._size = size

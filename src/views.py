@@ -1,8 +1,8 @@
-from compose import next_uposatha
-from screen import Ink, WIDTH, HEIGHT
 from components import Text
+from compose import next_uposatha
 from content import Context, next_uposatha_content
 from fonts import Font
+from screen import Ink, WIDTH, HEIGHT
 from viewer import DrawingViewer
 
 

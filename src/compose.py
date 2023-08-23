@@ -1,8 +1,6 @@
-from PIL import Image, ImageDraw
-
 from components import Text, HorizontalLine
-from countdown import Countdown, IconCountMapping, Appearance
 from content import NextUposatha
+from countdown import Countdown, IconCountMapping, Appearance
 from fonts import Font
 from layout import VerticalLayout
 from screen import Ink, HEIGHT, WIDTH

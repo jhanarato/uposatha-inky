@@ -4,11 +4,13 @@ from typing import Protocol
 
 class Area(Protocol):
     def height(self) -> int: ...
+
     def width(self) -> int: ...
 
 
 class VerticalLayout:
     """ A layout of ImageComponents on the full image """
+
     def __init__(self, screen_height: int, screen_width: int):
         self._screen_height = screen_height
         self._screen_width = screen_width

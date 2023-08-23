@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Optional
 
-from uposatha.elements import Uposatha, MoonPhase, Holiday, Season, SeasonName
 from uposatha.calendar import Calendar
+from uposatha.elements import Uposatha, MoonPhase, Holiday, SeasonName
 
 
 @dataclass

@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 
-from PIL import Image, ImageDraw
+from PIL import ImageDraw
 
 from components import DayOfWeekIcon
 from compose import GAP
