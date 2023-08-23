@@ -23,7 +23,11 @@ class Font:
     def __init__(self, name: str, size: int):
         self._name = name
         self._size = size
-        self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
+        self._pil_font = ImageFont.truetype(self.path, size=size)
+
+    @property
+    def path(self) -> str:
+        return fonts[self._name]
 
     @property
     def family(self) -> str:
@@ -51,6 +55,3 @@ class Font:
 
     def as_pillow(self) -> ImageFont:
         return self._pil_font
-
-    def glyph_metrics(self, char: str) -> GlyphMetrics:
-        return glyph_metrics(fonts[self._name], char)
