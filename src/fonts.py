@@ -1,11 +1,8 @@
-from dataclasses import dataclass
-
-import font_hanken_grotesk
-import font_source_serif_pro
-import glyphtools
 from PIL import ImageFont
 from fontTools.ttLib import TTFont
 import font_roboto
+
+from glyph_metrics import GlyphMetrics, glyph_metrics
 
 fonts = {
     "roboto": font_roboto.Roboto,
@@ -23,33 +20,9 @@ fonts = {
 }
 
 
-class DesignUnits:
-    def __init__(self, units: int, units_per_em: int):
-        self._units = units
-        self._units_per_em = units_per_em
-
-    def units(self) -> int:
-        return self._units
-
-    def to_em(self) -> float:
-        return self.units() / self._units_per_em
-
-    def to_points(self, font_size: int) -> float:
-        return self.to_em() * font_size
-
-
-@dataclass
-class GlyphMetrics:
-    glyph_width: DesignUnits
-    left_side_bearing: DesignUnits
-    x_min: DesignUnits
-    x_max: DesignUnits
-    y_min: DesignUnits
-    y_max: DesignUnits
-
-
 class Font:
     def __init__(self, name: str, size: int):
+        self._name = name
         self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
         self._ft_font = TTFont(fonts[name])
         self._size = size
@@ -82,15 +55,7 @@ class Font:
         return self._pil_font
 
     def glyph_metrics(self, char: str) -> GlyphMetrics:
-        gt_metrics = glyphtools.get_glyph_metrics(self._ft_font, char)
-        return GlyphMetrics(
-            glyph_width=DesignUnits(gt_metrics["fullwidth"], self.upm()),
-            left_side_bearing=DesignUnits(gt_metrics["lsb"], self.upm()),
-            x_min=DesignUnits(gt_metrics["xMin"], self.upm()),
-            x_max=DesignUnits(gt_metrics["xMax"], self.upm()),
-            y_min=DesignUnits(gt_metrics["yMin"], self.upm()),
-            y_max=DesignUnits(gt_metrics["yMax"], self.upm()),
-        )
+        return glyph_metrics(fonts[self._name], char)
 
     def upm(self):
         return self._ft_font['head'].unitsPerEm

@@ -1,6 +1,7 @@
 import pytest
 
-from fonts import fonts, Font, DesignUnits
+from fonts import fonts, Font
+from glyph_metrics import DesignUnits
 
 
 def test_font_dictionary():
