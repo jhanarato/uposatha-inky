@@ -29,8 +29,8 @@ class GlyphMetrics:
     y_max: DesignUnits
 
 
-def glyph_metrics(font_name: str, char: str):
-    font = TTFont(font_name)
+def glyph_metrics(font_file_path: str, char: str):
+    font = TTFont(font_file_path)
     upm = font['head'].unitsPerEm
     gt_metrics = get_glyph_metrics(font, char)
     return GlyphMetrics(
