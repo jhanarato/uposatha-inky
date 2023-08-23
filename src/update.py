@@ -8,7 +8,7 @@ from content import get_context
 def update(today: date):
     context = get_context(today)
 
-    if context.holiday:
+    if context.holiday_today():
         views.holiday(context)
     elif context.uposatha_today():
         views.uposatha(context)
