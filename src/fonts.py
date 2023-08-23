@@ -1,6 +1,5 @@
 import font_roboto
 from PIL import ImageFont
-from fontTools.ttLib import TTFont
 
 from glyph_metrics import GlyphMetrics, glyph_metrics
 
@@ -23,9 +22,8 @@ fonts = {
 class Font:
     def __init__(self, name: str, size: int):
         self._name = name
-        self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
-        self._ft_font = TTFont(fonts[name])
         self._size = size
+        self._pil_font = ImageFont.truetype(font=fonts[name], size=size)
 
     @property
     def family(self) -> str:
@@ -56,6 +54,3 @@ class Font:
 
     def glyph_metrics(self, char: str) -> GlyphMetrics:
         return glyph_metrics(fonts[self._name], char)
-
-    def upm(self):
-        return self._ft_font['head'].unitsPerEm
