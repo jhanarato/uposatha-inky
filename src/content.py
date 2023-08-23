@@ -46,8 +46,11 @@ class Context:
     uposatha: Uposatha
     holiday: Optional[Holiday]
 
-    def today_is_uposatha(self) -> bool:
+    def uposatha_today(self) -> bool:
         return self.today == self.uposatha.falls_on
+
+    def holiday_today(self) -> bool:
+        return False
 
 
 def get_context(today: date) -> Context:

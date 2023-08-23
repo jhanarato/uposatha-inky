@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 from uposatha.calendar import Calendar
-from uposatha.elements import SeasonName
+from uposatha.elements import SeasonName, HolidayName
 
 from content import next_uposatha_content, Context, get_context
 
@@ -24,7 +24,7 @@ def test_should_provide_today_is_uposatha():
     today = date(2023, 6, 17)
     uposatha = cal.next_uposatha(today)
     context = Context(today, SeasonName.RAINY, uposatha, None)
-    assert context.today_is_uposatha()
+    assert context.uposatha_today()
 
 
 def test_should_create_context_with_no_holiday():
@@ -40,3 +40,33 @@ def test_should_create_context_with_no_holiday():
     assert context.uposatha == uposatha
     assert context.season == SeasonName.RAINY
     assert context.holiday is None
+
+
+def test_context_for_day_before_holiday():
+    day_before_asalha = date(2023, 7, 31)
+    context = get_context(day_before_asalha)
+    assert context.today == day_before_asalha
+    assert context.uposatha.falls_on == date(2023, 8, 1)
+    assert context.holiday.name == HolidayName.ASALHA
+
+
+def test_context_for_day_before_ordinary_uposatha():
+    day_before_new_moon_after_asalha = date(2023, 8, 15)
+    context = get_context(day_before_new_moon_after_asalha)
+    assert context.today == day_before_new_moon_after_asalha
+    assert context.uposatha.falls_on == date(2023, 8, 16)
+    assert context.holiday is None
+
+
+@pytest.mark.parametrize(
+    "today,is_uposatha",
+    [
+        (date(2023, 7, 31), False),
+        (date(2023, 8, 1), True),
+        (date(2023, 8, 15), False),
+        (date(2023, 8, 16), True),
+    ]
+)
+def test_context_uposatha_today(today, is_uposatha):
+    assert get_context(today).uposatha_today() == is_uposatha
+    
