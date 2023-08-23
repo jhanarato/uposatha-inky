@@ -3,8 +3,8 @@ from font_roboto import RobotoBold
 
 palette = [
     255, 255, 255,  # 0 = WHITE
-    0, 0, 0,        # 1 = BLACK
-    255, 255, 0     # 2 = YELLOW
+    0, 0, 0,  # 1 = BLACK
+    255, 255, 0  # 2 = YELLOW
 ]
 
 font = ImageFont.truetype(RobotoBold, 50)

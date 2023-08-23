@@ -1,10 +1,10 @@
 import pytest
-
-from font_roboto import RobotoBold
-from fontTools.ttLib import TTFont
 from PIL import ImageFont
+from fontTools.ttLib import TTFont
+from font_roboto import RobotoBold
 
 from Experiments.witdh_finder import pixel_width
+
 
 # Approval test for refactoring. I just switched the
 # font in the original script, the value is what was returned
@@ -13,6 +13,7 @@ def test_pixel_width():
     text = 'This is a test'
     font = TTFont(RobotoBold)
     assert pixel_width(text, font, 12) == 69.029296875
+
 
 def test_pixel_width_equivalent_to_pillow_length():
     size = 30
