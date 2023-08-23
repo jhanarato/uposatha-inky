@@ -69,4 +69,16 @@ def test_context_for_day_before_ordinary_uposatha():
 )
 def test_context_uposatha_today(today, is_uposatha):
     assert get_context(today).uposatha_today() == is_uposatha
-    
+
+
+@pytest.mark.parametrize(
+    "today,is_holiday",
+    [
+        (date(2023, 7, 31), False),
+        (date(2023, 8, 1), True),
+        (date(2023, 8, 15), False),
+        (date(2023, 8, 16), False),
+    ]
+)
+def test_context_uposatha_today(today, is_holiday):
+    assert get_context(today).holiday_today() == is_holiday

@@ -50,7 +50,10 @@ class Context:
         return self.today == self.uposatha.falls_on
 
     def holiday_today(self) -> bool:
-        return False
+        if self.holiday is None:
+            return False
+
+        return self.uposatha_today()
 
 
 def get_context(today: date) -> Context:
