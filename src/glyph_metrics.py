@@ -8,12 +8,18 @@ from design_units import DesignUnits
 
 @dataclass
 class GlyphMetrics:
-    glyph_width: DesignUnits
-    left_side_bearing: DesignUnits
     x_min: DesignUnits
     x_max: DesignUnits
     y_min: DesignUnits
     y_max: DesignUnits
+
+    @property
+    def glyph_width(self) -> DesignUnits:
+        return self.x_max - self.x_min
+
+    @property
+    def left_side_bearing(self) -> DesignUnits:
+        return self.x_min
 
 
 def glyph_metrics(font_file_path: str, char: str):
@@ -21,8 +27,6 @@ def glyph_metrics(font_file_path: str, char: str):
     upm = font['head'].unitsPerEm
     gt_metrics = get_glyph_metrics(font, char)
     return GlyphMetrics(
-        glyph_width=DesignUnits(gt_metrics["fullwidth"], upm),
-        left_side_bearing=DesignUnits(gt_metrics["lsb"], upm),
         x_min=DesignUnits(gt_metrics["xMin"], upm),
         x_max=DesignUnits(gt_metrics["xMax"], upm),
         y_min=DesignUnits(gt_metrics["yMin"], upm),

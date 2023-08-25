@@ -41,4 +41,3 @@ def test_lsb_is_xmin(metrics):
 def test_should_raise_if_missing_glyph():
     with pytest.raises(KeyError):
         _ = glyph_metrics(font_roboto.RobotoBold, " ")
-
