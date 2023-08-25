@@ -15,8 +15,8 @@ class DesignUnits:
     def to_points(self, font_size: int) -> float:
         return self.to_em() * font_size
 
-    def to_pixels(self, font_points_per_em: int) -> int:
-        return round(self.to_em() * font_points_per_em)
+    def to_pixels(self) -> int:
+        return round(self.to_em())
 
     def __eq__(self, other):
         if not isinstance(other, DesignUnits):

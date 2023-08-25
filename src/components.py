@@ -40,18 +40,18 @@ class Glyph:
         self._metrics = glyph_metrics(self._font.path, self._char)
 
     def width(self) -> int:
-        return (self._metrics.width * self._font.size).to_pixels(1)
+        return (self._metrics.width * self._font.size).to_pixels()
 
     def height(self) -> int:
-        return (self._metrics.height * self._font.size).to_pixels(1)
+        return (self._metrics.height * self._font.size).to_pixels()
 
     def relative_x(self, x: int) -> int:
-        x_min = (self._metrics.x_min * self._font.size).to_pixels(1)
+        x_min = (self._metrics.x_min * self._font.size).to_pixels()
         return x - x_min
 
     def relative_y(self, y: int) -> int:
         ascent = self._font.ascent()
-        above_baseline = (self._metrics.y_max * self._font.size).to_pixels(1)
+        above_baseline = (self._metrics.y_max * self._font.size).to_pixels()
         distance_to_glyph_top = ascent - above_baseline
         return y - distance_to_glyph_top
 
