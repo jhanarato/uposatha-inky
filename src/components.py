@@ -40,7 +40,7 @@ class Glyph:
         self._metrics = glyph_metrics(self._font.path, self._char)
 
     def width(self) -> int:
-        width = self._metrics.glyph_width.to_points(self._font.size)
+        width = self._metrics.width.to_points(self._font.size)
         return round(width)
 
     def height(self) -> int:

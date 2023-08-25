@@ -14,7 +14,7 @@ class GlyphMetrics:
     y_max: DesignUnits
 
     @property
-    def glyph_width(self) -> DesignUnits:
+    def width(self) -> DesignUnits:
         return self.x_max - self.x_min
 
 
