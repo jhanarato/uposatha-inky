@@ -17,6 +17,10 @@ class GlyphMetrics:
     def width(self) -> DesignUnits:
         return self.x_max - self.x_min
 
+    @property
+    def height(self) -> DesignUnits:
+        return self.y_max - self.y_min
+
 
 def glyph_metrics(font_file_path: str, char: str):
     font = TTFont(font_file_path)

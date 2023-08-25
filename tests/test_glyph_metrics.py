@@ -1,6 +1,7 @@
 import pytest
 import font_roboto
 
+from design_units import DesignUnits
 from glyph_metrics import glyph_metrics
 
 
@@ -22,8 +23,11 @@ def test_glyph_width_in_points(metrics):
 
 
 def test_width_is_xmin_xmax_difference(metrics):
-    difference = metrics.x_max - metrics.x_min
-    assert metrics.width == difference
+    assert metrics.width == DesignUnits(1025 - 4, 2048)
+
+
+def test_height_includes_above_and_below_baseline(metrics):
+    assert metrics.height == DesignUnits(1082 + 437, 2048)
 
 
 def test_should_raise_if_missing_glyph():
