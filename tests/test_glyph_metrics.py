@@ -34,6 +34,10 @@ def test_width_is_xmin_xmax_difference(metrics):
     assert metrics.glyph_width.units() == difference
 
 
+def test_lsb_is_xmin(metrics):
+    assert metrics.left_side_bearing.units() == metrics.x_min.units()
+
+
 def test_should_raise_if_missing_glyph():
     with pytest.raises(KeyError):
         _ = glyph_metrics(font_roboto.RobotoBold, " ")
