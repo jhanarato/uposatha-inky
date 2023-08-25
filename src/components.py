@@ -51,8 +51,9 @@ class Glyph:
 
     def relative_y(self, y: int) -> int:
         ascent = self._font.ascent()
-        y_max = self._metrics.y_max.to_points(self._font.size)
-        return y - round(ascent - y_max)
+        above_baseline = self._metrics.y_max.to_pixels(self._font.size)
+        distance_to_glyph_top = ascent - above_baseline
+        return y - distance_to_glyph_top
 
     def draw(self, draw: ImageDraw, x: int, y: int):
         draw.text(xy=(self.relative_x(x), self.relative_y(y)),
