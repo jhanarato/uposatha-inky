@@ -27,6 +27,16 @@ class DesignUnits:
         units_per_em_eq = self._units_per_em == other._units_per_em
         return units_eq and units_per_em_eq
 
+    def __sub__(self, other):
+        if not isinstance(other, DesignUnits):
+            return NotImplemented
+
+        if not self._units_per_em == self._units_per_em:
+            return NotImplemented
+
+        units = self._units - other._units
+        return DesignUnits(units, self._units_per_em)
+
 
 @dataclass
 class GlyphMetrics:

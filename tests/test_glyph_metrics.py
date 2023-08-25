@@ -57,3 +57,7 @@ def test_units_per_em_are_not_equal():
 
 def test_units_compared_to_non_units():
     assert DesignUnits(100, 1000) != 100
+
+
+def test_subtract_units():
+    assert DesignUnits(100, 1000) - DesignUnits(75, 1000) == DesignUnits(25, 1000)
