@@ -44,9 +44,8 @@ class Glyph:
         return round(width)
 
     def height(self) -> int:
-        y_max = self._metrics.y_max.to_points(self._font.size)
-        y_min = self._metrics.y_min.to_points(self._font.size)
-        return round(y_max - y_min)
+        units = self._metrics.y_max - self._metrics.y_min
+        return round(units.to_points(self._font.size))
 
     def relative_x(self, x: int) -> int:
         x_min = self._metrics.x_min.to_points(self._font.size)
