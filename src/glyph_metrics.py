@@ -37,6 +37,28 @@ class DesignUnits:
         units = self._units - other._units
         return DesignUnits(units, self._units_per_em)
 
+    def __add__(self, other):
+        if not isinstance(other, DesignUnits):
+            return NotImplemented
+
+        if not self._units_per_em == self._units_per_em:
+            return NotImplemented
+
+        units = self._units + other._units
+        return DesignUnits(units, self._units_per_em)
+
+    def __mul__(self, multiplicand: float) -> Self:
+        if not self._units_per_em == self._units_per_em:
+            return NotImplemented
+
+        try:
+            scale_by = float(multiplicand)
+        except TypeError:
+            return NotImplemented
+
+        units = round(self._units * scale_by)
+        return DesignUnits(units, self._units_per_em)
+
 
 @dataclass
 class GlyphMetrics:
