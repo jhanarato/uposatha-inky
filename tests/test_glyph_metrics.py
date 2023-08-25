@@ -23,12 +23,12 @@ def test_glyph_width_in_points(metrics):
 
 
 def test_glyph_width_to_pixels(metrics):
-    assert metrics.width.to_pixels(font_points_per_em=16) == 8
+    assert (metrics.width * 16).to_pixels(font_points_per_em=1) == 8
 
 
 def test_y_max_pixels_are_rounded_points(metrics):
     points = metrics.y_max.to_points(16)
-    pixels = metrics.y_max.to_pixels(16)
+    pixels = (metrics.y_max * 16).to_pixels(1)
     assert pixels == round(points)
 
 
