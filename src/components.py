@@ -49,8 +49,8 @@ class Glyph:
         return round(y_max - y_min)
 
     def relative_x(self, x: int) -> int:
-        lsb = self._metrics.left_side_bearing.to_points(self._font.size)
-        return x - round(lsb)
+        x_min = self._metrics.x_min.to_points(self._font.size)
+        return x - round(x_min)
 
     def relative_y(self, y: int) -> int:
         ascent = self._font.ascent()
