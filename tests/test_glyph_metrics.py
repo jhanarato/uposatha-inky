@@ -26,6 +26,12 @@ def test_glyph_width_to_pixels(metrics):
     assert metrics.width.to_pixels(font_points_per_em=16) == 8
 
 
+def test_y_max_pixels_are_rounded_points(metrics):
+    points = metrics.y_max.to_points(16)
+    pixels = metrics.y_max.to_pixels(16)
+    assert pixels == round(points)
+
+
 def test_width_is_xmin_xmax_difference(metrics):
     assert metrics.width == DesignUnits(1025 - 4, 2048)
 
