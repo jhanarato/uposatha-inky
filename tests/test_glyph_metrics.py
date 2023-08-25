@@ -47,3 +47,21 @@ def test_design_units_are_equal():
     left = DesignUnits(100, 1000)
     right = DesignUnits(100, 1000)
     assert left == right
+
+
+def test_design_units_are_not_equal():
+    left = DesignUnits(100, 1000)
+    right = DesignUnits(101, 1000)
+    assert left != right
+
+
+def test_units_per_em_are_not_equal():
+    left = DesignUnits(100, 1000)
+    right = DesignUnits(100, 1001)
+    assert left != right
+
+
+def test_units_compared_to_non_units():
+    left = DesignUnits(100, 1000)
+    right = 100
+    assert left == right

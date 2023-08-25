@@ -19,7 +19,10 @@ class DesignUnits:
     def to_points(self, font_size: int) -> float:
         return self.to_em() * font_size
 
-    def __eq__(self, other: Self):
+    def __eq__(self, other):
+        if not isinstance(other, DesignUnits):
+            return NotImplemented
+
         units_eq = self._units == other._units
         units_per_em_eq = self._units_per_em == other._units_per_em
         return units_eq and units_per_em_eq
