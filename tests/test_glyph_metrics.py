@@ -1,7 +1,7 @@
 import pytest
 import font_roboto
 
-from glyph_metrics import glyph_metrics
+from glyph_metrics import glyph_metrics, DesignUnits
 
 
 @pytest.fixture
@@ -41,3 +41,9 @@ def test_lsb_is_xmin(metrics):
 def test_should_raise_if_missing_glyph():
     with pytest.raises(KeyError):
         _ = glyph_metrics(font_roboto.RobotoBold, " ")
+
+
+def test_design_units_are_equal():
+    left = DesignUnits(100, 1000)
+    right = DesignUnits(100, 1000)
+    assert left == right
