@@ -21,21 +21,9 @@ def test_glyph_width_in_points(metrics):
     assert metrics.glyph_width.to_points(font_size=16) == 9.265625
 
 
-def test_glyph_left_side_bearing(metrics):
-    assert metrics.left_side_bearing.units() == 130
-
-
-def test_lsb_as_points(metrics):
-    assert metrics.left_side_bearing.to_points(font_size=30) == 1.904296875
-
-
 def test_width_is_xmin_xmax_difference(metrics):
     difference = metrics.x_max - metrics.x_min
     assert metrics.glyph_width == difference
-
-
-def test_lsb_is_xmin(metrics):
-    assert metrics.left_side_bearing == metrics.x_min
 
 
 def test_should_raise_if_missing_glyph():
