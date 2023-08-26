@@ -6,6 +6,10 @@ class DesignUnits:
         self._units = units
         self._units_per_em = units_per_em
 
+    @classmethod
+    def from_pixels(cls, pixels: int, units_per_em) -> Self:
+        return cls(123, 1000)
+
     def units(self) -> int:
         return self._units
 

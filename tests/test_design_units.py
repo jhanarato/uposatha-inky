@@ -33,3 +33,5 @@ def test_round_units_multiplication():
     assert DesignUnits(1, 1000) * 1.1 == DesignUnits(1, 1000)
 
 
+def test_from_pixels():
+    assert DesignUnits.from_pixels(8, 1000) == DesignUnits(123, 1000)
