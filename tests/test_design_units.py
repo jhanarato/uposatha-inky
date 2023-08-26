@@ -34,4 +34,4 @@ def test_round_units_multiplication():
 
 
 def test_from_pixels():
-    assert DesignUnits.from_pixels(8, 1000) == DesignUnits(123, 1000)
+    assert DesignUnits.from_pixels(8, 1000) == DesignUnits(8000, 1000)
