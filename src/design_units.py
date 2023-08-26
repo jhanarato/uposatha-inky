@@ -21,10 +21,7 @@ class DesignUnits:
     def __eq__(self, other):
         if not isinstance(other, DesignUnits):
             return NotImplemented
-
-        units_eq = self._units == other._units
-        units_per_em_eq = self._units_per_em == other._units_per_em
-        return units_eq and units_per_em_eq
+        return (self._units, self._units_per_em) == (other._units, other._units_per_em)
 
     def __sub__(self, other):
         if not isinstance(other, DesignUnits):
