@@ -3,7 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from fonts import Font
-from glyph_metrics import glyph_metrics
+from font_metrics import glyph_metrics
 from screen import Ink
 
 

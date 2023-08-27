@@ -4,7 +4,7 @@ import font_roboto
 from PIL import ImageFont
 
 from design_units import DesignUnits
-from glyph_metrics import GlyphMetrics
+from font_metrics import GlyphMetrics
 
 fonts = {
     "roboto": font_roboto.Roboto,
@@ -23,7 +23,7 @@ fonts = {
 
 
 class Metrics(Protocol):
-    def units_per_em(self, file_path: str) -> DesignUnits: ...
+    def units_per_em(self, file_path: str) -> int: ...
     def glyph_metrics(self, file_path: str, char: str) -> GlyphMetrics: ...
 
 

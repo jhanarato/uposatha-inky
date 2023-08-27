@@ -1,5 +1,5 @@
 from font_roboto import RobotoBold
-from glyph_metrics import glyph_metrics
+from font_metrics import glyph_metrics
 
 
 def test_five_letter_metrics(benchmark):
