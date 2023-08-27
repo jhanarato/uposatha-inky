@@ -2,7 +2,7 @@ import pytest
 import font_roboto
 
 from design_units import DesignUnits
-from font_metrics import MetricsFromFile, GlyphMetrics
+from font_metrics import MetricsFromFile, GlyphMetrics, MetricsPrecalculated
 from fonts import Font
 
 
@@ -64,3 +64,20 @@ def test_read_metrics_has_glyph_metrics():
     y_actual = metrics.glyph_metrics(font_roboto.RobotoBold, "y")
 
     assert y_actual == y_expected
+
+
+def test_precalculated_units_per_em():
+    from_file = MetricsFromFile().units_per_em(font_roboto.RobotoBold)
+    precalculated = MetricsPrecalculated().units_per_em(font_roboto.RobotoBold)
+
+    assert from_file == precalculated
+
+
+@pytest.mark.parametrize(
+    "char", ["S", "M", "T", "W", "F"]
+)
+def test_precalculated_glyph_metrics(char):
+    metrics_from_file = MetricsFromFile().glyph_metrics(font_roboto.RobotoBold, char)
+    metrics_precalculated = MetricsPrecalculated().glyph_metrics(font_roboto.RobotoBold, char)
+
+    assert metrics_precalculated == metrics_from_file
