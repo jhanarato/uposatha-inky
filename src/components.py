@@ -3,7 +3,6 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from fonts import Font
-from font_metrics import glyph_metrics
 from screen import Ink
 
 
@@ -37,7 +36,7 @@ class Glyph:
         self._font = font
         self._char = char
         self._colour = colour
-        self._metrics = glyph_metrics(self._font.path, self._char)
+        self._metrics = Font.metrics.glyph_metrics(self._font.path, self._char)
 
     def width(self) -> int:
         width_in_units = self._metrics.width * self._font.size
