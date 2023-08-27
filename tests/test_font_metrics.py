@@ -2,12 +2,13 @@ import pytest
 import font_roboto
 
 from design_units import DesignUnits
-from font_metrics import glyph_metrics, MetricsFromFile, GlyphMetrics
+from font_metrics import MetricsFromFile, GlyphMetrics
+from fonts import Font
 
 
 @pytest.fixture
 def metrics():
-    return glyph_metrics(font_roboto.RobotoBold, "y")
+    return Font.metrics.glyph_metrics(font_roboto.RobotoBold, "y")
 
 
 def test_glyph_width_in_units(metrics):
@@ -42,7 +43,7 @@ def test_height_includes_above_and_below_baseline(metrics):
 
 def test_should_raise_if_missing_glyph():
     with pytest.raises(KeyError):
-        _ = glyph_metrics(font_roboto.RobotoBold, " ")
+        _ = Font.metrics.glyph_metrics(font_roboto.RobotoBold, " ")
 
 
 def test_read_metrics_has_units_per_em():
