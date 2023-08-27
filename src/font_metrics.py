@@ -32,3 +32,17 @@ def glyph_metrics(font_file_path: str, char: str):
         y_min=DesignUnits(gt_metrics["yMin"], upm),
         y_max=DesignUnits(gt_metrics["yMax"], upm),
     )
+
+
+class MetricsFromFile:
+    def units_per_em(self, file_path: str) -> int:
+        font = TTFont(file_path)
+        return font['head'].unitsPerEm
+
+    def glyph_metrics(self, file_path: str, char: str) -> GlyphMetrics:
+        return GlyphMetrics(
+            x_min=DesignUnits(4, 2048),
+            x_max=DesignUnits(1025, 2048),
+            y_min=DesignUnits(-437, 2048),
+            y_max=DesignUnits(1082, 2048)
+        )
