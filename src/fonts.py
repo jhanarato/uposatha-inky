@@ -29,7 +29,7 @@ class Metrics(Protocol):
 
 
 class Font:
-    metrics = font_metrics.MetricsFromFile()
+    metrics = font_metrics.MetricsPrecalculated()
 
     def __init__(self, name: str, size: int):
         self._name = name

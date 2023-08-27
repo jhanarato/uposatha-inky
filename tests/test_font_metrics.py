@@ -7,7 +7,7 @@ from fonts import Font
 
 
 @pytest.fixture
-def metrics():
+def metrics(metrics_reads_file):
     return Font.metrics.glyph_metrics(font_roboto.RobotoBold, "y")
 
 

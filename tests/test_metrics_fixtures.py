@@ -3,6 +3,7 @@ from fonts import Font
 
 
 def test_1_default_metrics():
+    Font.metrics = MetricsFromFile()
     assert isinstance(Font.metrics, MetricsFromFile)
 
 

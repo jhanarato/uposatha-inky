@@ -2,15 +2,15 @@ from icon_grid_demo import icon_row, shifted_grid, grid_coordinates, image_size
 
 
 def test_shifted_grid():
-    icons = shifted_grid("ABC")
+    icons = shifted_grid("SMT")
     row_str = "".join([icon.letter for icon in icons])
-    assert row_str == "ABCBCACAB"
+    assert row_str == "SMTMTSTSM"
 
 
 def test_icon_rows():
-    row = icon_row("ABC")
+    row = icon_row("SMT")
     result = "".join([icon.letter for icon in row])
-    assert result == "ABC"
+    assert result == "SMT"
 
 
 def test_grid_coordinates():
