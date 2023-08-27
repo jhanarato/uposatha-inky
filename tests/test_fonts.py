@@ -1,5 +1,7 @@
 import pytest
 
+from font_roboto import RobotoBold
+
 from fonts import fonts, Font
 from design_units import DesignUnits
 
@@ -58,3 +60,7 @@ def test_design_units_converts_to_em(units):
 
 def test_design_converts_font_points_to_glyph_points(units):
     assert units.to_points(font_size=10) == 0.5
+
+
+def test_font_class_provides_metrics():
+    assert Font.metrics.units_per_em(RobotoBold) == 2048

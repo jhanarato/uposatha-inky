@@ -3,6 +3,7 @@ from typing import Protocol
 import font_roboto
 from PIL import ImageFont
 
+import font_metrics
 from design_units import DesignUnits
 from font_metrics import GlyphMetrics
 
@@ -28,6 +29,8 @@ class Metrics(Protocol):
 
 
 class Font:
+    metrics = font_metrics.MetricsFromFile()
+
     def __init__(self, name: str, size: int):
         self._name = name
         self._size = size
