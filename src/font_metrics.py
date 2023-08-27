@@ -42,6 +42,10 @@ class MetricsFromFile:
 
 class MetricsPrecalculated:
     def __init__(self):
+        self._units_per_em = {
+            font_roboto.RobotoBold: 2048,
+        }
+
         self._metrics = {
             font_roboto.RobotoBold: {
                 "S": GlyphMetrics(
@@ -78,7 +82,7 @@ class MetricsPrecalculated:
         }
 
     def units_per_em(self, file_path: str) -> int:
-        return 2048
+        return self._units_per_em[file_path]
 
     def glyph_metrics(self, file_path: str, char: str) -> GlyphMetrics:
         return self._metrics[file_path][char]
