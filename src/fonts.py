@@ -1,7 +1,10 @@
+from typing import Protocol
+
 import font_roboto
 from PIL import ImageFont
 
-from glyph_metrics import GlyphMetrics, glyph_metrics
+from design_units import DesignUnits
+from glyph_metrics import GlyphMetrics
 
 fonts = {
     "roboto": font_roboto.Roboto,
@@ -17,6 +20,11 @@ fonts = {
     "roboto-thin": font_roboto.RobotoThin,
     "roboto-thin-italic": font_roboto.RobotoThinItalic,
 }
+
+
+class Metrics(Protocol):
+    def units_per_em(self, file_path: str) -> DesignUnits: ...
+    def glyph_metrics(self, file_path: str, char: str) -> GlyphMetrics: ...
 
 
 class Font:
