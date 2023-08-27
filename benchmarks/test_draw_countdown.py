@@ -16,5 +16,9 @@ def draw_countdown():
         countdown.draw(draw, 0, 0)
 
 
-def test_draw_countdown(benchmark):
+def test_draw_countdown_read(benchmark, read_from_file):
+    benchmark(draw_countdown)
+
+
+def test_draw_countdown_precalculate(benchmark, precalculate):
     benchmark(draw_countdown)

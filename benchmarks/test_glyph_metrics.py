@@ -8,9 +8,9 @@ def five_letter_metrics():
         _ = Font.metrics.glyph_metrics(RobotoBold, letter)
 
 
-def test_read(benchmark, read_from_file):
+def test_five_letters_read(benchmark, read_from_file):
     benchmark(five_letter_metrics)
 
 
-def test_precalculate(benchmark, precalculate):
+def test_five_letters_precalculated(benchmark, precalculate):
     benchmark(five_letter_metrics)
