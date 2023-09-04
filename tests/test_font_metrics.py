@@ -6,9 +6,10 @@ from font_metrics import MetricsFromFile, MetricsPrecalculated
 from fonts import Font
 
 
-@pytest.fixture
-def metrics(metrics_reads_file):
-    return Font.metrics.glyph_metrics(font_roboto.RobotoBold, "y")
+@pytest.fixture(scope="module")
+def metrics():
+    metrics = MetricsFromFile()
+    return metrics.glyph_metrics(font_roboto.RobotoBold, "y")
 
 
 def test_glyph_width_in_units(metrics):
