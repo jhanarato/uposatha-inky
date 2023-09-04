@@ -52,8 +52,10 @@ class Font:
     def size(self) -> int:
         return self._size
 
-    def ascent(self) -> int:
-        return self._pil_font.getmetrics()[0]
+    def ascent(self) -> DesignUnits:
+        pixels = self._pil_font.getmetrics()[0]
+        upm = self.metrics.units_per_em(self.path)
+        return DesignUnits.from_pixels(pixels, upm)
 
     def descent(self) -> DesignUnits:
         pixels = self._pil_font.getmetrics()[1]

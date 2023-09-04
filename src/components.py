@@ -51,7 +51,7 @@ class Glyph:
         return x - left_offset_in_units.to_pixels()
 
     def relative_y(self, y: int) -> int:
-        ascent_in_pixels = self._font.ascent()
+        ascent_in_pixels = self._font.ascent().to_pixels()
         above_baseline_in_units = self._metrics.y_max * self._font.size
         top_offset_in_pixels = ascent_in_pixels - above_baseline_in_units.to_pixels()
         return y - top_offset_in_pixels

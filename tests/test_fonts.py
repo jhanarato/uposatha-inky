@@ -25,7 +25,7 @@ def test_should_have_style(font):
 
 
 def test_should_have_ascent(font):
-    assert font.ascent() == 28
+    assert font.ascent().to_pixels() == 28
 
 
 def test_should_have_descent(font):
