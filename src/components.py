@@ -39,12 +39,12 @@ class Glyph:
         self._metrics = Font.metrics.glyph_metrics(self._font.path, self._char)
 
     def width(self) -> int:
-        width_in_units = self._metrics.width * self._font.size
-        return width_in_units.to_pixels()
+        width = self._metrics.width * self._font.size
+        return width.to_pixels()
 
     def height(self) -> int:
-        height_in_units = self._metrics.height * self._font.size
-        return height_in_units.to_pixels()
+        height = self._metrics.height * self._font.size
+        return height.to_pixels()
 
     def relative_x(self, x: int) -> int:
         left_offset = self._metrics.x_min * self._font.size
