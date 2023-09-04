@@ -2,6 +2,7 @@ from typing import Protocol
 
 from PIL import ImageDraw
 
+from design_units import DesignUnits
 from fonts import Font
 from screen import Ink
 
@@ -46,17 +47,27 @@ class Glyph:
         height = self._metrics.height * self._font.size
         return height.to_pixels()
 
+    def _left_bearing(self) -> DesignUnits:
+        return self._metrics.x_min * self._font.size
+
+    def _top_bearing(self) -> DesignUnits:
+        above_baseline = self._metrics.y_max * self._font.size
+        return self._font.ascent() - above_baseline
+
     def relative_x(self, x: int) -> int:
-        left_offset = self._metrics.x_min * self._font.size
-        return x - left_offset.to_pixels()
+        return x - self._left_bearing().to_pixels()
 
     def relative_y(self, y: int) -> int:
-        above_baseline = self._metrics.y_max * self._font.size
-        top_offset_in_units = self._font.ascent() - above_baseline
-        return y - top_offset_in_units.to_pixels()
+        return y - self._top_bearing().to_pixels()
+
+    def offset(self, x, y) -> tuple[int, int]:
+        return (
+            self.relative_x(x),
+            self.relative_y(y)
+        )
 
     def draw(self, draw: ImageDraw, x: int, y: int):
-        draw.text(xy=(self.relative_x(x), self.relative_y(y)),
+        draw.text(xy=self.offset(x, y),
                   text=self._char,
                   fill=self._colour.value,
                   font=self._font.as_pillow())
