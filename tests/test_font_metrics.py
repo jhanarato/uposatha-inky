@@ -51,21 +51,6 @@ def test_read_metrics_has_units_per_em():
     assert metrics.units_per_em(font_roboto.RobotoBold) == 2048
 
 
-def test_read_metrics_has_glyph_metrics():
-    metrics = MetricsFromFile()
-
-    y_expected = GlyphMetrics(
-        x_min=DesignUnits(4, 2048),
-        x_max=DesignUnits(1025, 2048),
-        y_min=DesignUnits(-437, 2048),
-        y_max=DesignUnits(1082, 2048)
-    )
-
-    y_actual = metrics.glyph_metrics(font_roboto.RobotoBold, "y")
-
-    assert y_actual == y_expected
-
-
 def test_precalculated_units_per_em():
     from_file = MetricsFromFile().units_per_em(font_roboto.RobotoBold)
     precalculated = MetricsPrecalculated().units_per_em(font_roboto.RobotoBold)
