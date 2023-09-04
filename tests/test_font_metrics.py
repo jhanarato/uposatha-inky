@@ -2,7 +2,7 @@ import pytest
 import font_roboto
 
 from design_units import DesignUnits
-from font_metrics import MetricsFromFile, GlyphMetrics, MetricsPrecalculated
+from font_metrics import MetricsFromFile, MetricsPrecalculated
 from fonts import Font
 
 
