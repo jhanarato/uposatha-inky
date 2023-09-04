@@ -47,14 +47,13 @@ class Glyph:
         return height_in_units.to_pixels()
 
     def relative_x(self, x: int) -> int:
-        left_offset_in_units = self._metrics.x_min * self._font.size
-        return x - left_offset_in_units.to_pixels()
+        left_offset = self._metrics.x_min * self._font.size
+        return x - left_offset.to_pixels()
 
     def relative_y(self, y: int) -> int:
-        ascent_in_pixels = self._font.ascent().to_pixels()
-        above_baseline_in_units = self._metrics.y_max * self._font.size
-        top_offset_in_pixels = ascent_in_pixels - above_baseline_in_units.to_pixels()
-        return y - top_offset_in_pixels
+        above_baseline = self._metrics.y_max * self._font.size
+        top_offset_in_units = self._font.ascent() - above_baseline
+        return y - top_offset_in_units.to_pixels()
 
     def draw(self, draw: ImageDraw, x: int, y: int):
         draw.text(xy=(self.relative_x(x), self.relative_y(y)),
