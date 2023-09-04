@@ -4,7 +4,6 @@ import font_roboto
 from PIL import ImageFont
 
 import font_metrics
-from design_units import DesignUnits
 from font_metrics import GlyphMetrics
 
 fonts = {
@@ -29,7 +28,7 @@ class Metrics(Protocol):
 
 
 class Font:
-    metrics = font_metrics.MetricsPrecalculated()
+    metrics: Metrics = font_metrics.MetricsPrecalculated()
 
     def __init__(self, name: str, size: int):
         self._name = name
