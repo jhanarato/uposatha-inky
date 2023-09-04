@@ -55,12 +55,12 @@ class Font:
     def ascent(self) -> DesignUnits:
         pixels = self._pil_font.getmetrics()[0]
         upm = self.metrics.units_per_em(self.path)
-        return DesignUnits.from_pixels(pixels, upm)
+        return DesignUnits.from_points(pixels, upm)
 
     def descent(self) -> DesignUnits:
         pixels = self._pil_font.getmetrics()[1]
         upm = self.metrics.units_per_em(self.path)
-        return DesignUnits.from_pixels(pixels, upm)
+        return DesignUnits.from_points(pixels, upm)
 
     def height(self, text: str) -> int:
         return self._pil_font.getbbox(text)[3]

@@ -7,8 +7,8 @@ class DesignUnits:
         self._units_per_em = units_per_em
 
     @classmethod
-    def from_pixels(cls, pixels: int, units_per_em) -> Self:
-        return cls(pixels * units_per_em, units_per_em)
+    def from_points(cls, points: int, units_per_em) -> Self:
+        return cls(points * units_per_em, units_per_em)
 
     def units(self) -> int:
         return self._units
