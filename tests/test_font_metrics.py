@@ -2,14 +2,23 @@ import pytest
 import font_roboto
 
 from design_units import DesignUnits
-from font_metrics import MetricsFromFile, MetricsPrecalculated
+from font_metrics import MetricsFromFile, MetricsPrecalculated, GlyphMetrics
 from fonts import Font
 
 
 @pytest.fixture(scope="module")
-def metrics():
-    metrics = MetricsFromFile()
-    return metrics.glyph_metrics(font_roboto.RobotoBold, "y")
+def file_metrics():
+    return MetricsFromFile()
+
+
+@pytest.fixture
+def metrics(file_metrics):
+    return GlyphMetrics(
+        x_min=DesignUnits(4, 2048),
+        x_max=DesignUnits(1025, 2048),
+        y_min=DesignUnits(-437, 2048),
+        y_max=DesignUnits(1082, 2048)
+    )
 
 
 def test_glyph_width_in_units(metrics):
@@ -62,8 +71,8 @@ def test_precalculated_units_per_em():
 @pytest.mark.parametrize(
     "char", ["S", "M", "T", "W", "F"]
 )
-def test_precalculated_glyph_metrics(char):
-    metrics_from_file = MetricsFromFile().glyph_metrics(font_roboto.RobotoBold, char)
+def test_precalculated_glyph_metrics(file_metrics, char):
+    metrics_from_file = file_metrics.glyph_metrics(font_roboto.RobotoBold, char)
     metrics_precalculated = MetricsPrecalculated().glyph_metrics(font_roboto.RobotoBold, char)
 
     assert metrics_precalculated == metrics_from_file
