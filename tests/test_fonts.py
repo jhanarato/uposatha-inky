@@ -29,7 +29,7 @@ def test_should_have_ascent(font):
 
 
 def test_should_have_descent(font):
-    assert font.descent() == 8
+    assert font.descent().to_pixels() == 8
 
 
 def test_should_measure_height_of_text(font):

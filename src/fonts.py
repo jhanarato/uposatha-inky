@@ -4,6 +4,7 @@ import font_roboto
 from PIL import ImageFont
 
 import font_metrics
+from design_units import DesignUnits
 from font_metrics import GlyphMetrics
 
 fonts = {
@@ -54,8 +55,10 @@ class Font:
     def ascent(self) -> int:
         return self._pil_font.getmetrics()[0]
 
-    def descent(self) -> int:
-        return self._pil_font.getmetrics()[1]
+    def descent(self) -> DesignUnits:
+        pixels = self._pil_font.getmetrics()[1]
+        upm = self.metrics.units_per_em(self.path)
+        return DesignUnits.from_pixels(pixels, upm)
 
     def height(self, text: str) -> int:
         return self._pil_font.getbbox(text)[3]
