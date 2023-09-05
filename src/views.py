@@ -1,3 +1,5 @@
+from PIL import ImageDraw
+
 from components import Text
 from compose import next_uposatha
 from content import Context, next_uposatha_content
@@ -23,3 +25,8 @@ def holiday(context: Context):
         font = Font("roboto", 30)
         text = Text("Today is a holiday", font, Ink.BLACK)
         text.draw(draw, 10, 10)
+
+
+class BetweenUposathasView:
+    def show(self, draw: ImageDraw):
+        pass
