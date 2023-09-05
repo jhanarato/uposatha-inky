@@ -26,3 +26,8 @@ def test_should_find_relative_y():
 def test_should_calculate_left_bearing():
     glyph = Glyph("W", Font("roboto-bold", 30), Ink.BLACK)
     assert glyph._left_bearing().to_pixels() == 1
+
+
+def test_should_calculate_top_bearing():
+    glyph = Glyph("W", Font("roboto-bold", 30), Ink.BLACK)
+    assert glyph._top_bearing().to_pixels() == 7
