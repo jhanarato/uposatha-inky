@@ -54,20 +54,13 @@ class Glyph:
         above_baseline = self._metrics.y_max * self._font.size
         return self._font.ascent() - above_baseline
 
-    def relative_x(self, x: int) -> int:
-        return x - self._left_bearing().to_pixels()
-
-    def relative_y(self, y: int) -> int:
-        return y - self._top_bearing().to_pixels()
-
-    def offset(self, x, y) -> tuple[int, int]:
-        return (
-            self.relative_x(x),
-            self.relative_y(y)
+    def draw(self, draw: ImageDraw, x: int, y: int):
+        xy = (
+            x - self._left_bearing().to_pixels(),
+            y - self._top_bearing().to_pixels()
         )
 
-    def draw(self, draw: ImageDraw, x: int, y: int):
-        draw.text(xy=self.offset(x, y),
+        draw.text(xy=xy,
                   text=self._char,
                   fill=self._colour.value,
                   font=self._font.as_pillow())
