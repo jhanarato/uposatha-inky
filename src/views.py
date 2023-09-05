@@ -5,6 +5,7 @@ from compose import next_uposatha
 from content import Context, next_uposatha_content, NextUposatha
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
+from layout import VerticalLayout
 from screen import Ink, WIDTH, HEIGHT
 from viewer import DrawingViewer
 
@@ -74,6 +75,15 @@ class BetweenUposathasView:
                 self._content.moon_phase),
             Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
         ]
+
+    def _layout(self) -> VerticalLayout:
+        layout = VerticalLayout(HEIGHT, WIDTH)
+
+        for component in self._components():
+            layout.add_space(20)
+            layout.add_centred(component)
+
+        return layout
 
     def show(self, draw: ImageDraw):
         pass

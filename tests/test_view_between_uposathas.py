@@ -41,3 +41,9 @@ def test_should_generate_components(content):
     between_view = BetweenUposathasView(content)
     component_types = [type(component) for component in between_view._components()]
     assert component_types == [Text, HorizontalLine, Text, Countdown, Text]
+
+
+def test_should_layout_components(content):
+    between_view = BetweenUposathasView(content)
+    layout = between_view._layout()
+    assert sum(1 for _ in layout.coordinates()) == len(between_view._components())
