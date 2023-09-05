@@ -3,8 +3,9 @@ from collections.abc import Iterator
 from PIL import ImageDraw
 
 from components import DayOfWeekIcon
-from compose import GAP
 from viewer import DrawingViewer
+
+GAP = 4
 
 
 def days(size: int) -> list[DayOfWeekIcon]:
