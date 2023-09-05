@@ -21,3 +21,8 @@ def test_should_find_relative_x():
 def test_should_find_relative_y():
     glyph = Glyph("W", Font("roboto-bold", 30), Ink.BLACK)
     assert glyph.relative_y(11) == 4
+
+
+def test_should_calculate_left_bearing():
+    glyph = Glyph("W", Font("roboto-bold", 30), Ink.BLACK)
+    assert glyph._left_bearing().to_pixels() == 1
