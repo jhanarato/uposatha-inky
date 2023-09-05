@@ -2,7 +2,7 @@ from PIL import ImageDraw
 
 from components import Text
 from compose import next_uposatha
-from content import Context, next_uposatha_content
+from content import Context, next_uposatha_content, NextUposatha
 from countdown import IconCountMapping, Appearance
 from fonts import Font
 from screen import Ink, WIDTH, HEIGHT
@@ -36,8 +36,8 @@ class BetweenUposathasView:
     LARGE_ICON = 45
     LARGEST_ICON = 80
 
-    def show(self, draw: ImageDraw):
-        pass
+    def __init__(self, content: NextUposatha):
+        self._content = content
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
@@ -55,3 +55,12 @@ class BetweenUposathasView:
         appearances[2, 3] = Appearance(self.LARGE_ICON, 7, self.GAP)
         appearances[1] = Appearance(self.LARGEST_ICON, 7, self.GAP)
         return appearances
+
+    def _appearances(self) -> IconCountMapping[Appearance]:
+        if self._content.fourteen_day:
+            return self._fourteen_day_appearance()
+        else:
+            return self._fifteen_day_appearance()
+
+    def show(self, draw: ImageDraw):
+        pass
