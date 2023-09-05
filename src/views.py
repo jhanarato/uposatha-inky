@@ -1,7 +1,6 @@
 from PIL import ImageDraw
 
 from components import Text, HorizontalLine
-from compose import next_uposatha
 from content import Context, next_uposatha_content, NextUposatha
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
@@ -12,7 +11,9 @@ from viewer import DrawingViewer
 
 def between_uposathas(context: Context):
     content = next_uposatha_content(context.today)
-    next_uposatha(content)
+    between_view = BetweenUposathasView(content)
+    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
+        between_view.show(draw)
 
 
 def uposatha(context: Context):
@@ -86,4 +87,5 @@ class BetweenUposathasView:
         return layout
 
     def show(self, draw: ImageDraw):
-        pass
+        for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
+            component.draw(draw, *coordinates)
