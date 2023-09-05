@@ -1,9 +1,9 @@
 from PIL import ImageDraw
 
-from components import Text
+from components import Text, HorizontalLine
 from compose import next_uposatha
 from content import Context, next_uposatha_content, NextUposatha
-from countdown import IconCountMapping, Appearance
+from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from screen import Ink, WIDTH, HEIGHT
 from viewer import DrawingViewer
@@ -61,6 +61,19 @@ class BetweenUposathasView:
             return self._fourteen_day_appearance()
         else:
             return self._fifteen_day_appearance()
+
+    def _components(self):
+        return [
+            Text("Uposatha", Font("roboto-bold", 30), Ink.BLACK),
+            HorizontalLine(300, Ink.BLACK),
+            Text(self._content.date, Font("roboto-bold", 24), Ink.BLACK),
+            Countdown(
+                self._appearances(),
+                self._content.today,
+                self._content.falls_on,
+                self._content.moon_phase),
+            Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
+        ]
 
     def show(self, draw: ImageDraw):
         pass
