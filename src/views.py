@@ -13,7 +13,7 @@ def between_uposathas(context: Context):
     content = next_uposatha_content(context)
     between_view = BetweenUposathasView(content)
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        between_view.show(draw)
+        between_view.show(draw, context)
 
 
 def uposatha(context: Context):
@@ -86,6 +86,6 @@ class BetweenUposathasView:
 
         return layout
 
-    def show(self, draw: ImageDraw):
+    def show(self, draw: ImageDraw, context: Context):
         for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
             component.draw(draw, *coordinates)

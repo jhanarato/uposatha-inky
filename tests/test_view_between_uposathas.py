@@ -20,7 +20,7 @@ def test_should_show_between_view(day_before_uposatha_context):
     content = next_uposatha_content(day_before_uposatha_context)
     between_view = BetweenUposathasView(content)
     with DrawingViewer(width=WIDTH, height=HEIGHT, show=False) as draw:
-        between_view.show(draw)
+        between_view.show(draw, day_before_uposatha_context)
 
 
 def test_should_select_appearances(day_before_uposatha_context):
