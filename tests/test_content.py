@@ -23,7 +23,8 @@ def test_should_provide_today_is_uposatha():
     cal = Calendar()
     today = date(2023, 6, 17)
     uposatha = cal.next_uposatha(today)
-    context = Context(today, SeasonName.RAINY, uposatha, None)
+    season = cal.current_season(today)
+    context = Context(today, season, uposatha, None)
     assert context.uposatha_today()
 
 
@@ -38,7 +39,7 @@ def test_should_create_context_with_no_holiday():
 
     assert context.today == date(2023, 8, 15)
     assert context.uposatha == uposatha
-    assert context.season == SeasonName.RAINY
+    assert context.season.name == SeasonName.RAINY
     assert context.holiday is None
 
 
