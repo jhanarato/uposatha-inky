@@ -56,13 +56,15 @@ def test_should_layout_components(day_before_uposatha_context):
     assert sum(1 for _ in layout.coordinates()) == len(between_view._components(content))
 
 
-def test_should_select_between_view(day_before_uposatha_context):
-    assert isinstance(select_view(day_before_uposatha_context), BetweenUposathasView)
-
-
-def test_should_select_uposatha_view(uposatha_context):
-    assert isinstance(select_view(uposatha_context), UposathaView)
-
-
-def test_should_select_holiday_view(holiday_context):
-    assert isinstance(select_view(holiday_context), HolidayView)
+@pytest.mark.parametrize(
+    "today,view_type",
+    [
+        (date(2023, 9, 28), BetweenUposathasView),
+        (date(2023, 9, 29), UposathaView),
+        (date(2023, 10, 29), HolidayView),
+    ]
+)
+def test_should_select_view_from_context(today, view_type):
+    context = get_context(today)
+    view = select_view(context)
+    assert isinstance(view, view_type)
