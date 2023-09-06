@@ -8,7 +8,7 @@ from countdown import Appearance
 from countdown import Countdown
 from screen import WIDTH, HEIGHT
 from viewer import DrawingViewer
-from views import BetweenUposathasView, next_uposatha_content
+from views import select_view, BetweenUposathasView, next_uposatha_content
 
 
 @pytest.fixture
@@ -44,3 +44,7 @@ def test_should_layout_components(day_before_uposatha_context):
     between_view = BetweenUposathasView()
     layout = between_view._layout(content)
     assert sum(1 for _ in layout.coordinates()) == len(between_view._components(content))
+
+
+def test_should_select_between_view(day_before_uposatha_context):
+    assert isinstance(select_view(day_before_uposatha_context), BetweenUposathasView)

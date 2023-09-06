@@ -18,6 +18,10 @@ class View(Protocol):
     def show(self, draw: ImageDraw, context: Context) -> None: ...
 
 
+def select_view(context: Context) -> View:
+    return BetweenUposathasView()
+
+
 def between_uposathas(context: Context):
     between_view = BetweenUposathasView()
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
