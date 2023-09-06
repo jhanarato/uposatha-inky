@@ -45,15 +45,15 @@ def next_uposatha_content(context: Context) -> NextUposatha:
         today=context.today,
         falls_on=context.uposatha.falls_on,
         date=context.uposatha.falls_on.strftime("%A %d/%m/%y"),
-        details=uposatha_details(context.season, context.uposatha),
+        details=uposatha_details(context),
         moon_phase=context.uposatha.moon_phase,
         fourteen_day=(context.uposatha.days_since_previous == 14)
     )
 
 
-def uposatha_details(season, next_uposatha):
-    days_since_previous = next_uposatha.days_since_previous
-    uposatha_number = next_uposatha.number_in_season
-    number_of_uposathas = len(season.uposathas)
-    season_name = season.name.name.capitalize()
+def uposatha_details(context: Context):
+    days_since_previous = context.uposatha.days_since_previous
+    uposatha_number = context.uposatha.number_in_season
+    number_of_uposathas = len(context.season.uposathas)
+    season_name = context.season.name.name.capitalize()
     return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
