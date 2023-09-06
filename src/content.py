@@ -7,6 +7,30 @@ from uposatha.elements import Uposatha, MoonPhase, Holiday, SeasonName
 
 
 @dataclass
+class Context:
+    today: date
+    season: SeasonName
+    uposatha: Uposatha
+    holiday: Optional[Holiday]
+
+    def uposatha_today(self) -> bool:
+        return self.today == self.uposatha.falls_on
+
+    def holiday_today(self) -> bool:
+        if self.holiday is None:
+            return False
+
+        return self.uposatha_today()
+
+
+def get_context(today: date) -> Context:
+    cal = Calendar()
+    uposatha = cal.next_uposatha(today)
+    season = cal.current_season(today)
+    return Context(today, season.name, uposatha, uposatha.holiday)
+
+
+@dataclass
 class NextUposatha:
     today: date
     falls_on: date
@@ -37,27 +61,3 @@ def uposatha_details(season, next_uposatha):
     number_of_uposathas = len(season.uposathas)
     season_name = season.name.name.capitalize()
     return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
-
-
-@dataclass
-class Context:
-    today: date
-    season: SeasonName
-    uposatha: Uposatha
-    holiday: Optional[Holiday]
-
-    def uposatha_today(self) -> bool:
-        return self.today == self.uposatha.falls_on
-
-    def holiday_today(self) -> bool:
-        if self.holiday is None:
-            return False
-
-        return self.uposatha_today()
-
-
-def get_context(today: date) -> Context:
-    cal = Calendar()
-    uposatha = cal.next_uposatha(today)
-    season = cal.current_season(today)
-    return Context(today, season.name, uposatha, uposatha.holiday)
