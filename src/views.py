@@ -10,7 +10,7 @@ from viewer import DrawingViewer
 
 
 def between_uposathas(context: Context):
-    content = next_uposatha_content(context.today)
+    content = next_uposatha_content(context)
     between_view = BetweenUposathasView(content)
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
         between_view.show(draw)

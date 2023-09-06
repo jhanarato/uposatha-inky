@@ -40,18 +40,14 @@ class NextUposatha:
     fourteen_day: bool
 
 
-def next_uposatha_content(today: date) -> NextUposatha:
-    calendar = Calendar()
-    next_uposatha = calendar.next_uposatha(today)
-    season = calendar.current_season(today)
-
+def next_uposatha_content(context: Context) -> NextUposatha:
     return NextUposatha(
-        today=today,
-        falls_on=next_uposatha.falls_on,
-        date=next_uposatha.falls_on.strftime("%A %d/%m/%y"),
-        details=uposatha_details(season, next_uposatha),
-        moon_phase=next_uposatha.moon_phase,
-        fourteen_day=(next_uposatha.days_since_previous == 14)
+        today=context.today,
+        falls_on=context.uposatha.falls_on,
+        date=context.uposatha.falls_on.strftime("%A %d/%m/%y"),
+        details=uposatha_details(context.season, context.uposatha),
+        moon_phase=context.uposatha.moon_phase,
+        fourteen_day=(context.uposatha.days_since_previous == 14)
     )
 
 

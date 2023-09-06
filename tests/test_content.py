@@ -16,7 +16,8 @@ from content import next_uposatha_content, Context, get_context
     ]
 )
 def test_should_flag_fourteen_day(today, is_fourteen_day):
-    assert next_uposatha_content(today=today).fourteen_day == is_fourteen_day
+    context = get_context(today)
+    assert next_uposatha_content(context).fourteen_day == is_fourteen_day
 
 
 def test_should_provide_today_is_uposatha():
