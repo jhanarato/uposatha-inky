@@ -19,7 +19,12 @@ class View(Protocol):
 
 
 def select_view(context: Context) -> View:
-    return BetweenUposathasView()
+    if context.holiday_today():
+        return HolidayView()
+    elif context.uposatha_today():
+        return UposathaView()
+    else:
+        return BetweenUposathasView()
 
 
 def between_uposathas(context: Context):
@@ -40,6 +45,14 @@ def holiday(context: Context):
         font = Font("roboto", 30)
         text = Text("Today is a holiday", font, Ink.BLACK)
         text.draw(draw, 10, 10)
+
+
+class UposathaView:
+    pass
+
+
+class HolidayView:
+    pass
 
 
 @dataclass

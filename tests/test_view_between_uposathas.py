@@ -8,12 +8,22 @@ from countdown import Appearance
 from countdown import Countdown
 from screen import WIDTH, HEIGHT
 from viewer import DrawingViewer
-from views import select_view, BetweenUposathasView, next_uposatha_content
+from views import select_view, BetweenUposathasView, next_uposatha_content, UposathaView, HolidayView
 
 
 @pytest.fixture
 def day_before_uposatha_context():
-    return get_context(date(2023, 9, 30))
+    return get_context(date(2023, 9, 28))
+
+
+@pytest.fixture
+def uposatha_context():
+    return get_context(date(2023, 9, 29))
+
+
+@pytest.fixture
+def holiday_context():
+    return get_context(date(2023, 10, 29))
 
 
 def test_should_show_between_view(day_before_uposatha_context):
@@ -48,3 +58,11 @@ def test_should_layout_components(day_before_uposatha_context):
 
 def test_should_select_between_view(day_before_uposatha_context):
     assert isinstance(select_view(day_before_uposatha_context), BetweenUposathasView)
+
+
+def test_should_select_uposatha_view(uposatha_context):
+    assert isinstance(select_view(uposatha_context), UposathaView)
+
+
+def test_should_select_holiday_view(holiday_context):
+    assert isinstance(select_view(holiday_context), HolidayView)
