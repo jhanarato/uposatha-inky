@@ -10,8 +10,7 @@ from viewer import DrawingViewer
 
 
 def between_uposathas(context: Context):
-    content = next_uposatha_content(context)
-    between_view = BetweenUposathasView(content)
+    between_view = BetweenUposathasView()
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
         between_view.show(draw, context)
 
@@ -38,9 +37,6 @@ class BetweenUposathasView:
     LARGE_ICON = 45
     LARGEST_ICON = 80
 
-    def __init__(self, content: NextUposatha):
-        self._content = content
-
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
         appearances[11, 15] = Appearance(self.SMALLEST_ICON, 5, self.GAP)
@@ -58,34 +54,35 @@ class BetweenUposathasView:
         appearances[1] = Appearance(self.LARGEST_ICON, 7, self.GAP)
         return appearances
 
-    def _appearances(self) -> IconCountMapping[Appearance]:
-        if self._content.fourteen_day:
+    def _appearances(self, content: NextUposatha) -> IconCountMapping[Appearance]:
+        if content.fourteen_day:
             return self._fourteen_day_appearance()
         else:
             return self._fifteen_day_appearance()
 
-    def _components(self):
+    def _components(self, content: NextUposatha):
         return [
             Text("Uposatha", Font("roboto-bold", 30), Ink.BLACK),
             HorizontalLine(300, Ink.BLACK),
-            Text(self._content.date, Font("roboto-bold", 24), Ink.BLACK),
+            Text(content.date, Font("roboto-bold", 24), Ink.BLACK),
             Countdown(
-                self._appearances(),
-                self._content.today,
-                self._content.falls_on,
-                self._content.moon_phase),
-            Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
+                self._appearances(content),
+                content.today,
+                content.falls_on,
+                content.moon_phase),
+            Text(content.details, Font("roboto-bold", 24), Ink.BLACK),
         ]
 
-    def _layout(self) -> VerticalLayout:
+    def _layout(self, content: NextUposatha) -> VerticalLayout:
         layout = VerticalLayout(HEIGHT, WIDTH)
 
-        for component in self._components():
+        for component in self._components(content):
             layout.add_space(20)
             layout.add_centred(component)
 
         return layout
 
     def show(self, draw: ImageDraw, context: Context):
-        for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
+        content = next_uposatha_content(context)
+        for component, coordinates in zip(self._components(content), self._layout(content).coordinates(), strict=True):
             component.draw(draw, *coordinates)
