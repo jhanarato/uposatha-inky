@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
+from typing import Protocol
 
 from PIL import ImageDraw
 from uposatha.elements import MoonPhase
@@ -11,6 +12,10 @@ from fonts import Font
 from layout import VerticalLayout
 from screen import Ink, WIDTH, HEIGHT
 from viewer import DrawingViewer
+
+
+class View(Protocol):
+    def show(self, draw: ImageDraw, context: Context) -> None: ...
 
 
 def between_uposathas(context: Context):
@@ -96,7 +101,7 @@ class BetweenUposathasView:
 
         return layout
 
-    def show(self, draw: ImageDraw, context: Context):
+    def show(self, draw: ImageDraw, context: Context) -> None:
         content = next_uposatha_content(context)
         for component, coordinates in zip(self._components(content), self._layout(content).coordinates(), strict=True):
             component.draw(draw, *coordinates)
