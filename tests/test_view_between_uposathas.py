@@ -3,12 +3,12 @@ from datetime import date
 import pytest
 
 from components import Text, HorizontalLine
-from content import get_context, next_uposatha_content
+from content import get_context
 from countdown import Appearance
 from countdown import Countdown
 from screen import WIDTH, HEIGHT
 from viewer import DrawingViewer
-from views import BetweenUposathasView
+from views import BetweenUposathasView, next_uposatha_content
 
 
 @pytest.fixture

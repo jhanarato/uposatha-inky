@@ -1,7 +1,11 @@
+from dataclasses import dataclass
+from datetime import date
+
 from PIL import ImageDraw
+from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from content import Context, next_uposatha_content, NextUposatha
+from content import Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from layout import VerticalLayout
@@ -27,6 +31,16 @@ def holiday(context: Context):
         font = Font("roboto", 30)
         text = Text("Today is a holiday", font, Ink.BLACK)
         text.draw(draw, 10, 10)
+
+
+@dataclass
+class NextUposatha:
+    today: date
+    falls_on: date
+    date: str
+    details: str
+    moon_phase: MoonPhase
+    fourteen_day: bool
 
 
 class BetweenUposathasView:
@@ -86,3 +100,22 @@ class BetweenUposathasView:
         content = next_uposatha_content(context)
         for component, coordinates in zip(self._components(content), self._layout(content).coordinates(), strict=True):
             component.draw(draw, *coordinates)
+
+
+def next_uposatha_content(context: Context) -> NextUposatha:
+    return NextUposatha(
+        today=context.today,
+        falls_on=context.uposatha.falls_on,
+        date=context.uposatha.falls_on.strftime("%A %d/%m/%y"),
+        details=uposatha_details(context),
+        moon_phase=context.uposatha.moon_phase,
+        fourteen_day=(context.uposatha.days_since_previous == 14)
+    )
+
+
+def uposatha_details(context: Context):
+    days_since_previous = context.uposatha.days_since_previous
+    uposatha_number = context.uposatha.number_in_season
+    number_of_uposathas = len(context.season.uposathas)
+    season_name = context.season.name.name.capitalize()
+    return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
