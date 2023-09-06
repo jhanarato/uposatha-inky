@@ -48,11 +48,13 @@ def holiday(context: Context):
 
 
 class UposathaView:
-    pass
+    def show(self, draw: ImageDraw, context: Context) -> None:
+        pass
 
 
 class HolidayView:
-    pass
+    def show(self, draw: ImageDraw, context: Context) -> None:
+        pass
 
 
 @dataclass
