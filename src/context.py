@@ -6,7 +6,7 @@ from uposatha.calendar import Calendar
 from uposatha.elements import Uposatha, Holiday, Season
 
 
-@dataclass
+@dataclass(frozen=True)
 class Context:
     today: date
     season: Season
