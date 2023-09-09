@@ -5,7 +5,7 @@ from PIL import ImageDraw
 from uposatha.elements import MoonPhase
 
 from components import Text, HorizontalLine
-from content import Context
+from context import Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from layout import VerticalLayout

@@ -4,7 +4,7 @@ import pytest
 from uposatha.calendar import Calendar
 from uposatha.elements import SeasonName, HolidayName
 
-from content import Context, get_context
+from context import Context, get_context
 from views import BetweenUposathaContent
 
 
