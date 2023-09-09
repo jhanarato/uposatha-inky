@@ -15,7 +15,7 @@ from viewer import DrawingViewer
 
 
 class View(Protocol):
-    def show(self, draw: ImageDraw, context: Context) -> None: ...
+    def show(self, draw: ImageDraw) -> None: ...
 
 
 def select_view(context: Context) -> View:
@@ -30,7 +30,7 @@ def select_view(context: Context) -> View:
 def between_uposathas(context: Context):
     between_view = BetweenUposathasView(context)
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        between_view.show(draw, context)
+        between_view.show(draw)
 
 
 def uposatha(context: Context):
@@ -48,12 +48,12 @@ def holiday(context: Context):
 
 
 class UposathaView:
-    def show(self, draw: ImageDraw, context: Context) -> None:
+    def show(self, draw: ImageDraw) -> None:
         pass
 
 
 class HolidayView:
-    def show(self, draw: ImageDraw, context: Context) -> None:
+    def show(self, draw: ImageDraw) -> None:
         pass
 
 
@@ -124,8 +124,7 @@ class BetweenUposathasView:
 
         return layout
 
-    def show(self, draw: ImageDraw, context: Context) -> None:
-        content = next_uposatha_content(context)
+    def show(self, draw: ImageDraw) -> None:
         for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
             component.draw(draw, *coordinates)
 
