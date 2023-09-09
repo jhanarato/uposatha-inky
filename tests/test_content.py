@@ -4,7 +4,7 @@ import pytest
 from uposatha.calendar import Calendar
 from uposatha.elements import SeasonName, HolidayName
 
-from content import BetweenUposathaContent
+from content import BetweenUposathasContent
 from context import Context, get_context
 
 
@@ -18,7 +18,7 @@ from context import Context, get_context
 )
 def test_should_flag_fourteen_day(today, is_fourteen_day):
     context = get_context(today)
-    assert BetweenUposathaContent(context).fourteen_day == is_fourteen_day
+    assert BetweenUposathasContent(context).fourteen_day == is_fourteen_day
 
 
 def test_should_provide_today_is_uposatha():

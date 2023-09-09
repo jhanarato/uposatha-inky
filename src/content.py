@@ -5,7 +5,7 @@ from uposatha.elements import MoonPhase
 from context import Context
 
 
-class BetweenUposathaContent:
+class BetweenUposathasContent:
     def __init__(self, context: Context):
         self._context = context
 
