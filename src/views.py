@@ -24,11 +24,11 @@ def select_view(context: Context) -> View:
     elif context.uposatha_today():
         return UposathaView()
     else:
-        return BetweenUposathasView()
+        return BetweenUposathasView(context)
 
 
 def between_uposathas(context: Context):
-    between_view = BetweenUposathasView()
+    between_view = BetweenUposathasView(context)
     with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
         between_view.show(draw, context)
 
@@ -74,6 +74,9 @@ class BetweenUposathasView:
     MEDIUM_ICON = 40
     LARGE_ICON = 45
     LARGEST_ICON = 80
+
+    def __init__(self, context: Context):
+        pass
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
