@@ -10,7 +10,6 @@ from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from layout import VerticalLayout
 from screen import Ink, WIDTH, HEIGHT
-from viewer import DrawingViewer
 
 
 class View(Protocol):
@@ -24,26 +23,6 @@ def select_view(context: Context) -> View:
         return UposathaView(context)
     else:
         return BetweenUposathasView(context)
-
-
-def between_uposathas(context: Context):
-    between_view = BetweenUposathasView(context)
-    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        between_view.show(draw)
-
-
-def uposatha(context: Context):
-    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        font = Font("roboto", 30)
-        text = Text("Today is the uposatha", font, Ink.BLACK)
-        text.draw(draw, 10, 10)
-
-
-def holiday(context: Context):
-    with DrawingViewer(width=WIDTH, height=HEIGHT) as draw:
-        font = Font("roboto", 30)
-        text = Text("Today is a holiday", font, Ink.BLACK)
-        text.draw(draw, 10, 10)
 
 
 class UposathaView:
