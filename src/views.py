@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from datetime import date
 from typing import Protocol
 
@@ -57,14 +56,33 @@ class HolidayView:
         pass
 
 
-@dataclass
-class NextUposatha:
-    today: date
-    falls_on: date
-    date: str
-    details: str
-    moon_phase: MoonPhase
-    fourteen_day: bool
+class BetweenUposathaContent:
+    def __init__(self, context: Context):
+        self._context = context
+
+    @property
+    def today(self) -> date:
+        return self._context.today
+
+    @property
+    def falls_on(self) -> date:
+        return self._context.uposatha.falls_on
+
+    @property
+    def date(self) -> str:
+        return self._context.uposatha.falls_on.strftime("%A %d/%m/%y")
+
+    @property
+    def details(self) -> str:
+        return uposatha_details(self._context)
+
+    @property
+    def moon_phase(self) -> MoonPhase:
+        return self._context.uposatha.moon_phase
+
+    @property
+    def fourteen_day(self) -> bool:
+        return self._context.uposatha.days_since_previous == 14
 
 
 class BetweenUposathasView:
@@ -76,8 +94,7 @@ class BetweenUposathasView:
     LARGEST_ICON = 80
 
     def __init__(self, context: Context):
-        self._context: Context = context
-        self._content: NextUposatha = next_uposatha_content(context)
+        self._content = BetweenUposathaContent(context)
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
@@ -127,17 +144,6 @@ class BetweenUposathasView:
     def show(self, draw: ImageDraw) -> None:
         for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
             component.draw(draw, *coordinates)
-
-
-def next_uposatha_content(context: Context) -> NextUposatha:
-    return NextUposatha(
-        today=context.today,
-        falls_on=context.uposatha.falls_on,
-        date=context.uposatha.falls_on.strftime("%A %d/%m/%y"),
-        details=uposatha_details(context),
-        moon_phase=context.uposatha.moon_phase,
-        fourteen_day=(context.uposatha.days_since_previous == 14)
-    )
 
 
 def uposatha_details(context: Context):
