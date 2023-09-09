@@ -73,10 +73,6 @@ class BetweenUposathaContent:
         return self._context.uposatha.falls_on.strftime("%A %d/%m/%y")
 
     @property
-    def details(self) -> str:
-        return uposatha_details(self._context)
-
-    @property
     def moon_phase(self) -> MoonPhase:
         return self._context.uposatha.moon_phase
 
@@ -84,7 +80,8 @@ class BetweenUposathaContent:
     def fourteen_day(self) -> bool:
         return self._context.uposatha.days_since_previous == 14
 
-    def uposatha_details(self):
+    @property
+    def details(self) -> str:
         days_since_previous = self._context.uposatha.days_since_previous
         uposatha_number = self._context.uposatha.number_in_season
         number_of_uposathas = len(self._context.season.uposathas)
@@ -151,11 +148,3 @@ class BetweenUposathasView:
     def show(self, draw: ImageDraw) -> None:
         for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
             component.draw(draw, *coordinates)
-
-
-def uposatha_details(context: Context):
-    days_since_previous = context.uposatha.days_since_previous
-    uposatha_number = context.uposatha.number_in_season
-    number_of_uposathas = len(context.season.uposathas)
-    season_name = context.season.name.name.capitalize()
-    return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
