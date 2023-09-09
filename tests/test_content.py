@@ -4,8 +4,7 @@ import pytest
 from uposatha.calendar import Calendar
 from uposatha.elements import SeasonName, HolidayName
 
-from content import BetweenUposathasContent
-from context import Context, get_context
+from content import BetweenUposathasContent, Context, get_context
 
 
 @pytest.mark.parametrize(

@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 
 from components import Text, HorizontalLine
-from context import get_context
+from content import get_context
 from countdown import Appearance
 from countdown import Countdown
 from screen import WIDTH, HEIGHT

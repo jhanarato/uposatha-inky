@@ -3,8 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from components import Text, HorizontalLine
-from content import BetweenUposathasContent
-from context import Context
+from content import BetweenUposathasContent, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from layout import VerticalLayout
