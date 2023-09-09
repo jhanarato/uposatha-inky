@@ -115,7 +115,7 @@ class BetweenUposathasView:
             Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
         ]
 
-    def _layout(self, content: NextUposatha) -> VerticalLayout:
+    def _layout(self) -> VerticalLayout:
         layout = VerticalLayout(HEIGHT, WIDTH)
 
         for component in self._components():
@@ -126,7 +126,7 @@ class BetweenUposathasView:
 
     def show(self, draw: ImageDraw, context: Context) -> None:
         content = next_uposatha_content(context)
-        for component, coordinates in zip(self._components(), self._layout(content).coordinates(), strict=True):
+        for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
             component.draw(draw, *coordinates)
 
 
