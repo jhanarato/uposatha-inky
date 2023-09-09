@@ -76,8 +76,8 @@ class BetweenUposathasView:
     LARGEST_ICON = 80
 
     def __init__(self, context: Context):
-        self._context = context
-        self._content = next_uposatha_content(context)
+        self._context: Context = context
+        self._content: NextUposatha = next_uposatha_content(context)
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
@@ -102,23 +102,23 @@ class BetweenUposathasView:
         else:
             return self._fifteen_day_appearance()
 
-    def _components(self, content: NextUposatha):
+    def _components(self):
         return [
             Text("Uposatha", Font("roboto-bold", 30), Ink.BLACK),
             HorizontalLine(300, Ink.BLACK),
-            Text(content.date, Font("roboto-bold", 24), Ink.BLACK),
+            Text(self._content.date, Font("roboto-bold", 24), Ink.BLACK),
             Countdown(
                 self._appearances(),
-                content.today,
-                content.falls_on,
-                content.moon_phase),
-            Text(content.details, Font("roboto-bold", 24), Ink.BLACK),
+                self._content.today,
+                self._content.falls_on,
+                self._content.moon_phase),
+            Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
         ]
 
     def _layout(self, content: NextUposatha) -> VerticalLayout:
         layout = VerticalLayout(HEIGHT, WIDTH)
 
-        for component in self._components(content):
+        for component in self._components():
             layout.add_space(20)
             layout.add_centred(component)
 
@@ -126,7 +126,7 @@ class BetweenUposathasView:
 
     def show(self, draw: ImageDraw, context: Context) -> None:
         content = next_uposatha_content(context)
-        for component, coordinates in zip(self._components(content), self._layout(content).coordinates(), strict=True):
+        for component, coordinates in zip(self._components(), self._layout(content).coordinates(), strict=True):
             component.draw(draw, *coordinates)
 
 
