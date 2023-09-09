@@ -33,9 +33,8 @@ def test_should_show_between_view(day_before_uposatha_context):
 
 
 def test_should_select_appearances(day_before_uposatha_context):
-    content = next_uposatha_content(day_before_uposatha_context)
     between_view = BetweenUposathasView(day_before_uposatha_context)
-    appearances = between_view._appearances(content)
+    appearances = between_view._appearances()
     assert appearances[1] == Appearance(
         BetweenUposathasView.LARGEST_ICON, 8, BetweenUposathasView.GAP
     )

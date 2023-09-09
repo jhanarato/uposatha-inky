@@ -76,7 +76,8 @@ class BetweenUposathasView:
     LARGEST_ICON = 80
 
     def __init__(self, context: Context):
-        pass
+        self._context = context
+        self._content = next_uposatha_content(context)
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)
@@ -95,8 +96,8 @@ class BetweenUposathasView:
         appearances[1] = Appearance(self.LARGEST_ICON, 7, self.GAP)
         return appearances
 
-    def _appearances(self, content: NextUposatha) -> IconCountMapping[Appearance]:
-        if content.fourteen_day:
+    def _appearances(self) -> IconCountMapping[Appearance]:
+        if self._content.fourteen_day:
             return self._fourteen_day_appearance()
         else:
             return self._fifteen_day_appearance()
@@ -107,7 +108,7 @@ class BetweenUposathasView:
             HorizontalLine(300, Ink.BLACK),
             Text(content.date, Font("roboto-bold", 24), Ink.BLACK),
             Countdown(
-                self._appearances(content),
+                self._appearances(),
                 content.today,
                 content.falls_on,
                 content.moon_phase),
