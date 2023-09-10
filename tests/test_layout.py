@@ -53,6 +53,13 @@ def test_should_left_align_area():
     assert list(layout.coordinates()) == [(0, 0)]
 
 
+def test_should_right_align_area():
+    area = Area(height=10, width=20)
+    layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
+    layout.add_right(area)
+    assert list(layout.coordinates()) == [(181, 0)]
+
+
 def test_should_generate_coordinates():
     layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
     layout.add_centred(Area(height=20, width=20))
