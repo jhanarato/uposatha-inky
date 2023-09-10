@@ -27,12 +27,12 @@ class VerticalLayout:
         self._y += component.height()
 
     def add_right(self, component: Area) -> None:
-        x = self._screen_width - component.width()
+        x = self._bbox.right - component.width()
         self._coordinates.append((x, self._y))
         self._y += component.height()
 
     def add_centred(self, component: Area) -> None:
-        x = (self._screen_width - component.width()) // 2
+        x = self._bbox.left + ((self._bbox.width - component.width()) // 2)
         self._coordinates.append((x, self._y))
         self._y += component.height()
 

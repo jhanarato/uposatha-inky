@@ -57,7 +57,7 @@ def test_should_right_align_area():
     area = Area(height=10, width=20)
     layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
     layout.add_right(area)
-    assert list(layout.coordinates()) == [(181, 0)]
+    assert list(layout.coordinates()) == [(180, 0)]
 
 
 def test_should_generate_coordinates():
@@ -91,7 +91,19 @@ def test_should_layout_in_vertically_offset_bbox():
     assert list(layout.coordinates()) == [(50, 100), (50, 170)]
 
 
-def test_should_layout_left_aligned_with_bbox_offset():
+def test_should_align_left_to_bbox():
     layout = VerticalLayout(BBox(top=0, left=100, bottom=300, right=200))
     layout.add_left(Area(height=50, width=70))
     assert list(layout.coordinates()) == [(100, 0)]
+
+
+def test_should_align_right_to_bbox():
+    layout = VerticalLayout(BBox(top=0, left=100, bottom=300, right=200))
+    layout.add_right(Area(height=50, width=70))
+    assert list(layout.coordinates()) == [(130, 0)]
+
+
+def test_should_align_center_to_bbox():
+    layout = VerticalLayout(BBox(top=0, left=100, bottom=300, right=200))
+    layout.add_centred(Area(height=50, width=70))
+    assert list(layout.coordinates()) == [(115, 0)]
