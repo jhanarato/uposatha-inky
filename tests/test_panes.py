@@ -8,6 +8,6 @@ from screen import Ink
 
 def test_create_pane():
     bbox = BBox(0, 0, 100, 100)
-    layout = VerticalLayout(bbox.height, bbox.width)
+    layout = VerticalLayout(bbox)
     components = [Text("Text to show", Font("roboto-bold", 30), Ink.BLACK)]
     pane = Pane(bbox, layout, components)

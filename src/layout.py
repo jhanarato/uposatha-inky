@@ -1,6 +1,8 @@
 from collections.abc import Iterator
 from typing import Protocol
 
+from bbox import BBox
+
 
 class Area(Protocol):
     def height(self) -> int: ...
@@ -9,11 +11,9 @@ class Area(Protocol):
 
 
 class VerticalLayout:
-    """ A layout of ImageComponents on the full image """
-
-    def __init__(self, screen_height: int, screen_width: int):
-        self._screen_height = screen_height
-        self._screen_width = screen_width
+    def __init__(self, bbox: BBox):
+        self._screen_height = bbox.height
+        self._screen_width = bbox.width
         self._y = 0
         self._coordinates = []
 

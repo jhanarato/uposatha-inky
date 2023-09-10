@@ -2,6 +2,7 @@ from typing import Protocol
 
 from PIL import ImageDraw
 
+from bbox import BBox
 from components import Text, HorizontalLine
 from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
@@ -91,7 +92,7 @@ class BetweenUposathasView:
         ]
 
     def _layout(self) -> VerticalLayout:
-        layout = VerticalLayout(HEIGHT, WIDTH)
+        layout = VerticalLayout(BBox(top=0, left=0, bottom=HEIGHT, right=WIDTH))
 
         for component in self._components():
             layout.add_space(20)
