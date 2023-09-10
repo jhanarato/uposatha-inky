@@ -89,3 +89,9 @@ def test_should_layout_in_vertically_offset_bbox():
     layout.add_space(50)
     layout.add_centred(Area(height=30, width=100))
     assert list(layout.coordinates()) == [(50, 100), (50, 170)]
+
+
+def test_should_layout_left_aligned_with_bbox_offset():
+    layout = VerticalLayout(BBox(top=0, left=100, bottom=300, right=200))
+    layout.add_left(Area(height=50, width=70))
+    assert list(layout.coordinates()) == [(100, 0)]

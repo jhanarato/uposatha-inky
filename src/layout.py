@@ -12,6 +12,7 @@ class Area(Protocol):
 
 class VerticalLayout:
     def __init__(self, bbox: BBox):
+        self._bbox = bbox
         self._screen_height = bbox.height
         self._screen_width = bbox.width
         self._y = bbox.top
@@ -21,7 +22,7 @@ class VerticalLayout:
         self._y += height
 
     def add_left(self, component: Area) -> None:
-        x = 0
+        x = self._bbox.left
         self._coordinates.append((x, self._y))
         self._y += component.height()
 
