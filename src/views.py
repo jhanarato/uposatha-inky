@@ -92,13 +92,8 @@ class BetweenUposathasView:
         ]
 
     def _layout(self) -> VerticalLayout:
-        layout = VerticalLayout(BBox(top=0, left=0, bottom=HEIGHT, right=WIDTH))
-
-        for component in self._components():
-            layout.add_space(20)
-            layout.add_centred(component)
-
-        return layout
+        bbox = BBox(top=0, left=0, bottom=HEIGHT, right=WIDTH)
+        return VerticalLayout.all_centered(bbox, self._components(), spacing=20)
 
     def show(self, draw: ImageDraw) -> None:
         for component, coordinates in zip(self._components(), self._layout().coordinates(), strict=True):
