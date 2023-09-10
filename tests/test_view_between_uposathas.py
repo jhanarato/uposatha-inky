@@ -46,12 +46,6 @@ def test_should_generate_components(day_before_uposatha_context):
     assert component_types == [Text, HorizontalLine, Text, Countdown, Text]
 
 
-def test_should_layout_components(day_before_uposatha_context):
-    between_view = BetweenUposathasView(day_before_uposatha_context)
-    layout = between_view._layout()
-    assert sum(1 for _ in layout.coordinates()) == len(between_view._components())
-
-
 @pytest.mark.parametrize(
     "today,view_type",
     [
