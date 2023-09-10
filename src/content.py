@@ -30,7 +30,7 @@ def get_context(today: date) -> Context:
     return Context(today, season, uposatha, uposatha.holiday)
 
 
-class BetweenUposathasContent:
+class Content:
     def __init__(self, context: Context):
         self._context = context
 

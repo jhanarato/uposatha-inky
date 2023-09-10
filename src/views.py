@@ -3,7 +3,7 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from components import Text, HorizontalLine
-from content import BetweenUposathasContent, Context
+from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
 from layout import VerticalLayout
@@ -52,7 +52,7 @@ class BetweenUposathasView:
     LARGEST_ICON = 80
 
     def __init__(self, context: Context):
-        self._content = BetweenUposathasContent(context)
+        self._content = Content(context)
 
     def _fifteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](15)

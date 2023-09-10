@@ -4,7 +4,7 @@ import pytest
 from uposatha.calendar import Calendar
 from uposatha.elements import SeasonName, HolidayName
 
-from content import BetweenUposathasContent, Context, get_context
+from content import Content, Context, get_context
 
 
 @pytest.mark.parametrize(
@@ -17,12 +17,12 @@ from content import BetweenUposathasContent, Context, get_context
 )
 def test_should_flag_fourteen_day(today, is_fourteen_day):
     context = get_context(today)
-    assert BetweenUposathasContent(context).fourteen_day == is_fourteen_day
+    assert Content(context).fourteen_day == is_fourteen_day
 
 
 def test_should_format_details():
     context = get_context(date(2023, 9, 10))
-    content = BetweenUposathasContent(context)
+    content = Content(context)
     assert content.details == "3 of 8 | Rainy | 14 Day"
 
 
