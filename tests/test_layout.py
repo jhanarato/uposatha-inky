@@ -74,3 +74,11 @@ def test_should_handle_space_only():
     layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
     layout.add_space(50)
     assert list(layout.coordinates()) == []
+
+
+def test_should_layout_in_vertically_offset_bbox():
+    layout = VerticalLayout(BBox(top=100, left=0, bottom=200, right=200))
+    layout.add_centred(Area(height=20, width=100))
+    layout.add_space(50)
+    layout.add_centred(Area(height=30, width=100))
+    assert list(layout.coordinates()) == [(50, 100), (50, 170)]
