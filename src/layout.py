@@ -1,4 +1,4 @@
-from collections.abc import Iterator
+from collections.abc import Iterator, Iterable
 from typing import Protocol
 
 from bbox import BBox
@@ -17,6 +17,15 @@ class VerticalLayout:
         self._screen_width = bbox.width
         self._y = bbox.top
         self._coordinates = []
+
+    @classmethod
+    def all_centered(cls, bbox: BBox, areas: Iterable[Area], spacing: int):
+        layout = cls(bbox)
+        for area in areas:
+            layout.add_space(spacing)
+            layout.add_centred(area)
+
+        return layout
 
     def add_space(self, height: int) -> None:
         self._y += height

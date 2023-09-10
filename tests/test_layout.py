@@ -107,3 +107,17 @@ def test_should_align_center_to_bbox():
     layout = VerticalLayout(BBox(top=0, left=100, bottom=300, right=200))
     layout.add_centred(Area(height=50, width=70))
     assert list(layout.coordinates()) == [(115, 0)]
+
+
+def test_should_center_all_with_even_spacing():
+    components = [
+        Area(height=70, width=50),
+        Area(height=70, width=50),
+        Area(height=70, width=50),
+    ]
+
+    bbox = BBox(top=0, left=0, bottom=300, right=200)
+
+    layout = VerticalLayout.all_centered(bbox, components, spacing=20)
+
+    assert list(layout.coordinates()) == [(75, 20), (75, 110), (75, 200)]
