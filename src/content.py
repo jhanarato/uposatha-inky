@@ -55,9 +55,29 @@ class BetweenUposathasContent:
         return self._context.uposatha.days_since_previous == 14
 
     @property
+    def days_since_uposatha(self) -> int:
+        return self._context.uposatha.days_since_previous
+
+    @property
+    def uposatha_number(self) -> int:
+        return self._context.uposatha.number_in_season
+
+    @property
+    def number_of_uposathas(self) -> int:
+        return len(self._context.season.uposathas)
+
+    @property
+    def num_of_num(self) -> str:
+        return f"{self.uposatha_number} of {self.number_of_uposathas}"
+
+    @property
+    def season_name(self) -> str:
+        return self._context.season.name.name.capitalize()
+
+    @property
+    def day(self) -> str:
+        return f"{self.days_since_uposatha} Day"
+
+    @property
     def details(self) -> str:
-        days_since_previous = self._context.uposatha.days_since_previous
-        uposatha_number = self._context.uposatha.number_in_season
-        number_of_uposathas = len(self._context.season.uposathas)
-        season_name = self._context.season.name.name.capitalize()
-        return f"{uposatha_number} of {number_of_uposathas} | {season_name} | {days_since_previous} Day"
+        return f"{self.num_of_num} | {self.season_name} | {self.day}"
