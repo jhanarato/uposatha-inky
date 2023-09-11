@@ -2,8 +2,8 @@ from bbox import BBox
 from components import Text
 from fonts import Font
 from layout import VerticalLayout
-from panes import Pane
 from screen import Ink
+from views import Pane
 
 
 def test_create_pane():

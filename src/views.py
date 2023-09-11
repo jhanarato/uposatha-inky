@@ -1,4 +1,4 @@
-from typing import Protocol
+from typing import Protocol, Any
 
 from PIL import ImageDraw
 
@@ -22,6 +22,11 @@ def select_view(context: Context) -> View:
         return UposathaView(context)
     else:
         return BetweenUposathasView(context)
+
+
+class Pane:
+    def __init__(self, bbox: BBox, layout: VerticalLayout, components: list[Any]):
+        pass
 
 
 class UposathaView:
