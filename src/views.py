@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from typing import Protocol, Any
 
 from PIL import ImageDraw
@@ -25,8 +26,14 @@ def select_view(context: Context) -> View:
 
 
 class Pane:
-    def __init__(self, bbox: BBox, layout: VerticalLayout, components: list[Any]):
-        pass
+    def __init__(self, components: Iterable[Any], bbox: BBox):
+        self._layout = VerticalLayout.all_centered(bbox, components, spacing=20)
+        self._components = components
+
+    def draw(self, draw: ImageDraw) -> None:
+        coords = self._layout.coordinates()
+        for component, coordinates in zip(self._components, coords, strict=True):
+            component.draw(draw, *coordinates)
 
 
 class UposathaView:
