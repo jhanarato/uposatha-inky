@@ -92,7 +92,7 @@ class BetweenUposathasView:
 
     def _components(self):
         return [
-            Text("Uposatha", Font("roboto-bold", 30), Ink.BLACK),
+            Text("Next Uposatha", Font("roboto-bold", 30), Ink.BLACK),
             HorizontalLine(300, Ink.BLACK),
             Text(self._content.date, Font("roboto-bold", 24), Ink.BLACK),
             Countdown(
