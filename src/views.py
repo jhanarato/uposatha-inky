@@ -40,10 +40,16 @@ class UposathaView:
     def __init__(self, context: Context):
         pass
 
+    def _components(self):
+        return [
+            Text("Uposatha Today", Font("roboto-bold", 30), Ink.BLACK),
+            HorizontalLine(300, Ink.BLACK),
+        ]
+
     def show(self, draw: ImageDraw) -> None:
-        font = Font("roboto", 30)
-        text = Text("Today is the uposatha", font, Ink.BLACK)
-        text.draw(draw, 10, 10)
+        bbox = BBox(top=0, left=0, bottom=HEIGHT, right=WIDTH)
+        pane = Pane(self._components(), bbox)
+        pane.draw(draw)
 
 
 class HolidayView:
