@@ -119,7 +119,7 @@ def test_should_align_center_to_bbox():
     assert list(layout.coordinates()) == [(115, 0)]
 
 
-def test_should_add_sequence_of_components():
+def test_should_add_centered_sequence_of_components():
     components = [
         Area(height=70, width=50),
         Area(height=70, width=50),
