@@ -19,7 +19,7 @@ class Align(Enum):
 
 class VerticalLayout:
     def __init__(self, bbox: BBox, align: Align, spacing: int):
-        self._default_spacing = spacing
+        self._spacing = spacing
         self._bbox = bbox
         self._y = bbox.top
         self._coordinates = []
@@ -27,17 +27,17 @@ class VerticalLayout:
     def add_all_left(self, areas: Iterable[Area]):
         for area in areas:
             self._add_left(area)
-            self._add_space(self._default_spacing)
+            self._add_space(self._spacing)
 
     def add_all_centered(self, areas: Iterable[Area]):
         for area in areas:
             self._add_centred(area)
-            self._add_space(self._default_spacing)
+            self._add_space(self._spacing)
 
     def add_all_right(self, areas: Iterable[Area]):
         for area in areas:
             self._add_right(area)
-            self._add_space(self._default_spacing)
+            self._add_space(self._spacing)
 
     def coordinates(self) -> Iterator[tuple[int, int]]:
         return iter(self._coordinates)
