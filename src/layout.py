@@ -24,15 +24,6 @@ class VerticalLayout:
             self.add_space(self._spacing)
             self.add_centred(area)
 
-    @classmethod
-    def all_centered(cls, bbox: BBox, areas: Iterable[Area], spacing: int):
-        layout = cls(bbox, spacing)
-        for area in areas:
-            layout.add_space(spacing)
-            layout.add_centred(area)
-
-        return layout
-
     def add_space(self, height: int) -> None:
         self._y += height
 

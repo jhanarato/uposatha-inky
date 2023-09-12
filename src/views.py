@@ -27,7 +27,8 @@ def select_view(context: Context) -> View:
 
 class Pane:
     def __init__(self, components: Iterable[Any], bbox: BBox):
-        self._layout = VerticalLayout.all_centered(bbox, components, spacing=20)
+        self._layout = VerticalLayout(bbox, spacing=20)
+        self._layout.add_all_centered(components)
         self._components = components
 
     def draw(self, draw: ImageDraw) -> None:
