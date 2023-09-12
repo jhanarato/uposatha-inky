@@ -19,6 +19,11 @@ class VerticalLayout:
         self._y = bbox.top
         self._coordinates = []
 
+    def add_all_left(self, areas: Iterable[Area]):
+        for area in areas:
+            self.add_space(self._default_spacing)
+            self.add_left(area)
+
     def add_all_centered(self, areas: Iterable[Area]):
         for area in areas:
             self.add_space(self._default_spacing)
