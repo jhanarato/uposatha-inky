@@ -29,7 +29,7 @@ class Pane:
     def __init__(self, components: Iterable[Component], layout: VerticalLayout):
         self._layout = layout
         self._components = components
-        self._layout.add_all_centered(components)
+        self._layout.add(components)
 
     def draw(self, draw: ImageDraw) -> None:
         coords = self._layout.coordinates()

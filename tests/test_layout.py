@@ -23,7 +23,7 @@ def test_should_draw_component_with_space_between():
         Area(10, 20),
     ]
 
-    layout.add_all_centered(components)
+    layout.add(components)
 
     assert list(layout.coordinates()) == [(90, 30), (90, 70)]
 
@@ -67,7 +67,7 @@ def test_should_layout_in_vertically_offset_bbox():
         Area(height=30, width=100),
     ]
 
-    layout.add_all_centered(components)
+    layout.add(components)
 
     assert list(layout.coordinates()) == [(50, 100), (50, 170)]
 
