@@ -1,10 +1,11 @@
 from PIL.ImageDraw import ImageDraw
 
 from bbox import BBox
+from layout import VerticalLayout
 from views import Pane
 
 
-def test_pane_draws_component():
+def test_pane_draws_components():
     class Drawn:
         def __init__(self):
             self.drawn = False
@@ -24,7 +25,9 @@ def test_pane_draws_component():
         Drawn(), Drawn(), Drawn(),
     ]
 
-    pane = Pane(components, bbox)
+    layout = VerticalLayout(bbox, spacing=20)
+
+    pane = Pane(components, layout)
     pane.draw(None)
 
     assert all(component.drawn for component in components)

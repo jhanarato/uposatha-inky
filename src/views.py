@@ -26,10 +26,10 @@ def select_view(context: Context) -> View:
 
 
 class Pane:
-    def __init__(self, components: Iterable[Any], bbox: BBox):
-        self._layout = VerticalLayout(bbox, spacing=20)
-        self._layout.add_all_centered(components)
+    def __init__(self, components: Iterable[Any], layout: VerticalLayout):
+        self._layout = layout
         self._components = components
+        self._layout.add_all_centered(components)
 
     def draw(self, draw: ImageDraw) -> None:
         coords = self._layout.coordinates()
@@ -49,7 +49,8 @@ class UposathaView:
 
     def show(self, draw: ImageDraw) -> None:
         bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
-        pane = Pane(self._components(), bbox)
+        layout = VerticalLayout(bbox, spacing=20)
+        pane = Pane(self._components(), layout)
         pane.draw(draw)
 
 
@@ -112,5 +113,6 @@ class BetweenUposathasView:
 
     def show(self, draw: ImageDraw) -> None:
         bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
-        pane = Pane(self._components(), bbox)
+        layout = VerticalLayout(bbox, spacing=20)
+        pane = Pane(self._components(), layout)
         pane.draw(draw)
