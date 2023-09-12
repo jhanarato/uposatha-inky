@@ -21,18 +21,18 @@ class VerticalLayout:
 
     def add_all_left(self, areas: Iterable[Area]):
         for area in areas:
-            self._add_space(self._default_spacing)
             self._add_left(area)
+            self._add_space(self._default_spacing)
 
     def add_all_centered(self, areas: Iterable[Area]):
         for area in areas:
-            self._add_space(self._default_spacing)
             self._add_centred(area)
+            self._add_space(self._default_spacing)
 
     def add_all_right(self, areas: Iterable[Area]):
         for area in areas:
-            self._add_space(self._default_spacing)
             self._add_right(area)
+            self._add_space(self._default_spacing)
 
     def coordinates(self) -> Iterator[tuple[int, int]]:
         return iter(self._coordinates)

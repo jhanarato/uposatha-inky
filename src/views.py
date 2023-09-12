@@ -111,6 +111,6 @@ class BetweenUposathasView:
         ]
 
     def show(self, draw: ImageDraw) -> None:
-        bbox = BBox(top=0, left=0, bottom=HEIGHT, right=WIDTH)
+        bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
         pane = Pane(self._components(), bbox)
         pane.draw(draw)

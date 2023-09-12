@@ -15,7 +15,8 @@ class Area:
 
 
 def test_should_draw_component_with_space_between():
-    layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200), spacing=30)
+    bbox = BBox(top=30, left=0, bottom=100, right=200)
+    layout = VerticalLayout(bbox, spacing=30)
 
     components = [
         Area(10, 20),
@@ -68,7 +69,7 @@ def test_should_layout_in_vertically_offset_bbox():
 
     layout.add_all_centered(components)
 
-    assert list(layout.coordinates()) == [(50, 150), (50, 220)]
+    assert list(layout.coordinates()) == [(50, 100), (50, 170)]
 
 
 def test_should_align_left_to_bbox():
@@ -99,7 +100,7 @@ def test_should_add_centered_sequence_of_components():
         Area(height=70, width=100),
     ]
 
-    bbox = BBox(top=0, left=0, bottom=300, right=200)
+    bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, spacing=20)
     layout.add_all_centered(components)
@@ -110,11 +111,11 @@ def test_should_add_centered_sequence_of_components():
 def test_should_add_left_aligned_sequence_of_components():
     components = [
         Area(height=70, width=50),
-        Area(height=70, width=50),
-        Area(height=70, width=50),
+        Area(height=70, width=70),
+        Area(height=70, width=90),
     ]
 
-    bbox = BBox(top=0, left=0, bottom=300, right=200)
+    bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, spacing=20)
     layout.add_all_left(components)
@@ -129,7 +130,7 @@ def test_should_add_right_aligned_sequence_of_components():
         Area(height=70, width=10),
     ]
 
-    bbox = BBox(top=0, left=0, bottom=300, right=200)
+    bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, spacing=20)
     layout.add_all_right(components)
