@@ -8,7 +8,7 @@ from components import Text, HorizontalLine, Component
 from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
-from layout import VerticalLayout, Align
+from layout import VerticalLayout, Align, Layout
 from screen import Ink, WIDTH, HEIGHT
 
 
@@ -26,7 +26,7 @@ def select_view(context: Context) -> View:
 
 
 class Pane:
-    def __init__(self, components: Iterable[Component], layout: VerticalLayout):
+    def __init__(self, components: Iterable[Component], layout: Layout):
         self._layout = layout
         self._components = components
         self._layout.add(components)

@@ -11,6 +11,12 @@ class Area(Protocol):
     def width(self) -> int: ...
 
 
+class Layout(Protocol):
+    def add(self, areas: Iterable[Area]): ...
+
+    def coordinates(self) -> Iterator[tuple[int, int]]: ...
+
+
 class Align(Enum):
     LEFT = auto()
     RIGHT = auto()
