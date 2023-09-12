@@ -8,7 +8,7 @@ from components import Text, HorizontalLine, Component
 from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
-from layout import VerticalLayout
+from layout import VerticalLayout, Align
 from screen import Ink, WIDTH, HEIGHT
 
 
@@ -49,7 +49,7 @@ class UposathaView:
 
     def show(self, draw: ImageDraw) -> None:
         bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
-        layout = VerticalLayout(bbox, spacing=20)
+        layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
         pane = Pane(self._components(), layout)
         pane.draw(draw)
 
@@ -113,6 +113,6 @@ class BetweenUposathasView:
 
     def show(self, draw: ImageDraw) -> None:
         bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
-        layout = VerticalLayout(bbox, spacing=20)
+        layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
         pane = Pane(self._components(), layout)
         pane.draw(draw)

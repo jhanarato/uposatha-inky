@@ -1,4 +1,5 @@
 from collections.abc import Iterator, Iterable
+from enum import Enum, auto
 from typing import Protocol
 
 from bbox import BBox
@@ -10,8 +11,14 @@ class Area(Protocol):
     def width(self) -> int: ...
 
 
+class Align(Enum):
+    LEFT = auto()
+    RIGHT = auto()
+    CENTER = auto()
+
+
 class VerticalLayout:
-    def __init__(self, bbox: BBox, spacing: int):
+    def __init__(self, bbox: BBox, align: Align, spacing: int):
         self._default_spacing = spacing
         self._bbox = bbox
         self._y = bbox.top

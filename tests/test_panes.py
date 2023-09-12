@@ -1,7 +1,7 @@
 from PIL.ImageDraw import ImageDraw
 
 from bbox import BBox
-from layout import VerticalLayout
+from layout import VerticalLayout, Align
 from views import Pane
 
 
@@ -25,7 +25,7 @@ def test_pane_draws_components():
         Drawn(), Drawn(), Drawn(),
     ]
 
-    layout = VerticalLayout(bbox, spacing=20)
+    layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
 
     pane = Pane(components, layout)
     pane.draw(None)
