@@ -11,8 +11,8 @@ class Area(Protocol):
 
 
 class VerticalLayout:
-    def __init__(self, bbox: BBox, default_spacing: int = 0):
-        self._default_spacing = default_spacing
+    def __init__(self, bbox: BBox, spacing: int):
+        self._default_spacing = spacing
         self._bbox = bbox
         self._screen_height = bbox.height
         self._screen_width = bbox.width
