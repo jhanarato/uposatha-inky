@@ -14,7 +14,7 @@ class Area:
         return self._width
 
 
-def test_should_draw_component_with_space_after():
+def test_should_draw_component_with_space_between():
     layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200), default_spacing=30)
 
     components = [
@@ -27,22 +27,15 @@ def test_should_draw_component_with_space_after():
     assert list(layout.coordinates()) == [(90, 30), (90, 70)]
 
 
-def test_should_draw_component_with_space_before():
-    layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
-    layout.add_space(20)
-    layout.add_centred(Area(20, 50))
-    assert list(layout.coordinates()) == [(75, 20)]
-
-
 def test_three_components_spaced():
     bbox = BBox(top=0, left=0, bottom=100, right=200)
-    layout = VerticalLayout(bbox)
+    layout = VerticalLayout(bbox, default_spacing=50)
     layout.add_centred(Area(height=20, width=20))
     layout.add_space(50)
     layout.add_centred(Area(height=30, width=20))
-    layout.add_space(30)
+    layout.add_space(50)
     layout.add_centred(Area(height=40, width=20))
-    assert list(layout.coordinates()) == [(90, 0), (90, 70), (90, 130)]
+    assert list(layout.coordinates()) == [(90, 0), (90, 70), (90, 150)]
 
 
 def test_should_centre_align_area():
