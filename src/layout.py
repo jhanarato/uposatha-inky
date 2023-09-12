@@ -21,36 +21,36 @@ class VerticalLayout:
 
     def add_all_left(self, areas: Iterable[Area]):
         for area in areas:
-            self.add_space(self._default_spacing)
-            self.add_left(area)
+            self._add_space(self._default_spacing)
+            self._add_left(area)
 
     def add_all_centered(self, areas: Iterable[Area]):
         for area in areas:
-            self.add_space(self._default_spacing)
-            self.add_centred(area)
+            self._add_space(self._default_spacing)
+            self._add_centred(area)
 
     def add_all_right(self, areas: Iterable[Area]):
         for area in areas:
-            self.add_space(self._default_spacing)
-            self.add_right(area)
+            self._add_space(self._default_spacing)
+            self._add_right(area)
 
-    def add_space(self, height: int) -> None:
+    def coordinates(self) -> Iterator[tuple[int, int]]:
+        return iter(self._coordinates)
+
+    def _add_space(self, height: int) -> None:
         self._y += height
 
-    def add_left(self, component: Area) -> None:
+    def _add_left(self, component: Area) -> None:
         x = self._bbox.left
         self._coordinates.append((x, self._y))
         self._y += component.height()
 
-    def add_right(self, component: Area) -> None:
+    def _add_right(self, component: Area) -> None:
         x = self._bbox.right - component.width()
         self._coordinates.append((x, self._y))
         self._y += component.height()
 
-    def add_centred(self, component: Area) -> None:
+    def _add_centred(self, component: Area) -> None:
         x = self._bbox.left + ((self._bbox.width - component.width()) // 2)
         self._coordinates.append((x, self._y))
         self._y += component.height()
-
-    def coordinates(self) -> Iterator[tuple[int, int]]:
-        return iter(self._coordinates)
