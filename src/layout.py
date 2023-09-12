@@ -14,8 +14,6 @@ class VerticalLayout:
     def __init__(self, bbox: BBox, spacing: int):
         self._default_spacing = spacing
         self._bbox = bbox
-        self._screen_height = bbox.height
-        self._screen_width = bbox.width
         self._y = bbox.top
         self._coordinates = []
 
