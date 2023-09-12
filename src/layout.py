@@ -11,8 +11,8 @@ class Area(Protocol):
 
 
 class VerticalLayout:
-    def __init__(self, bbox: BBox, spacing: int):
-        self._spacing = spacing
+    def __init__(self, bbox: BBox, default_spacing: int = 0):
+        self._default_spacing = default_spacing
         self._bbox = bbox
         self._screen_height = bbox.height
         self._screen_width = bbox.width
@@ -21,7 +21,7 @@ class VerticalLayout:
 
     def add_all_centered(self, areas: Iterable[Area]):
         for area in areas:
-            self.add_space(self._spacing)
+            self.add_space(self._default_spacing)
             self.add_centred(area)
 
     def add_space(self, height: int) -> None:
