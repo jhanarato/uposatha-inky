@@ -74,11 +74,16 @@ def test_should_handle_no_components():
 
 def test_should_layout_in_vertically_offset_bbox():
     bbox = BBox(top=100, left=0, bottom=200, right=200)
-    layout = VerticalLayout(bbox)
-    layout.add_centred(Area(height=20, width=100))
-    layout.add_space(50)
-    layout.add_centred(Area(height=30, width=100))
-    assert list(layout.coordinates()) == [(50, 100), (50, 170)]
+    layout = VerticalLayout(bbox, default_spacing=50)
+
+    components = [
+        Area(height=20, width=100),
+        Area(height=30, width=100),
+    ]
+
+    layout.add_all_centered(components)
+
+    assert list(layout.coordinates()) == [(50, 150), (50, 220)]
 
 
 def test_should_align_left_to_bbox():
