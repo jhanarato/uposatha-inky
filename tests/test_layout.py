@@ -103,7 +103,7 @@ def test_should_add_centered_sequence_of_components():
     bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
-    layout.add_all_centered(components)
+    layout.add(components)
 
     assert list(layout.coordinates()) == [(75, 20), (60, 110), (50, 200)]
 
@@ -118,7 +118,7 @@ def test_should_add_left_aligned_sequence_of_components():
     bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, Align.LEFT, spacing=20)
-    layout.add_all_left(components)
+    layout.add(components)
 
     assert list(layout.coordinates()) == [(0, 20), (0, 110), (0, 200)]
 
@@ -133,6 +133,6 @@ def test_should_add_right_aligned_sequence_of_components():
     bbox = BBox(top=20, left=0, bottom=300, right=200)
 
     layout = VerticalLayout(bbox, Align.RIGHT, spacing=20)
-    layout.add_all_right(components)
+    layout.add(components)
 
     assert list(layout.coordinates()) == [(150, 20), (170, 110), (190, 200)]
