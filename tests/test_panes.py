@@ -5,24 +5,31 @@ from layout import VerticalLayout, Align
 from views import Pane
 
 
-def test_pane_draws_components():
-    class Drawn:
-        def __init__(self):
-            self.drawn = False
+class Drawn:
+    def __init__(self, height: int, width: int):
+        self._height = height
+        self._width = width
+        self.drawn = False
+        self.xy = None
 
-        def height(self) -> int:
-            return 0
+    def height(self) -> int:
+        return self._height
 
-        def width(self) -> int:
-            return 0
+    def width(self) -> int:
+        return self._width
 
-        def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-            self.drawn = True
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        self.drawn = True
+        self.xy = (x, y)
 
-    bbox = BBox(top=0, left=0, bottom=100, right=100)
+
+def test_should_draw_pane():
+    bbox = BBox(top=20, left=50, bottom=100, right=100)
 
     components = [
-        Drawn(), Drawn(), Drawn(),
+        Drawn(height=10, width=20),
+        Drawn(height=20, width=30),
+        Drawn(height=60, width=10),
     ]
 
     layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
@@ -31,3 +38,6 @@ def test_pane_draws_components():
     pane.draw(None)
 
     assert all(component.drawn for component in components)
+
+    coords = [component.xy for component in components]
+    assert coords == [(65, 20), (60, 50), (70, 90)]
