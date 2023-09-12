@@ -7,10 +7,12 @@ from fonts import Font
 from screen import Ink
 
 
-class Drawable(Protocol):
-    def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
+class Component(Protocol):
+    def height(self) -> int: ...
 
-    """ Draw given the top left coordinates """
+    def width(self) -> int: ...
+
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None: ...
 
 
 class Text:

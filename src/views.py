@@ -1,10 +1,10 @@
 from collections.abc import Iterable
-from typing import Protocol, Any
+from typing import Protocol
 
 from PIL import ImageDraw
 
 from bbox import BBox
-from components import Text, HorizontalLine
+from components import Text, HorizontalLine, Component
 from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
@@ -26,7 +26,7 @@ def select_view(context: Context) -> View:
 
 
 class Pane:
-    def __init__(self, components: Iterable[Any], layout: VerticalLayout):
+    def __init__(self, components: Iterable[Component], layout: VerticalLayout):
         self._layout = layout
         self._components = components
         self._layout.add_all_centered(components)
