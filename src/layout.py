@@ -38,17 +38,17 @@ class VerticalLayout:
     def _add_space(self, height: int) -> None:
         self._y += height
 
-    def _add_left(self, component: Area) -> None:
+    def _add_left(self, area: Area) -> None:
         x = self._bbox.left
         self._coordinates.append((x, self._y))
-        self._y += component.height()
+        self._y += area.height()
 
-    def _add_right(self, component: Area) -> None:
-        x = self._bbox.right - component.width()
+    def _add_right(self, area: Area) -> None:
+        x = self._bbox.right - area.width()
         self._coordinates.append((x, self._y))
-        self._y += component.height()
+        self._y += area.height()
 
-    def _add_centred(self, component: Area) -> None:
-        x = self._bbox.left + ((self._bbox.width - component.width()) // 2)
+    def _add_centred(self, area: Area) -> None:
+        x = self._bbox.left + ((self._bbox.width - area.width()) // 2)
         self._coordinates.append((x, self._y))
-        self._y += component.height()
+        self._y += area.height()
