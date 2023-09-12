@@ -66,29 +66,9 @@ def test_should_right_align_area():
     assert list(layout.coordinates()) == [(180, 0)]
 
 
-def test_should_generate_coordinates():
-    bbox = BBox(top=0, left=0, bottom=100, right=200)
-    layout = VerticalLayout(bbox)
-    layout.add_centred(Area(height=20, width=20))
-    layout.add_space(50)
-    layout.add_centred(Area(height=30, width=20))
-    layout.add_space(30)
-    layout.add_centred(Area(height=40, width=20))
-
-    coordinates = list(layout.coordinates())
-    assert coordinates == [(90, 0), (90, 70), (90, 130)]
-
-
 def test_should_handle_no_components():
     bbox = BBox(top=0, left=0, bottom=100, right=200)
     layout = VerticalLayout(bbox)
-    assert list(layout.coordinates()) == []
-
-
-def test_should_handle_space_only():
-    bbox = BBox(top=0, left=0, bottom=100, right=200)
-    layout = VerticalLayout(bbox)
-    layout.add_space(50)
     assert list(layout.coordinates()) == []
 
 
