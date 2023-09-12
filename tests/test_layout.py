@@ -135,3 +135,18 @@ def test_should_add_left_aligned_sequence_of_components():
     layout.add_all_left(components)
 
     assert list(layout.coordinates()) == [(0, 20), (0, 110), (0, 200)]
+
+
+def test_should_add_right_aligned_sequence_of_components():
+    components = [
+        Area(height=70, width=50),
+        Area(height=70, width=30),
+        Area(height=70, width=10),
+    ]
+
+    bbox = BBox(top=0, left=0, bottom=300, right=200)
+
+    layout = VerticalLayout(bbox, default_spacing=20)
+    layout.add_all_right(components)
+
+    assert list(layout.coordinates()) == [(150, 20), (170, 110), (190, 200)]

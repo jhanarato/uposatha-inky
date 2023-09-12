@@ -29,6 +29,11 @@ class VerticalLayout:
             self.add_space(self._default_spacing)
             self.add_centred(area)
 
+    def add_all_right(self, areas: Iterable[Area]):
+        for area in areas:
+            self.add_space(self._default_spacing)
+            self.add_right(area)
+
     def add_space(self, height: int) -> None:
         self._y += height
 
