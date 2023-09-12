@@ -15,11 +15,16 @@ class Area:
 
 
 def test_should_draw_component_with_space_after():
-    layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200))
-    layout.add_centred(Area(10, 20))
-    layout.add_space(30)
-    layout.add_centred(Area(10, 20))
-    assert list(layout.coordinates()) == [(90, 0), (90, 40)]
+    layout = VerticalLayout(BBox(top=0, left=0, bottom=100, right=200), default_spacing=30)
+
+    components = [
+        Area(10, 20),
+        Area(10, 20),
+    ]
+
+    layout.add_all_centered(components)
+
+    assert list(layout.coordinates()) == [(90, 30), (90, 70)]
 
 
 def test_should_draw_component_with_space_before():
