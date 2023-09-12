@@ -30,12 +30,15 @@ def test_should_draw_component_with_space_between():
 def test_three_components_spaced():
     bbox = BBox(top=0, left=0, bottom=100, right=200)
     layout = VerticalLayout(bbox, default_spacing=50)
-    layout.add_space(50)
-    layout.add_centred(Area(height=20, width=20))
-    layout.add_space(50)
-    layout.add_centred(Area(height=30, width=20))
-    layout.add_space(50)
-    layout.add_centred(Area(height=40, width=20))
+
+    components = [
+        Area(height=20, width=20),
+        Area(height=30, width=20),
+        Area(height=40, width=20)
+    ]
+
+    layout.add_all_centered(components)
+
     assert list(layout.coordinates()) == [(90, 50), (90, 120), (90, 200)]
 
 
