@@ -111,8 +111,34 @@ class BetweenUposathasView:
             Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
         ]
 
-    def show(self, draw: ImageDraw) -> None:
-        bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
+    def _heading_pane(self) -> Pane:
+        components = [
+            Text("Next Uposatha", Font("roboto-bold", 30), Ink.BLACK),
+            HorizontalLine(300, Ink.BLACK),
+        ]
+
+        bbox = BBox(top=20, left=0, bottom=95, right=WIDTH)
         layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
-        pane = Pane(self._components(), layout)
-        pane.draw(draw)
+
+        return Pane(components, layout)
+
+    def _info_pane(self) -> Pane:
+        components = [
+            Text(self._content.date, Font("roboto-bold", 24), Ink.BLACK),
+            Countdown(
+                self._appearances(),
+                self._content.today,
+                self._content.falls_on,
+                self._content.moon_phase
+            ),
+            Text(self._content.details, Font("roboto-bold", 24), Ink.BLACK),
+        ]
+
+        bbox = BBox(top=96, left=0, bottom=HEIGHT, right=WIDTH)
+        layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
+
+        return Pane(components, layout)
+
+    def show(self, draw: ImageDraw) -> None:
+        self._heading_pane().draw(draw)
+        self._info_pane().draw(draw)
