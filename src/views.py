@@ -39,7 +39,7 @@ class Pane:
 
 class UposathaView:
     def __init__(self, context: Context):
-        pass
+        self._content = Content(context)
 
     def _heading_pane(self) -> Pane:
         components = [
@@ -53,14 +53,17 @@ class UposathaView:
         return Pane(components, layout)
 
     def _info_pane(self) -> Pane:
+        font = Font("roboto-bold", 27)
+        colour = Ink.BLACK
+
         components = [
-            Text("Line 1", Font("roboto-bold", 24), Ink.BLACK),
-            Text("Line 2", Font("roboto-bold", 24), Ink.BLACK),
-            Text("Line 3", Font("roboto-bold", 24), Ink.BLACK),
+            Text(self._content.num_of_num, font, colour),
+            Text(self._content.season_name, font, colour),
+            Text(self._content.day, font, colour),
         ]
 
         bbox = BBox(top=96, left=WIDTH // 2, bottom=HEIGHT, right=WIDTH)
-        layout = VerticalLayout(bbox, Align.LEFT, spacing=20)
+        layout = VerticalLayout(bbox, Align.CENTER, spacing=15)
 
         return Pane(components, layout)
 
