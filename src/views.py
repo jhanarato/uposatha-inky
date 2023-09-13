@@ -41,17 +41,32 @@ class UposathaView:
     def __init__(self, context: Context):
         pass
 
-    def _components(self):
-        return [
+    def _heading_pane(self) -> Pane:
+        components = [
             Text("Uposatha Today", Font("roboto-bold", 30), Ink.BLACK),
             HorizontalLine(300, Ink.BLACK),
         ]
 
-    def show(self, draw: ImageDraw) -> None:
-        bbox = BBox(top=20, left=0, bottom=HEIGHT, right=WIDTH)
+        bbox = BBox(top=20, left=0, bottom=95, right=WIDTH)
         layout = VerticalLayout(bbox, Align.CENTER, spacing=20)
-        pane = Pane(self._components(), layout)
-        pane.draw(draw)
+
+        return Pane(components, layout)
+
+    def _info_pane(self) -> Pane:
+        components = [
+            Text("Line 1", Font("roboto-bold", 24), Ink.BLACK),
+            Text("Line 2", Font("roboto-bold", 24), Ink.BLACK),
+            Text("Line 3", Font("roboto-bold", 24), Ink.BLACK),
+        ]
+
+        bbox = BBox(top=96, left=WIDTH // 2, bottom=HEIGHT, right=WIDTH)
+        layout = VerticalLayout(bbox, Align.LEFT, spacing=20)
+
+        return Pane(components, layout)
+
+    def show(self, draw: ImageDraw) -> None:
+        self._heading_pane().draw(draw)
+        self._info_pane().draw(draw)
 
 
 class HolidayView:
