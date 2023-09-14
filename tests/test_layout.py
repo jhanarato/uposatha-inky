@@ -179,13 +179,13 @@ def test_should_stack_centered_full_screen():
     "area,coords",
     [
         (Area(width=70, height=30), (75, 85)),
-        # (Area(width=80, height=20), (, )),
-        # (Area(width=10, height=50), (, )),
-        # (Area(width=25, height=25), (, )),
+        (Area(width=80, height=20), (70, 90)),
+        (Area(width=10, height=50), (105, 75)),
+        (Area(width=25, height=25), (98, 88)),
     ]
 )
 def test_should_position_area_at_center_of_bbox(area, coords):
-    # Center == (70, 110)
+    # Center == (110, 100)
     bbox = BBox(top=50, left=40, bottom=150, right=180)
     layout = StackedLayout(bbox)
     layout.add([area])
