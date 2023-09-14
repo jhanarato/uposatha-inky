@@ -1,5 +1,7 @@
+import pytest
+
 from bbox import BBox
-from layout import VerticalLayout, Align
+from layout import VerticalLayout, Align, StackedLayout
 
 
 class Area:
@@ -136,3 +138,35 @@ def test_should_add_right_aligned_sequence_of_components():
     layout.add(components)
 
     assert list(layout.coordinates()) == [(150, 20), (170, 110), (190, 200)]
+
+
+@pytest.mark.parametrize(
+    "area,coords",
+    [
+        (Area(width=70, height=30), (65, 35))
+    ]
+)
+def test_should_position_area_at_center(area, coords):
+    bbox = BBox(top=0, left=0, bottom=100, right=200)
+    layout = StackedLayout(bbox)
+    layout.add([area])
+
+    assert next(layout.coordinates()) == coords
+
+
+def test_should_stack_centered_full_screen():
+    components = [
+        Area(height=30, width=70),
+        Area(height=20, width=80),
+        Area(height=50, width=10),
+        Area(height=25, width=25),
+    ]
+
+    bbox = BBox(top=0, left=0, bottom=100, right=200)
+
+    layout = StackedLayout(bbox)
+    layout.add(components)
+
+    assert list(layout.coordinates()) == [
+        (65, 35), (60, 40), (95, 25), (88, 38),
+    ]
