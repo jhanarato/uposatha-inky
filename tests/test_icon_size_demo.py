@@ -1,4 +1,4 @@
-from icon_size_demo import positions, image_width, image_height
+from demos.icon_size_demo import positions, image_width, image_height
 
 
 def test_positions():

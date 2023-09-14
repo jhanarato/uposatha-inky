@@ -1,4 +1,4 @@
-from icon_grid_demo import icon_row, shifted_grid, grid_coordinates, image_size
+from demos.icon_grid_demo import icon_row, shifted_grid, grid_coordinates, image_size
 
 
 def test_shifted_grid():
