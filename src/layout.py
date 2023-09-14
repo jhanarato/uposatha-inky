@@ -72,8 +72,8 @@ class StackedLayout:
 
     def add(self, areas: Iterable[Area]) -> None:
         for area in areas:
-            x = (self._bbox.width - area.width()) // 2
-            y = (self._bbox.height - area.height()) // 2
+            x = self._bbox.left + (self._bbox.width - area.width()) // 2
+            y = self._bbox.top + (self._bbox.height - area.height()) // 2
             self._coordinates.append((x, y))
 
     def coordinates(self) -> Iterator[tuple[int, int]]:

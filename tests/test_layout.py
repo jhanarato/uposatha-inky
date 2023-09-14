@@ -149,7 +149,7 @@ def test_should_add_right_aligned_sequence_of_components():
         (Area(width=25, height=25), (88, 38)),
     ]
 )
-def test_should_position_area_at_center(area, coords):
+def test_should_position_area_at_center_of_screen(area, coords):
     bbox = BBox(top=0, left=0, bottom=100, right=200)
     layout = StackedLayout(bbox)
     layout.add([area])
@@ -173,3 +173,21 @@ def test_should_stack_centered_full_screen():
     assert list(layout.coordinates()) == [
         (65, 35), (60, 40), (95, 25), (88, 38),
     ]
+
+
+@pytest.mark.parametrize(
+    "area,coords",
+    [
+        (Area(width=70, height=30), (75, 85)),
+        # (Area(width=80, height=20), (, )),
+        # (Area(width=10, height=50), (, )),
+        # (Area(width=25, height=25), (, )),
+    ]
+)
+def test_should_position_area_at_center_of_bbox(area, coords):
+    # Center == (70, 110)
+    bbox = BBox(top=50, left=40, bottom=150, right=180)
+    layout = StackedLayout(bbox)
+    layout.add([area])
+
+    assert next(layout.coordinates()) == coords
