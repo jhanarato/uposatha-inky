@@ -143,7 +143,10 @@ def test_should_add_right_aligned_sequence_of_components():
 @pytest.mark.parametrize(
     "area,coords",
     [
-        (Area(width=70, height=30), (65, 35))
+        (Area(width=70, height=30), (65, 35)),
+        (Area(width=80, height=20), (60, 40)),
+        (Area(width=10, height=50), (95, 25)),
+        (Area(width=25, height=25), (88, 38)),
     ]
 )
 def test_should_position_area_at_center(area, coords):
