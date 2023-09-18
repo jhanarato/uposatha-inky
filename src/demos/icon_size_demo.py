@@ -9,7 +9,7 @@ GAP = 4
 
 
 def days(size: int) -> list[DayOfWeekIcon]:
-    return [DayOfWeekIcon(letter, size) for letter in "SMTWF"]
+    return [DayOfWeekIcon(letter, size, 3) for letter in "SMTWF"]
 
 
 def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tuple[int, int]]:
@@ -27,7 +27,7 @@ def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tupl
 def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
     for size in sizes:
         for letter in letters:
-            yield DayOfWeekIcon(letter, size)
+            yield DayOfWeekIcon(letter, size, 3)
 
 
 def draw_icons(draw: ImageDraw, border: int, letters: str, sizes: list[int]) -> None:

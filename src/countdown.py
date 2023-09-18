@@ -113,7 +113,7 @@ class Icons(Sequence[Component]):
             return 3
 
     def _day_of_week_icon(self, day: date) -> Component:
-        return DayOfWeekIcon(letter=day.strftime("%a")[0], size=self.icon_size)
+        return DayOfWeekIcon(letter=day.strftime("%a")[0], size=self.icon_size, border=self.icon_border)
 
     def _moon_icon(self) -> Component:
         match self._moon_phase:

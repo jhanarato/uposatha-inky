@@ -133,10 +133,10 @@ class DayOfWeekIcon:
     An icon displaying the abbreviated day of the week. e.g. M for Monday.
     """
 
-    def __init__(self, letter: str, size: int) -> None:
+    def __init__(self, letter: str, size: int, border) -> None:
         self._letter = letter
         self._size = size
-        self._circle = Circle(self._size, border=3, fill=Ink.WHITE, outline=Ink.BLACK)
+        self._circle = Circle(self._size, border=border, fill=Ink.WHITE, outline=Ink.BLACK)
         font = Font("roboto-bold", round(self._size * 0.7))
         self._glyph = Glyph(letter, font, Ink.BLACK)
 

@@ -38,7 +38,7 @@ def shifted_grid(letters: str) -> Iterator[DayOfWeekIcon]:
 
 
 def icon_row(letters: str) -> list[DayOfWeekIcon]:
-    return [DayOfWeekIcon(letter, ICON_SIZE) for letter in letters]
+    return [DayOfWeekIcon(letter, ICON_SIZE, 3) for letter in letters]
 
 
 def draw_icons(draw: ImageDraw, letters: str) -> None:
