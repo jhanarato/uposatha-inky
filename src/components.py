@@ -109,6 +109,7 @@ class Rectangle:
 class Circle:
     def __init__(self, diameter: int, border: int, fill: Ink, outline: Ink):
         self._diameter = diameter
+        self._border = border
         self._fill = fill
         self._outline = outline
 
@@ -123,7 +124,7 @@ class Circle:
             xy=[(x, y), (x + self.width(), y + self.height())],
             fill=self._fill.value,
             outline=self._outline.value,
-            width=3
+            width=self._border
         )
 
 
