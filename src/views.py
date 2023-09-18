@@ -154,8 +154,8 @@ class BetweenUposathasView:
     def _fourteen_day_appearance(self) -> IconCountMapping[Appearance]:
         appearances = IconCountMapping[Appearance](14)
         appearances[8, 14] = Appearance(self.SMALL_ICON, 7, self.GAP)
-        appearances[4, 7] = Appearance(self.MEDIUM_ICON, 7, self.GAP)
-        appearances[2, 3] = Appearance(self.LARGE_ICON, 7, self.GAP)
+        appearances[5, 7] = Appearance(self.MEDIUM_ICON, 7, self.GAP)
+        appearances[2, 4] = Appearance(self.LARGE_ICON, 7, self.GAP)
         appearances[1] = Appearance(self.LARGEST_ICON, 7, self.GAP)
         return appearances
 
