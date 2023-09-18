@@ -107,7 +107,7 @@ class Rectangle:
 
 
 class Circle:
-    def __init__(self, diameter: int, fill: Ink, outline: Ink):
+    def __init__(self, diameter: int, border: int, fill: Ink, outline: Ink):
         self._diameter = diameter
         self._fill = fill
         self._outline = outline
@@ -135,7 +135,7 @@ class DayOfWeekIcon:
     def __init__(self, letter: str, size: int) -> None:
         self._letter = letter
         self._size = size
-        self._circle = Circle(self._size, fill=Ink.WHITE, outline=Ink.BLACK)
+        self._circle = Circle(self._size, 3, fill=Ink.WHITE, outline=Ink.BLACK)
         font = Font("roboto-bold", round(self._size * 0.7))
         self._glyph = Glyph(letter, font, Ink.BLACK)
 
@@ -170,7 +170,7 @@ class FullMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        circle = Circle(self._size, fill=Ink.YELLOW, outline=Ink.BLACK)
+        circle = Circle(self._size, 3, fill=Ink.YELLOW, outline=Ink.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
@@ -188,7 +188,7 @@ class NewMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        circle = Circle(self._size, fill=Ink.BLACK, outline=Ink.BLACK)
+        circle = Circle(self._size, 3, fill=Ink.BLACK, outline=Ink.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):

@@ -22,7 +22,7 @@ def draw_glyph_in_frame():
         center_x = WIDTH // 2
         center_y = HEIGHT // 2
 
-        circle = Circle(80, fill=Ink.WHITE, outline=Ink.BLACK)
+        circle = Circle(80, 3, fill=Ink.WHITE, outline=Ink.BLACK)
         circle_x = center_x - (circle.width() // 2)
         circle_y = center_y - (circle.height() // 2)
 

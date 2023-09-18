@@ -101,7 +101,7 @@ class UposathaView:
         match self._content.moon_phase:
             case MoonPhase.FULL:
                 components = [
-                    Circle(150, Ink.YELLOW, Ink.BLACK),
+                    Circle(150, 3, Ink.YELLOW, Ink.BLACK),
                     MoonWords(
                         self._content.moon_words[0],
                         self._content.moon_words[1],
@@ -110,7 +110,7 @@ class UposathaView:
                 ]
             case MoonPhase.NEW:
                 components = [
-                    Circle(150, Ink.BLACK, Ink.BLACK),
+                    Circle(150, 3, Ink.BLACK, Ink.BLACK),
                     MoonWords(
                         self._content.moon_words[0],
                         self._content.moon_words[1],

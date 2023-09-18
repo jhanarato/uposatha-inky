@@ -8,7 +8,7 @@ from views import Pane
 with DrawingViewer(height=200, width=200) as draw:
     components = [
         Rectangle(50, 50, Ink.BLACK),
-        Circle(40, Ink.WHITE, Ink.WHITE)
+        Circle(40, 3, Ink.WHITE, Ink.WHITE)
     ]
 
     bbox = BBox(left=100, top=100, right=200, bottom=200)
