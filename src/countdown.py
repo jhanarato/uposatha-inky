@@ -118,7 +118,7 @@ class Icons(Sequence[Component]):
     def _moon_icon(self) -> Component:
         match self._moon_phase:
             case MoonPhase.FULL:
-                return FullMoonIcon(self.icon_size)
+                return FullMoonIcon(self.icon_size, self.icon_border)
             case MoonPhase.NEW:
                 return NewMoonIcon(size=self.icon_size)
 

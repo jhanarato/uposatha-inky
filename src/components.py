@@ -161,8 +161,9 @@ class DayOfWeekIcon:
 
 
 class FullMoonIcon:
-    def __init__(self, size: int):
+    def __init__(self, size: int, border):
         self._size = size
+        self._border = border
 
     def height(self) -> int:
         return self._size
@@ -171,7 +172,7 @@ class FullMoonIcon:
         return self._size
 
     def draw(self, draw: ImageDraw, x: int, y: int) -> None:
-        circle = Circle(self._size, border=3, fill=Ink.YELLOW, outline=Ink.BLACK)
+        circle = Circle(self._size, border=self._border, fill=Ink.YELLOW, outline=Ink.BLACK)
         circle.draw(draw, x, y)
 
     def __str__(self):
