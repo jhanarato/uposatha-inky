@@ -53,7 +53,7 @@ class UposathaView:
         return Pane(components, layout)
 
     def _info_pane(self) -> Pane:
-        font = Font("roboto-bold", 27)
+        font = Font("roboto-bold", 26)
         colour = Ink.BLACK
 
         components = [
@@ -62,8 +62,8 @@ class UposathaView:
             Text(self._content.day, font, colour),
         ]
 
-        bbox = BBox(top=96, left=WIDTH // 2, bottom=HEIGHT, right=WIDTH)
-        layout = VerticalLayout(bbox, Align.CENTER, spacing=15)
+        bbox = BBox(top=110, left=160, bottom=HEIGHT, right=WIDTH)
+        layout = VerticalLayout(bbox, Align.CENTER, spacing=10)
 
         return Pane(components, layout)
 
@@ -73,7 +73,7 @@ class UposathaView:
             Text("Full", Font("roboto-bold", 30), Ink.BLACK),
         ]
 
-        bbox = BBox(top=96, left=20, bottom=250, right=WIDTH // 2)
+        bbox = BBox(top=96, left=70, bottom=250, right=WIDTH // 2)
         layout = StackedLayout(bbox)
 
         return Pane(components, layout)
