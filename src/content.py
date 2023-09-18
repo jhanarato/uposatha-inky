@@ -98,7 +98,7 @@ class Content:
                 case HolidayName.ASALHA:
                     return "Āsāḷha", "Pūjā"
                 case HolidayName.VESAK:
-                    return "Vesak", "Day"
+                    return "Visākha", "Pūjā"
                 case HolidayName.MAGHA:
                     return "Māgha", "Pūjā"
 

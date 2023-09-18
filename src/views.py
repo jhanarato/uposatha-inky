@@ -131,16 +131,6 @@ class UposathaView:
         self._moon_pane().draw(draw)
 
 
-class HolidayView:
-    def __init__(self, context: Context):
-        pass
-
-    def show(self, draw: ImageDraw) -> None:
-        font = Font("roboto", 30)
-        text = Text("Today is a holiday", font, Ink.BLACK)
-        text.draw(draw, 10, 10)
-
-
 class BetweenUposathasView:
     GAP = 4
     SMALLEST_ICON = 25

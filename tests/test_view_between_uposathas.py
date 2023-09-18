@@ -8,7 +8,7 @@ from countdown import Appearance
 from countdown import Countdown
 from screen import WIDTH, HEIGHT
 from viewer import DrawingViewer
-from views import select_view, BetweenUposathasView, UposathaView, HolidayView
+from views import select_view, BetweenUposathasView, UposathaView
 
 
 @pytest.fixture
@@ -51,7 +51,7 @@ def test_should_generate_components(day_before_uposatha_context):
     [
         (date(2023, 9, 28), BetweenUposathasView),
         (date(2023, 9, 29), UposathaView),
-        (date(2023, 10, 29), HolidayView),
+        (date(2023, 10, 29), UposathaView),
     ]
 )
 def test_should_select_view_from_context(today, view_type):
