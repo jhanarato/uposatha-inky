@@ -2,6 +2,7 @@ from collections.abc import Iterable
 from typing import Protocol
 
 from PIL.ImageDraw import ImageDraw
+from uposatha.elements import MoonPhase
 
 from bbox import BBox
 from components import Text, HorizontalLine, Component, Circle
@@ -97,10 +98,19 @@ class UposathaView:
         return Pane(components, layout)
 
     def _moon_pane(self) -> Pane:
-        components = [
-            Circle(150, Ink.YELLOW, Ink.BLACK),
-            MoonWords("Full", "Moon", Ink.BLACK),
-        ]
+        match self._content.moon_phase:
+            case MoonPhase.FULL:
+                components = [
+                    Circle(150, Ink.YELLOW, Ink.BLACK),
+                    MoonWords("Full", "Moon", Ink.BLACK),
+                ]
+            case MoonPhase.NEW:
+                components = [
+                    Circle(150, Ink.BLACK, Ink.BLACK),
+                    MoonWords("New", "Moon", Ink.WHITE),
+                ]
+            case _:
+                raise RuntimeError("Moon must be full or new")
 
         bbox = BBox(top=96, left=70, bottom=250, right=WIDTH // 2)
         layout = StackedLayout(bbox)
