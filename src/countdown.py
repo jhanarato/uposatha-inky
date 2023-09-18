@@ -105,6 +105,13 @@ class Icons(Sequence[Component]):
         self._end = end
         self._moon_phase = moon_phase
 
+    @property
+    def icon_border(self) -> int:
+        if self.icon_size <= 25:
+            return 1
+        else:
+            return 3
+
     def _day_of_week_icon(self, day: date) -> Component:
         return DayOfWeekIcon(letter=day.strftime("%a")[0], size=self.icon_size)
 

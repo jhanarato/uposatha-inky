@@ -65,3 +65,16 @@ def test_should_not_allow_negative_index():
     icons = Icons(1, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
     with pytest.raises(IndexError):
         _ = icons[-1]
+
+
+@pytest.mark.parametrize(
+    "icon_size,icon_border",
+    [
+        (24, 1),
+        (25, 1),
+        (26, 3),
+    ]
+)
+def test_should_adjust_icon_border(icon_size, icon_border):
+    icons = Icons(icon_size, date(2023, 6, 5), date(2023, 6, 7), MoonPhase.FULL)
+    assert icons.icon_border == icon_border
