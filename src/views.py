@@ -19,7 +19,7 @@ class View(Protocol):
 
 def select_view(context: Context) -> View:
     if context.holiday_today():
-        return HolidayView(context)
+        return UposathaView(context)
     elif context.uposatha_today():
         return UposathaView(context)
     else:
@@ -102,12 +102,20 @@ class UposathaView:
             case MoonPhase.FULL:
                 components = [
                     Circle(150, Ink.YELLOW, Ink.BLACK),
-                    MoonWords("Full", "Moon", Ink.BLACK),
+                    MoonWords(
+                        self._content.moon_words[0],
+                        self._content.moon_words[1],
+                        Ink.BLACK
+                    ),
                 ]
             case MoonPhase.NEW:
                 components = [
                     Circle(150, Ink.BLACK, Ink.BLACK),
-                    MoonWords("New", "Moon", Ink.WHITE),
+                    MoonWords(
+                        self._content.moon_words[0],
+                        self._content.moon_words[1],
+                        Ink.WHITE
+                    ),
                 ]
             case _:
                 raise RuntimeError("Moon must be full or new")
