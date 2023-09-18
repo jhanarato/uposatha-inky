@@ -132,11 +132,11 @@ class UposathaView:
 
 
 class BetweenUposathasView:
-    GAP = 4
+    GAP = 6
     SMALLEST_ICON = 25
     SMALL_ICON = 35
     MEDIUM_ICON = 40
-    LARGE_ICON = 45
+    LARGE_ICON = 60
     LARGEST_ICON = 80
 
     def __init__(self, context: Context):
@@ -146,8 +146,8 @@ class BetweenUposathasView:
         appearances = IconCountMapping[Appearance](15)
         appearances[11, 15] = Appearance(self.SMALLEST_ICON, 5, self.GAP)
         appearances[8, 10] = Appearance(self.SMALL_ICON, 5, self.GAP)
-        appearances[4, 7] = Appearance(self.MEDIUM_ICON, 8, self.GAP)
-        appearances[2, 3] = Appearance(self.LARGE_ICON, 8, self.GAP)
+        appearances[3, 7] = Appearance(self.MEDIUM_ICON, 8, self.GAP)
+        appearances[2, 4] = Appearance(self.LARGE_ICON, 8, self.GAP)
         appearances[1] = Appearance(self.LARGEST_ICON, 8, self.GAP)
         return appearances
 
