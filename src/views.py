@@ -92,7 +92,7 @@ class UposathaView:
             Text(self._content.day, font, colour),
         ]
 
-        bbox = BBox(top=110, left=160, bottom=HEIGHT, right=WIDTH)
+        bbox = BBox(top=120, left=160, bottom=HEIGHT, right=WIDTH)
         layout = VerticalLayout(bbox, Align.CENTER, spacing=10)
 
         return Pane(components, layout)
