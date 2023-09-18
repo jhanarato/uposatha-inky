@@ -180,7 +180,7 @@ class FullMoonIcon:
 
 
 class NewMoonIcon:
-    def __init__(self, size: int):
+    def __init__(self, size: int, border):
         self._size = size
 
     def height(self) -> int:

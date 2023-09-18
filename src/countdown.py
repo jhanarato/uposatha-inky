@@ -120,7 +120,7 @@ class Icons(Sequence[Component]):
             case MoonPhase.FULL:
                 return FullMoonIcon(self.icon_size, self.icon_border)
             case MoonPhase.NEW:
-                return NewMoonIcon(size=self.icon_size)
+                return NewMoonIcon(self.icon_size, self.icon_border)
 
             case MoonPhase.WANING | MoonPhase.WAXING:
                 raise RuntimeError("Moon phase must be full or new")
