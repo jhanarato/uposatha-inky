@@ -81,3 +81,9 @@ class Content:
     @property
     def details(self) -> str:
         return f"{self.num_of_num} | {self.season_name} | {self.day}"
+
+    @property
+    def moon_words(self) -> tuple[str, str]:
+        if self.today != self.falls_on:
+            return "", ""
+        return "Full", "Moon"

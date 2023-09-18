@@ -90,3 +90,16 @@ def test_context_uposatha_today(today, is_uposatha):
 )
 def test_context_uposatha_today(today, is_holiday):
     assert get_context(today).holiday_today() == is_holiday
+
+
+@pytest.mark.parametrize(
+    "today,words",
+    [
+        (date(2023, 9, 18), ("", "")),
+        (date(2023, 9, 29), ("Full", "Moon")),
+    ]
+)
+def test_moon_words(today, words):
+    context = get_context(today)
+    content = Content(context)
+    assert content.moon_words == words
