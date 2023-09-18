@@ -39,10 +39,10 @@ class Pane:
 
 class MoonWords:
     def __init__(self, first_word: str, second_word: str, colour: Ink):
-        font = Font("roboto-bold", 30)
+        font = Font("roboto-bold", 28)
         self._first_text = Text(first_word, font, colour)
         self._second_text = Text(second_word, font, colour)
-        self._spacing = 15
+        self._spacing = 10
 
     def height(self) -> int:
         h = self._first_text.height()
@@ -201,4 +201,3 @@ class BetweenUposathasView:
     def show(self, draw: ImageDraw) -> None:
         self._heading_pane().draw(draw)
         self._info_pane().draw(draw)
-
