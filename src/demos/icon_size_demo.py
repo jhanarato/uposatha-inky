@@ -26,8 +26,12 @@ def positions(border: int, letter_count: int, sizes: list[int]) -> Iterator[tupl
 
 def icons(letters: str, sizes: list[int]) -> Iterator[DayOfWeekIcon]:
     for size in sizes:
+        if size <= 25:
+            border = 1
+        else:
+            border = 3
         for letter in letters:
-            yield DayOfWeekIcon(letter, size, 3)
+            yield DayOfWeekIcon(letter, size, border)
 
 
 def draw_icons(draw: ImageDraw, border: int, letters: str, sizes: list[int]) -> None:
