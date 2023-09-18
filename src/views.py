@@ -4,11 +4,11 @@ from typing import Protocol
 from PIL import ImageDraw
 
 from bbox import BBox
-from components import Text, HorizontalLine, Component
+from components import Text, HorizontalLine, Component, Circle
 from content import Content, Context
 from countdown import IconCountMapping, Appearance, Countdown
 from fonts import Font
-from layout import VerticalLayout, Align, Layout
+from layout import VerticalLayout, Align, Layout, StackedLayout
 from screen import Ink, WIDTH, HEIGHT
 
 
@@ -67,9 +67,21 @@ class UposathaView:
 
         return Pane(components, layout)
 
+    def _moon_pane(self) -> Pane:
+        components = [
+            Circle(150, Ink.YELLOW, Ink.BLACK),
+            Text("Full", Font("roboto-bold", 30), Ink.BLACK),
+        ]
+
+        bbox = BBox(top=96, left=20, bottom=250, right=WIDTH // 2)
+        layout = StackedLayout(bbox)
+
+        return Pane(components, layout)
+
     def show(self, draw: ImageDraw) -> None:
         self._heading_pane().draw(draw)
         self._info_pane().draw(draw)
+        self._moon_pane().draw(draw)
 
 
 class HolidayView:
