@@ -1,6 +1,6 @@
-from large_moon import MoonWords
 from screen import Ink
 from viewer import DrawingViewer
+from views import MoonWords
 
 
 def test_moon_words_has_height():

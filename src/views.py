@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from typing import Protocol
 
-from PIL import ImageDraw
+from PIL.ImageDraw import ImageDraw
 
 from bbox import BBox
 from components import Text, HorizontalLine, Component, Circle
@@ -37,6 +37,35 @@ class Pane:
             component.draw(draw, *coordinates)
 
 
+class MoonWords:
+    def __init__(self, first_word: str, second_word: str, colour: Ink):
+        font = Font("roboto-bold", 30)
+        self._first_text = Text(first_word, font, colour)
+        self._second_text = Text(second_word, font, colour)
+        self._spacing = 15
+
+    def height(self) -> int:
+        h = self._first_text.height()
+        h += self._second_text.height()
+        h += self._spacing
+        return h
+
+    def width(self) -> int:
+        return max(self._first_text.width(), self._second_text.width())
+
+    def draw(self, draw: ImageDraw, x: int, y: int) -> None:
+        components = [self._first_text, self._second_text]
+        bbox = BBox(
+            left=x,
+            right=x + self.width(),
+            top=y,
+            bottom=y + self.height()
+        )
+        layout = VerticalLayout(bbox, Align.CENTER, self._spacing)
+        pane = Pane(components, layout)
+        pane.draw(draw)
+
+
 class UposathaView:
     def __init__(self, context: Context):
         self._content = Content(context)
@@ -70,7 +99,7 @@ class UposathaView:
     def _moon_pane(self) -> Pane:
         components = [
             Circle(150, Ink.YELLOW, Ink.BLACK),
-            Text("Full", Font("roboto-bold", 30), Ink.BLACK),
+            MoonWords("Full", "Moon", Ink.BLACK),
         ]
 
         bbox = BBox(top=96, left=70, bottom=250, right=WIDTH // 2)
@@ -172,3 +201,4 @@ class BetweenUposathasView:
     def show(self, draw: ImageDraw) -> None:
         self._heading_pane().draw(draw)
         self._info_pane().draw(draw)
+
