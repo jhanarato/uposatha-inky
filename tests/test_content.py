@@ -103,3 +103,16 @@ def test_moon_words(today, words):
     context = get_context(today)
     content = Content(context)
     assert content.moon_words == words
+
+
+@pytest.mark.parametrize(
+    "today,is_uposatha",
+    [
+        (date(2023, 9, 18), False),
+        (date(2023, 9, 29), True),
+    ]
+)
+def test_is_uposatha(today, is_uposatha):
+    context = get_context(today)
+    content = Content(context)
+    assert content.is_uposatha == is_uposatha

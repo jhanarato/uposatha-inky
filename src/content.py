@@ -43,6 +43,10 @@ class Content:
         return self._context.uposatha.falls_on
 
     @property
+    def is_uposatha(self) -> bool:
+        return self._context.uposatha_today()
+
+    @property
     def date(self) -> str:
         return self._context.uposatha.falls_on.strftime("%A %d/%m/%y")
 
@@ -84,6 +88,7 @@ class Content:
 
     @property
     def moon_words(self) -> tuple[str, str]:
-        if self.today != self.falls_on:
+        if not self.is_uposatha:
             return "", ""
+
         return "Full", "Moon"
