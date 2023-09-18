@@ -3,7 +3,7 @@ from datetime import date
 from typing import Optional
 
 from uposatha.calendar import Calendar
-from uposatha.elements import MoonPhase, Season, Uposatha, Holiday
+from uposatha.elements import MoonPhase, Season, Uposatha, Holiday, HolidayName
 
 
 @dataclass(frozen=True)
@@ -91,4 +91,13 @@ class Content:
         if not self.is_uposatha:
             return "", ""
 
-        return "Full", "Moon"
+        if self._context.holiday:
+            match self._context.holiday.name:
+                case HolidayName.PAVARANA:
+                    return "Pavāraṇā", "Day"
+
+        match self.moon_phase:
+            case MoonPhase.FULL:
+                return "Full", "Moon"
+            case MoonPhase.NEW:
+                return "New", "Moon"
