@@ -98,6 +98,9 @@ def test_context_uposatha_today(today, is_holiday):
         (date(2023, 9, 18), ("", "")),
         (date(2023, 9, 14), ("New", "Moon")),
         (date(2023, 9, 29), ("Full", "Moon")),
+        (date(2023, 3, 6), ("Māgha", "Pūjā")),
+        (date(2023, 6, 3), ("Vesak", "Day")),
+        (date(2023, 8, 1), ("Āsāḷha", "Pūjā")),
         (date(2023, 10, 29), ("Pavāraṇā", "Day")),
     ]
 )

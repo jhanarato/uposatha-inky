@@ -95,6 +95,12 @@ class Content:
             match self._context.holiday.name:
                 case HolidayName.PAVARANA:
                     return "Pavāraṇā", "Day"
+                case HolidayName.ASALHA:
+                    return "Āsāḷha", "Pūjā"
+                case HolidayName.VESAK:
+                    return "Vesak", "Day"
+                case HolidayName.MAGHA:
+                    return "Māgha", "Pūjā"
 
         match self.moon_phase:
             case MoonPhase.FULL:
