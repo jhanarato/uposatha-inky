@@ -29,7 +29,8 @@ class DrawingViewer:
     def _view_on_inky(self):
         display = auto()
         display.set_border(display.WHITE)
-        display.set_image(self._image)
+        upside_down = self._image.rotate(180)
+        display.set_image(upside_down)
         display.show()
 
     def _view_on_screen(self):
